@@ -1,0 +1,26 @@
+{
+  "name": "signal-ui",
+  "description": "UI Component Library",
+  "version": "0.1.0",
+  "devDependencies": {
+    "del": "^1.1.0",
+    "fs": "0.0.2",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-browserify": "^0.5.0",
+    "gulp-concat": "^2.4.2",
+    "gulp-jade": "^0.10.0",
+    "gulp-jshint": "^1.9.0",
+    "gulp-minify-css": "^0.3.11",
+    "gulp-notify": "^2.1.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-replace": "^0.5.0",
+    "gulp-ruby-sass": "^0.7.1",
+    "gulp-uglify": "^1.0.2",
+    "gulp-util": "^3.0.1",
+    "jade": "^1.8.1",
+    "jshint-stylish": "^1.0.0",
+    "run-sequence": "^1.0.2",
+    "sass": "^0.5.0"
+  }
+}
