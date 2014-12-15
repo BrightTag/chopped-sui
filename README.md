@@ -1,5 +1,21 @@
 # SignalUI Component Library
 
+## Installation
+
+1. Clone this repo
+2. Install node via package manager or [download](http://nodejs.org/download/)
+3. `cd` to your local repo and run `npm install`
+4. run `gem install bundler`
+5. run `bundler install`
+
+## Building
+
+`cd` to the local repo and run `gulp`
+
+## Demo
+
+`cd` to the local repo and run `gulp local-demo` and follow the instructions
+
 ## Components
 
 Each component resides in a folder under `src/modules`.

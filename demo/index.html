@@ -1,0 +1,122 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Component Demo Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="css/modules.css">
+    <script src="js/signal-ui.js"></script>
+  </head>
+  <body>
+
+    <div class="drop-down drop-down--unenhanced drop-down--built">
+      <select class="drop-down__select drop-down__select--hidden" id="custom1" name="custom1">
+        <option value="1">Select Built 1</option>
+        <option value="2">Select Built 2</option>
+        <option value="3">Select Built 3</option>
+      </select>
+      <button class="drop-down__trigger">Select Built 1</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option drop-down__menu-option--current"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Select Built 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Select Built 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Select Built 3</a></li>
+      </ul>
+    </div>
+    <script id="drop-down-1">
+      SignalUI.initializeWidget({ scriptId: 'drop-down-1', widgetType: 'drop-down' });
+    </script>
+
+    <div class="drop-down drop-down--unenhanced drop-down--built">
+      <select class="drop-down__select drop-down__select--hidden drop-down__select--hide-current" id="custom2" name="custom2">
+        <option value="1">Select Hidden Built 1</option>
+        <option value="2">Select Hidden Built 2</option>
+        <option value="3">Select Hidden Built 3</option>
+      </select>
+      <button class="drop-down__trigger">Select Hidden Built 1</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option drop-down__menu-option--current drop-down__menu-option--hidden"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Select Hidden Built 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Select Hidden Built 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Select Hidden Built 3</a></li>
+      </ul>
+    </div>
+    <script id="drop-down-2">
+      SignalUI.initializeWidget({ scriptId: 'drop-down-2', widgetType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built">
+      <button class="drop-down__trigger drop-down__trigger--fixed">Kay Dance</button>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-left">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Settings</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Logout</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-3">
+      SignalUI.initializeWidget({ scriptId: 'drop-down-3', widgetType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built">
+      <button class="drop-down__trigger drop-down__trigger--fixed">More</button>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-right">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Add a Site</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Edit Name</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Edit Comments</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-4">
+      SignalUI.initializeWidget({ scriptId: 'drop-down-4', widgetType: 'drop-down' });
+    </script>
+
+    <div class="drop-down drop-down--unenhanced">
+      <select class="drop-down__select" id="custom3" name="custom3">
+        <option value="1">Select 1</option>
+        <option value="2">Select 2</option>
+        <option value="3">Select 3</option>
+        <option value="4">Select 4</option>
+        <option value="5">Select 5</option>
+        <option value="6">Select 6</option>
+      </select>
+    </div>
+
+    <script id="drop-down-5">
+      SignalUI.initializeWidget({ scriptId: 'drop-down-5', widgetType: 'drop-down' });
+    </script>
+
+    <div class="drop-down drop-down--unenhanced">
+      <select class="drop-down__select drop-down__select--hide-current" id="custom3" name="custom3">
+        <option value="1">Select Hidden 1</option>
+        <option value="2">Select Hidden 2</option>
+        <option value="3">Select Hidden 3</option>
+      </select>
+    </div>
+
+    <script id="drop-down-6">
+      SignalUI.initializeWidget({ scriptId: 'drop-down-6', widgetType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced">
+      <ul class="drop-down__menu drop-down__menu--flush-left">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Settings</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Logout</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-7">
+      SignalUI.initializeWidget({ scriptId: 'drop-down-7', widgetType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced">
+      <ul class="drop-down__menu drop-down__menu--flush-right">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Nav 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Nav 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Nav 3</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-7">
+      SignalUI.initializeWidget({ scriptId: 'drop-down-7', widgetType: 'drop-down' });
+    </script>
+
+    <script src="js/modules.js"></script>
+  </body>
+</html>

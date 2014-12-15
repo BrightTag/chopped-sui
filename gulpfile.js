@@ -1,5 +1,6 @@
 var
   del              = require('del'),
+  exec             = require('child_process').exec,
   fs               = require('fs'),
   gulp             = require('gulp'),
   gulpautoprefixer = require('gulp-autoprefixer'),
@@ -144,8 +145,25 @@ gulp.task('library-js', function () {
     .pipe(gulp.dest('dist/library'));
 });
 
+gulp.task('demo-library-js', function() {
+  return gulp.src('dist/library/signal-ui.js')
+    .pipe(gulp.dest('demo/js'))
+});
+
+gulp.task('demo-module-js', function() {
+  return gulp.src('dist/modules/js/modules.js')
+    .pipe(gulp.dest('demo/js'))
+});
+
+gulp.task('demo-module-css', function() {
+  return gulp.src('dist/modules/css/modules.css')
+    .pipe(gulp.dest('demo/css'))
+});
+
 gulp.task('clean-all', function(cb) {
   del([
+    'demo/js',
+    'demo/css',
     'dist',
     'dist/modules/css',
     'dist/modules/js',
@@ -159,7 +177,12 @@ gulp.task('clean-build', function(cb) {
   ], cb);
 });
 
-gulp.task('default', function (callback) {
+gulp.task('local-demo', function (callback) {
+  exec('node_modules/.bin/http-server demo');
+  console.log('Serving Signal UI Component Demo at http://localhost:8080/');
+});
+
+gulp.task('default', function () {
   runsequence(
     'clean-all',
     'lint-js',
@@ -168,6 +191,11 @@ gulp.task('default', function (callback) {
       'module-css',
       'module-js',
       'library-js'
+    ],
+    [
+      'demo-module-css',
+      'demo-module-js',
+      'demo-library-js'
     ],
     'clean-build'
   )
