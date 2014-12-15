@@ -39,8 +39,6 @@
       i,
       len,
 
-      registeredWidget = SignalUI.registeredWidgets[widgetType],
-
       nodeBuilder,
       nodes;
 
@@ -64,8 +62,8 @@
     triggerData.triggerText = selectedOption;
 
     // generate HTML
-    template += registeredWidget.templates.trigger(triggerData);
-    template += registeredWidget.templates.menu(menuData);
+    template += SignalUI.templates['drop-down-trigger'](triggerData);
+    template += SignalUI.templates['drop-down-menu'](menuData);
 
     // append new HTML
     nodeBuilder = document.createElement('div');
@@ -85,8 +83,6 @@
       menuOptions,
       i,
       len,
-
-      registeredWidget = SignalUI.registeredWidgets[widgetType],
 
       nodeBuilder,
       nodes;
@@ -109,7 +105,7 @@
       };
 
       // generate HTML
-      template = registeredWidget.templates.trigger(triggerData);
+      template = SignalUI.templates['drop-down-trigger'](triggerData);
 
       // append new HTML
       nodeBuilder = document.createElement('div');
@@ -485,11 +481,6 @@
     widgetType: 'dropDown',
 
     widgetClass: 'drop-down',
-
-    templates: {
-      trigger: 'TEMPLATE:drop-down/templates/drop-down-trigger',
-      menu:    'TEMPLATE:drop-down/templates/drop-down-menu'
-    },
 
     build: buildDropDown,
 

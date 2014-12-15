@@ -5,7 +5,9 @@ var
   gulp             = require('gulp'),
   gulpautoprefixer = require('gulp-autoprefixer'),
   gulpbrowserfy    = require('gulp-browserify'),
-  gulpconcat       = require('gulp-concat'),
+  gulpconcat       = require('gulp-concat')
+  gulpdeclare      = require('gulp-declare'),
+  gulphandlebars   = require('gulp-handlebars'),
   gulpjade         = require('gulp-jade'),
   gulpjshint       = require('gulp-jshint'),
   gulpminifycss    = require('gulp-minify-css'),
@@ -14,6 +16,7 @@ var
   gulpreplace      = require('gulp-replace'),
   gulprubysass     = require('gulp-ruby-sass'),
   gulpuglify       = require('gulp-uglify'),
+  gulpwrap         = require('gulp-wrap'),
   jade             = require('jade'),
   jshintstylish    = require('jshint-stylish'),
   runsequence      = require('run-sequence');
@@ -53,14 +56,15 @@ gulp.task('module-css', function () {
 });
 
 gulp.task('module-js', function () {
-  return gulp.src('src/modules/**/js/*.js')
+  return gulp.src(['src/modules/templates.js',
+                   'src/modules/**/js/*.js'])
     .pipe(gulpconcat('modules.js'))
-    .pipe(gulpreplace(/'TEMPLATE:([^']+)'/g, function(s, filename) {
-      return fs.readFileSync('src/modules/' + filename + '.min.js', 'utf8');
-    }))
-    .on('error', gulpnotify.onError(function (error) {
-      return '\n\n✗ Module JS - Template Replace Error\n  ' + error.message + '\n';
-    }))
+    // .pipe(gulpreplace(/'TEMPLATE:([^']+)'/g, function(s, filename) {
+    //   return fs.readFileSync('src/modules/' + filename + '.min.js', 'utf8');
+    // }))
+    // .on('error', gulpnotify.onError(function (error) {
+    //   return '\n\n✗ Module JS - Template Replace Error\n  ' + error.message + '\n';
+    // }))
     .pipe(gulp.dest('dist/modules/js'))
     .pipe(gulprename({
       suffix: '.min'
@@ -73,23 +77,14 @@ gulp.task('module-js', function () {
 });
 
 gulp.task('module-templates', function () {
-  return gulp.src('src/modules/**/*.jade')
-    .pipe(gulpjade({
-      jade: jade,
-      pretty: true,
-      client: true
+   return gulp.src('src/modules/**/*.mustache')
+    .pipe(gulphandlebars())
+    .pipe(gulpwrap('Handlebars.template(<%= contents %>)'))
+    .pipe(gulpdeclare({
+      namespace: 'SignalUI.templates',
+      noRedeclare: true, // Avoid duplicate declarations
     }))
-    .on('error', gulpnotify.onError(function (error) {
-      return '\n\n✗ Module Templates - Jade Error\n  ' + error.message + '\n';
-    }))
-    .pipe(gulp.dest('src/modules/'))
-    .pipe(gulprename({
-      suffix: '.min'
-    }))
-    .pipe(gulpuglify())
-    .on('error', gulpnotify.onError(function (error) {
-      return '\n\n✗ Module Templates - Uglify Error\n  ' + error.message + '\n';
-    }))
+    .pipe(gulpconcat('templates.js'))
     .pipe(gulp.dest('src/modules/'));
 });
 
@@ -130,7 +125,7 @@ gulp.task('lint-js', function () {
 
 gulp.task('library-js', function () {
   return gulp.src([
-      'node_modules/jade/runtime.js',
+      'lib/handlebars.runtime-v2.0.0.js',
       'src/library/*.js'
     ])
     .pipe(gulpconcat('signal-ui.js'))
@@ -167,13 +162,15 @@ gulp.task('clean-all', function(cb) {
     'dist',
     'dist/modules/css',
     'dist/modules/js',
-    'src/modules/**/templates/*.js'
+    'src/modules/**/templates/*.js',
+    'src/modules/templates.js'
   ], cb);
 });
 
 gulp.task('clean-build', function(cb) {
   del([
-    'src/modules/**/templates/*.js'
+    'src/modules/**/templates/*.js',
+    'src/modules/templates.js'
   ], cb);
 });
 

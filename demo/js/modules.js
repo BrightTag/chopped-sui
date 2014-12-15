@@ -1,3 +1,45 @@
+this["SignalUI"] = this["SignalUI"] || {};
+this["SignalUI"]["templates"] = this["SignalUI"]["templates"] || {};
+this["SignalUI"]["templates"]["drop-down-menu"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  return " drop-down__menu--flush-right";
+  },"3":function(depth0,helpers,partials,data) {
+  var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, blockHelperMissing=helpers.blockHelperMissing, escapeExpression=this.escapeExpression, buffer = "		<li class=\"drop-down__menu-option";
+  stack1 = ((helper = (helper = helpers.isCurrent || (depth0 != null ? depth0.isCurrent : depth0)) != null ? helper : helperMissing),(options={"name":"isCurrent","hash":{},"fn":this.program(4, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  if (!helpers.isCurrent) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\"><a tabindex=\"-1\" href=\"javascript:;\" class=\"drop-down__menu-option-trigger\">"
+    + escapeExpression(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"text","hash":{},"data":data}) : helper)))
+    + "</a></li>\n";
+},"4":function(depth0,helpers,partials,data) {
+  var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, blockHelperMissing=helpers.blockHelperMissing, buffer = " drop-down__menu-option--current";
+  stack1 = ((helper = (helper = helpers.currentIsHidden || (depth0 != null ? depth0.currentIsHidden : depth0)) != null ? helper : helperMissing),(options={"name":"currentIsHidden","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  if (!helpers.currentIsHidden) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if (stack1 != null) { buffer += stack1; }
+  return buffer;
+},"5":function(depth0,helpers,partials,data) {
+  return " drop-down__menu-option--hidden";
+  },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, blockHelperMissing=helpers.blockHelperMissing, buffer = "<ul class=\"drop-down__menu drop-down__menu--hidden";
+  stack1 = ((helper = (helper = helpers.flushRight || (depth0 != null ? depth0.flushRight : depth0)) != null ? helper : helperMissing),(options={"name":"flushRight","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  if (!helpers.flushRight) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\">\n";
+  stack1 = ((helper = (helper = helpers.menuItems || (depth0 != null ? depth0.menuItems : depth0)) != null ? helper : helperMissing),(options={"name":"menuItems","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  if (!helpers.menuItems) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "</ul>";
+},"useData":true});
+this["SignalUI"]["templates"]["drop-down-trigger"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  return " drop-down__trigger--fixed";
+  },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, blockHelperMissing=helpers.blockHelperMissing, escapeExpression=this.escapeExpression, buffer = "<button class=\"drop-down__trigger";
+  stack1 = ((helper = (helper = helpers.fixedTrigger || (depth0 != null ? depth0.fixedTrigger : depth0)) != null ? helper : helperMissing),(options={"name":"fixedTrigger","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  if (!helpers.fixedTrigger) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\">\n	"
+    + escapeExpression(((helper = (helper = helpers.triggerText || (depth0 != null ? depth0.triggerText : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"triggerText","hash":{},"data":data}) : helper)))
+    + "\n</button>";
+},"useData":true});
 (function (SignalUI) {
 
   'use strict';
@@ -39,8 +81,6 @@
       i,
       len,
 
-      registeredWidget = SignalUI.registeredWidgets[widgetType],
-
       nodeBuilder,
       nodes;
 
@@ -64,8 +104,8 @@
     triggerData.triggerText = selectedOption;
 
     // generate HTML
-    template += registeredWidget.templates.trigger(triggerData);
-    template += registeredWidget.templates.menu(menuData);
+    template += SignalUI.templates['drop-down-trigger'](triggerData);
+    template += SignalUI.templates['drop-down-menu'](menuData);
 
     // append new HTML
     nodeBuilder = document.createElement('div');
@@ -85,8 +125,6 @@
       menuOptions,
       i,
       len,
-
-      registeredWidget = SignalUI.registeredWidgets[widgetType],
 
       nodeBuilder,
       nodes;
@@ -109,7 +147,7 @@
       };
 
       // generate HTML
-      template = registeredWidget.templates.trigger(triggerData);
+      template = SignalUI.templates['drop-down-trigger'](triggerData);
 
       // append new HTML
       nodeBuilder = document.createElement('div');
@@ -485,11 +523,6 @@
     widgetType: 'dropDown',
 
     widgetClass: 'drop-down',
-
-    templates: {
-      trigger: function template(e){var r,i=[],t=e||{};return function(e,t){var g=["drop-down__trigger"];e&&g.push("drop-down__trigger--fixed"),i.push("\n<button"+jade.cls([g],[!0])+">"+jade.escape(null==(r=t)?"":r)+"</button>")}.call(this,"fixedTrigger"in t?t.fixedTrigger:"undefined"!=typeof fixedTrigger?fixedTrigger:void 0,"triggerText"in t?t.triggerText:"undefined"!=typeof triggerText?triggerText:void 0),i.join("")},
-      menu:    function template(n){var e,d=[],i=n||{};return function(n,i,r){var u=["drop-down__menu","drop-down__menu--hidden"];i&&u.push("drop-down__menu--flush-right"),d.push("\n<ul"+jade.cls([u],[!0])+">"),function(){var i=r;if("number"==typeof i.length)for(var u=0,o=i.length;o>u;u++){var t=i[u],s=["drop-down__menu-option"];t.isCurrent&&s.push("drop-down__menu-option--current"),t.isCurrent&&n&&s.push("drop-down__menu-option--hidden"),d.push("\n  <li"+jade.cls([s],[!0])+'><a tabindex="-1" href="javascript:;" class="drop-down__menu-option-trigger">'+jade.escape(null==(e=t.text)?"":e)+"</a></li>")}else{var o=0;for(var u in i){o++;var t=i[u],s=["drop-down__menu-option"];t.isCurrent&&s.push("drop-down__menu-option--current"),t.isCurrent&&n&&s.push("drop-down__menu-option--hidden"),d.push("\n  <li"+jade.cls([s],[!0])+'><a tabindex="-1" href="javascript:;" class="drop-down__menu-option-trigger">'+jade.escape(null==(e=t.text)?"":e)+"</a></li>")}}}.call(this),d.push("\n</ul>")}.call(this,"currentIsHidden"in i?i.currentIsHidden:"undefined"!=typeof currentIsHidden?currentIsHidden:void 0,"flushRight"in i?i.flushRight:"undefined"!=typeof flushRight?flushRight:void 0,"menuItems"in i?i.menuItems:"undefined"!=typeof menuItems?menuItems:void 0,"undefined"in i?i.undefined:void 0),d.join("")}
-    },
 
     build: buildDropDown,
 
