@@ -1,3 +1,4 @@
+# OS
 .DS_Store
 .DS_Store?
 ._*
@@ -5,6 +6,17 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-node_modules
+
+# Caches
 .sass-cache
+
+# Packages
+node_modules/
+bower_components/
+
+# Compiled
+src/modules/**/templates/*.js
 src/modules/templates.js
+demo/css
+demo/js
+dist/
