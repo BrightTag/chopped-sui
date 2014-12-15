@@ -22,7 +22,7 @@
 
 ## Demo
 
-`cd` to the local repo and run `gulp local-demo` and follow the instructions
+`cd` to the local repo and run `gulp start:demo` and follow the instructions
 
 **TODO**: demo HTML shoud be built after helpers/templates are in place
 
