@@ -2,375 +2,499 @@
 
   'use strict';
 
-  SignalUI.registerWidget({
-    widgetType: 'dropDown',
-    widgetClass: 'drop-down',
-    templates: {
-      trigger: 'TEMPLATE:drop-down/templates/drop-down-trigger',
-      menu:    'TEMPLATE:drop-down/templates/drop-down-menu'
-    },
-    build: function (widget, widgetType) {
-      var
-        select = widget.querySelectorAll('.drop-down__select')[0],
-        menu = widget.querySelectorAll('.drop-down__menu')[0],
-        i = 0,
-        len,
-        option,
-        options,
-        menuData = { menuItems: [] },
-        triggerData = {},
-        template = '',
-        selected,
-        currentIsHidden,
-        flushRight,
-        div,
-        elements,
-        registeredWidget = SignalUI.registeredWidgets[widgetType];
+  var
+    // no g flag for testing
+    currentMenuOptionHidden = /(^| )drop-down__select--hide-current( |$)/ ,
+    menuFlushRight          = /(^| )drop-down__select--flush-right( |$)/,
+    menuHidden              = /(^| )drop-down__menu--hidden( |$)/,
+    menuFixed               = /(^| )drop-down__menu--fixed( |$)/,
+    optionHidden            = /(^| )drop-down__menu-option--hidden( |$)/,
+    triggerFixed            = /(^| )drop-down__trigger--fixed( |$)/,
 
-      if (select) {
-        currentIsHidden = /(^| )drop-down__select--hide-current( |$)/g.test(select.className);
-        flushRight = /(^| )drop-down__select--flush-right( |$)/g.test(select.className);
+    // g flag for replacing
+    menuHiddenClass         = /(^| )drop-down__menu--hidden( |$)/g,
+    optionHiddenClass       = /(^| )drop-down__menu-option--hidden( |$)/g,
+    optionCurrentClass      = /(^| )drop-down__menu-option--current( |$)/g,
+    triggerActiveClass      = /(^| )drop-down__trigger--active( |$)/g;
 
-        menuData.currentIsHidden = currentIsHidden;
-        menuData.flushRight = flushRight;
+  // Add menu and trigger for existing select
+  function buildFromSelect(widget, widgetType, select) {
+    var
+      className = select.className,
 
-        select.className += ' drop-down__select--hidden';
-        options = select.children;
-        for (i = 0, len = options.length; i < len; i += 1) {
-          option = options[i];
-          menuData.menuItems.push({
-            text: option.innerHTML,
-            isCurrent: option.selected
-          });
-          if (option.selected) {
-            selected = option.innerHTML;
-          }
-        }
+      currentIsHidden  = currentMenuOptionHidden.test(className),
+      menuIsFlushRight = menuFlushRight.test(className),
 
-        triggerData.triggerText = selected;
+      menuData = {
+        menuItems: [],
+        currentIsHidden: currentIsHidden,
+        flushRight: menuIsFlushRight
+      },
+      triggerData = {},
+      template = '',
 
-        template += registeredWidget.templates.trigger(triggerData);
-        template += registeredWidget.templates.menu(menuData);
-      } else if (menu) {
-        options = menu.children;
-        for (i = 0, len = options.length; i < len; i += 1) {
-          options[i].children[0].tabIndex = -1;
-        }
-        menu.className += ' drop-down__menu--hidden';
+      menuOptions,
+      menuOption,
+      selectedOption,
+      i,
+      len,
 
-        triggerData.triggerText = 'Menu';
+      registeredWidget = SignalUI.registeredWidgets[widgetType],
 
-        template += registeredWidget.templates.trigger(triggerData);
+      nodeBuilder,
+      nodes;
+
+    // hide select
+    select.className += ' drop-down__select--hidden';
+
+    // build menu data
+    menuOptions = select.children;
+    for (i = 0, len = menuOptions.length; i < len; i += 1) {
+      menuOption = menuOptions[i];
+      menuData.menuItems.push({
+        text: menuOption.innerHTML,
+        isCurrent: menuOption.selected
+      });
+      if (menuOption.selected) {
+        selectedOption = menuOption.innerHTML;
       }
+    }
 
-      div = document.createElement('div');
-      div.innerHTML = template;
-      elements = div.children;
-      if (select) {
-        while (elements.length) {
-          widget.appendChild(elements[0]);
-        }
-      } else if (menu) {
-        while (elements.length) {
-          widget.insertBefore(elements[0], menu);
-        }
+    // build trigger data
+    triggerData.triggerText = selectedOption;
+
+    // generate HTML
+    template += registeredWidget.templates.trigger(triggerData);
+    template += registeredWidget.templates.menu(menuData);
+
+    // append new HTML
+    nodeBuilder = document.createElement('div');
+    nodeBuilder.innerHTML = template;
+    nodes = nodeBuilder.children;
+    while (nodes.length) {
+      widget.appendChild(nodes[0]);
+    }
+  }
+
+  // add trigger for existing menu
+  function buildFromMenu(widget, widgetType, menu, trigger) {
+    var
+      triggerData,
+      template,
+
+      menuOptions,
+      i,
+      len,
+
+      registeredWidget = SignalUI.registeredWidgets[widgetType],
+
+      nodeBuilder,
+      nodes;
+
+    // make sure menu items can't be tab-targeted
+    menuOptions = menu.children;
+    for (i = 0, len = menuOptions.length; i < len; i += 1) {
+      menuOptions[i].children[0].tabIndex = -1;
+    }
+
+    // make sure the menu is hidden
+    menu.className += ' drop-down__menu--hidden';
+
+    // build a trigger if it doesn't exist
+    if (!trigger) {
+
+      // build trigger data
+      triggerData = {
+        triggerText: menu.getAttribute('drop-down-trigger-text') || 'Menu'
+      };
+
+      // generate HTML
+      template = registeredWidget.templates.trigger(triggerData);
+
+      // append new HTML
+      nodeBuilder = document.createElement('div');
+      nodeBuilder.innerHTML = template;
+      nodes = nodeBuilder.children;
+      while (nodes.length) {
+        widget.insertBefore(nodes[0], menu);
       }
-    },
-    enhance: function (widget) {
-      var
-        trigger = widget.querySelectorAll('.drop-down__trigger')[0],
-        menu = widget.querySelectorAll('.drop-down__menu')[0],
+    }
+  }
 
-        menuHidden = /(^| )drop-down__menu--hidden( |$)/g,
-        menuIsHidden = /(^| )drop-down__menu--hidden( |$)/,
-        triggerActive = /(^| )drop-down__trigger--active( |$)/g,
-        menuIsFixed = /(^| )drop-down__menu--fixed( |$)/,
+  // add HTML for existing markup
+  function buildDropDown (widget, widgetType) {
+    var
+      // potentially existing elements
+      select = widget.querySelectorAll('.drop-down__select')[0],
+      trigger = widget.querySelectorAll('.drop-down__trigger')[0],
+      menu = widget.querySelectorAll('.drop-down__menu')[0];
 
-        widgetWidth = widget.clientWidth,
-        menuWidth = menu.clientWidth,
+    if (select) {
+      buildFromSelect(widget, widgetType, select);
+    } else if (menu) {
+      buildFromMenu(widget, widgetType, menu, trigger);
+    }
 
-        hideOnOtherDropDownShow = function (e) {
-          var dropDownHideEvent;
-          if (e.detail.widget !== widget) {
-            dropDownHideEvent = new window.CustomEvent(
-              'dropDownHide'
-            );
-            widget.dispatchEvent(dropDownHideEvent);
-          }
-        };
+    return true;
+  }
 
-      if ((menuWidth > widgetWidth) && menuIsFixed.test(menu.className)) {
+  // resize trigger based on menu size
+  function adjustTriggerWidth(widget, menu) {
+    var
+      menuWidth   = menu.clientWidth,
+      widgetWidth = widget.clientWidth;
+
+      if ((menuWidth > widgetWidth) && menuFixed.test(menu.ClassName)) {
         widget.style.width = menuWidth + 'px';
       }
+  }
 
-      /* STANDARD EVENTS */
+  // toggle menu visibility on trigger click
+  function enhanceTriggerClick(widget, trigger, menu) {
+    trigger.addEventListener('click', function (e) {
+      var
+        dropDownShowEvent,
+        dropDownHideEvent;
 
-      trigger.addEventListener('click', function (e) {
-        var
-          dropDownShowEvent,
-          dropDownHideEvent;
-        e.preventDefault();
-        if (menuIsHidden.test(menu.className)) {
+      e.preventDefault();
+
+      if (menuHidden.test(menu.className)) {
+        dropDownShowEvent = new window.CustomEvent(
+          'dropDownShow'
+        );
+        widget.dispatchEvent(dropDownShowEvent);
+      } else {
+        dropDownHideEvent = new window.CustomEvent(
+          'dropDownHide'
+        );
+        widget.dispatchEvent(dropDownHideEvent);
+      }
+
+      return false;
+    }, true);
+  }
+
+  // open/close menu and change selected option on arrows
+  function enhanceWidgetKeyup(widget, trigger, menu) {
+    widget.addEventListener('keyup', function (e) {
+      var
+        dropDownShowEvent,
+        dropDownHideEvent,
+        nextNode;
+
+      if (menuHidden.test(menu.className)) {
+
+        // space = enter on menu item
+        if (e.keyCode === 32 && e.target.tagName === 'A') {
+          e.target.click();
+
+        // down/forward arrow = open closed menu
+        } else if (e.keyCode === 39 || e.keyCode === 40) {
           dropDownShowEvent = new window.CustomEvent(
             'dropDownShow'
           );
           widget.dispatchEvent(dropDownShowEvent);
-        } else {
+        }
+
+      } else {
+
+        // space = enter on menu item
+        if (e.keyCode === 32 && e.target.tagName === 'A') {
+          e.target.click();
+
+        // up/back arrow
+        } else if (e.keyCode === 37 || e.keyCode === 38) {
+
+          // close on trigger
+          if (e.target.tagName === 'BUTTON') {
+            dropDownHideEvent = new window.CustomEvent(
+              'dropDownHide'
+            );
+            widget.dispatchEvent(dropDownHideEvent);
+
+          // focus on previous menu item or trigger if at top
+          } else {
+            nextNode = e.target.parentElement.previousSibling;
+            if (nextNode && optionHidden.test(nextNode.className)) {
+              nextNode = nextNode.previousSibling;
+            }
+            while (nextNode && nextNode.nodeType !== 1) {
+              nextNode = nextNode.previousSibling;
+              if (nextNode && optionHidden.test(nextNode.className)) {
+                nextNode = nextNode.previousSibling;
+              }
+            }
+            if (nextNode) {
+              nextNode.children[0].focus();
+            } else {
+              trigger.focus();
+            }
+          }
+
+        // down/forward arrow = next menu option
+        } else if (e.keyCode === 39 || e.keyCode === 40) {
+          if (e.target.tagName === 'BUTTON') {
+            nextNode = menu.children[0];
+          } else {
+            nextNode = e.target.parentElement.nextSibling;
+          }
+          if (nextNode && optionHidden.test(nextNode.className)) {
+            nextNode = nextNode.nextSibling;
+          }
+          while (nextNode && nextNode.nodeType !== 1) {
+            nextNode = nextNode.nextSibling;
+            if (nextNode && optionHidden.test(nextNode.className)) {
+              nextNode = nextNode.nextSibling;
+            }
+          }
+          if (nextNode) {
+            nextNode.children[0].focus();
+          }
+        }
+      }
+    }, true);
+  }
+
+  // select current option when clicked
+  function enhanceMenuClick(widget, menu) {
+    menu.addEventListener('click', function (e) {
+      var dropDownSelectEvent;
+
+      // send select event but allow click for navigation
+      if (e.target.tagName === 'A') {
+        dropDownSelectEvent = new window.CustomEvent(
+          'dropDownSelect',
+          {
+            'detail': {
+              'select': e.target
+            }
+          }
+        );
+        widget.dispatchEvent(dropDownSelectEvent);
+      }
+    }, true);
+  }
+
+  function listenForShow(widget, trigger, menu, hideOnOtherDropDownShow) {
+    widget.addEventListener('dropDownShow', function () {
+      var
+        dropDownWillShowEvent,
+        dropDownDidShowEvent,
+        menuClassName,
+        triggerClassName;
+
+      dropDownWillShowEvent = new window.CustomEvent(
+        'dropDownWillShow',
+        {
+          'detail': {
+            'widget': widget
+          }
+        }
+      );
+      widget.dispatchEvent(dropDownWillShowEvent);
+      document.body.dispatchEvent(dropDownWillShowEvent);
+
+      menuClassName = menu.className;
+      triggerClassName = trigger.className;
+
+      menuClassName = menuClassName.replace(menuHiddenClass, ' ');
+      triggerClassName = triggerClassName.replace(triggerActiveClass, ' ') +
+        ' drop-down__trigger--active';
+
+      menu.className = menuClassName;
+      trigger.className = triggerClassName;
+
+      dropDownDidShowEvent = new window.CustomEvent(
+        'dropDownDidShow',
+        {
+          'detail': {
+            'widget': widget
+          }
+        }
+      );
+
+      document.body.addEventListener(
+        'dropDownWillShow',
+        hideOnOtherDropDownShow,
+        true
+      );
+
+      menu.scrollTop = 1;
+      menu.scrollTop = 0;
+
+      trigger.focus();
+
+      widget.dispatchEvent(dropDownDidShowEvent);
+    }, true);
+  }
+
+  function listenForHide(widget, trigger, menu, hideOnOtherDropDownShow) {
+    widget.addEventListener('dropDownHide', function () {
+      var
+        dropDownWillHideEvent,
+        dropDownDidHideEvent,
+        menuClassName,
+        triggerClassName;
+
+      dropDownWillHideEvent = new window.CustomEvent(
+        'dropDownWillHide',
+        {
+          'detail': {
+            'widget': widget
+          }
+        }
+      );
+      widget.dispatchEvent(dropDownWillHideEvent);
+
+      menuClassName = menu.className;
+      triggerClassName = trigger.className;
+
+      menuClassName = menuClassName.replace(menuHiddenClass, ' ');
+      menuClassName += ' drop-down__menu--hidden';
+      triggerClassName = triggerClassName.replace(triggerActiveClass, ' ');
+
+      menu.className = menuClassName;
+      trigger.className = triggerClassName;
+
+      dropDownDidHideEvent = new window.CustomEvent(
+        'dropDownDidHide',
+        {
+          'detail': {
+            'widget': widget
+          }
+        }
+      );
+
+      document.body.removeEventListener(
+        'dropDownWillShow',
+        hideOnOtherDropDownShow,
+        true
+      );
+
+      widget.dispatchEvent(dropDownDidHideEvent);
+    }, true);
+  }
+
+  function listenForSelect(widget, trigger, menu) {
+    widget.addEventListener('dropDownSelect', function (e) {
+      var
+        selected = e.detail.select,
+        dropDownDidSelectEvent,
+        dropDownHideEvent,
+        menuOptions,
+        i,
+        len,
+        menuOption,
+        optionClassName,
+        select,
+        selectedIndex,
+        previousOption,
+        currentIsHidden = widget.querySelectorAll('.drop-down__menu-option--hidden').length;
+
+      if (!triggerFixed.test(trigger.className)) {
+        trigger.innerHTML = selected.innerHTML;
+
+        menuOptions = menu.children;
+
+        for (i = 0, len = menuOptions.length; i < len; i += 1) {
+          menuOption = menuOptions[i];
+          optionClassName = menuOption.className;
+          optionClassName = optionClassName.replace(optionCurrentClass, ' ');
+          optionClassName = optionClassName.replace(optionHiddenClass, ' ');
+          if (menuOption.children[0] === selected) {
+            optionClassName += ' drop-down__menu-option--current';
+            if (currentIsHidden) {
+              optionClassName += ' drop-down__menu-option--hidden';
+            }
+          }
+          menuOption.className = optionClassName;
+        }
+
+        select = widget.querySelectorAll('.drop-down__select')[0];
+        if (select) {
+          selectedIndex = -1;
+          previousOption = selected.parentElement.previousSibling;
+          while (previousOption) {
+            if (previousOption.nodeType !== 1) {
+              selectedIndex += 1;
+            }
+            previousOption = previousOption.previousSibling;
+          }
+          select.selectedIndex = selectedIndex;
+        }
+
+      }
+
+      dropDownHideEvent = new window.CustomEvent(
+        'dropDownHide',
+        {
+          'detail': {
+            'widget': widget
+          }
+        }
+      );
+
+      trigger.focus();
+
+      dropDownDidSelectEvent = new window.CustomEvent(
+        'dropDownDidSelect',
+        {
+          'detail': {
+            'widget': e.detail.widget,
+            'selected': e.detail.select
+          }
+        }
+      );
+      widget.dispatchEvent(dropDownDidSelectEvent);
+
+      widget.dispatchEvent(dropDownHideEvent);
+    }, true);
+  }
+
+  function enhanceDropDown(widget) {
+    var
+      trigger = widget.querySelectorAll('.drop-down__trigger')[0],
+      menu    = widget.querySelectorAll('.drop-down__menu')[0],
+
+      hideOnOtherDropDownShow = function(e) {
+        var dropDownHideEvent;
+
+        if (e.detail.widget !== widget) {
           dropDownHideEvent = new window.CustomEvent(
             'dropDownHide'
           );
           widget.dispatchEvent(dropDownHideEvent);
         }
-        return false;
-      }, true);
+      };
 
-      widget.addEventListener('keyup', function (e) {
-        var
-          dropDownShowEvent,
-          dropDownHideEvent,
-          nextNode,
-          isHidden;
-        isHidden = /(^| )drop-down__menu-option--hidden( |$)/;
-        if (menuIsHidden.test(menu.className)) {
-          if (e.keyCode === 32 && e.target.tagName === 'A') {
-            e.target.click();
-          }
-          if (e.keyCode === 39 || e.keyCode === 40) {
-            dropDownShowEvent = new window.CustomEvent(
-              'dropDownShow'
-            );
-            widget.dispatchEvent(dropDownShowEvent);
-          }
-        } else {
-          if (e.keyCode === 32 && e.target.tagName === 'A') {
-            e.target.click();
-          }
-          if (e.keyCode === 37 || e.keyCode === 38) {
-            if (e.target.tagName === 'BUTTON') {
-              dropDownHideEvent = new window.CustomEvent(
-                'dropDownHide'
-              );
-              widget.dispatchEvent(dropDownHideEvent);
-            } else {
-              nextNode = e.target.parentElement.previousSibling;
-              if (nextNode && isHidden.test(nextNode.className)) {
-                nextNode = nextNode.previousSibling;
-              }
-              while (nextNode && nextNode.nodeType !== 1) {
-                nextNode = nextNode.previousSibling;
-                if (nextNode && isHidden.test(nextNode.className)) {
-                  nextNode = nextNode.previousSibling;
-                }
-              }
-              if (nextNode) {
-                nextNode.children[0].focus();
-              } else {
-                trigger.focus();
-              }
-            }
-          }
-          if (e.keyCode === 39 || e.keyCode === 40) {
-            if (e.target.tagName === 'BUTTON') {
-              nextNode = menu.children[0];
-            } else {
-              nextNode = e.target.parentElement.nextSibling;
-            }
-            if (nextNode && isHidden.test(nextNode.className)) {
-              nextNode = nextNode.nextSibling;
-            }
-            while (nextNode && nextNode.nodeType !== 1) {
-              nextNode = nextNode.nextSibling;
-              if (nextNode && isHidden.test(nextNode.className)) {
-                nextNode = nextNode.nextSibling;
-              }
-            }
-            if (nextNode) {
-              nextNode.children[0].focus();
-            }
-          }
-        }
-      }, true);
+    adjustTriggerWidth(widget, menu);
 
-      menu.addEventListener('click', function (e) {
-        var dropDownSelectEvent;
-        if (e.target.tagName === 'A') {
-          dropDownSelectEvent = new window.CustomEvent(
-            'dropDownSelect',
-            {
-              'detail': {
-                'select': e.target
-              }
-            }
-          );
-          widget.dispatchEvent(dropDownSelectEvent);
-        }
-      }, true);
+    enhanceTriggerClick(widget, trigger, menu);
+    enhanceWidgetKeyup(widget, trigger, menu);
+    enhanceMenuClick(widget, menu);
 
-      /* API EVENTS */
+    listenForShow(widget, trigger, menu, hideOnOtherDropDownShow);
+    listenForHide(widget,trigger, menu, hideOnOtherDropDownShow);
+    listenForSelect(widget,trigger, menu);
 
-      widget.addEventListener('dropDownShow', function () {
-        var
-          dropDownWillShowEvent,
-          dropDownDidShowEvent,
-          mClassName,
-          sClassName;
+    return true;
+  }
 
-        dropDownWillShowEvent = new window.CustomEvent(
-          'dropDownWillShow',
-          {
-            'detail': {
-              'widget': widget
-            }
-          }
-        );
-        widget.dispatchEvent(dropDownWillShowEvent);
-        document.body.dispatchEvent(dropDownWillShowEvent);
+  SignalUI.registerWidget({
 
-        mClassName = menu.className;
-        sClassName = trigger.className;
+    widgetType: 'dropDown',
 
-        mClassName = mClassName.replace(menuHidden, ' ');
-        sClassName = sClassName.replace(triggerActive, ' ') +
-          ' drop-down__trigger--active';
+    widgetClass: 'drop-down',
 
-        menu.className = mClassName;
-        trigger.className = sClassName;
+    templates: {
+      trigger: 'TEMPLATE:drop-down/templates/drop-down-trigger',
+      menu:    'TEMPLATE:drop-down/templates/drop-down-menu'
+    },
 
-        dropDownDidShowEvent = new window.CustomEvent(
-          'dropDownDidShow',
-          {
-            'detail': {
-              'widget': widget
-            }
-          }
-        );
+    build: buildDropDown,
 
-        document.body.addEventListener(
-          'dropDownWillShow',
-          hideOnOtherDropDownShow,
-          true
-        );
+    enhance: enhanceDropDown
 
-        menu.scrollTop = 1;
-        menu.scrollTop = 0;
-
-        trigger.focus();
-
-        widget.dispatchEvent(dropDownDidShowEvent);
-      }, true);
-
-      widget.addEventListener('dropDownHide', function () {
-        var
-          dropDownWillHideEvent,
-          dropDownDidHideEvent,
-          mClassName,
-          sClassName;
-
-        dropDownWillHideEvent = new window.CustomEvent(
-          'dropDownWillHide',
-          {
-            'detail': {
-              'widget': widget
-            }
-          }
-        );
-        widget.dispatchEvent(dropDownWillHideEvent);
-
-        mClassName = menu.className;
-        sClassName = trigger.className;
-
-        mClassName = mClassName.replace(menuHidden, ' ') +
-          ' drop-down__menu--hidden';
-        sClassName = sClassName.replace(triggerActive, ' ');
-
-        menu.className = mClassName;
-        trigger.className = sClassName;
-
-        dropDownDidHideEvent = new window.CustomEvent(
-          'dropDownDidHide',
-          {
-            'detail': {
-              'widget': widget
-            }
-          }
-        );
-
-        document.body.removeEventListener(
-          'dropDownWillShow',
-          hideOnOtherDropDownShow,
-          true
-        );
-
-        widget.dispatchEvent(dropDownDidHideEvent);
-      }, true);
-
-      widget.addEventListener('dropDownSelect', function (e) {
-        var
-          selected = e.detail.select,
-          dropDownDidSelectEvent,
-          dropDownHideEvent,
-          menuOptions,
-          i,
-          len,
-          menuOption,
-          cClassName,
-          oClassName,
-          isCurrent = /(^| )drop-down__menu-option(-container)?--current( |$)/g,
-          isHidden = /(^| )drop-down__menu-option--hidden( |$)/g,
-          isFixed = /(^| )drop-down__trigger--fixed( |$)/g,
-          currentIsHidden = widget.querySelectorAll('.drop-down__menu-option--hidden').length;
-
-        if (!isFixed.test(trigger.className)) {
-          trigger.innerHTML = selected.innerHTML;
-
-          menuOptions = menu.children;
-
-          for (i = 0, len = menuOptions.length; i < len; i += 1) {
-            menuOption = menuOptions[i];
-            cClassName = menuOption.className;
-            oClassName = menuOption.children[0].className;
-            cClassName = cClassName.replace(isCurrent, ' ');
-            cClassName = cClassName.replace(isHidden, ' ');
-            oClassName = oClassName.replace(isCurrent, ' ');
-            if (menuOption.children[0] === selected) {
-              cClassName += ' drop-down__menu-option--current';
-              oClassName += ' drop-down__menu-option-trigger';
-              if (currentIsHidden) {
-                cClassName += ' drop-down__menu-option--hidden';
-              }
-            }
-            menuOption.className = cClassName;
-            menuOption.children[0].className = oClassName;
-          }
-
-        }
-
-        dropDownHideEvent = new window.CustomEvent(
-          'dropDownHide',
-          {
-            'detail': {
-              'widget': widget
-            }
-          }
-        );
-
-        trigger.focus();
-
-        dropDownDidSelectEvent = new window.CustomEvent(
-          'dropDownDidSelect',
-          {
-            'detail': {
-              'widget': e.detail.widget,
-              'selected': e.detail.select
-            }
-          }
-        );
-        widget.dispatchEvent(dropDownDidSelectEvent);
-
-        widget.dispatchEvent(dropDownHideEvent);
-      }, true);
-
-    }
   });
 
 }(window.SignalUI));
