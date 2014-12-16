@@ -162,6 +162,18 @@
     top: 44px;
     z-index: 11;
 
+    .drop-down--unenhanced & {
+      position: relative;
+      top: 0;
+      max-height: none;
+    }
+
+    .drop-down--built & {
+      position: absolute;
+      top: 44px;
+      max-height: 200px;
+    }
+
     &--flush-right {
 
       left: auto;

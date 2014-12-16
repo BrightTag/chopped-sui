@@ -3,31 +3,36 @@ this["SignalUI"]["templates"] = this["SignalUI"]["templates"] || {};
 this["SignalUI"]["templates"]["drop-down-menu"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   return " drop-down__menu--flush-right";
   },"3":function(depth0,helpers,partials,data) {
+  return " drop-down__menu--flush-left";
+  },"5":function(depth0,helpers,partials,data) {
   var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, blockHelperMissing=helpers.blockHelperMissing, escapeExpression=this.escapeExpression, buffer = "		<li class=\"drop-down__menu-option";
-  stack1 = ((helper = (helper = helpers.isCurrent || (depth0 != null ? depth0.isCurrent : depth0)) != null ? helper : helperMissing),(options={"name":"isCurrent","hash":{},"fn":this.program(4, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  stack1 = ((helper = (helper = helpers.isCurrent || (depth0 != null ? depth0.isCurrent : depth0)) != null ? helper : helperMissing),(options={"name":"isCurrent","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
   if (!helpers.isCurrent) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\"><a tabindex=\"-1\" href=\"javascript:;\" class=\"drop-down__menu-option-trigger\">"
     + escapeExpression(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"text","hash":{},"data":data}) : helper)))
     + "</a></li>\n";
-},"4":function(depth0,helpers,partials,data) {
+},"6":function(depth0,helpers,partials,data) {
   var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, blockHelperMissing=helpers.blockHelperMissing, buffer = " drop-down__menu-option--current";
-  stack1 = ((helper = (helper = helpers.currentIsHidden || (depth0 != null ? depth0.currentIsHidden : depth0)) != null ? helper : helperMissing),(options={"name":"currentIsHidden","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  stack1 = ((helper = (helper = helpers.currentIsHidden || (depth0 != null ? depth0.currentIsHidden : depth0)) != null ? helper : helperMissing),(options={"name":"currentIsHidden","hash":{},"fn":this.program(7, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
   if (!helpers.currentIsHidden) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
   if (stack1 != null) { buffer += stack1; }
   return buffer;
-},"5":function(depth0,helpers,partials,data) {
+},"7":function(depth0,helpers,partials,data) {
   return " drop-down__menu-option--hidden";
   },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, blockHelperMissing=helpers.blockHelperMissing, buffer = "<ul class=\"drop-down__menu drop-down__menu--hidden";
   stack1 = ((helper = (helper = helpers.flushRight || (depth0 != null ? depth0.flushRight : depth0)) != null ? helper : helperMissing),(options={"name":"flushRight","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
   if (!helpers.flushRight) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
   if (stack1 != null) { buffer += stack1; }
+  stack1 = ((helper = (helper = helpers.flushLeft || (depth0 != null ? depth0.flushLeft : depth0)) != null ? helper : helperMissing),(options={"name":"flushLeft","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  if (!helpers.flushLeft) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if (stack1 != null) { buffer += stack1; }
   buffer += "\">\n";
-  stack1 = ((helper = (helper = helpers.menuItems || (depth0 != null ? depth0.menuItems : depth0)) != null ? helper : helperMissing),(options={"name":"menuItems","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  stack1 = ((helper = (helper = helpers.menuItems || (depth0 != null ? depth0.menuItems : depth0)) != null ? helper : helperMissing),(options={"name":"menuItems","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
   if (!helpers.menuItems) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</ul>";
+  return buffer + "</ul>\n";
 },"useData":true});
 this["SignalUI"]["templates"]["drop-down-trigger"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   return " drop-down__trigger--fixed";
@@ -46,31 +51,34 @@ this["SignalUI"]["templates"]["drop-down-trigger"] = Handlebars.template({"1":fu
 
   var
     // no g flag for testing
-    currentMenuOptionHidden = /(^| )drop-down__select--hide-current( |$)/ ,
-    menuFlushRight          = /(^| )drop-down__select--flush-right( |$)/,
-    menuHidden              = /(^| )drop-down__menu--hidden( |$)/,
-    menuFixed               = /(^| )drop-down__menu--fixed( |$)/,
-    optionHidden            = /(^| )drop-down__menu-option--hidden( |$)/,
-    triggerFixed            = /(^| )drop-down__trigger--fixed( |$)/,
+    currentOptionHidden = /(^| )drop-down__select--hide-current( |$)/ ,
+    menuFlush           = /(^| )drop-down__menu--flush-(right|left)( |$)/,
+    menuFlushRight      = /(^| )drop-down__menu--flush-right( |$)/,
+    menuFlushLeft       = /(^| )drop-down__menu--flush-left( |$)/,
+    menuHidden          = /(^| )drop-down__menu--hidden( |$)/,
+    optionHidden        = /(^| )drop-down__menu-option--hidden( |$)/,
+    triggerFixed        = /(^| )drop-down__trigger--fixed( |$)/,
 
     // g flag for replacing
-    menuHiddenClass         = /(^| )drop-down__menu--hidden( |$)/g,
-    optionHiddenClass       = /(^| )drop-down__menu-option--hidden( |$)/g,
-    optionCurrentClass      = /(^| )drop-down__menu-option--current( |$)/g,
-    triggerActiveClass      = /(^| )drop-down__trigger--active( |$)/g;
+    menuHiddenClass     = /(^| )drop-down__menu--hidden( |$)/g,
+    optionHiddenClass   = /(^| )drop-down__menu-option--hidden( |$)/g,
+    optionCurrentClass  = /(^| )drop-down__menu-option--current( |$)/g,
+    triggerActiveClass  = /(^| )drop-down__trigger--active( |$)/g;
 
   // Add menu and trigger for existing select
   function buildFromSelect(widget, widgetType, select) {
     var
       className = select.className,
 
-      currentIsHidden  = currentMenuOptionHidden.test(className),
+      currentIsHidden  = currentOptionHidden.test(className),
       menuIsFlushRight = menuFlushRight.test(className),
+      menuIsFlushLeft  = menuFlushLeft.test(className),
 
       menuData = {
-        menuItems: [],
+        menuItems      : [],
         currentIsHidden: currentIsHidden,
-        flushRight: menuIsFlushRight
+        flushRight     : menuIsFlushRight,
+        flushLeft      : menuIsFlushLeft
       },
       triggerData = {},
       template = '',
@@ -143,7 +151,8 @@ this["SignalUI"]["templates"]["drop-down-trigger"] = Handlebars.template({"1":fu
 
       // build trigger data
       triggerData = {
-        triggerText: menu.getAttribute('drop-down-trigger-text') || 'Menu'
+        triggerText:  menu.getAttribute('drop-down-trigger-text') || 'Menu',
+        fixedTrigger: menuFlush.test(menu.className)
       };
 
       // generate HTML
@@ -177,12 +186,12 @@ this["SignalUI"]["templates"]["drop-down-trigger"] = Handlebars.template({"1":fu
   }
 
   // resize trigger based on menu size
-  function adjustTriggerWidth(widget, menu) {
+  function adjustTriggerWidth(widget, trigger, menu) {
     var
       menuWidth   = menu.clientWidth,
       widgetWidth = widget.clientWidth;
 
-      if ((menuWidth > widgetWidth) && menuFixed.test(menu.ClassName)) {
+      if ((menuWidth > widgetWidth) && !triggerFixed.test(trigger.className)) {
         widget.style.width = menuWidth + 'px';
       }
   }
@@ -505,7 +514,7 @@ this["SignalUI"]["templates"]["drop-down-trigger"] = Handlebars.template({"1":fu
         }
       };
 
-    adjustTriggerWidth(widget, menu);
+    adjustTriggerWidth(widget, trigger, menu);
 
     enhanceTriggerClick(widget, trigger, menu);
     enhanceWidgetKeyup(widget, trigger, menu);

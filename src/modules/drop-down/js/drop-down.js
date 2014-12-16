@@ -4,31 +4,34 @@
 
   var
     // no g flag for testing
-    currentMenuOptionHidden = /(^| )drop-down__select--hide-current( |$)/ ,
-    menuFlushRight          = /(^| )drop-down__select--flush-right( |$)/,
-    menuHidden              = /(^| )drop-down__menu--hidden( |$)/,
-    menuFixed               = /(^| )drop-down__menu--fixed( |$)/,
-    optionHidden            = /(^| )drop-down__menu-option--hidden( |$)/,
-    triggerFixed            = /(^| )drop-down__trigger--fixed( |$)/,
+    currentOptionHidden = /(^| )drop-down__select--hide-current( |$)/ ,
+    menuFlush           = /(^| )drop-down__menu--flush-(right|left)( |$)/,
+    menuFlushRight      = /(^| )drop-down__menu--flush-right( |$)/,
+    menuFlushLeft       = /(^| )drop-down__menu--flush-left( |$)/,
+    menuHidden          = /(^| )drop-down__menu--hidden( |$)/,
+    optionHidden        = /(^| )drop-down__menu-option--hidden( |$)/,
+    triggerFixed        = /(^| )drop-down__trigger--fixed( |$)/,
 
     // g flag for replacing
-    menuHiddenClass         = /(^| )drop-down__menu--hidden( |$)/g,
-    optionHiddenClass       = /(^| )drop-down__menu-option--hidden( |$)/g,
-    optionCurrentClass      = /(^| )drop-down__menu-option--current( |$)/g,
-    triggerActiveClass      = /(^| )drop-down__trigger--active( |$)/g;
+    menuHiddenClass     = /(^| )drop-down__menu--hidden( |$)/g,
+    optionHiddenClass   = /(^| )drop-down__menu-option--hidden( |$)/g,
+    optionCurrentClass  = /(^| )drop-down__menu-option--current( |$)/g,
+    triggerActiveClass  = /(^| )drop-down__trigger--active( |$)/g;
 
   // Add menu and trigger for existing select
   function buildFromSelect(widget, widgetType, select) {
     var
       className = select.className,
 
-      currentIsHidden  = currentMenuOptionHidden.test(className),
+      currentIsHidden  = currentOptionHidden.test(className),
       menuIsFlushRight = menuFlushRight.test(className),
+      menuIsFlushLeft  = menuFlushLeft.test(className),
 
       menuData = {
-        menuItems: [],
+        menuItems      : [],
         currentIsHidden: currentIsHidden,
-        flushRight: menuIsFlushRight
+        flushRight     : menuIsFlushRight,
+        flushLeft      : menuIsFlushLeft
       },
       triggerData = {},
       template = '',
@@ -101,7 +104,8 @@
 
       // build trigger data
       triggerData = {
-        triggerText: menu.getAttribute('drop-down-trigger-text') || 'Menu'
+        triggerText:  menu.getAttribute('drop-down-trigger-text') || 'Menu',
+        fixedTrigger: menuFlush.test(menu.className)
       };
 
       // generate HTML
@@ -135,12 +139,12 @@
   }
 
   // resize trigger based on menu size
-  function adjustTriggerWidth(widget, menu) {
+  function adjustTriggerWidth(widget, trigger, menu) {
     var
       menuWidth   = menu.clientWidth,
       widgetWidth = widget.clientWidth;
 
-      if ((menuWidth > widgetWidth) && menuFixed.test(menu.ClassName)) {
+      if ((menuWidth > widgetWidth) && !triggerFixed.test(trigger.className)) {
         widget.style.width = menuWidth + 'px';
       }
   }
@@ -463,7 +467,7 @@
         }
       };
 
-    adjustTriggerWidth(widget, menu);
+    adjustTriggerWidth(widget, trigger, menu);
 
     enhanceTriggerClick(widget, trigger, menu);
     enhanceWidgetKeyup(widget, trigger, menu);
