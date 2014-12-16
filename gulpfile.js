@@ -1,25 +1,22 @@
 var
-  del              = require('del'),
-  exec             = require('child_process').exec,
-  fs               = require('fs'),
-  gulp             = require('gulp'),
-  gulpautoprefixer = require('gulp-autoprefixer'),
-  gulpbrowserfy    = require('gulp-browserify'),
-  gulpconcat       = require('gulp-concat')
-  gulpdeclare      = require('gulp-declare'),
-  gulphandlebars   = require('gulp-handlebars'),
-  gulpjade         = require('gulp-jade'),
-  gulpjshint       = require('gulp-jshint'),
-  gulpminifycss    = require('gulp-minify-css'),
-  gulpnotify       = require('gulp-notify'),
-  gulprename       = require('gulp-rename'),
-  gulpreplace      = require('gulp-replace'),
-  gulprubysass     = require('gulp-ruby-sass'),
-  gulpuglify       = require('gulp-uglify'),
-  gulpwrap         = require('gulp-wrap'),
-  jade             = require('jade'),
-  jshintstylish    = require('jshint-stylish'),
-  runsequence      = require('run-sequence');
+  del                = require('del'),
+  exec               = require('child_process').exec,
+  fs                 = require('fs'),
+  gulp               = require('gulp'),
+  gulpautoprefixer   = require('gulp-autoprefixer'),
+  gulpbrowserfy      = require('gulp-browserify'),
+  gulpconcat         = require('gulp-concat')
+  gulpdeclare        = require('gulp-declare'),
+  gulphandlebars     = require('gulp-handlebars'),
+  gulpjshint         = require('gulp-jshint'),
+  gulpminifycss      = require('gulp-minify-css'),
+  gulpnotify         = require('gulp-notify'),
+  gulprename         = require('gulp-rename'),
+  gulprubysass       = require('gulp-ruby-sass'),
+  gulpuglify         = require('gulp-uglify'),
+  gulpwrap           = require('gulp-wrap'),
+  jshintstylish      = require('jshint-stylish'),
+  runsequence        = require('run-sequence');
 
 gulp.task('module-css', function () {
   return gulp.src('src/modules/**/*.scss')
@@ -56,15 +53,11 @@ gulp.task('module-css', function () {
 });
 
 gulp.task('module-js', function () {
-  return gulp.src(['src/modules/templates.js',
-                   'src/modules/**/js/*.js'])
+  return gulp.src([
+      'src/modules/templates.js',
+      'src/modules/**/js/*.js'
+    ])
     .pipe(gulpconcat('modules.js'))
-    // .pipe(gulpreplace(/'TEMPLATE:([^']+)'/g, function(s, filename) {
-    //   return fs.readFileSync('src/modules/' + filename + '.min.js', 'utf8');
-    // }))
-    // .on('error', gulpnotify.onError(function (error) {
-    //   return '\n\n✗ Module JS - Template Replace Error\n  ' + error.message + '\n';
-    // }))
     .pipe(gulp.dest('dist/modules/js'))
     .pipe(gulprename({
       suffix: '.min'
@@ -125,7 +118,7 @@ gulp.task('lint-js', function () {
 
 gulp.task('library-js', function () {
   return gulp.src([
-      'lib/handlebars.runtime-v2.0.0.js',
+      'node_modules/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js',
       'src/library/*.js'
     ])
     .pipe(gulpconcat('signal-ui.js'))

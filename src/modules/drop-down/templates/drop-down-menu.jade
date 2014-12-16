@@ -1,8 +1,0 @@
-- var menuClasses = ['drop-down__menu', 'drop-down__menu--hidden'];
-- if (flushRight) { menuClasses.push('drop-down__menu--flush-right'); }
-ul(class=menuClasses)
-  each menuItem, index in menuItems
-    - var menuItemClasses = ['drop-down__menu-option'];
-    - if (menuItem.isCurrent) { menuItemClasses.push('drop-down__menu-option--current'); }
-    - if (menuItem.isCurrent && currentIsHidden) { menuItemClasses.push('drop-down__menu-option--hidden'); }
-    li(class=menuItemClasses): a(tabindex='-1', href='javascript:;').drop-down__menu-option-trigger= menuItem.text

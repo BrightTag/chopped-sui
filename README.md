@@ -5,8 +5,16 @@
 1. Clone this repo
 2. Install node via package manager or [download](http://nodejs.org/download/)
 3. `cd` to your local repo and run `npm install`
-4. run `gem install bundler`
+4. run `npm install gulp -g`
+4. run `sudo gem install bundler`
 5. run `bundler install`
+6. run `gulp`
+
+## Updating
+
+1. On master branch `git pull origin master`
+2. run `npm install`
+3. run `gulp`
 
 ## Building
 
@@ -15,6 +23,8 @@
 ## Demo
 
 `cd` to the local repo and run `gulp local-demo` and follow the instructions
+
+**TODO**: demo HTML shoud be built after helpers/templates are in place
 
 ## Components
 
@@ -40,24 +50,9 @@ SASS files for all modules will be converted to CSS and concatenated into `dist/
 
 `js` should contain a single JS file named `module-name.js` containing the SignalUI.registerWidget() call for this component. For `drop-down` this is `drop-down.scss`.
 
-The `templates` argument should be formatted using text placeholders for the actual templates.
-
-For `drop-down`, the templates argument looks like this:
-
-```js
-templates: {
-  trigger: 'TEMPLATE:drop-down/templates/drop-down-trigger',
-  menu:    'TEMPLATE:drop-down/templates/drop-down-menu'
-},
-```
-
-The keyword 'TEMPLATE:' is followed by the directory (after `src/modules/`) and file name (without extention) of the sub-template. The build process will incorporate precompiled templates in the appropriate place.
-
-**TODO**: better placeholders/system for integrating precompiled Jade templates?
-
 ### Templates
 
-`templates` should contain zero or more templates  named `module-name-part.jade` containing sub templates for any HTML that needs to be added on enhancement, no matter how insignificant. For `drop-down` this is `drop-down-trigger.jade` and `drop-down-menu.jade`.
+`templates` should contain zero or more templates  named `module-name-part.mustache` containing sub templates for any HTML that needs to be added on enhancement, no matter how insignificant. For `drop-down` this is `drop-down-trigger.mustache` and `drop-down-menu.mustache`.
 
 **TODO**: The template used in creating language-specific helpers should also live here, most likely
 
