@@ -18,7 +18,7 @@ gulp.task('demo:js:library', function() {
 
 });
 
-gulp.task('demo:js:module', [], function() {
+gulp.task('demo:js:module', function() {
 
   return gulp.src('dist/modules/js/modules.js')
     .pipe(gulp.dest('demo/js'))
