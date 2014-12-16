@@ -172,6 +172,23 @@ gulp.task('local-demo', function (callback) {
   console.log('Serving Signal UI Component Demo at http://localhost:8080/');
 });
 
+gulp.task('demo', function (callback) {
+  exec('node_modules/.bin/http-server demo');
+  console.log('Serving Signal UI Component Demo at http://localhost:8080/');
+});
+
+gulp.task('watch', function() {
+  gulp.watch('src/modules/**/*.scss', ['module-css']);
+  gulp.watch(['src/modules/templates.js', 'src/modules/**/js/*.js'], ['module-js']);
+  gulp.watch('src/modules/**/*.mustache', ['module-templates']);
+  gulp.watch('src/**/*.js', ['lint-js']);
+  gulp.watch('node_modules/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js', ['library-js']);
+  gulp.watch('src/library/*.js', ['library-js']);
+  gulp.watch('dist/library/signal-ui.js', ['demo-library-js']);
+  gulp.watch('dist/modules/js/modules.js', ['demo-module-js']);
+  gulp.watch('dist/modules/css/modules.css', ['demo-module-css']);
+});
+
 gulp.task('default', function () {
   runsequence(
     'clean-all',
