@@ -13,6 +13,7 @@ gulp.task('default', function(callback) {
     'library',
     'module',
     'demo',
+    'clean:src',
     callback
   );
 
