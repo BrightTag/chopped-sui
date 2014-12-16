@@ -1,0 +1,2 @@
+#!/bin/bash
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";brew install node;npm install;npm install gulp -g;sudo gem install bundler;bundler install;gulp;gulp start:demo;
