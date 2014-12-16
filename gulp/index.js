@@ -1,7 +1,6 @@
 'use strict';
 
-var gulp = require( 'gulp' ),
-    fs = require( 'fs' ),
+var fs = require( 'fs' ),
     tasks = fs.readdirSync( './gulp/tasks/' );
 
 tasks.forEach(function( task ){
