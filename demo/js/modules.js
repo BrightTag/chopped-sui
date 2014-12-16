@@ -21,7 +21,7 @@ this.SignalUI.templates["drop-down-trigger"]=Handlebars.template({1:function(){r
     triggerActiveClass  = /(^| )drop-down__trigger--active( |$)/g;
 
   // Add menu and trigger for existing select
-  function buildFromSelect(widget, widgetType, select) {
+  function buildFromSelect(widget, select) {
     var
       className = select.className,
 
@@ -82,7 +82,7 @@ this.SignalUI.templates["drop-down-trigger"]=Handlebars.template({1:function(){r
   }
 
   // add trigger for existing menu
-  function buildFromMenu(widget, widgetType, menu, trigger) {
+  function buildFromMenu(widget, menu, trigger) {
     var
       triggerData,
       template,
@@ -126,7 +126,7 @@ this.SignalUI.templates["drop-down-trigger"]=Handlebars.template({1:function(){r
   }
 
   // add HTML for existing markup
-  function buildDropDown (widget, widgetType) {
+  function buildDropDown(widget) {
     var
       // potentially existing elements
       select = widget.querySelectorAll('.drop-down__select')[0],
@@ -134,9 +134,9 @@ this.SignalUI.templates["drop-down-trigger"]=Handlebars.template({1:function(){r
       menu = widget.querySelectorAll('.drop-down__menu')[0];
 
     if (select) {
-      buildFromSelect(widget, widgetType, select);
+      buildFromSelect(widget, select);
     } else if (menu) {
-      buildFromMenu(widget, widgetType, menu, trigger);
+      buildFromMenu(widget, menu, trigger);
     }
 
     return true;
@@ -148,9 +148,9 @@ this.SignalUI.templates["drop-down-trigger"]=Handlebars.template({1:function(){r
       menuWidth   = menu.clientWidth,
       widgetWidth = widget.clientWidth;
 
-      if ((menuWidth > widgetWidth) && !menuFlush.test(menu.className)) {
-        widget.style.width = menuWidth + 'px';
-      }
+    if ((menuWidth > widgetWidth) && !menuFlush.test(menu.className)) {
+      widget.style.width = menuWidth + 'px';
+    }
   }
 
   // toggle menu visibility on trigger click
@@ -478,8 +478,8 @@ this.SignalUI.templates["drop-down-trigger"]=Handlebars.template({1:function(){r
     enhanceMenuClick(widget, menu);
 
     listenForShow(widget, trigger, menu, hideOnOtherDropDownShow);
-    listenForHide(widget,trigger, menu, hideOnOtherDropDownShow);
-    listenForSelect(widget,trigger, menu);
+    listenForHide(widget, trigger, menu, hideOnOtherDropDownShow);
+    listenForSelect(widget, trigger, menu);
 
     return true;
   }

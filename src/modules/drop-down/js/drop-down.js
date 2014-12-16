@@ -19,7 +19,7 @@
     triggerActiveClass  = /(^| )drop-down__trigger--active( |$)/g;
 
   // Add menu and trigger for existing select
-  function buildFromSelect(widget, widgetType, select) {
+  function buildFromSelect(widget, select) {
     var
       className = select.className,
 
@@ -80,7 +80,7 @@
   }
 
   // add trigger for existing menu
-  function buildFromMenu(widget, widgetType, menu, trigger) {
+  function buildFromMenu(widget, menu, trigger) {
     var
       triggerData,
       template,
@@ -124,7 +124,7 @@
   }
 
   // add HTML for existing markup
-  function buildDropDown (widget, widgetType) {
+  function buildDropDown(widget) {
     var
       // potentially existing elements
       select = widget.querySelectorAll('.drop-down__select')[0],
@@ -132,9 +132,9 @@
       menu = widget.querySelectorAll('.drop-down__menu')[0];
 
     if (select) {
-      buildFromSelect(widget, widgetType, select);
+      buildFromSelect(widget, select);
     } else if (menu) {
-      buildFromMenu(widget, widgetType, menu, trigger);
+      buildFromMenu(widget, menu, trigger);
     }
 
     return true;
@@ -146,9 +146,9 @@
       menuWidth   = menu.clientWidth,
       widgetWidth = widget.clientWidth;
 
-      if ((menuWidth > widgetWidth) && !menuFlush.test(menu.className)) {
-        widget.style.width = menuWidth + 'px';
-      }
+    if ((menuWidth > widgetWidth) && !menuFlush.test(menu.className)) {
+      widget.style.width = menuWidth + 'px';
+    }
   }
 
   // toggle menu visibility on trigger click
@@ -476,8 +476,8 @@
     enhanceMenuClick(widget, menu);
 
     listenForShow(widget, trigger, menu, hideOnOtherDropDownShow);
-    listenForHide(widget,trigger, menu, hideOnOtherDropDownShow);
-    listenForSelect(widget,trigger, menu);
+    listenForHide(widget, trigger, menu, hideOnOtherDropDownShow);
+    listenForSelect(widget, trigger, menu);
 
     return true;
   }
