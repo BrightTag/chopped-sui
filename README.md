@@ -3,18 +3,12 @@
 ## Installation
 
 1. Clone this repo
-2. Install node via package manager or [download](http://nodejs.org/download/)
-3. `cd` to your local repo and run `npm install`
-4. run `npm install gulp -g`
-4. run `sudo gem install bundler`
-5. run `bundler install`
-6. run `gulp`
+2. `cd` to your local repo and run `./install.sh`
 
 ## Updating
 
 1. On master branch `git pull origin master`
-2. run `npm install`
-3. run `gulp`
+2. run `./update.sh`
 
 ## Building
 
