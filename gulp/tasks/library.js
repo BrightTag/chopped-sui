@@ -5,6 +5,7 @@ var config       = require('../config'),
     gulp         = require('gulp'),
     concat       = require('gulp-concat'),
     rename       = require('gulp-rename'),
+    replace      = require('gulp-replace'),
     uglify       = require('gulp-uglify');
 
 gulp.task('library', [
@@ -15,10 +16,11 @@ gulp.task('library:js', function () {
 
   return gulp.src([
       // @todo use bower for managing client dependencies
-      'node_modules/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js',
-      'src/library/*.js'
+      'src/library/*.js',
+      'node_modules/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js'
     ])
     .pipe(concat('signal-ui.js'))
+    .pipe(replace(/root\.Handlebars/g, 'root.SignalUI.Handlebars'))
     .pipe(gulp.dest('dist/library'))
     .pipe(rename({
       suffix: '.min'
