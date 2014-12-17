@@ -14,6 +14,9 @@ Thumbs.db
 node_modules/
 bower_components/
 
+# Logs
+npm-debug.log
+
 # Compiled
 src/components/**/templates/*.js
 src/components/templates.js

@@ -8,7 +8,6 @@ fi
 if ! type npm >/dev/null 2>&1; then
   brew install node
 fi
-npm install
 if ! type gulp >/dev/null 2>&1; then
   sudo npm install gulp -g
 fi
