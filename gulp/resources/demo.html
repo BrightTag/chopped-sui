@@ -1,0 +1,150 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Component Demo Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="css/components.css">
+    <script src="js/signal-ui.js"></script>
+  </head>
+  <body>
+
+    <div class="drop-down drop-down--unenhanced drop-down--built">
+      <select class="drop-down__select drop-down__select--hidden">
+        <option value="1">I'm a Select 1</option>
+        <option value="2">I'm a Select 2</option>
+        <option value="3">I'm a Select 3</option>
+      </select>
+      <button class="drop-down__trigger">I'm a Select 1</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option drop-down__menu-option--current"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">I'm a Select 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">I'm a Select 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">I'm a Select 3</a></li>
+      </ul>
+    </div>
+    <script id="drop-down-1">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-1', componentType: 'drop-down' });
+    </script>
+
+    <div class="drop-down drop-down--unenhanced drop-down--built">
+      <select class="drop-down__select drop-down__select--hidden drop-down__select--hide-current">
+        <option value="1">Hidden Selected 1</option>
+        <option value="2">Hidden Selected 2</option>
+        <option value="3">Hidden Selected 3</option>
+      </select>
+      <button class="drop-down__trigger">Hidden Selected 1</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option drop-down__menu-option--current drop-down__menu-option--hidden"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Hidden Selected 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Hidden Selected 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Hidden Selected 3</a></li>
+      </ul>
+    </div>
+    <script id="drop-down-2">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-2', componentType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built">
+      <button class="drop-down__trigger drop-down__trigger--fixed">Menu</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#4">Menu Option 4</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#5">Menu Option 5</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#6">Menu Option 6</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-3">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-3', componentType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built">
+      <button class="drop-down__trigger drop-down__trigger--fixed">Right</button>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-right">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-4">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-4', componentType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built">
+      <button class="drop-down__trigger drop-down__trigger--fixed">Left</button>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-left">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-5">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-5', componentType: 'drop-down' });
+    </script>
+
+    <br/>
+
+    <div class="drop-down drop-down--unenhanced">
+      <select class="drop-down__select">
+        <option value="1">I'm a Select 1</option>
+        <option value="2">I'm a Select 2</option>
+        <option value="3">I'm a Select 3</option>
+      </select>
+    </div>
+    <script id="drop-down-6">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-6', componentType: 'drop-down' });
+    </script>
+
+    <div class="drop-down drop-down--unenhanced">
+      <select class="drop-down__select drop-down__select--hide-current">
+        <option value="1">Hidden Selected 1</option>
+        <option value="2">Hidden Selected 2</option>
+        <option value="3">Hidden Selected 3</option>
+      </select>
+    </div>
+    <script id="drop-down-7">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-7', componentType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced">
+      <ul class="drop-down__menu" drop-down-trigger-text="Menu">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#4">Menu Option 4</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#5">Menu Option 5</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#6">Menu Option 6</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-8">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-8', componentType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced">
+      <ul class="drop-down__menu drop-down__menu--flush-right" drop-down-trigger-text="Right">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-9">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-9', componentType: 'drop-down' });
+    </script>
+
+    <nav class="drop-down drop-down--unenhanced">
+      <ul class="drop-down__menu drop-down__menu--flush-left" drop-down-trigger-text="Left">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav>
+    <script id="drop-down-10">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-10', componentType: 'drop-down' });
+    </script>
+
+    <script src="js/components.js"></script>
+  </body>
+</html>

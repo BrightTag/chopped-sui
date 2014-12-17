@@ -3,9 +3,11 @@
 var config       = require('../config'),
     handleErrors = require('../util/errors'),
     gulp         = require('gulp'),
-    concat       = require('gulp-concat');
+    concat       = require('gulp-concat'),
+    rename       = require('gulp-rename');
 
 gulp.task('demo', [
+  'demo:html',
   'demo:css',
   'demo:js:library',
   'demo:js:components'
@@ -31,3 +33,11 @@ gulp.task('demo:css', function() {
     .pipe(gulp.dest('demo/css'))
 
 });
+
+gulp.task('demo:html', function() {
+
+  return gulp.src('gulp/resources/demo.html')
+    .pipe(rename('index.html'))
+    .pipe(gulp.dest('demo'))
+
+})
