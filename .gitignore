@@ -20,5 +20,5 @@ npm-debug.log
 # Compiled
 src/components/**/templates/*.js
 src/components/templates.js
-demo/
-dist/
+demo
+demo/*
