@@ -46,8 +46,6 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       nodeBuilder,
       nodes;
 
-    window.console.log(menuData);
-
     // hide select
     select.className += ' drop-down__select--hidden';
 
