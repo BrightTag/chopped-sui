@@ -8,7 +8,7 @@ var config       = require('../config'),
 gulp.task('demo', [
   'demo:css',
   'demo:js:library',
-  'demo:js:module'
+  'demo:js:components'
 ]);
 
 gulp.task('demo:js:library', function() {
@@ -18,16 +18,16 @@ gulp.task('demo:js:library', function() {
 
 });
 
-gulp.task('demo:js:module', function() {
+gulp.task('demo:js:components', function() {
 
-  return gulp.src('dist/modules/js/modules.js')
+  return gulp.src('dist/components/js/components.js')
     .pipe(gulp.dest('demo/js'))
 
 });
 
 gulp.task('demo:css', function() {
 
-  return gulp.src('dist/modules/css/modules.css')
+  return gulp.src('dist/components/css/components.css')
     .pipe(gulp.dest('demo/css'))
 
 });

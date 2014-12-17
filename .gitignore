@@ -15,8 +15,8 @@ node_modules/
 bower_components/
 
 # Compiled
-src/modules/**/templates/*.js
-src/modules/templates.js
+src/components/**/templates/*.js
+src/components/templates.js
 demo/css
 demo/js
 dist/

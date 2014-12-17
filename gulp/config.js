@@ -5,21 +5,21 @@ var config = {
   root: 'src',
 
   css: {
-    src: 'src/modules/**/*.scss',
-    dest: 'dist/modules/css'
+    src: 'src/components/**/*.scss',
+    dest: 'dist/components/css'
   },
 
   js: {
     src: [
-      'src/modules/templates.js',
-      'src/modules/**/js/*.js'
+      'src/components/templates.js',
+      'src/components/**/js/*.js'
     ],
-    dest: 'dist/modules/js'
+    dest: 'dist/components/js'
   },
 
   templates: {
-    src: 'src/modules/**/*.mustache',
-    dest: 'src/modules/',
+    src: 'src/components/**/*.mustache',
+    dest: 'src/components/',
     pattern: /'TEMPLATE:([^']+)'/g
   },
 

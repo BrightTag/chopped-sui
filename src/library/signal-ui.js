@@ -2,63 +2,64 @@
   'use strict';
 
   var
-    Widget,
+    Component,
     SignalUI,
     initializeAllOfType,
-    initializeThisWidget;
+    initializeThisComponent;
 
   /**
-   * [initializeThisWidget description]
-   * @param  {[type]} widget     [description]
-   * @param  {[type]} widgetType [description]
+   * [initializeThisComponent description]
+   * @param  {[type]} component     [description]
+   * @param  {[type]} componentType [description]
    * @param  {[type]} script     [description]
    * @return {[type]}            [description]
    */
-  initializeThisWidget = function (widget, widgetType, script) {
+  initializeThisComponent = function (component, componentType, script) {
     var
-      widgetClass,
-      widgetClasses,
-      widgetUnenhanced,
-      widgetBuilt;
+      componentClass,
+      componentClasses,
+      componentUnenhanced,
+      componentBuilt;
 
-    // the widget must be registered
-    if (SignalUI.registeredWidgets[widgetType]) {
-      widgetClasses = widget.className;
-      widgetClass = SignalUI.registeredWidgets[widgetType].widgetClass;
-      widgetUnenhanced = new RegExp(
-        '(^| )' + widgetClass + '--unenhanced( |$)',
+    // the component must be registered
+    if (SignalUI.registeredComponents[componentType]) {
+      componentClasses = component.className;
+      componentClass = SignalUI.registeredComponents[componentType]
+        .componentClass;
+      componentUnenhanced = new RegExp(
+        '(^| )' + componentClass + '--unenhanced( |$)',
         'g'
       );
-      widgetBuilt = new RegExp(
-        '(^| )' + widgetClass + '--built( |$)',
+      componentBuilt = new RegExp(
+        '(^| )' + componentClass + '--built( |$)',
         'g'
       );
 
-      // only enhance unenhanced widgets
-      if (widgetUnenhanced.test(widgetClasses)) {
-        widgetClasses = widgetClasses.replace(widgetUnenhanced, ' ');
+      // only enhance unenhanced components
+      if (componentUnenhanced.test(componentClasses)) {
+        componentClasses = componentClasses.replace(componentUnenhanced, ' ');
 
-        // only build unbuilt widgets
-        if (!widgetBuilt.test(widgetClasses)) {
+        // only build unbuilt components
+        if (!componentBuilt.test(componentClasses)) {
 
-          SignalUI.registeredWidgets[widgetType].willBuild(widget);
-          SignalUI.registeredWidgets[widgetType].build(widget, widgetType);
-          SignalUI.registeredWidgets[widgetType].didBuild(widget);
+          SignalUI.registeredComponents[componentType].willBuild(component);
+          SignalUI.registeredComponents[componentType].build(component, componentType);
+          SignalUI.registeredComponents[componentType].didBuild(component);
 
-          widgetClasses += ' ' + widgetClass + '--built';
+          componentClasses += ' ' + componentClass + '--built';
         }
-        widget.className = widgetClasses;
+        component.className = componentClasses;
 
-        SignalUI.registeredWidgets[widgetType].willEnhance(widget);
-        SignalUI.registeredWidgets[widgetType].enhance(widget);
+        SignalUI.registeredComponents[componentType].willEnhance(component);
+        SignalUI.registeredComponents[componentType].enhance(component);
 
         // timeout required for css animation support
         setTimeout(function () {
-          var className = widget.className;
-          className = className.replace(widgetBuilt, ' ');
-          className += ' ' + widgetClass + '--enhanced';
-          widget.className = className;
-          SignalUI.registeredWidgets[widgetType].didEnhance(widget);
+          var className = component.className;
+          className = className.replace(componentBuilt, ' ');
+          className += ' ' + componentClass + '--enhanced';
+          component.className = className;
+          SignalUI.registeredComponents[componentType].didEnhance(component);
         }, 100);
       }
     }
@@ -71,129 +72,129 @@
 
   /**
    * [initializeAllOfType description]
-   * @param  {[type]} widgetType [description]
+   * @param  {[type]} componentType [description]
    * @return {[type]}            [description]
    */
-  initializeAllOfType = function (widgetType) {
-    var widgets, i, len;
+  initializeAllOfType = function (componentType) {
+    var components, i, len;
 
-    // the widget must be registered
-    if (SignalUI.registeredWidgets[widgetType]) {
+    // the component must be registered
+    if (SignalUI.registeredComponents[componentType]) {
 
-      // find each widget of this type that needs to be enhanced
-      widgets = document.querySelectorAll(
+      // find each component of this type that needs to be enhanced
+      components = document.querySelectorAll(
         '.' +
-          window.SignalUI.registeredWidgets[widgetType].widgetClass +
+          window.SignalUI.registeredComponents[componentType].componentClass +
           '--unenhanced'
       );
 
       //
-      for (i = 0, len = widgets.length; i < len; i += 1) {
+      for (i = 0, len = components.length; i < len; i += 1) {
 
-        initializeThisWidget(widgets[i], widgetType);
+        initializeThisComponent(components[i], componentType);
 
       }
     }
   };
 
   /**
-   * [Widget description]
+   * [Component description]
    * @param {[type]} args [description]
    */
-  Widget = function (args) {
-    this.widgetType  = args.widgetType  || '';
-    this.widgetClass = args.widgetClass || '';
+  Component = function (args) {
+    this.componentType  = args.componentType  || '';
+    this.componentClass = args.componentClass || '';
     this.templates   = args.templates   || {};
   };
 
   /**
    * [willBuild description]
-   * @param  {[type]} widget [description]
+   * @param  {[type]} component [description]
    * @return {[type]}        [description]
    */
-  Widget.prototype.willBuild = function (widget) {
+  Component.prototype.willBuild = function (component) {
     var willBuildEvent = new window.CustomEvent(
-      this.widgetType + 'WillBuild',
+      this.componentType + 'WillBuild',
       {
         'detail': {
-          'widget': widget
+          'component': component
         }
       }
     );
-    widget.dispatchEvent(willBuildEvent);
+    component.dispatchEvent(willBuildEvent);
     return true;
   };
 
   /**
    * [didBuild description]
-   * @param  {[type]} widget [description]
+   * @param  {[type]} component [description]
    * @return {[type]}        [description]
    */
-  Widget.prototype.didBuild = function (widget) {
+  Component.prototype.didBuild = function (component) {
     var didBuildEvent = new window.CustomEvent(
-      this.widgetType + 'DidBuild',
+      this.componentType + 'DidBuild',
       {
         'detail': {
-          'widget': widget
+          'component': component
         }
       }
     );
-    widget.dispatchEvent(didBuildEvent);
+    component.dispatchEvent(didBuildEvent);
     return true;
   };
 
   /**
    * [willEnhance description]
-   * @param  {[type]} widget [description]
+   * @param  {[type]} component [description]
    * @return {[type]}        [description]
    */
-  Widget.prototype.willEnhance = function (widget) {
+  Component.prototype.willEnhance = function (component) {
     var willEnhanceEvent = new window.CustomEvent(
-      this.widgetType + 'WillEnhance',
+      this.componentType + 'WillEnhance',
       {
         'detail': {
-          'widget': widget
+          'component': component
         }
       }
     );
-    widget.dispatchEvent(willEnhanceEvent);
+    component.dispatchEvent(willEnhanceEvent);
     return true;
   };
 
   /**
    * [didEnhance description]
-   * @param  {[type]} widget [description]
+   * @param  {[type]} component [description]
    * @return {[type]}        [description]
    */
-  Widget.prototype.didEnhance = function (widget) {
+  Component.prototype.didEnhance = function (component) {
     var didEnhanceEvent = new window.CustomEvent(
-      this.widgetType + 'DidEnhance',
+      this.componentType + 'DidEnhance',
       {
         'detail': {
-          'widget': widget
+          'component': component
         }
       }
     );
-    widget.dispatchEvent(didEnhanceEvent);
+    component.dispatchEvent(didEnhanceEvent);
     return true;
   };
 
   /**
    * [build description]
-   * @param  {[type]} widget     [description]
-   * @param  {[type]} widgetType [description]
+   * @param  {[type]} component     [description]
+   * @param  {[type]} componentType [description]
    * @return {[type]}            [description]
    */
-  Widget.prototype.build = function () {
+  Component.prototype.build = function () {
     return true;
   };
 
   /**
    * [enhance description]
-   * @param  {[type]} widget [description]
+   * @param  {[type]} component [description]
    * @return {[type]}        [description]
    */
-  Widget.prototype.enhance = function () {
+  Component.prototype.enhance = function () {
     return true;
   };
 
@@ -201,59 +202,60 @@
   SignalUI = {
 
     /**
-     * [registeredWidgets description]
+     * [registeredComponents description]
      * @type {Object}
      */
-    registeredWidgets: {},
+    registeredComponents: {},
 
     /**
-     * [initializeWidget description]
+     * [initializeComponent description]
      * @param  {[type]} args [description]
      * @return {[type]}      [description]
      */
-    initializeWidget: function (args) {
+    initializeComponent: function (args) {
 
-      // without a widget type there is no way to look up the widget
-      if (!args.widgetType) {
+      // without a component type there is no way to look up the component
+      if (!args.componentType) {
         return;
       }
 
-      // no widget and no script tag means we want to initialize all
-      // widgets of this type
-      if (!args.widget && !args.scriptId) {
-        initializeAllOfType(args.widgetType);
+      // no component and no script tag means we want to initialize all
+      // components of this type
+      if (!args.component && !args.scriptId) {
+        initializeAllOfType(args.componentType);
         return;
       }
 
-      if (!args.widget) {
+      if (!args.component) {
         args.script = document.getElementById(args.scriptId);
-        args.widget = args.script.previousSibling;
+        args.component = args.script.previousSibling;
       }
     },
 
     /**
-     * [registerWidget description]
+     * [registerComponent description]
      * @param  {[type]} args [description]
      * @return {[type]}      [description]
      */
-    registerWidget: function (args) {
+    registerComponent: function (args) {
 
-      if (!args.widgetClass || !args.widgetType) {
+      if (!args.componentClass || !args.componentType) {
         return;
       }
 
-      SignalUI.registeredWidgets[args.widgetType] = new Widget(args);
+      SignalUI.registeredComponents[args.componentType] = new Component(args);
 
       if (args.build) {
-        SignalUI.registeredWidgets[args.widgetType].build = args.build;
+        SignalUI.registeredComponents[args.componentType].build = args.build;
       }
 
       if (args.enhance) {
-        SignalUI.registeredWidgets[args.widgetType].enhance = args.enhance;
+        SignalUI.registeredComponents[args.componentType].enhance =
+          args.enhance;
       }
 
-      SignalUI.initializeWidget({
-        widgetType: args.widgetType
+      SignalUI.initializeComponent({
+        componentType: args.componentType
       });
     }
   };

@@ -12,7 +12,7 @@ var config       = require('../config'),
     wrap         = require('gulp-wrap'),
     declare      = require('gulp-declare');
 
-gulp.task('module:templates', function () {
+gulp.task('components:templates', function () {
 
   return gulp.src(config.templates.src)
     .pipe(hbs())

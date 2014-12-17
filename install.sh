@@ -10,7 +10,7 @@ if ! type npm >/dev/null 2>&1; then
 fi
 npm install
 if ! type gulp >/dev/null 2>&1; then
-  npm install gulp -g
+  sudo npm install gulp -g
 fi
 if ! type bundler >/dev/null 2>&1; then
   sudo gem install bundler

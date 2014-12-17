@@ -11,7 +11,7 @@ gulp.task('default', function(callback) {
     'clean',
     'lint',
     'library',
-    'module',
+    'components',
     'demo',
     'clean:src',
     callback

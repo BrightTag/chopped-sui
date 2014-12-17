@@ -5,14 +5,14 @@ var config = require('../config'),
 
 gulp.task('watch', function() {
 
-  gulp.watch('src/modules/**/*.scss', ['module:css']);
-  gulp.watch(['src/modules/templates.js', 'src/modules/**/js/*.js'], ['module:js']);
-  gulp.watch('src/modules/**/*.mustache', ['module:templates']);
+  gulp.watch('src/components/**/*.scss', ['component:css']);
+  gulp.watch(['src/components/templates.js', 'src/components/**/js/*.js'], ['components:js']);
+  gulp.watch('src/components/**/*.mustache', ['component:templates']);
   gulp.watch('src/**/*.js', ['lint:js']);
-  gulp.watch('node_modules/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js', ['library:js']);
+  gulp.watch('node_components/gulp-handlebars/node_components/handlebars/dist/handlebars.runtime.js', ['library:js']);
   gulp.watch('src/library/*.js', ['library:js']);
   gulp.watch('dist/library/signal-ui.js', ['demo:js:library']);
-  gulp.watch('dist/modules/js/modules.js', ['demo:js:module']);
-  gulp.watch('dist/modules/css/modules.css', ['demo:css']);
+  gulp.watch('dist/components/js/components.js', ['demo:js:components']);
+  gulp.watch('dist/components/css/components.css', ['demo:css']);
 
 });

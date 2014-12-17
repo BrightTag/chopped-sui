@@ -3,7 +3,7 @@
 var config = require('../config'),
     gulp   = require('gulp');
 
-gulp.task('module', [
-  'module:css',
-  'module:js'
+gulp.task('components', [
+  'components:css',
+  'components:js'
 ]);

@@ -9,12 +9,12 @@ var config       = require('../config'),
     rename       = require('gulp-rename'),
     uglify       = require('gulp-uglify');
 
-gulp.task('module:js', ['module:templates'], function () {
+gulp.task('components:js', ['components:templates'], function () {
 
   return gulp.src(config.js.src)
-    .pipe(concat('modules.js'))
+    .pipe(concat('components.js'))
     // .pipe(replace(config.templates.pattern, function(s, filename) {
-    //   return fs.readFileSync('src/modules/' + filename + '.min.js', 'utf8');
+    //   return fs.readFileSync('src/componentss/' + filename + '.min.js', 'utf8');
     // }))
     // .on('error', handleErrors)
     .pipe(gulp.dest(config.js.dest))

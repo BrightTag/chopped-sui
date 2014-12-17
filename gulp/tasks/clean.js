@@ -30,8 +30,8 @@ gulp.task('clean:dist', function(callback) {
 gulp.task('clean:src', function(callback) {
 
   del([
-    'src/modules/**/templates/*.js',
-    'src/modules/templates.js'
+    'src/components/**/templates/*.js',
+    'src/components/templates.js'
   ], callback);
 
 });

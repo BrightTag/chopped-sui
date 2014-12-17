@@ -1,5 +1,3 @@
-this.SignalUI=this.SignalUI||{},this.SignalUI.templates=this.SignalUI.templates||{},this.SignalUI.templates["drop-down-menu"]=SignalUI.Handlebars.template({1:function(){return" drop-down__menu--flush-right"},3:function(){return" drop-down__menu--flush-left"},5:function(n,l,e,t){var i,s,a,r="function",u=l.helperMissing,o=l.blockHelperMissing,h=this.escapeExpression,p='		<li class="drop-down__menu-option';return s=null!=(s=l.isCurrent||(null!=n?n.isCurrent:n))?s:u,a={name:"isCurrent",hash:{},fn:this.program(6,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.isCurrent||(i=o.call(n,i,a)),null!=i&&(p+=i),p+'"><a tabindex="-1" href="javascript:;" class="drop-down__menu-option-trigger">'+h((s=null!=(s=l.text||(null!=n?n.text:n))?s:u,typeof s===r?s.call(n,{name:"text",hash:{},data:t}):s))+"</a></li>\n"},6:function(n,l,e,t){var i,s,a,r="function",u=l.helperMissing,o=l.blockHelperMissing,h=" drop-down__menu-option--current";return s=null!=(s=l.isHidden||(null!=n?n.isHidden:n))?s:u,a={name:"isHidden",hash:{},fn:this.program(7,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.isHidden||(i=o.call(n,i,a)),null!=i&&(h+=i),h},7:function(){return" drop-down__menu-option--hidden"},compiler:[6,">= 2.0.0-beta.1"],main:function(n,l,e,t){var i,s,a,r="function",u=l.helperMissing,o=l.blockHelperMissing,h='<ul class="drop-down__menu drop-down__menu--hidden';return s=null!=(s=l.flushRight||(null!=n?n.flushRight:n))?s:u,a={name:"flushRight",hash:{},fn:this.program(1,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.flushRight||(i=o.call(n,i,a)),null!=i&&(h+=i),s=null!=(s=l.flushLeft||(null!=n?n.flushLeft:n))?s:u,a={name:"flushLeft",hash:{},fn:this.program(3,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.flushLeft||(i=o.call(n,i,a)),null!=i&&(h+=i),h+='">\n',s=null!=(s=l.menuItems||(null!=n?n.menuItems:n))?s:u,a={name:"menuItems",hash:{},fn:this.program(5,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.menuItems||(i=o.call(n,i,a)),null!=i&&(h+=i),h+"</ul>\n"},useData:!0});
-this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:function(){return" drop-down__trigger--fixed"},compiler:[6,">= 2.0.0-beta.1"],main:function(e,r,i,n){var t,l,a,g="function",o=r.helperMissing,s=r.blockHelperMissing,d=this.escapeExpression,p='<button class="drop-down__trigger';return l=null!=(l=r.fixedTrigger||(null!=e?e.fixedTrigger:e))?l:o,a={name:"fixedTrigger",hash:{},fn:this.program(1,n),inverse:this.noop,data:n},t=typeof l===g?l.call(e,a):l,r.fixedTrigger||(t=s.call(e,t,a)),null!=t&&(p+=t),p+'">\n	'+d((l=null!=(l=r.triggerText||(null!=e?e.triggerText:e))?l:o,typeof l===g?l.call(e,{name:"triggerText",hash:{},data:n}):l))+"\n</button>"},useData:!0});
 (function (SignalUI) {
 
   'use strict';
@@ -21,7 +19,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     triggerActiveClass  = /(^| )drop-down__trigger--active( |$)/g;
 
   // Add menu and trigger for existing select
-  function buildFromSelect(widget, select) {
+  function buildFromSelect(component, select) {
     var
       className = select.className,
 
@@ -75,12 +73,12 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     nodeBuilder.innerHTML = template;
     nodes = nodeBuilder.children;
     while (nodes.length) {
-      widget.appendChild(nodes[0]);
+      component.appendChild(nodes[0]);
     }
   }
 
   // add trigger for existing menu
-  function buildFromMenu(widget, menu, trigger) {
+  function buildFromMenu(component, menu, trigger) {
     var
       triggerData,
       template,
@@ -118,41 +116,41 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       nodeBuilder.innerHTML = template;
       nodes = nodeBuilder.children;
       while (nodes.length) {
-        widget.insertBefore(nodes[0], menu);
+        component.insertBefore(nodes[0], menu);
       }
     }
   }
 
   // add HTML for existing markup
-  function buildDropDown(widget) {
+  function buildDropDown(component) {
     var
       // potentially existing elements
-      select = widget.querySelectorAll('.drop-down__select')[0],
-      trigger = widget.querySelectorAll('.drop-down__trigger')[0],
-      menu = widget.querySelectorAll('.drop-down__menu')[0];
+      select = component.querySelectorAll('.drop-down__select')[0],
+      trigger = component.querySelectorAll('.drop-down__trigger')[0],
+      menu = component.querySelectorAll('.drop-down__menu')[0];
 
     if (select) {
-      buildFromSelect(widget, select);
+      buildFromSelect(component, select);
     } else if (menu) {
-      buildFromMenu(widget, menu, trigger);
+      buildFromMenu(component, menu, trigger);
     }
 
     return true;
   }
 
   // resize trigger based on menu size
-  function adjustTriggerWidth(widget, menu) {
+  function adjustTriggerWidth(component, menu) {
     var
       menuWidth   = menu.clientWidth,
-      widgetWidth = widget.clientWidth;
+      componentWidth = component.clientWidth;
 
-    if ((menuWidth > widgetWidth) && !menuFlush.test(menu.className)) {
-      widget.style.width = menuWidth + 'px';
+    if ((menuWidth > componentWidth) && !menuFlush.test(menu.className)) {
+      component.style.width = menuWidth + 'px';
     }
   }
 
   // toggle menu visibility on trigger click
-  function enhanceTriggerClick(widget, trigger, menu) {
+  function enhanceTriggerClick(component, trigger, menu) {
     function handleTriggerClick(e) {
       var
         dropDownShowEvent,
@@ -165,26 +163,22 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         dropDownShowEvent = new window.CustomEvent(
           'dropDownShow'
         );
-        widget.dispatchEvent(dropDownShowEvent);
+        component.dispatchEvent(dropDownShowEvent);
       } else {
         dropDownHideEvent = new window.CustomEvent(
           'dropDownHide'
         );
-        widget.dispatchEvent(dropDownHideEvent);
+        component.dispatchEvent(dropDownHideEvent);
       }
 
       return false;
     }
 
-    if (trigger.addEventListener) {
-      trigger.addEventListener('click', handleTriggerClick, false);
-    } else {
-      trigger.attachEvent('click', handleTriggerClick);
-    }
+    trigger.addEventListener('click', handleTriggerClick, false);
   }
 
   // open/close menu and change selected option on arrows
-  function enhanceWidgetKeyup(widget, trigger, menu) {
+  function enhanceComponentKeyup(component, trigger, menu) {
     function handleMenuKeyup(e) {
       var
         dropDownShowEvent,
@@ -204,7 +198,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
           dropDownShowEvent = new window.CustomEvent(
             'dropDownShow'
           );
-          widget.dispatchEvent(dropDownShowEvent);
+          component.dispatchEvent(dropDownShowEvent);
         }
 
       } else {
@@ -221,7 +215,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
             dropDownHideEvent = new window.CustomEvent(
               'dropDownHide'
             );
-            widget.dispatchEvent(dropDownHideEvent);
+            component.dispatchEvent(dropDownHideEvent);
 
           // focus on previous menu item or trigger if at top
           } else {
@@ -265,15 +259,11 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       }
     }
 
-    if (widget.addEventListener) {
-      widget.addEventListener('keyup', handleMenuKeyup, false);
-    } else {
-      widget.attachEvent('keyup', handleMenuKeyup);
-    }
+    component.addEventListener('keyup', handleMenuKeyup, false);
   }
 
   // select current option when clicked
-  function enhanceMenuClick(widget, menu) {
+  function enhanceMenuClick(component, menu) {
     function handleMenuClick(e) {
       var dropDownSelectEvent;
 
@@ -289,18 +279,14 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
             }
           }
         );
-        widget.dispatchEvent(dropDownSelectEvent);
+        component.dispatchEvent(dropDownSelectEvent);
       }
     }
 
-    if (menu.addEventListener) {
-      menu.addEventListener('click', handleMenuClick, false);
-    } else {
-      menu.attachEvent('click', handleMenuClick);
-    }
+    menu.addEventListener('click', handleMenuClick, false);
   }
 
-  function listenForShow(widget, trigger, menu, hideOnOtherDropDownShow) {
+  function listenForShow(component, trigger, menu, hideOnOtherDropDownShow) {
     function handleDropDownShow(e) {
       var
         dropDownWillShowEvent,
@@ -314,11 +300,11 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         'dropDownWillShow',
         {
           'detail': {
-            'widget': widget
+            'component': component
           }
         }
       );
-      widget.dispatchEvent(dropDownWillShowEvent);
+      component.dispatchEvent(dropDownWillShowEvent);
       document.body.dispatchEvent(dropDownWillShowEvent);
 
       menuClassName = menu.className;
@@ -335,37 +321,29 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         'dropDownDidShow',
         {
           'detail': {
-            'widget': widget
+            'component': component
           }
         }
       );
 
-      if (document.body.addEventListener) {
-        document.body.addEventListener(
-          'dropDownWillShow',
-          hideOnOtherDropDownShow,
-          false
-        );
-      } else {
-        document.body.attachEvent('dropDownWillShow', hideOnOtherDropDownShow);
-      }
+      document.body.addEventListener(
+        'dropDownWillShow',
+        hideOnOtherDropDownShow,
+        false
+      );
 
       menu.scrollTop = 1;
       menu.scrollTop = 0;
 
       trigger.focus();
 
-      widget.dispatchEvent(dropDownDidShowEvent);
+      component.dispatchEvent(dropDownDidShowEvent);
     }
 
-    if (widget.addEventListener) {
-      widget.addEventListener('dropDownShow', handleDropDownShow, false);
-    } else {
-      widget.attachEvent('dropDownShow', handleDropDownShow);
-    }
+    component.addEventListener('dropDownShow', handleDropDownShow, false);
   }
 
-  function listenForHide(widget, trigger, menu, hideOnOtherDropDownShow) {
+  function listenForHide(component, trigger, menu, hideOnOtherDropDownShow) {
     function handleDropDownHide(e) {
       var
         dropDownWillHideEvent,
@@ -379,11 +357,11 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         'dropDownWillHide',
         {
           'detail': {
-            'widget': widget
+            'component': component
           }
         }
       );
-      widget.dispatchEvent(dropDownWillHideEvent);
+      component.dispatchEvent(dropDownWillHideEvent);
 
       menuClassName = menu.className;
       triggerClassName = trigger.className;
@@ -399,7 +377,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         'dropDownDidHide',
         {
           'detail': {
-            'widget': widget
+            'component': component
           }
         }
       );
@@ -410,17 +388,13 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         true
       );
 
-      widget.dispatchEvent(dropDownDidHideEvent);
+      component.dispatchEvent(dropDownDidHideEvent);
     }
 
-    if (widget.addEventListener) {
-      widget.addEventListener('dropDownHide', handleDropDownHide, false);
-    } else {
-      widget.attachEvent('dropDownHide', handleDropDownHide);
-    }
+    component.addEventListener('dropDownHide', handleDropDownHide, false);
   }
 
-  function listenForSelect(widget, trigger, menu) {
+  function listenForSelect(component, trigger, menu) {
     function handleDropDownSelect(e) {
       var
         selected = e.detail.select,
@@ -434,7 +408,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         select,
         selectedIndex,
         previousOption,
-        currentIsHidden = widget.querySelectorAll('.drop-down__menu-option--hidden').length;
+        currentIsHidden = component.querySelectorAll('.drop-down__menu-option--hidden').length;
 
       e.stopPropagation();
 
@@ -457,7 +431,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
           menuOption.className = optionClassName;
         }
 
-        select = widget.querySelectorAll('.drop-down__select')[0];
+        select = component.querySelectorAll('.drop-down__select')[0];
         if (select) {
           selectedIndex = -1;
           previousOption = selected.parentElement.previousSibling;
@@ -476,7 +450,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         'dropDownHide',
         {
           'detail': {
-            'widget': widget
+            'component': component
           }
         }
       );
@@ -487,59 +461,55 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         'dropDownDidSelect',
         {
           'detail': {
-            'widget': e.detail.widget,
+            'component': e.detail.component,
             'selected': e.detail.select
           }
         }
       );
-      widget.dispatchEvent(dropDownDidSelectEvent);
+      component.dispatchEvent(dropDownDidSelectEvent);
 
-      widget.dispatchEvent(dropDownHideEvent);
+      component.dispatchEvent(dropDownHideEvent);
     }
 
-    if (widget.addEventListener) {
-      widget.addEventListener('dropDownSelect', handleDropDownSelect, false);
-    } else {
-      widget.attachEvent('dropDownSelect', handleDropDownSelect);
-    }
+    component.addEventListener('dropDownSelect', handleDropDownSelect, false);
   }
 
-  function enhanceDropDown(widget) {
+  function enhanceDropDown(component) {
     var
-      trigger = widget.querySelectorAll('.drop-down__trigger')[0],
-      menu    = widget.querySelectorAll('.drop-down__menu')[0],
+      trigger = component.querySelectorAll('.drop-down__trigger')[0],
+      menu    = component.querySelectorAll('.drop-down__menu')[0],
 
       hideOnOtherDropDownShow = function(e) {
         var dropDownHideEvent;
 
         e.stopPropagation();
 
-        if (e.detail.widget !== widget) {
+        if (e.detail.component !== component) {
           dropDownHideEvent = new window.CustomEvent(
             'dropDownHide'
           );
-          widget.dispatchEvent(dropDownHideEvent);
+          component.dispatchEvent(dropDownHideEvent);
         }
       };
 
-    adjustTriggerWidth(widget, menu);
+    adjustTriggerWidth(component, menu);
 
-    enhanceTriggerClick(widget, trigger, menu);
-    enhanceWidgetKeyup(widget, trigger, menu);
-    enhanceMenuClick(widget, menu);
+    enhanceTriggerClick(component, trigger, menu);
+    enhanceComponentKeyup(component, trigger, menu);
+    enhanceMenuClick(component, menu);
 
-    listenForShow(widget, trigger, menu, hideOnOtherDropDownShow);
-    listenForHide(widget, trigger, menu, hideOnOtherDropDownShow);
-    listenForSelect(widget, trigger, menu);
+    listenForShow(component, trigger, menu, hideOnOtherDropDownShow);
+    listenForHide(component, trigger, menu, hideOnOtherDropDownShow);
+    listenForSelect(component, trigger, menu);
 
     return true;
   }
 
-  SignalUI.registerWidget({
+  SignalUI.registerComponent({
 
-    widgetType: 'dropDown',
+    componentType: 'dropDown',
 
-    widgetClass: 'drop-down',
+    componentClass: 'drop-down',
 
     build: buildDropDown,
 

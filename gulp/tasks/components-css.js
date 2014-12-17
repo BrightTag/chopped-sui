@@ -9,11 +9,11 @@ var config       = require('../config'),
     rename       = require('gulp-rename'),
     csso         = require('gulp-csso');
 
-gulp.task('module:css', [
-  'module:css:min'
+gulp.task('components:css', [
+  'components:css:min'
 ]);
 
-gulp.task('module:css:compile', function () {
+gulp.task('components:css:compile', function () {
 
   return gulp.src( config.css.src )
     .pipe(sass({
@@ -22,12 +22,12 @@ gulp.task('module:css:compile', function () {
       'sourcemap=none': true
     }))
     .on('error', handleErrors)
-    .pipe(concat('modules.css'))
+    .pipe(concat('components.css'))
     .pipe(gulp.dest(config.css.dest))
 
 });
 
-gulp.task('module:css:prefix', ['module:css:compile'], function () {
+gulp.task('components:css:prefix', ['components:css:compile'], function () {
 
   return gulp.src(config.css.dest +'/**/*.css')
     .pipe(autoPrefixer(config.autoPrefixer))
@@ -35,7 +35,7 @@ gulp.task('module:css:prefix', ['module:css:compile'], function () {
 
 });
 
-gulp.task('module:css:min', ['module:css:prefix'], function () {
+gulp.task('components:css:min', ['components:css:prefix'], function () {
 
   return gulp.src(config.css.dest +'/**/*.css')
     .pipe(csso())

@@ -22,31 +22,31 @@
 
 ## Components
 
-Each component resides in a folder under `src/modules`.
+Each component resides in a folder under `src/components`.
 
-For example, the `drop-down` component may be found under `src/modules/drop-down`.
+For example, the `drop-down` component may be found under `src/components/drop-down`.
 
 Each component directory contains a folder for `css`, `js`, and `templates`.
 
-**TODO**: "Component" library, "/modules" directory, "Widget" within the JS library. Should we formalize/standardize?
+**TODO**: "Component" library, "/components" directory, "Component" within the JS library. Should we formalize/standardize?
 
 ### CSS
 
-`css` should contain a single SASS file named `module-name.scss` containing all the styles necessary to render all versions of the component. For `drop-down` this is `drop-down.scss`.
+`css` should contain a single SASS file named `component-name.scss` containing all the styles necessary to render all versions of the component. For `drop-down` this is `drop-down.scss`.
 
 **TODO**: we may want to expand this to allow for multiple SASS files
 
-SASS files for all modules will be converted to CSS and concatenated into `dist/modules/css/modules.css`.
+SASS files for all components will be converted to CSS and concatenated into `dist/components/css/components.css`.
 
 **TODO**: there may come a time where ordering these CSS files becomes a requirement
 
 ### JS
 
-`js` should contain a single JS file named `module-name.js` containing the SignalUI.registerWidget() call for this component. For `drop-down` this is `drop-down.scss`.
+`js` should contain a single JS file named `component-name.js` containing the SignalUI.registerComponent() call for this component. For `drop-down` this is `drop-down.scss`.
 
 ### Templates
 
-`templates` should contain zero or more templates  named `module-name-part.mustache` containing sub templates for any HTML that needs to be added on enhancement, no matter how insignificant. For `drop-down` this is `drop-down-trigger.mustache` and `drop-down-menu.mustache`.
+`templates` should contain zero or more templates  named `component-name-part.mustache` containing sub templates for any HTML that needs to be added on enhancement, no matter how insignificant. For `drop-down` this is `drop-down-trigger.mustache` and `drop-down-menu.mustache`.
 
 **TODO**: The template used in creating language-specific helpers should also live here, most likely
 
@@ -60,7 +60,7 @@ SASS files for all modules will be converted to CSS and concatenated into `dist/
 
 ## Library
 
-The library is a single JavaScript file building helpers for initializing modules in the SignalUI namespace.
+The library is a single JavaScript file building helpers for initializing components in the SignalUI namespace.
 
 **TODO**: We should really be using browserify or requirejs to break this apart into smaller, testable parts.
 
