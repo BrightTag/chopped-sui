@@ -1,2 +1,3 @@
 #!/bin/bash
-npm install;gulp;gulp start:demo;
+npm install
+gulp
