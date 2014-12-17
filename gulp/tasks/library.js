@@ -16,7 +16,7 @@ gulp.task('library:js', function () {
 
   return gulp.src([
       // @todo use bower for managing client dependencies
-      'node_modules/ie8/build/ie8.js',
+      '/lib/EventListener.js', //https://github.com/jonathantneal/EventListener/blob/master/EventListener.js
       'src/library/*.js',
       'node_modules/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js'
     ])
