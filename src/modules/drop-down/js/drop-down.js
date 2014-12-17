@@ -151,11 +151,12 @@
 
   // toggle menu visibility on trigger click
   function enhanceTriggerClick(widget, trigger, menu) {
-    trigger.addEventListener('click', function (e) {
+    function handleTriggerClick(e) {
       var
         dropDownShowEvent,
         dropDownHideEvent;
 
+      e.stopPropagation();
       e.preventDefault();
 
       if (menuHidden.test(menu.className)) {
@@ -171,16 +172,24 @@
       }
 
       return false;
-    }, true);
+    }
+
+    if (trigger.addEventListener) {
+      trigger.addEventListener('click', handleTriggerClick, false);
+    } else {
+      trigger.attachEvent('click', handleTriggerClick);
+    }
   }
 
   // open/close menu and change selected option on arrows
   function enhanceWidgetKeyup(widget, trigger, menu) {
-    widget.addEventListener('keyup', function (e) {
+    function handleMenuKeyup(e) {
       var
         dropDownShowEvent,
         dropDownHideEvent,
         nextNode;
+
+      e.stopPropagation();
 
       if (menuHidden.test(menu.className)) {
 
@@ -252,13 +261,21 @@
           }
         }
       }
-    }, true);
+    }
+
+    if (widget.addEventListener) {
+      widget.addEventListener('keyup', handleMenuKeyup, false);
+    } else {
+      widget.attachEvent('keyup', handleMenuKeyup);
+    }
   }
 
   // select current option when clicked
   function enhanceMenuClick(widget, menu) {
-    menu.addEventListener('click', function (e) {
+    function handleMenuClick(e) {
       var dropDownSelectEvent;
+
+      e.stopPropagation();
 
       // send select event but allow click for navigation
       if (e.target.tagName === 'A') {
@@ -272,16 +289,24 @@
         );
         widget.dispatchEvent(dropDownSelectEvent);
       }
-    }, true);
+    }
+
+    if (menu.addEventListener) {
+      menu.addEventListener('click', handleMenuClick, false);
+    } else {
+      menu.attachEvent('click', handleMenuClick);
+    }
   }
 
   function listenForShow(widget, trigger, menu, hideOnOtherDropDownShow) {
-    widget.addEventListener('dropDownShow', function () {
+    function handleDropDownShow(e) {
       var
         dropDownWillShowEvent,
         dropDownDidShowEvent,
         menuClassName,
         triggerClassName;
+
+      e.stopPropagation();
 
       dropDownWillShowEvent = new window.CustomEvent(
         'dropDownWillShow',
@@ -313,11 +338,15 @@
         }
       );
 
-      document.body.addEventListener(
-        'dropDownWillShow',
-        hideOnOtherDropDownShow,
-        true
-      );
+      if (document.body.addEventListener) {
+        document.body.addEventListener(
+          'dropDownWillShow',
+          hideOnOtherDropDownShow,
+          false
+        );
+      } else {
+        document.body.attachEvent('dropDownWillShow', hideOnOtherDropDownShow);
+      }
 
       menu.scrollTop = 1;
       menu.scrollTop = 0;
@@ -325,16 +354,24 @@
       trigger.focus();
 
       widget.dispatchEvent(dropDownDidShowEvent);
-    }, true);
+    }
+
+    if (widget.addEventListener) {
+      widget.addEventListener('dropDownShow', handleDropDownShow, false);
+    } else {
+      widget.attachEvent('dropDownShow', handleDropDownShow);
+    }
   }
 
   function listenForHide(widget, trigger, menu, hideOnOtherDropDownShow) {
-    widget.addEventListener('dropDownHide', function () {
+    function handleDropDownHide(e) {
       var
         dropDownWillHideEvent,
         dropDownDidHideEvent,
         menuClassName,
         triggerClassName;
+
+      e.stopPropagation();
 
       dropDownWillHideEvent = new window.CustomEvent(
         'dropDownWillHide',
@@ -372,11 +409,17 @@
       );
 
       widget.dispatchEvent(dropDownDidHideEvent);
-    }, true);
+    }
+
+    if (widget.addEventListener) {
+      widget.addEventListener('dropDownHide', handleDropDownHide, false);
+    } else {
+      widget.attachEvent('dropDownHide', handleDropDownHide);
+    }
   }
 
   function listenForSelect(widget, trigger, menu) {
-    widget.addEventListener('dropDownSelect', function (e) {
+    function handleDropDownSelect(e) {
       var
         selected = e.detail.select,
         dropDownDidSelectEvent,
@@ -390,6 +433,8 @@
         selectedIndex,
         previousOption,
         currentIsHidden = widget.querySelectorAll('.drop-down__menu-option--hidden').length;
+
+      e.stopPropagation();
 
       if (!triggerFixed.test(trigger.className)) {
         trigger.innerHTML = selected.innerHTML;
@@ -448,7 +493,13 @@
       widget.dispatchEvent(dropDownDidSelectEvent);
 
       widget.dispatchEvent(dropDownHideEvent);
-    }, true);
+    }
+
+    if (widget.addEventListener) {
+      widget.addEventListener('dropDownSelect', handleDropDownSelect, false);
+    } else {
+      widget.attachEvent('dropDownSelect', handleDropDownSelect);
+    }
   }
 
   function enhanceDropDown(widget) {
@@ -458,6 +509,8 @@
 
       hideOnOtherDropDownShow = function(e) {
         var dropDownHideEvent;
+
+        e.stopPropagation();
 
         if (e.detail.widget !== widget) {
           dropDownHideEvent = new window.CustomEvent(
