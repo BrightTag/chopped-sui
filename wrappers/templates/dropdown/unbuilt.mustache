@@ -1,0 +1,14 @@
+<div id="{{ id }}" class="heading-controls">
+  <nav class="drop-down drop-down--unenhanced">
+    <ul class="drop-down__menu drop-down__menu--flush-right" drop-down-trigger-text="{{ buttonText }}">
+      {{# options }}
+        <li class="drop-down__menu-option">
+          <a class="drop-down__menu-option-trigger" href="{{ href }}">{{ text }}</a>
+        </li>
+      {{/ options }}
+    </ul>
+  </nav>
+  <script id="drop-down-9">
+    SignalUI.initializeWidget({ scriptId: 'drop-down-9', widgetType: 'drop-down' });
+  </script>
+</div>
