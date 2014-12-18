@@ -361,6 +361,7 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
      * @return {Boolean}      - success
      */
     initializeComponent: function (args) {
+      console.log(args);
 
       // without a component type there is no way to look up the component
       if (!args.componentType) {
@@ -375,7 +376,7 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
       }
 
       if (!args.component) {
-        args.script = document.getElementById(args.scriptId);
+        args.script = document.getElementById("drop-down-" + args.scriptId);
         args.component = args.script.previousSibling;
       }
 
