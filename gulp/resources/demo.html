@@ -11,7 +11,8 @@
     <script src="js/signal-ui.js"></script>
   </head>
   <body>
-
+    <h3>Dropdown</h3>
+    <hr>
     <div class="drop-down drop-down--unenhanced drop-down--built">
       <select class="drop-down__select drop-down__select--hidden">
         <option value="1">I'm a Select 1</option>
@@ -141,6 +142,34 @@
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
       </ul>
     </nav>
+    <br>
+    <hr>
+    <h3>Navigation Tabs</h3>
+
+     <div class="tabs tabs--unenhanced">
+      <div id="entity-bar">
+      <nav class="primary-navigation">
+      <ul>
+        <li class="picker-wrapper">
+          <a class="site-picker" href="#">
+            <span class="current-site" title="carerunner.com" id="currentSite">carerunner.com</span> 
+          </a>
+        </li>
+        <li class='nav-tab active'><a href="#1">Site</a></li>
+        <li class='nav-tab'><a href="#2">Tags</a></li>
+        <li class='nav-tab'><a href="#3">Pages</a></li>
+        <li class='nav-tab'><a href="#4">Data & Events</a></li>
+      </ul>
+      </nav>
+      </div>
+      <div> Tab Content 1</div>
+      <div> Tab Content 2</div>
+      <div> Tab Content 3</div>
+    </div>
+    <script id="drop-down-11">
+      SignalUI.initializeComponent({ scriptId: 'drop-down-11', widgetType: 'tabs' });
+    </script>
+
     <script id="drop-down-10">
       SignalUI.initializeComponent({ scriptId: 'drop-down-10', componentType: 'drop-down' });
     </script>
