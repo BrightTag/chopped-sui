@@ -1,5 +1,26 @@
-# Implementing the Component Library
-	-allows components to be built and enhanced, but it knows nothing about what components are on the page. client side. signal-ui.js (like jquery). This is inlined because GO SPEED RACER GO.
-	-Javascript and CSS that represents the modules themselves. These are components that are like the jquery plugins. These are implemented on a per component basis. You only end up with a "components.js" no matter how many components you're implementing. This is at the end of the body.
-	-Components.css needs to be linked in the head.
-	-to make a component show up on a page I put in the right helper server side so that it will output the right markup. There are helpers in most languages we use. ## We are doing this so that if the markup every changes people don't need to update their code, they just need to update the signal-ui.js library, components.js, and helpers, which should be located in one place within the repo. ##
+# The Component Library
+
+The component library gives a set of pre-built and styled components for our UIs. The intention is to give enough flexibility and power so that these components can, eventually, make up the majority of what our clients interact with.
+
+Right now the component library only contains drop-down menus, but more components are coming soon.
+
+## Why are we doing this?
+
+The component library will allow for easy calls to create components on a page
+
+## Implementation
+
+1. Clone into signal-ui-component-library. Right now it is on Github, soon (probably) it will be moving to Gitlab.
+2. Inline signal-ui.js in the head of the page in question.
+3. Link components.css in the head of the page.
+4. At the end of the body tag link to components.js
+5. For each component or instance of a component, use the provided helper script to generate markup. These scripts have plenty of conifguration options to suit *your* needs! (Applause)
+
+## Benefits
+-Only need to implement a component once and can be utilized across UIs.
+-Can be tested independently of the UI it is integrated in.
+-Can be versioned for stability.
+-However, it can also easily be upgraded to newer versions for new components and functionality.
+-As the library grows, development will get faster and easier.
+-Through using the component library and stylesheet our future UIs will slowly move towards a unified look and feel.
+-UI development can be parallelized thanks to components being independent of a specific page's markup.
