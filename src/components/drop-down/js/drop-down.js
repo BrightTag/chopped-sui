@@ -5,9 +5,9 @@
   var
     // no g flag for testing
     currentOptionHidden = /(^| )drop-down__select--hide-current( |$)/,
-    menuFlush           = /(^| )drop-down__menu--flush-/,
-    menuFlushRight      = /(^| )drop-down__menu--flush-right( |$)/,
-    menuFlushLeft       = /(^| )drop-down__menu--flush-left( |$)/,
+    menuFlushBoth       = /(^| )drop-down__menu--flush-both/,
+    menuFlushLeft       = /(^| )drop-down__menu--flush-left/,
+    menuFlushRight      = /(^| )drop-down__menu--flush-right/,
     menuHidden          = /(^| )drop-down__menu--hidden( |$)/,
     optionHidden        = /(^| )drop-down__menu-option--hidden( |$)/,
     triggerFixed        = /(^| )drop-down__trigger--fixed( |$)/,
@@ -24,13 +24,9 @@
       className = select.className,
 
       currentIsHidden  = currentOptionHidden.test(className),
-      menuIsFlushRight = menuFlushRight.test(className),
-      menuIsFlushLeft  = menuFlushLeft.test(className),
 
       menuData = {
-        menuItems      : [],
-        flushRight     : menuIsFlushRight,
-        flushLeft      : menuIsFlushLeft
+        menuItems      : []
       },
       triggerData = {},
       template = '',
@@ -65,6 +61,7 @@
     triggerData.triggerText = selectedOption;
 
     // generate HTML
+    template += SignalUI.templates['drop-down-sizer'](menuData);
     template += SignalUI.templates['drop-down-trigger'](triggerData);
     template += SignalUI.templates['drop-down-menu'](menuData);
 
@@ -80,10 +77,15 @@
   // add trigger for existing menu
   function buildFromMenu(component, menu, trigger) {
     var
+      menuData = {
+        menuItems      : []
+      },
       triggerData,
-      template,
+      template = '',
 
       menuOptions,
+      menuOption,
+      menuFlushDirection,
       i,
       len,
 
@@ -93,7 +95,21 @@
     // make sure menu items can't be tab-targeted
     menuOptions = menu.children;
     for (i = 0, len = menuOptions.length; i < len; i += 1) {
-      menuOptions[i].children[0].tabIndex = -1;
+      menuOption = menuOptions[i].children[0];
+      menuOption.tabIndex = -1;
+      menuData.menuItems.push({
+        text: menuOption.innerHTML
+      });
+    }
+
+    menuFlushDirection =
+      menuFlushLeft.test(menu.className) ? 'left' :
+      menuFlushRight.test(menu.className) ? 'right' :
+      menuFlushBoth.test(menu.className) ? 'both' :
+      '';
+
+    if (menuFlushDirection) {
+      menuData.flush = menuFlushDirection;
     }
 
     // make sure the menu is hidden
@@ -102,14 +118,31 @@
     // build a trigger if it doesn't exist
     if (!trigger) {
 
+      window.console.log(menuFlushDirection);
+
       // build trigger data
       triggerData = {
         triggerText:  menu.getAttribute('drop-down-trigger-text') || 'Menu',
         fixedTrigger: true
       };
 
+      if (menuFlushDirection) {
+        triggerData.flushDirection = menuFlushDirection;
+      }
+
+      window.console.log(triggerData);
+
       // generate HTML
-      template = SignalUI.templates['drop-down-trigger'](triggerData);
+      template += SignalUI.templates['drop-down-trigger'](triggerData);
+    }
+
+    if (menuFlushBoth.test(menu.className)) {
+
+      template += SignalUI.templates['drop-down-sizer'](menuData);
+
+    }
+
+    if (template) {
 
       // append new HTML
       nodeBuilder = document.createElement('div');
@@ -118,6 +151,7 @@
       while (nodes.length) {
         component.insertBefore(nodes[0], menu);
       }
+
     }
   }
 
@@ -136,17 +170,6 @@
     }
 
     return true;
-  }
-
-  // resize trigger based on menu size
-  function adjustTriggerWidth(component, menu) {
-    var
-      menuWidth   = menu.clientWidth,
-      componentWidth = component.clientWidth;
-
-    if ((menuWidth > componentWidth) && !menuFlush.test(menu.className)) {
-      component.style.width = menuWidth + 'px';
-    }
   }
 
   // toggle menu visibility on trigger click
@@ -491,8 +514,6 @@
           component.dispatchEvent(dropDownHideEvent);
         }
       };
-
-    adjustTriggerWidth(component, menu);
 
     enhanceTriggerClick(component, trigger, menu);
     enhanceComponentKeyup(component, trigger, menu);

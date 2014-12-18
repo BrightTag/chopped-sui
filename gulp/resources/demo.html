@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <link rel="stylesheet" href="css/components.css">
+    <script src="//use.typekit.net/iax7vph.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
     <script src="js/signal-ui.js"></script>
   </head>
   <body>
@@ -19,6 +21,11 @@
         <option value="2">I'm a Select 2</option>
         <option value="3">I'm a Select 3</option>
       </select>
+      <ul class="drop-down__sizer">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">I'm a Select 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">I'm a Select 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">I'm a Select 3</span></li>
+      </ul>
       <button class="drop-down__trigger">I'm a Select 1</button>
       <ul class="drop-down__menu drop-down__menu--hidden">
         <li class="drop-down__menu-option drop-down__menu-option--current"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">I'm a Select 1</a></li>
@@ -36,6 +43,11 @@
         <option value="2">Hidden Selected 2</option>
         <option value="3">Hidden Selected 3</option>
       </select>
+      <ul class="drop-down__sizer">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Hidden Selected 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Hidden Selected 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Hidden Selected 3</span></li>
+      </ul>
       <button class="drop-down__trigger">Hidden Selected 1</button>
       <ul class="drop-down__menu drop-down__menu--hidden">
         <li class="drop-down__menu-option drop-down__menu-option--current drop-down__menu-option--hidden"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Hidden Selected 1</a></li>
@@ -49,7 +61,15 @@
 
     <nav class="drop-down drop-down--unenhanced drop-down--built">
       <button class="drop-down__trigger drop-down__trigger--fixed">Menu</button>
-      <ul class="drop-down__menu drop-down__menu--hidden">
+      <ul class="drop-down__sizer drop-down__menu--flush-both">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 3</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 4</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 5</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 6</span></li>
+      </ul>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-both">
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
@@ -63,7 +83,7 @@
     </script>
 
     <nav class="drop-down drop-down--unenhanced drop-down--built">
-      <button class="drop-down__trigger drop-down__trigger--fixed">Right</button>
+      <button class="drop-down__trigger drop-down__trigger--fixed drop-down__trigger--right">Right</button>
       <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-right">
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
@@ -75,7 +95,7 @@
     </script>
 
     <nav class="drop-down drop-down--unenhanced drop-down--built">
-      <button class="drop-down__trigger drop-down__trigger--fixed">Left</button>
+      <button class="drop-down__trigger drop-down__trigger--fixed drop-down__trigger--left">Left</button>
       <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-left">
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
@@ -111,7 +131,7 @@
     </script>
 
     <nav class="drop-down drop-down--unenhanced">
-      <ul class="drop-down__menu" drop-down-trigger-text="Menu">
+      <ul class="drop-down__menu drop-down__menu--flush-both" drop-down-trigger-text="Menu">
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
@@ -152,7 +172,7 @@
       <ul>
         <li class="picker-wrapper">
           <a class="site-picker" href="#">
-            <span class="current-site" title="carerunner.com" id="currentSite">carerunner.com</span> 
+            <span class="current-site" title="carerunner.com" id="currentSite">carerunner.com</span>
           </a>
         </li>
         <li class='nav-tab active'><a href="#1">Site</a></li>

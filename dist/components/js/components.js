@@ -1,5 +1,6 @@
-this.SignalUI=this.SignalUI||{},this.SignalUI.templates=this.SignalUI.templates||{},this.SignalUI.templates["drop-down-menu"]=SignalUI.Handlebars.template({1:function(){return" drop-down__menu--flush-right"},3:function(){return" drop-down__menu--flush-left"},5:function(n,l,e,t){var i,s,a,r="function",u=l.helperMissing,o=l.blockHelperMissing,h=this.escapeExpression,p='		<li class="drop-down__menu-option';return s=null!=(s=l.isCurrent||(null!=n?n.isCurrent:n))?s:u,a={name:"isCurrent",hash:{},fn:this.program(6,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.isCurrent||(i=o.call(n,i,a)),null!=i&&(p+=i),p+'"><a tabindex="-1" href="javascript:;" class="drop-down__menu-option-trigger">'+h((s=null!=(s=l.text||(null!=n?n.text:n))?s:u,typeof s===r?s.call(n,{name:"text",hash:{},data:t}):s))+"</a></li>\n"},6:function(n,l,e,t){var i,s,a,r="function",u=l.helperMissing,o=l.blockHelperMissing,h=" drop-down__menu-option--current";return s=null!=(s=l.isHidden||(null!=n?n.isHidden:n))?s:u,a={name:"isHidden",hash:{},fn:this.program(7,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.isHidden||(i=o.call(n,i,a)),null!=i&&(h+=i),h},7:function(){return" drop-down__menu-option--hidden"},compiler:[6,">= 2.0.0-beta.1"],main:function(n,l,e,t){var i,s,a,r="function",u=l.helperMissing,o=l.blockHelperMissing,h='<ul class="drop-down__menu drop-down__menu--hidden';return s=null!=(s=l.flushRight||(null!=n?n.flushRight:n))?s:u,a={name:"flushRight",hash:{},fn:this.program(1,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.flushRight||(i=o.call(n,i,a)),null!=i&&(h+=i),s=null!=(s=l.flushLeft||(null!=n?n.flushLeft:n))?s:u,a={name:"flushLeft",hash:{},fn:this.program(3,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.flushLeft||(i=o.call(n,i,a)),null!=i&&(h+=i),h+='">\n',s=null!=(s=l.menuItems||(null!=n?n.menuItems:n))?s:u,a={name:"menuItems",hash:{},fn:this.program(5,t),inverse:this.noop,data:t},i=typeof s===r?s.call(n,a):s,l.menuItems||(i=o.call(n,i,a)),null!=i&&(h+=i),h+"</ul>\n"},useData:!0});
-this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:function(){return" drop-down__trigger--fixed"},compiler:[6,">= 2.0.0-beta.1"],main:function(e,r,i,n){var t,l,a,g="function",o=r.helperMissing,s=r.blockHelperMissing,d=this.escapeExpression,p='<button class="drop-down__trigger';return l=null!=(l=r.fixedTrigger||(null!=e?e.fixedTrigger:e))?l:o,a={name:"fixedTrigger",hash:{},fn:this.program(1,n),inverse:this.noop,data:n},t=typeof l===g?l.call(e,a):l,r.fixedTrigger||(t=s.call(e,t,a)),null!=t&&(p+=t),p+'">\n	'+d((l=null!=(l=r.triggerText||(null!=e?e.triggerText:e))?l:o,typeof l===g?l.call(e,{name:"triggerText",hash:{},data:n}):l))+"\n</button>"},useData:!0});
+this.SignalUI=this.SignalUI||{},this.SignalUI.templates=this.SignalUI.templates||{},this.SignalUI.templates["drop-down-menu"]=SignalUI.Handlebars.template({1:function(n){var e=this.lambda,l=this.escapeExpression;return" drop-down__menu--flush-"+l(e(n,n))},3:function(n,e,l,i){var s,t,a,r="function",o=e.helperMissing,u=e.blockHelperMissing,p=this.escapeExpression,h='		<li class="drop-down__menu-option';return t=null!=(t=e.isCurrent||(null!=n?n.isCurrent:n))?t:o,a={name:"isCurrent",hash:{},fn:this.program(4,i),inverse:this.noop,data:i},s=typeof t===r?t.call(n,a):t,e.isCurrent||(s=u.call(n,s,a)),null!=s&&(h+=s),h+'"><a tabindex="-1" href="javascript:;" class="drop-down__menu-option-trigger">'+p((t=null!=(t=e.text||(null!=n?n.text:n))?t:o,typeof t===r?t.call(n,{name:"text",hash:{},data:i}):t))+"</a></li>\n"},4:function(n,e,l,i){var s,t,a,r="function",o=e.helperMissing,u=e.blockHelperMissing,p=" drop-down__menu-option--current";return t=null!=(t=e.isHidden||(null!=n?n.isHidden:n))?t:o,a={name:"isHidden",hash:{},fn:this.program(5,i),inverse:this.noop,data:i},s=typeof t===r?t.call(n,a):t,e.isHidden||(s=u.call(n,s,a)),null!=s&&(p+=s),p},5:function(){return" drop-down__menu-option--hidden"},compiler:[6,">= 2.0.0-beta.1"],main:function(n,e,l,i){var s,t,a,r="function",o=e.helperMissing,u=e.blockHelperMissing,p='<ul class="drop-down__menu drop-down__menu--hidden';return t=null!=(t=e.flush||(null!=n?n.flush:n))?t:o,a={name:"flush",hash:{},fn:this.program(1,i),inverse:this.noop,data:i},s=typeof t===r?t.call(n,a):t,e.flush||(s=u.call(n,s,a)),null!=s&&(p+=s),p+='">\n',t=null!=(t=e.menuItems||(null!=n?n.menuItems:n))?t:o,a={name:"menuItems",hash:{},fn:this.program(3,i),inverse:this.noop,data:i},s=typeof t===r?t.call(n,a):t,e.menuItems||(s=u.call(n,s,a)),null!=s&&(p+=s),p+"</ul>\n"},useData:!0});
+this.SignalUI.templates["drop-down-sizer"]=SignalUI.Handlebars.template({1:function(n){var e=this.lambda,l=this.escapeExpression;return" drop-down__menu--flush-"+l(e(n,n))},3:function(n,e,l,s){var a,t="function",i=e.helperMissing,o=this.escapeExpression;return'    <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">'+o((a=null!=(a=e.text||(null!=n?n.text:n))?a:i,typeof a===t?a.call(n,{name:"text",hash:{},data:s}):a))+"</span></li>\n"},compiler:[6,">= 2.0.0-beta.1"],main:function(n,e,l,s){var a,t,i,o="function",r=e.helperMissing,u=e.blockHelperMissing,p='<ul class="drop-down__sizer';return t=null!=(t=e.flush||(null!=n?n.flush:n))?t:r,i={name:"flush",hash:{},fn:this.program(1,s),inverse:this.noop,data:s},a=typeof t===o?t.call(n,i):t,e.flush||(a=u.call(n,a,i)),null!=a&&(p+=a),p+='">\n',t=null!=(t=e.menuItems||(null!=n?n.menuItems:n))?t:r,i={name:"menuItems",hash:{},fn:this.program(3,s),inverse:this.noop,data:s},a=typeof t===o?t.call(n,i):t,e.menuItems||(a=u.call(n,a,i)),null!=a&&(p+=a),p+"</ul>\n"},useData:!0});
+this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:function(){return" drop-down__trigger--fixed"},3:function(e){var r=this.lambda,n=this.escapeExpression;return" drop-down__trigger--"+n(r(e,e))},compiler:[6,">= 2.0.0-beta.1"],main:function(e,r,n,i){var t,l,a,s="function",o=r.helperMissing,g=r.blockHelperMissing,u=this.escapeExpression,p='<button class="drop-down__trigger';return l=null!=(l=r.fixedTrigger||(null!=e?e.fixedTrigger:e))?l:o,a={name:"fixedTrigger",hash:{},fn:this.program(1,i),inverse:this.noop,data:i},t=typeof l===s?l.call(e,a):l,r.fixedTrigger||(t=g.call(e,t,a)),null!=t&&(p+=t),l=null!=(l=r.flushDirection||(null!=e?e.flushDirection:e))?l:o,a={name:"flushDirection",hash:{},fn:this.program(3,i),inverse:this.noop,data:i},t=typeof l===s?l.call(e,a):l,r.flushDirection||(t=g.call(e,t,a)),null!=t&&(p+=t),p+'">\n	'+u((l=null!=(l=r.triggerText||(null!=e?e.triggerText:e))?l:o,typeof l===s?l.call(e,{name:"triggerText",hash:{},data:i}):l))+"\n</button>\n"},useData:!0});
 (function (SignalUI) {
 
   'use strict';
@@ -7,9 +8,9 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
   var
     // no g flag for testing
     currentOptionHidden = /(^| )drop-down__select--hide-current( |$)/,
-    menuFlush           = /(^| )drop-down__menu--flush-/,
-    menuFlushRight      = /(^| )drop-down__menu--flush-right( |$)/,
-    menuFlushLeft       = /(^| )drop-down__menu--flush-left( |$)/,
+    menuFlushBoth       = /(^| )drop-down__menu--flush-both/,
+    menuFlushLeft       = /(^| )drop-down__menu--flush-left/,
+    menuFlushRight      = /(^| )drop-down__menu--flush-right/,
     menuHidden          = /(^| )drop-down__menu--hidden( |$)/,
     optionHidden        = /(^| )drop-down__menu-option--hidden( |$)/,
     triggerFixed        = /(^| )drop-down__trigger--fixed( |$)/,
@@ -26,13 +27,9 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       className = select.className,
 
       currentIsHidden  = currentOptionHidden.test(className),
-      menuIsFlushRight = menuFlushRight.test(className),
-      menuIsFlushLeft  = menuFlushLeft.test(className),
 
       menuData = {
-        menuItems      : [],
-        flushRight     : menuIsFlushRight,
-        flushLeft      : menuIsFlushLeft
+        menuItems      : []
       },
       triggerData = {},
       template = '',
@@ -67,6 +64,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     triggerData.triggerText = selectedOption;
 
     // generate HTML
+    template += SignalUI.templates['drop-down-sizer'](menuData);
     template += SignalUI.templates['drop-down-trigger'](triggerData);
     template += SignalUI.templates['drop-down-menu'](menuData);
 
@@ -82,10 +80,15 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
   // add trigger for existing menu
   function buildFromMenu(component, menu, trigger) {
     var
+      menuData = {
+        menuItems      : []
+      },
       triggerData,
-      template,
+      template = '',
 
       menuOptions,
+      menuOption,
+      menuFlushDirection,
       i,
       len,
 
@@ -95,7 +98,21 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     // make sure menu items can't be tab-targeted
     menuOptions = menu.children;
     for (i = 0, len = menuOptions.length; i < len; i += 1) {
-      menuOptions[i].children[0].tabIndex = -1;
+      menuOption = menuOptions[i].children[0];
+      menuOption.tabIndex = -1;
+      menuData.menuItems.push({
+        text: menuOption.innerHTML
+      });
+    }
+
+    menuFlushDirection =
+      menuFlushLeft.test(menu.className) ? 'left' :
+      menuFlushRight.test(menu.className) ? 'right' :
+      menuFlushBoth.test(menu.className) ? 'both' :
+      '';
+
+    if (menuFlushDirection) {
+      menuData.flush = menuFlushDirection;
     }
 
     // make sure the menu is hidden
@@ -104,14 +121,31 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     // build a trigger if it doesn't exist
     if (!trigger) {
 
+      window.console.log(menuFlushDirection);
+
       // build trigger data
       triggerData = {
         triggerText:  menu.getAttribute('drop-down-trigger-text') || 'Menu',
         fixedTrigger: true
       };
 
+      if (menuFlushDirection) {
+        triggerData.flushDirection = menuFlushDirection;
+      }
+
+      window.console.log(triggerData);
+
       // generate HTML
-      template = SignalUI.templates['drop-down-trigger'](triggerData);
+      template += SignalUI.templates['drop-down-trigger'](triggerData);
+    }
+
+    if (menuFlushBoth.test(menu.className)) {
+
+      template += SignalUI.templates['drop-down-sizer'](menuData);
+
+    }
+
+    if (template) {
 
       // append new HTML
       nodeBuilder = document.createElement('div');
@@ -120,6 +154,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       while (nodes.length) {
         component.insertBefore(nodes[0], menu);
       }
+
     }
   }
 
@@ -138,17 +173,6 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     }
 
     return true;
-  }
-
-  // resize trigger based on menu size
-  function adjustTriggerWidth(component, menu) {
-    var
-      menuWidth   = menu.clientWidth,
-      componentWidth = component.clientWidth;
-
-    if ((menuWidth > componentWidth) && !menuFlush.test(menu.className)) {
-      component.style.width = menuWidth + 'px';
-    }
   }
 
   // toggle menu visibility on trigger click
@@ -493,8 +517,6 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
           component.dispatchEvent(dropDownHideEvent);
         }
       };
-
-    adjustTriggerWidth(component, menu);
 
     enhanceTriggerClick(component, trigger, menu);
     enhanceComponentKeyup(component, trigger, menu);

@@ -2,10 +2,16 @@
 
   /* default styles */
   display: inline-block;
-  margin: 10px;
+  font-family: "proxima-nova", Helvetica, Verdana, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  height: 46px;
+  margin: 0;
   position: relative;
   text-align: left;
-  font-family: Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  vertical-align: bottom;
 
   .js & {
 
@@ -37,69 +43,51 @@
 
   &__trigger {
 
-    background-color: #fff;
-    border-bottom: 1px solid #ccc;
-    border-color: #ccc;
+    background-color: transparent;
+    border-color: #CCC;
     border-style: solid;
-    border-width: 0 0 1px 0;
+    border-width: 0 0 2px 0;
     color: #333;
     cursor: hand;
     cursor: pointer;
     display: inline-block;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "proxima-nova", Helvetica, Verdana, Arial, sans-serif;
     font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    left: 0;
     line-height: 24px;
     margin: 0;
-    padding: 10px 40px 10px 15px;
-    position: relative;
+    padding: 10px 55px 10px 30px;
+    position: absolute;
     text-align: left;
+    text-transform: uppercase;
+    top: 0;
     transition: all .1s;
     white-space: nowrap;
     width: 100%;
 
-    &:after,
-    &:before {
-
-      border-style: solid;
-      border-width: 7px 4px;
-      content: '';
-      position: absolute;
-      right: 17px;
-      transition: all .1s;
-
-    }
-
-    &:after {
-
-      border-color: transparent transparent #333 transparent;
-      top: 6px;
-
-    }
-
     &:before {
 
       border-color: #333 transparent transparent transparent;
-      bottom: 6px;
+      border-style: solid;
+      border-width: 6px 5px;
+      bottom: 13px;
+      content: '';
+      position: absolute;
+      right: 33px;
+      transition: all .1s;
 
     }
 
     &:hover,
     &:focus {
 
-      color: #09c;
-
-      &:after {
-
-        border-color: transparent transparent #09c transparent;
-        opacity: 0;
-        top: 11px;
-
-      }
+      color: #00ADEF;
 
       &:before {
 
-        border-color: #09c transparent transparent transparent;
-        bottom: 11px;
+        border-color: #00ADEF transparent transparent transparent;
 
       }
 
@@ -107,53 +95,29 @@
 
     &--active {
 
-      background-color: #fff;
-      border-color: #09c;
-      color: #09c;
       z-index: 111;
 
-      &:after {
+    }
 
-        border-color: transparent transparent #09c transparent;
+    &--left,
+    &--right {
 
-      }
-
-      &:before {
-
-        border-color: #09c transparent transparent transparent;
-
-      }
-
-      &:hover,
-      &:focus {
-
-        &:after {
-
-          opacity: 1;
-
-        }
-
-        &:before {
-
-          opacity: 0;
-
-        }
-
-      }
+      position: relative;
 
     }
 
   }
 
-  &__menu {
+  &__menu,
+  &__sizer {
 
-    border-bottom: 1px solid #09c;
-    border-top: 1px solid #09c;
+    border-bottom: 2px solid #CCC;
+    border-top: 2px solid #CCC;
     display: inline-block;
     left: 0;
     list-style: none;
     margin: 0;
-    max-height: 200px;
+    max-height: 179px;
     min-width: 100%;
     opacity: 1;
     overflow: scroll;
@@ -163,15 +127,19 @@
     z-index: 11;
 
     .drop-down--unenhanced & {
+
+      max-height: none;
       position: relative;
       top: 0;
-      max-height: none;
+
     }
 
     .drop-down--built & {
+
+      max-height: 200px;
       position: absolute;
       top: 44px;
-      max-height: 200px;
+
     }
 
     &--flush-right {
@@ -181,10 +149,23 @@
 
     }
 
+
+    &--flush-right,
+    &--flush-left,
+    &--flush-both {
+
+      & .drop-down__menu-option-trigger {
+
+        padding-right: 30px;
+
+      }
+
+    }
+
     &--hidden {
 
       opacity: 0;
-      top: 0px;
+      top: 0;
       visibility: hidden;
 
     }
@@ -197,44 +178,21 @@
 
     &-option {
 
-      border-bottom: 1px solid #ccc;
-      border-top: 1px solid #ccc;
-      margin: -1px 0 0 0;
       position: relative;
       transition: all .1s;
       width: auto;
 
-      &:first-of-type {
-
-        border-top-color: #09c;
-
-      }
-
-      &:last-of-type {
-
-        border-bottom-color: #09c;
-        margin-bottom: -1px;
-
-      }
-
       &--current {
 
-        border-color: #09c;
+        border-color: #00ADEF;
         z-index: 11;
 
         .drop-down__menu-option-trigger {
 
-          background-color: #09c;
-          color: #fff;
+          background-color: #E8E8E8;
+          border-left-color: #00ADEF;
+          color: #00ADEF;
           z-index: 111;
-
-          &:hover,
-          &:focus {
-
-            background-color: #09c;
-            color: #fff;
-
-          }
 
         }
 
@@ -248,14 +206,16 @@
 
       &-trigger {
 
-        background-color: #f8f8f8;
+        background-color: #FFF;
+        border-left: 2px solid #CCC;
+        border-right: 2px solid #CCC;
         color: #333;
         cursor: hand;
         cursor: pointer;
         display: block;
         font-size: 16px;
         line-height: 24px;
-        padding: 10px 15px 10px 15px;
+        padding: 10px 53px 10px 28px;
         position: relative;
         text-decoration: none;
         transition: all .1s;
@@ -265,10 +225,49 @@
         &:hover,
         &:focus {
 
-          background-color: #eee;
+          border-left-color: #333;
+          color: #00ADEF;
           z-index: 11;
 
         }
+
+      }
+
+    }
+
+  }
+
+  &__sizer {
+
+    border: none;
+    display: inline-block;
+    height: 44px;
+    position: relative;
+    top: 0;
+    visibility: hidden;
+
+    .drop-down--unenhanced &,
+    .drop-down--built & {
+
+      max-height: none;
+      position: relative;
+      top: 0;
+
+    }
+
+    .drop-down--enhanced & {
+
+      transition: none;
+
+    }
+
+    &--flush-right,
+    &--flush-left,
+    &--flush-both {
+
+      & .drop-down__menu-option-trigger {
+
+        padding-right: 30px;
 
       }
 

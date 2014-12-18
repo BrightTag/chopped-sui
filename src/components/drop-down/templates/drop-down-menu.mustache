@@ -1,4 +1,4 @@
-<ul class="drop-down__menu drop-down__menu--hidden{{#flushRight}} drop-down__menu--flush-right{{/flushRight}}{{#flushLeft}} drop-down__menu--flush-left{{/flushLeft}}">
+<ul class="drop-down__menu drop-down__menu--hidden{{#flush}} drop-down__menu--flush-{{.}}{{/flush}}">
 	{{#menuItems}}
 		<li class="drop-down__menu-option{{#isCurrent}} drop-down__menu-option--current{{#isHidden}} drop-down__menu-option--hidden{{/isHidden}}{{/isCurrent}}"><a tabindex="-1" href="javascript:;" class="drop-down__menu-option-trigger">{{text}}</a></li>
 	{{/menuItems}}
