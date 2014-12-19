@@ -214,8 +214,6 @@ component.addEventListener('eventName', function (e) {
 
 `component` - the outermost element of the component that will be built
 
-#### info
-
 emitted when the component is about to be built
 
 ### `dropDownDidBuild`
@@ -223,8 +221,6 @@ emitted when the component is about to be built
 #### `event.detail`
 
 `component` - the outermost element of the component that was built
-
-#### info
 
 emitted when the component is built
 
@@ -234,8 +230,6 @@ emitted when the component is built
 
 `component` - the outermost element of the component that will be enhanced
 
-#### info
-
 emitted when the component is about to be enhanced
 
 ### `dropDownDidEnhance`
@@ -243,8 +237,6 @@ emitted when the component is about to be enhanced
 #### `event.detail`
 
 `component` - the outermost element of the component that was enhanced
-
-#### info
 
 emitted when the component is enhanced
 
@@ -254,8 +246,6 @@ emitted when the component is enhanced
 
 `component` - the outermost element of the component whose menu will be shown
 
-#### info
-
 emitted when the component's menu is about to be shown
 
 ### `dropDownDidShow`
@@ -263,8 +253,6 @@ emitted when the component's menu is about to be shown
 #### `event.detail`
 
 `component` - the outermost element of the component whose menu was shown
-
-#### info
 
 emitted when the component's menu is shown
 
@@ -274,8 +262,6 @@ emitted when the component's menu is shown
 
 `component` - the outermost element of the component whose menu will be hidden
 
-#### info
-
 emitted when the component's menu is about to be hidden
 
 ### `dropDownDidHide`
@@ -283,8 +269,6 @@ emitted when the component's menu is about to be hidden
 #### `event.detail`
 
 `component` - the outermost element of the component whose menu was hidden
-
-#### info
 
 emitted when the component's menu is hidden
 
@@ -295,8 +279,6 @@ emitted when the component's menu is hidden
 `component` - the outermost element of the component whose menu was hidden
 
 `selected` - the component's menu item element that was selected
-
-#### info
 
 emitted when one of the component's menu items is selected
 
