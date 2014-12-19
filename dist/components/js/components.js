@@ -119,8 +119,6 @@
     // build a trigger if it doesn't exist
     if (!trigger) {
 
-      window.console.log(menuFlushDirection);
-
       // build trigger data
       triggerData = {
         text        :  menu.getAttribute('drop-down-trigger-text') || 'Menu',
@@ -130,8 +128,6 @@
       if (menuFlushDirection) {
         triggerData.flushDirection = menuFlushDirection;
       }
-
-      window.console.log(triggerData);
 
       // generate HTML
       template += SignalUI.templates['drop-down-trigger'].render(triggerData);
