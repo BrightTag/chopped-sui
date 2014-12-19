@@ -204,15 +204,15 @@ component.addEventListener('eventName', function (e) {
 });
 ```
 
-> `eventName` corresponds to a valid broadcast event.
+`eventName` corresponds to a valid broadcast event.
 
 `e.details` is an object that contains `component` (the outermost element of the component that fired the event) and potentially other data relevant to the state change.
 
 ### dropDownWillBuild
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component that will be built
+`component` - the outermost element of the component that will be built
 
 #### info
 
@@ -220,9 +220,9 @@ emitted when the component is about to be built
 
 ### dropDownDidBuild
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component that was built
+`component` - the outermost element of the component that was built
 
 #### info
 
@@ -230,9 +230,9 @@ emitted when the component is built
 
 ### dropDownWillEnhance
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component that will be enhanced
+`component` - the outermost element of the component that will be enhanced
 
 #### info
 
@@ -240,9 +240,9 @@ emitted when the component is about to be enhanced
 
 ### dropDownDidEnhance
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component that was enhanced
+`component` - the outermost element of the component that was enhanced
 
 #### info
 
@@ -250,9 +250,9 @@ emitted when the component is enhanced
 
 ### dropDownWillShow
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component whose menu will be shown
+`component` - the outermost element of the component whose menu will be shown
 
 #### info
 
@@ -260,9 +260,9 @@ emitted when the component's menu is about to be shown
 
 ### dropDownDidShow
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component whose menu was shown
+`component` - the outermost element of the component whose menu was shown
 
 #### info
 
@@ -270,9 +270,9 @@ emitted when the component's menu is shown
 
 ### dropDownWillHide
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component whose menu will be hidden
+`component` - the outermost element of the component whose menu will be hidden
 
 #### info
 
@@ -280,9 +280,9 @@ emitted when the component's menu is about to be hidden
 
 ### dropDownDidHide
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component whose menu was hidden
+`component` - the outermost element of the component whose menu was hidden
 
 #### info
 
@@ -290,17 +290,17 @@ emitted when the component's menu is hidden
 
 ### dropDownDidSelect
 
-#### event.detail
+#### `event.detail`
 
-**component** - the outermost element of the component whose menu was hidden
+`component` - the outermost element of the component whose menu was hidden
 
-**selected** - the component's menu item element that was selected
+`selected` - the component's menu item element that was selected
 
 #### info
 
 emitted when one of the component's menu items is selected
 
-#### event.detail
+#### `event.detail`
 
 ## API Events
 
@@ -318,13 +318,13 @@ var apiEvent = new window.CustomEvent(
 component.dispatchEvent(apiEvent);
 ```
 
-> `eventName` corresponds to a valid API event.
+`eventName` corresponds to a valid API event.
 
 `eventData` is an object containing data relevent to the event.
 
 The second argument to CustomEvent may be omitted entirely in cases where no additional information is needed beyond the API directive.
 
-### dropDownShow
+### `dropDownShow`
 
 Tells the drop-down to show its menu if it isn't already shown.
 
@@ -333,7 +333,7 @@ var dropDownShowEvent = new window.CustomEvent('dropDownShow');
 component.dispatchEvent(dropDownShowEvent);
 ```
 
-> ### dropDownHide
+### `dropDownHide`
 
 Tells the drop-down to hide its menu if it isn't already hidden.
 
@@ -342,7 +342,7 @@ var dropDownHideEvent = new window.CustomEvent('dropDownHide');
 component.dispatchEvent(dropDownHideEvent);
 ```
 
-> ### dropDownSelect
+### `dropDownSelect`
 
 Tells the drop-down to select the specified option. Works even if the drop=down's menu is hidden.
 
