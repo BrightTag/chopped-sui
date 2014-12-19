@@ -208,7 +208,7 @@ component.addEventListener('eventName', function (e) {
 
 `e.details` is an object that contains `component` (the outermost element of the component that fired the event) and potentially other data relevant to the state change.
 
-### dropDownWillBuild
+### `dropDownWillBuild`
 
 #### `event.detail`
 
@@ -218,7 +218,7 @@ component.addEventListener('eventName', function (e) {
 
 emitted when the component is about to be built
 
-### dropDownDidBuild
+### `dropDownDidBuild`
 
 #### `event.detail`
 
@@ -228,7 +228,7 @@ emitted when the component is about to be built
 
 emitted when the component is built
 
-### dropDownWillEnhance
+### `dropDownWillEnhance`
 
 #### `event.detail`
 
@@ -238,7 +238,7 @@ emitted when the component is built
 
 emitted when the component is about to be enhanced
 
-### dropDownDidEnhance
+### `dropDownDidEnhance`
 
 #### `event.detail`
 
@@ -248,7 +248,7 @@ emitted when the component is about to be enhanced
 
 emitted when the component is enhanced
 
-### dropDownWillShow
+### `dropDownWillShow`
 
 #### `event.detail`
 
@@ -258,7 +258,7 @@ emitted when the component is enhanced
 
 emitted when the component's menu is about to be shown
 
-### dropDownDidShow
+### `dropDownDidShow`
 
 #### `event.detail`
 
@@ -268,7 +268,7 @@ emitted when the component's menu is about to be shown
 
 emitted when the component's menu is shown
 
-### dropDownWillHide
+### `dropDownWillHide`
 
 #### `event.detail`
 
@@ -278,7 +278,7 @@ emitted when the component's menu is shown
 
 emitted when the component's menu is about to be hidden
 
-### dropDownDidHide
+### `dropDownDidHide`
 
 #### `event.detail`
 
@@ -288,7 +288,7 @@ emitted when the component's menu is about to be hidden
 
 emitted when the component's menu is hidden
 
-### dropDownDidSelect
+### `dropDownDidSelect`
 
 #### `event.detail`
 
