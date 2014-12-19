@@ -7,6 +7,7 @@ Drop down menus require data in the following format:
 ### `uniqueIdentifier`
 
 > *required*
+
 > *string*
 
 Unique id attribute for the self-initialization script. This is to ensure that
@@ -15,7 +16,9 @@ components added via AJAX do not initiate the wrong component.
 ### `id`
 
 > *optional*
+
 > *string*
+
 > *default: null*
 
 Optional id attribute for the component.
@@ -23,7 +26,9 @@ Optional id attribute for the component.
 ### `class`
 
 > *optional*
+
 > *string*
+
 > *default: null*
 
 Optional class attribute for the component.
@@ -31,7 +36,9 @@ Optional class attribute for the component.
 ### `build`
 
 > *optional*
+
 > *boolean*
+
 > *default: false*
 
 Set to true for server-side pre-building of components.
@@ -39,7 +46,9 @@ Set to true for server-side pre-building of components.
 ### `select`
 
 > *optional - must use select or menu*
+
 > *object*
+
 > *default: null*
 
 Object containing information regarding a select on top of which the drop-down
@@ -48,6 +57,7 @@ component is based. `select` data is as follows:
 #### `selectId`
 
 > *required*
+
 > *string*
 
 The id attribute of the select.
@@ -55,6 +65,7 @@ The id attribute of the select.
 #### `selectName`
 
 > *required*
+
 > *string*
 
 The name attribute of the select.
@@ -62,7 +73,9 @@ The name attribute of the select.
 #### `hideCurrent`
 
 > *optional*
+
 > *boolean*
+
 > *default: false*
 
 Set to true to prevent the currently selected option from appearing in the
@@ -71,6 +84,7 @@ drop-down menu.
 #### `menuItems`
 
 > *required*
+
 > *array of objects*
 
 Array representing each option in the select. `menuItem` objects each contain
@@ -79,6 +93,7 @@ the following:
 ##### `text`
 
 > *required*
+
 > *string*
 
 Text label for the option.
@@ -86,6 +101,7 @@ Text label for the option.
 ##### `value`
 
 > *required*
+
 > *string*
 
 The value attribute of the option.
@@ -93,7 +109,9 @@ The value attribute of the option.
 ##### `isCurrent`
 
 > *optional - should only be set for one option*
+
 > *boolean*
+
 > *default: false*
 
 Adds the selected attribute to the option.
@@ -101,7 +119,9 @@ Adds the selected attribute to the option.
 ### `flushDirection`
 
 > *optional - ignored by `select`*
+
 > *string: 'left', 'right', or 'both'*
+
 > *default: 'both'*
 
 Specifies whether the menu and button's left, right, or both edges will be flush.
@@ -109,6 +129,7 @@ Specifies whether the menu and button's left, right, or both edges will be flush
 ### `triggerText`
 
 > *required for `menu` - ignored by `select`*
+
 > *string*
 
 The text for the trigger that shows the menu.
@@ -116,7 +137,9 @@ The text for the trigger that shows the menu.
 ### `triggerId`
 
 > *optional - ignored by `select`*
+
 > *string*
+
 > *default: ''*
 
 Optional id attribute for the trigger.
@@ -124,7 +147,9 @@ Optional id attribute for the trigger.
 ### `menu`
 
 > *optional - must use select or menu*
+
 > *object*
+
 > *default: null*
 
 Object containing information regarding an unordered list on top of which the
@@ -133,6 +158,7 @@ drop-down component is based. `menu` data is as follows:
 #### `menuItems`
 
 > *required*
+
 > *array of objects*
 
 Array representing each option in the select. `menuItem` objects each contain
@@ -141,6 +167,7 @@ the following:
 ##### `menuItemId`
 
 > *optional*
+
 > *string*
 
 Optional id attribute for the menu item.
@@ -148,6 +175,7 @@ Optional id attribute for the menu item.
 ##### `text`
 
 > *required*
+
 > *string*
 
 Text for the menu item.
@@ -155,7 +183,9 @@ Text for the menu item.
 ##### `link`
 
 > > *optional*
+
 > *string*
+
 > *default: 'javascript:;'*
 
 The href attribute of the menu item.
