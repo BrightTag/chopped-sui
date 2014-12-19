@@ -182,7 +182,7 @@ Text for the menu item.
 
 ##### `link`
 
-> > *optional*
+> *optional*
 
 > *string*
 
