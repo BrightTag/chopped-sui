@@ -28,8 +28,6 @@ For example, the `drop-down` component may be found under `src/components/drop-d
 
 Each component directory contains a folder for `css`, `js`, and `templates`.
 
-**TODO**: "Component" library, "/components" directory, "Component" within the JS library. Should we formalize/standardize?
-
 ### CSS
 
 `css` should contain a single SASS file named `component-name.scss` containing all the styles necessary to render all versions of the component. For `drop-down` this is `drop-down.scss`.
@@ -46,9 +44,7 @@ SASS files for all components will be converted to CSS and concatenated into `di
 
 ### Templates
 
-`templates` should contain zero or more templates  named `component-name-part.mustache` containing sub templates for any HTML that needs to be added on enhancement, no matter how insignificant. For `drop-down` this is `drop-down-trigger.mustache` and `drop-down-menu.mustache`.
-
-**TODO**: The template used in creating language-specific helpers should also live here, most likely
+`templates` should contain one or more templates  named `component-name.mustache` for rendering the entire component, or `component-name-part.mustache` containing sub templates for any HTML that needs to be added on enhancement, no matter how insignificant.
 
 ### Helpers
 
