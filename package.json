@@ -28,5 +28,10 @@
   },
   "scripts": {
     "postinstall": "sh ./install.sh npm"
+  },
+  "devDependencies": {
+    "grunt-mustache-precompile": "^0.1.1",
+    "gulp-grunt": "^0.5.2",
+    "gulp-hogan-compile": "^0.4.1"
   }
 }

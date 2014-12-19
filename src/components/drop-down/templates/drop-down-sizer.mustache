@@ -1,5 +1,5 @@
-<ul class="drop-down__sizer{{#flush}} drop-down__menu--flush-{{.}}{{/flush}}">
+<ul class="drop-down__sizer{{#flushDirection}} drop-down__menu--flush-{{flushDirection}}{{/flushDirection}}">
   {{#menuItems}}
-    <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">{{text}}</span></li>
+    <li class="drop-down__menu-option{{#isCurrent}} drop-down__menu-option--current{{#hideCurrent}} drop-down__menu-option--hidden{{/hideCurrent}}{{/isCurrent}}"><span class="drop-down__menu-option-trigger">{{text}}</span></li>
   {{/menuItems}}
 </ul>

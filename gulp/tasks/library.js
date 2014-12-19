@@ -16,9 +16,9 @@ gulp.task('library:js', function () {
 
   return gulp.src([
       // @todo use bower for managing client dependencies
-      '/lib/EventListener.js', //https://github.com/jonathantneal/EventListener/blob/master/EventListener.js
+      'lib/EventListener.js', //https://github.com/jonathantneal/EventListener/blob/master/EventListener.js
       'src/library/*.js',
-      'node_modules/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js'
+      'node_modules/gulp-hogan-compile/node_modules/hogan.js/dist/hogan-3.0.2.mustache.js'
     ])
     .pipe(concat('signal-ui.js'))
     .pipe(replace(/root\.Handlebars/g, 'root.SignalUI.Handlebars'))

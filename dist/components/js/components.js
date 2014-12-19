@@ -1,6 +1,8 @@
-this.SignalUI=this.SignalUI||{},this.SignalUI.templates=this.SignalUI.templates||{},this.SignalUI.templates["drop-down-menu"]=SignalUI.Handlebars.template({1:function(n){var e=this.lambda,l=this.escapeExpression;return" drop-down__menu--flush-"+l(e(n,n))},3:function(n,e,l,i){var s,t,a,r="function",o=e.helperMissing,u=e.blockHelperMissing,p=this.escapeExpression,h='		<li class="drop-down__menu-option';return t=null!=(t=e.isCurrent||(null!=n?n.isCurrent:n))?t:o,a={name:"isCurrent",hash:{},fn:this.program(4,i),inverse:this.noop,data:i},s=typeof t===r?t.call(n,a):t,e.isCurrent||(s=u.call(n,s,a)),null!=s&&(h+=s),h+'"><a tabindex="-1" href="javascript:;" class="drop-down__menu-option-trigger">'+p((t=null!=(t=e.text||(null!=n?n.text:n))?t:o,typeof t===r?t.call(n,{name:"text",hash:{},data:i}):t))+"</a></li>\n"},4:function(n,e,l,i){var s,t,a,r="function",o=e.helperMissing,u=e.blockHelperMissing,p=" drop-down__menu-option--current";return t=null!=(t=e.isHidden||(null!=n?n.isHidden:n))?t:o,a={name:"isHidden",hash:{},fn:this.program(5,i),inverse:this.noop,data:i},s=typeof t===r?t.call(n,a):t,e.isHidden||(s=u.call(n,s,a)),null!=s&&(p+=s),p},5:function(){return" drop-down__menu-option--hidden"},compiler:[6,">= 2.0.0-beta.1"],main:function(n,e,l,i){var s,t,a,r="function",o=e.helperMissing,u=e.blockHelperMissing,p='<ul class="drop-down__menu drop-down__menu--hidden';return t=null!=(t=e.flush||(null!=n?n.flush:n))?t:o,a={name:"flush",hash:{},fn:this.program(1,i),inverse:this.noop,data:i},s=typeof t===r?t.call(n,a):t,e.flush||(s=u.call(n,s,a)),null!=s&&(p+=s),p+='">\n',t=null!=(t=e.menuItems||(null!=n?n.menuItems:n))?t:o,a={name:"menuItems",hash:{},fn:this.program(3,i),inverse:this.noop,data:i},s=typeof t===r?t.call(n,a):t,e.menuItems||(s=u.call(n,s,a)),null!=s&&(p+=s),p+"</ul>\n"},useData:!0});
-this.SignalUI.templates["drop-down-sizer"]=SignalUI.Handlebars.template({1:function(n){var e=this.lambda,l=this.escapeExpression;return" drop-down__menu--flush-"+l(e(n,n))},3:function(n,e,l,s){var a,t="function",i=e.helperMissing,o=this.escapeExpression;return'    <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">'+o((a=null!=(a=e.text||(null!=n?n.text:n))?a:i,typeof a===t?a.call(n,{name:"text",hash:{},data:s}):a))+"</span></li>\n"},compiler:[6,">= 2.0.0-beta.1"],main:function(n,e,l,s){var a,t,i,o="function",r=e.helperMissing,u=e.blockHelperMissing,p='<ul class="drop-down__sizer';return t=null!=(t=e.flush||(null!=n?n.flush:n))?t:r,i={name:"flush",hash:{},fn:this.program(1,s),inverse:this.noop,data:s},a=typeof t===o?t.call(n,i):t,e.flush||(a=u.call(n,a,i)),null!=a&&(p+=a),p+='">\n',t=null!=(t=e.menuItems||(null!=n?n.menuItems:n))?t:r,i={name:"menuItems",hash:{},fn:this.program(3,s),inverse:this.noop,data:s},a=typeof t===o?t.call(n,i):t,e.menuItems||(a=u.call(n,a,i)),null!=a&&(p+=a),p+"</ul>\n"},useData:!0});
-this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:function(){return" drop-down__trigger--fixed"},3:function(e){var r=this.lambda,n=this.escapeExpression;return" drop-down__trigger--"+n(r(e,e))},compiler:[6,">= 2.0.0-beta.1"],main:function(e,r,n,i){var t,l,a,s="function",o=r.helperMissing,g=r.blockHelperMissing,u=this.escapeExpression,p='<button class="drop-down__trigger';return l=null!=(l=r.fixedTrigger||(null!=e?e.fixedTrigger:e))?l:o,a={name:"fixedTrigger",hash:{},fn:this.program(1,i),inverse:this.noop,data:i},t=typeof l===s?l.call(e,a):l,r.fixedTrigger||(t=g.call(e,t,a)),null!=t&&(p+=t),l=null!=(l=r.flushDirection||(null!=e?e.flushDirection:e))?l:o,a={name:"flushDirection",hash:{},fn:this.program(3,i),inverse:this.noop,data:i},t=typeof l===s?l.call(e,a):l,r.flushDirection||(t=g.call(e,t,a)),null!=t&&(p+=t),p+'">\n	'+u((l=null!=(l=r.triggerText||(null!=e?e.triggerText:e))?l:o,typeof l===s?l.call(e,{name:"triggerText",hash:{},data:i}):l))+"\n</button>\n"},useData:!0});
+    SignalUI.templates = {};
+    SignalUI.templates['drop-down-menu'] = new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<ul class=\"drop-down__menu drop-down__menu--hidden");if(t.s(t.f("flushDirection",c,p,1),c,p,0,69,111,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__menu--flush-");t.b(t.v(t.f("flushDirection",c,p,0)));});c.pop();}t.b("\">");t.b("\n" + i);if(t.s(t.f("menuItems",c,p,1),c,p,0,148,480,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("		<li class=\"drop-down__menu-option");if(t.s(t.f("isCurrent",c,p,1),c,p,0,198,293,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__menu-option--current");if(t.s(t.f("hideCurrent",c,p,1),c,p,0,246,277,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__menu-option--hidden");});c.pop();}});c.pop();}t.b("\"><a ");if(t.s(t.f("menuItemId",c,p,1),c,p,0,327,347,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("id=\"");t.b(t.v(t.f("menuItemId",c,p,0)));t.b("\" ");});c.pop();}t.b("tabindex=\"-1\" href=\"");t.b(t.v(t.f("link",c,p,0)));if(!t.s(t.f("link",c,p,1),c,p,1,0,0,"")){t.b("javascript:;");};t.b("\" class=\"drop-down__menu-option-trigger\">");t.b(t.v(t.f("text",c,p,0)));t.b("</a></li>");t.b("\n" + i);});c.pop();}t.b("</ul>");t.b("\n");return t.fl(); },partials: {}, subs: {  }});
+    SignalUI.templates['drop-down-sizer'] = new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<ul class=\"drop-down__sizer");if(t.s(t.f("flushDirection",c,p,1),c,p,0,46,88,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__menu--flush-");t.b(t.v(t.f("flushDirection",c,p,0)));});c.pop();}t.b("\">");t.b("\n" + i);if(t.s(t.f("menuItems",c,p,1),c,p,0,126,357,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("    <li class=\"drop-down__menu-option");if(t.s(t.f("isCurrent",c,p,1),c,p,0,178,273,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__menu-option--current");if(t.s(t.f("hideCurrent",c,p,1),c,p,0,226,257,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__menu-option--hidden");});c.pop();}});c.pop();}t.b("\"><span class=\"drop-down__menu-option-trigger\">");t.b(t.v(t.f("text",c,p,0)));t.b("</span></li>");t.b("\n" + i);});c.pop();}t.b("</ul>");t.b("\n");return t.fl(); },partials: {}, subs: {  }});
+    SignalUI.templates['drop-down-trigger'] = new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<button ");if(t.s(t.f("triggerId",c,p,1),c,p,0,22,41,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("id=\"");t.b(t.v(t.f("triggerId",c,p,0)));t.b("\" ");});c.pop();}t.b("class=\"drop-down__trigger");if(t.s(t.f("fixedTrigger",c,p,1),c,p,0,97,123,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__trigger--fixed");});c.pop();}if(t.s(t.f("flushDirection",c,p,1),c,p,0,159,198,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__trigger--");t.b(t.v(t.f("flushDirection",c,p,0)));});c.pop();}t.b("\">");t.b("\n" + i);t.b("	");t.b(t.v(t.f("text",c,p,0)));t.b("\n" + i);t.b("</button>");t.b("\n");return t.fl(); },partials: {}, subs: {  }});
+    SignalUI.templates['drop-down'] = new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<");if(t.s(t.f("select",c,p,1),c,p,0,12,15,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("div");});c.pop();}if(!t.s(t.f("select",c,p,1),c,p,1,0,0,"")){t.b("nav");};if(t.s(t.f("id",c,p,1),c,p,0,58,70,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" id=\"");t.b(t.v(t.f("id",c,p,0)));t.b("\"");});c.pop();}t.b(" class=\"drop-down drop-down--unenhanced");if(t.s(t.f("build",c,p,1),c,p,0,126,143,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down--built");});c.pop();}if(t.s(t.f("class",c,p,1),c,p,0,163,173,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" ");t.b(t.v(t.f("class",c,p,0)));});c.pop();}t.b("\">");t.b("\n" + i);if(t.s(t.f("select",c,p,1),c,p,0,199,705,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("    <select class=\"drop-down__select");if(t.s(t.f("hideCurrent",c,p,1),c,p,0,252,284,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__select--hide-current");});c.pop();}if(t.s(t.f("build",c,p,1),c,p,0,310,336,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__select--hidden");});c.pop();}t.b("\" id=\"");t.b(t.v(t.f("selectId",c,p,0)));t.b("\" name=\"");t.b(t.v(t.f("selectName",c,p,0)));t.b("\">");t.b("\n" + i);if(t.s(t.f("menuItems",c,p,1),c,p,0,409,503,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("      <option value=\"");t.b(t.v(t.f("value",c,p,0)));t.b("\"");if(t.s(t.f("isCurrent",c,p,1),c,p,0,455,464,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" selected");});c.pop();}t.b(">");t.b(t.v(t.f("text",c,p,0)));t.b("</option>");t.b("\n" + i);});c.pop();}t.b("    </select>");t.b("\n" + i);if(t.s(t.f("build",c,p,1),c,p,0,546,692,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(t.rp("<drop-down-sizer0",c,p,"      "));if(t.s(t.f("menuItems",c,p,1),c,p,0,595,646,"{{ }}")){t.rs(c,p,function(c,p,t){if(t.s(t.f("isCurrent",c,p,1),c,p,0,609,632,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(t.rp("<drop-down-trigger1",c,p,""));});c.pop();}});c.pop();}t.b(t.rp("<drop-down-menu2",c,p,"      "));});c.pop();}});c.pop();}if(t.s(t.f("menu",c,p,1),c,p,0,728,898,"{{ }}")){t.rs(c,p,function(c,p,t){if(t.s(t.f("build",c,p,1),c,p,0,743,860,"{{ }}")){t.rs(c,p,function(c,p,t){if(!t.s(t.f("flushDirection",c,p,1),c,p,1,0,0,"")){t.b(t.rp("<drop-down-sizer3",c,p,"        "));};t.b(t.rp("<drop-down-trigger4",c,p,"      "));});c.pop();}t.b(t.rp("<drop-down-menu5",c,p,"    "));});c.pop();}t.b("</");if(t.s(t.f("select",c,p,1),c,p,0,921,924,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("div");});c.pop();}if(!t.s(t.f("select",c,p,1),c,p,1,0,0,"")){t.b("nav");};t.b(">");t.b("\n" + i);t.b("<script id=\"drop-down-");t.b(t.v(t.f("uniqueIdentifier",c,p,0)));t.b("\">");t.b("\n" + i);t.b("  SignalUI.initializeComponent({ scriptId: '");t.b(t.v(t.f("uniqueIdentifier",c,p,0)));t.b("', componentType: 'drop-down' });");t.b("\n" + i);t.b("</script>");t.b("\n");return t.fl(); },partials: {"<drop-down-sizer0":{name:"drop-down-sizer", partials: {}, subs: {  }},"<drop-down-trigger1":{name:"drop-down-trigger", partials: {}, subs: {  }},"<drop-down-menu2":{name:"drop-down-menu", partials: {}, subs: {  }},"<drop-down-sizer3":{name:"drop-down-sizer", partials: {}, subs: {  }},"<drop-down-trigger4":{name:"drop-down-trigger", partials: {}, subs: {  }},"<drop-down-menu5":{name:"drop-down-menu", partials: {}, subs: {  }}}, subs: {  }});
 (function (SignalUI) {
 
   'use strict';
@@ -8,9 +10,8 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
   var
     // no g flag for testing
     currentOptionHidden = /(^| )drop-down__select--hide-current( |$)/,
-    menuFlushBoth       = /(^| )drop-down__menu--flush-both/,
-    menuFlushLeft       = /(^| )drop-down__menu--flush-left/,
-    menuFlushRight      = /(^| )drop-down__menu--flush-right/,
+    menuFlushBoth       = /(^| )drop-down__menu--flush-both( |$)/,
+    menuFlush           = /(^| )drop-down__menu--flush-(\S+)( |$)/,
     menuHidden          = /(^| )drop-down__menu--hidden( |$)/,
     optionHidden        = /(^| )drop-down__menu-option--hidden( |$)/,
     triggerFixed        = /(^| )drop-down__trigger--fixed( |$)/,
@@ -26,13 +27,14 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     var
       className = select.className,
 
-      currentIsHidden  = currentOptionHidden.test(className),
+      currentIsHidden = currentOptionHidden.test(className),
 
       menuData = {
-        menuItems      : []
+        hideCurrent: currentIsHidden,
+        menuItems: []
       },
       triggerData = {},
-      template = '',
+      template    = '',
 
       menuOptions,
       menuOption,
@@ -51,9 +53,8 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     for (i = 0, len = menuOptions.length; i < len; i += 1) {
       menuOption = menuOptions[i];
       menuData.menuItems.push({
-        text: menuOption.innerHTML,
-        isCurrent: menuOption.selected,
-        isHidden: menuOption.selected && currentIsHidden
+        text     : menuOption.innerHTML,
+        isCurrent: menuOption.selected
       });
       if (menuOption.selected) {
         selectedOption = menuOption.innerHTML;
@@ -61,12 +62,12 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
     }
 
     // build trigger data
-    triggerData.triggerText = selectedOption;
+    triggerData.text = selectedOption;
 
     // generate HTML
-    template += SignalUI.templates['drop-down-sizer'](menuData);
-    template += SignalUI.templates['drop-down-trigger'](triggerData);
-    template += SignalUI.templates['drop-down-menu'](menuData);
+    template += SignalUI.templates['drop-down-sizer'].render(menuData);
+    template += SignalUI.templates['drop-down-trigger'].render(triggerData);
+    template += SignalUI.templates['drop-down-menu'].render(menuData);
 
     // append new HTML
     nodeBuilder = document.createElement('div');
@@ -81,7 +82,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
   function buildFromMenu(component, menu, trigger) {
     var
       menuData = {
-        menuItems      : []
+        menuItems: []
       },
       triggerData,
       template = '',
@@ -105,14 +106,11 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       });
     }
 
-    menuFlushDirection =
-      menuFlushLeft.test(menu.className) ? 'left' :
-      menuFlushRight.test(menu.className) ? 'right' :
-      menuFlushBoth.test(menu.className) ? 'both' :
-      '';
+    menuFlushDirection = menu.className.match(menuFlush).length ?
+        menu.className.match(menuFlush)[2] : '';
 
     if (menuFlushDirection) {
-      menuData.flush = menuFlushDirection;
+      menuData.flushDirection = menuFlushDirection;
     }
 
     // make sure the menu is hidden
@@ -125,7 +123,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
 
       // build trigger data
       triggerData = {
-        triggerText:  menu.getAttribute('drop-down-trigger-text') || 'Menu',
+        text        :  menu.getAttribute('drop-down-trigger-text') || 'Menu',
         fixedTrigger: true
       };
 
@@ -136,21 +134,21 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       window.console.log(triggerData);
 
       // generate HTML
-      template += SignalUI.templates['drop-down-trigger'](triggerData);
+      template += SignalUI.templates['drop-down-trigger'].render(triggerData);
     }
 
     if (menuFlushBoth.test(menu.className)) {
 
-      template += SignalUI.templates['drop-down-sizer'](menuData);
+      template += SignalUI.templates['drop-down-sizer'].render(menuData);
 
     }
 
     if (template) {
 
       // append new HTML
-      nodeBuilder = document.createElement('div');
+      nodeBuilder           = document.createElement('div');
       nodeBuilder.innerHTML = template;
-      nodes = nodeBuilder.children;
+      nodes                 = nodeBuilder.children;
       while (nodes.length) {
         component.insertBefore(nodes[0], menu);
       }
@@ -162,9 +160,9 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
   function buildDropDown(component) {
     var
       // potentially existing elements
-      select = component.querySelectorAll('.drop-down__select')[0],
+      select  = component.querySelectorAll('.drop-down__select')[0],
       trigger = component.querySelectorAll('.drop-down__trigger')[0],
-      menu = component.querySelectorAll('.drop-down__menu')[0];
+      menu    = component.querySelectorAll('.drop-down__menu')[0];
 
     if (select) {
       buildFromSelect(component, select);
@@ -333,14 +331,14 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       component.dispatchEvent(dropDownWillShowEvent);
       document.body.dispatchEvent(dropDownWillShowEvent);
 
-      menuClassName = menu.className;
+      menuClassName    = menu.className;
       triggerClassName = trigger.className;
 
-      menuClassName = menuClassName.replace(menuHiddenClass, ' ');
+      menuClassName    = menuClassName.replace(menuHiddenClass, ' ');
       triggerClassName = triggerClassName.replace(triggerActiveClass, ' ') +
         ' drop-down__trigger--active';
 
-      menu.className = menuClassName;
+      menu.className    = menuClassName;
       trigger.className = triggerClassName;
 
       dropDownDidShowEvent = new window.CustomEvent(
@@ -389,14 +387,14 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
       );
       component.dispatchEvent(dropDownWillHideEvent);
 
-      menuClassName = menu.className;
+      menuClassName    = menu.className;
       triggerClassName = trigger.className;
 
-      menuClassName = menuClassName.replace(menuHiddenClass, ' ');
-      menuClassName += ' drop-down__menu--hidden';
+      menuClassName    = menuClassName.replace(menuHiddenClass, ' ');
+      menuClassName    += ' drop-down__menu--hidden';
       triggerClassName = triggerClassName.replace(triggerActiveClass, ' ');
 
-      menu.className = menuClassName;
+      menu.className    = menuClassName;
       trigger.className = triggerClassName;
 
       dropDownDidHideEvent = new window.CustomEvent(
@@ -444,7 +442,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         menuOptions = menu.children;
 
         for (i = 0, len = menuOptions.length; i < len; i += 1) {
-          menuOption = menuOptions[i];
+          menuOption      = menuOptions[i];
           optionClassName = menuOption.className;
           optionClassName = optionClassName.replace(optionCurrentClass, ' ');
           optionClassName = optionClassName.replace(optionHiddenClass, ' ');
@@ -459,7 +457,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
 
         select = component.querySelectorAll('.drop-down__select')[0];
         if (select) {
-          selectedIndex = -1;
+          selectedIndex  = -1;
           previousOption = selected.parentElement.previousSibling;
           while (previousOption) {
             if (previousOption.nodeType !== 1) {
@@ -488,7 +486,7 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
         {
           'detail': {
             'component': e.detail.component,
-            'selected': e.detail.select
+            'selected' : e.detail.select
           }
         }
       );
@@ -530,15 +528,10 @@ this.SignalUI.templates["drop-down-trigger"]=SignalUI.Handlebars.template({1:fun
   }
 
   SignalUI.registerComponent({
-
-    componentType: 'dropDown',
-
+    componentType : 'dropDown',
     componentClass: 'drop-down',
-
-    build: buildDropDown,
-
-    enhance: enhanceDropDown
-
+    build         : buildDropDown,
+    enhance       : enhanceDropDown
   });
 
 }(window.SignalUI));

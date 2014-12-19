@@ -5,9 +5,8 @@
   var
     // no g flag for testing
     currentOptionHidden = /(^| )drop-down__select--hide-current( |$)/,
-    menuFlushBoth       = /(^| )drop-down__menu--flush-both/,
-    menuFlushLeft       = /(^| )drop-down__menu--flush-left/,
-    menuFlushRight      = /(^| )drop-down__menu--flush-right/,
+    menuFlushBoth       = /(^| )drop-down__menu--flush-both( |$)/,
+    menuFlush           = /(^| )drop-down__menu--flush-(\S+)( |$)/,
     menuHidden          = /(^| )drop-down__menu--hidden( |$)/,
     optionHidden        = /(^| )drop-down__menu-option--hidden( |$)/,
     triggerFixed        = /(^| )drop-down__trigger--fixed( |$)/,
@@ -23,13 +22,14 @@
     var
       className = select.className,
 
-      currentIsHidden  = currentOptionHidden.test(className),
+      currentIsHidden = currentOptionHidden.test(className),
 
       menuData = {
-        menuItems      : []
+        hideCurrent: currentIsHidden,
+        menuItems: []
       },
       triggerData = {},
-      template = '',
+      template    = '',
 
       menuOptions,
       menuOption,
@@ -48,9 +48,8 @@
     for (i = 0, len = menuOptions.length; i < len; i += 1) {
       menuOption = menuOptions[i];
       menuData.menuItems.push({
-        text: menuOption.innerHTML,
-        isCurrent: menuOption.selected,
-        isHidden: menuOption.selected && currentIsHidden
+        text     : menuOption.innerHTML,
+        isCurrent: menuOption.selected
       });
       if (menuOption.selected) {
         selectedOption = menuOption.innerHTML;
@@ -58,12 +57,12 @@
     }
 
     // build trigger data
-    triggerData.triggerText = selectedOption;
+    triggerData.text = selectedOption;
 
     // generate HTML
-    template += SignalUI.templates['drop-down-sizer'](menuData);
-    template += SignalUI.templates['drop-down-trigger'](triggerData);
-    template += SignalUI.templates['drop-down-menu'](menuData);
+    template += SignalUI.templates['drop-down-sizer'].render(menuData);
+    template += SignalUI.templates['drop-down-trigger'].render(triggerData);
+    template += SignalUI.templates['drop-down-menu'].render(menuData);
 
     // append new HTML
     nodeBuilder = document.createElement('div');
@@ -78,7 +77,7 @@
   function buildFromMenu(component, menu, trigger) {
     var
       menuData = {
-        menuItems      : []
+        menuItems: []
       },
       triggerData,
       template = '',
@@ -102,14 +101,11 @@
       });
     }
 
-    menuFlushDirection =
-      menuFlushLeft.test(menu.className) ? 'left' :
-      menuFlushRight.test(menu.className) ? 'right' :
-      menuFlushBoth.test(menu.className) ? 'both' :
-      '';
+    menuFlushDirection = menu.className.match(menuFlush).length ?
+        menu.className.match(menuFlush)[2] : '';
 
     if (menuFlushDirection) {
-      menuData.flush = menuFlushDirection;
+      menuData.flushDirection = menuFlushDirection;
     }
 
     // make sure the menu is hidden
@@ -122,7 +118,7 @@
 
       // build trigger data
       triggerData = {
-        triggerText:  menu.getAttribute('drop-down-trigger-text') || 'Menu',
+        text        :  menu.getAttribute('drop-down-trigger-text') || 'Menu',
         fixedTrigger: true
       };
 
@@ -133,21 +129,21 @@
       window.console.log(triggerData);
 
       // generate HTML
-      template += SignalUI.templates['drop-down-trigger'](triggerData);
+      template += SignalUI.templates['drop-down-trigger'].render(triggerData);
     }
 
     if (menuFlushBoth.test(menu.className)) {
 
-      template += SignalUI.templates['drop-down-sizer'](menuData);
+      template += SignalUI.templates['drop-down-sizer'].render(menuData);
 
     }
 
     if (template) {
 
       // append new HTML
-      nodeBuilder = document.createElement('div');
+      nodeBuilder           = document.createElement('div');
       nodeBuilder.innerHTML = template;
-      nodes = nodeBuilder.children;
+      nodes                 = nodeBuilder.children;
       while (nodes.length) {
         component.insertBefore(nodes[0], menu);
       }
@@ -159,9 +155,9 @@
   function buildDropDown(component) {
     var
       // potentially existing elements
-      select = component.querySelectorAll('.drop-down__select')[0],
+      select  = component.querySelectorAll('.drop-down__select')[0],
       trigger = component.querySelectorAll('.drop-down__trigger')[0],
-      menu = component.querySelectorAll('.drop-down__menu')[0];
+      menu    = component.querySelectorAll('.drop-down__menu')[0];
 
     if (select) {
       buildFromSelect(component, select);
@@ -330,14 +326,14 @@
       component.dispatchEvent(dropDownWillShowEvent);
       document.body.dispatchEvent(dropDownWillShowEvent);
 
-      menuClassName = menu.className;
+      menuClassName    = menu.className;
       triggerClassName = trigger.className;
 
-      menuClassName = menuClassName.replace(menuHiddenClass, ' ');
+      menuClassName    = menuClassName.replace(menuHiddenClass, ' ');
       triggerClassName = triggerClassName.replace(triggerActiveClass, ' ') +
         ' drop-down__trigger--active';
 
-      menu.className = menuClassName;
+      menu.className    = menuClassName;
       trigger.className = triggerClassName;
 
       dropDownDidShowEvent = new window.CustomEvent(
@@ -386,14 +382,14 @@
       );
       component.dispatchEvent(dropDownWillHideEvent);
 
-      menuClassName = menu.className;
+      menuClassName    = menu.className;
       triggerClassName = trigger.className;
 
-      menuClassName = menuClassName.replace(menuHiddenClass, ' ');
-      menuClassName += ' drop-down__menu--hidden';
+      menuClassName    = menuClassName.replace(menuHiddenClass, ' ');
+      menuClassName    += ' drop-down__menu--hidden';
       triggerClassName = triggerClassName.replace(triggerActiveClass, ' ');
 
-      menu.className = menuClassName;
+      menu.className    = menuClassName;
       trigger.className = triggerClassName;
 
       dropDownDidHideEvent = new window.CustomEvent(
@@ -441,7 +437,7 @@
         menuOptions = menu.children;
 
         for (i = 0, len = menuOptions.length; i < len; i += 1) {
-          menuOption = menuOptions[i];
+          menuOption      = menuOptions[i];
           optionClassName = menuOption.className;
           optionClassName = optionClassName.replace(optionCurrentClass, ' ');
           optionClassName = optionClassName.replace(optionHiddenClass, ' ');
@@ -456,7 +452,7 @@
 
         select = component.querySelectorAll('.drop-down__select')[0];
         if (select) {
-          selectedIndex = -1;
+          selectedIndex  = -1;
           previousOption = selected.parentElement.previousSibling;
           while (previousOption) {
             if (previousOption.nodeType !== 1) {
@@ -485,7 +481,7 @@
         {
           'detail': {
             'component': e.detail.component,
-            'selected': e.detail.select
+            'selected' : e.detail.select
           }
         }
       );
@@ -527,15 +523,10 @@
   }
 
   SignalUI.registerComponent({
-
-    componentType: 'dropDown',
-
+    componentType : 'dropDown',
     componentClass: 'drop-down',
-
-    build: buildDropDown,
-
-    enhance: enhanceDropDown
-
+    build         : buildDropDown,
+    enhance       : enhanceDropDown
   });
 
 }(window.SignalUI));

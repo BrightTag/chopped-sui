@@ -8,11 +8,11 @@
     initializeThisComponent;
 
   /**
-   * [initializeThisComponent description]
-   * @param  {[type]} component     [description]
-   * @param  {[type]} componentType [description]
-   * @param  {[type]} script     [description]
-   * @return {[type]}            [description]
+   * Initialize a component if its type is registered
+   * @param  {DOM Element} component     - outermose element of a component
+   * @param  {String}      componentType - type of component
+   * @param  {DOM Element} script        - trailing script element
+   * @return {Boolean}                   - success
    */
   initializeThisComponent = function (component, componentType, script) {
     var
@@ -68,12 +68,14 @@
     if (script) {
       script.parentElement.removeChild(script);
     }
+
+    return true;
   };
 
   /**
-   * [initializeAllOfType description]
-   * @param  {[type]} componentType [description]
-   * @return {[type]}            [description]
+   * Initialize all components of a type if it's registered
+   * @param  {String}  componentType - type of component
+   * @return {Boolean}               - success
    */
   initializeAllOfType = function (componentType) {
     var components, i, len;
@@ -98,19 +100,20 @@
   };
 
   /**
-   * [Component description]
-   * @param {[type]} args [description]
+   * Class representing a registered component
+   * @param {Object} args           - args
+   *        {String} componentType  - type of component
+   *        {String} componentClass - CSS class of component
    */
   Component = function (args) {
     this.componentType  = args.componentType  || '';
     this.componentClass = args.componentClass || '';
-    this.templates   = args.templates   || {};
   };
 
   /**
-   * [willBuild description]
-   * @param  {[type]} component [description]
-   * @return {[type]}        [description]
+   * emits a [component]WillBuild event
+   * @param  {DOM Element} component - outermose element of a component
+   * @return {[Boolean]}             - success
    */
   Component.prototype.willBuild = function (component) {
     var willBuildEvent = new window.CustomEvent(
@@ -126,9 +129,9 @@
   };
 
   /**
-   * [didBuild description]
-   * @param  {[type]} component [description]
-   * @return {[type]}        [description]
+   * emits a [component]DidBuild event
+   * @param  {DOM Element} component - outermose element of a component
+   * @return {[Boolean]}             - success
    */
   Component.prototype.didBuild = function (component) {
     var didBuildEvent = new window.CustomEvent(
@@ -144,9 +147,9 @@
   };
 
   /**
-   * [willEnhance description]
-   * @param  {[type]} component [description]
-   * @return {[type]}        [description]
+   * emit a [component]WillEnhance event
+   * @param  {DOM Element} component - outermose element of a component
+   * @return {[Boolean]}             - success
    */
   Component.prototype.willEnhance = function (component) {
     var willEnhanceEvent = new window.CustomEvent(
@@ -162,9 +165,9 @@
   };
 
   /**
-   * [didEnhance description]
-   * @param  {[type]} component [description]
-   * @return {[type]}        [description]
+   * emit a [component]DidEnhance event
+   * @param  {DOM Element} component - outermose element of a component
+   * @return {[Boolean]}             - success
    */
   Component.prototype.didEnhance = function (component) {
     var didEnhanceEvent = new window.CustomEvent(
@@ -180,19 +183,18 @@
   };
 
   /**
-   * [build description]
-   * @param  {[type]} component     [description]
-   * @param  {[type]} componentType [description]
-   * @return {[type]}            [description]
+   * adds HTML for JS enhancement
+   * @param  {DOM Element} component - outermose element of a component
+   * @return {[Boolean]}             - success
    */
   Component.prototype.build = function () {
     return true;
   };
 
   /**
-   * [enhance description]
-   * @param  {[type]} component [description]
-   * @return {[type]}        [description]
+   * adds enhanced behaviors
+   * @param  {DOM Element} component - outermose element of a component
+   * @return {[Boolean]}             - success
    */
   Component.prototype.enhance = function () {
     return true;
@@ -202,15 +204,15 @@
   SignalUI = {
 
     /**
-     * [registeredComponents description]
+     * dictionary of known widget types
      * @type {Object}
      */
     registeredComponents: {},
 
     /**
      * [initializeComponent description]
-     * @param  {[type]} args [description]
-     * @return {[type]}      [description]
+     * @param  {Object}  args - args
+     * @return {Boolean}      - success
      */
     initializeComponent: function (args) {
 
@@ -230,12 +232,14 @@
         args.script = document.getElementById(args.scriptId);
         args.component = args.script.previousSibling;
       }
+
+      return true;
     },
 
     /**
      * [registerComponent description]
-     * @param  {[type]} args [description]
-     * @return {[type]}      [description]
+     * @param  {Object} args  - args
+     * @return {Boolean}      - success
      */
     registerComponent: function (args) {
 
