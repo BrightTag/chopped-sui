@@ -171,8 +171,6 @@
 
   // toggle menu visibility on trigger click
   function enhanceTriggerClick(component, trigger, menu) {
-    console.log(component);
-    console.log(trigger);
     function handleTriggerClick(e) {
       var
         dropDownShowEvent,
@@ -513,7 +511,7 @@
           component.dispatchEvent(dropDownHideEvent);
         }
       };
-      console.log(trigger);
+
     enhanceTriggerClick(component, trigger, menu);
     enhanceComponentKeyup(component, trigger, menu);
     enhanceMenuClick(component, menu);
@@ -565,7 +563,7 @@
 
     component.addEventListener('click', function(e) {
       // e = e || window.event;
-      var
+      var 
         tab = e.target.parentElement,
         parentNode = tab.parentElement;
 

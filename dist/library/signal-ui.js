@@ -157,10 +157,10 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
    * Initialize a component if its type is registered
    * @param  {DOM Element} component     - outermose element of a component
    * @param  {String}      componentType - type of component
-   * @param  {DOM Element} script        - trailing script element
+   * @param  {DOM Element} image         - trailing image element
    * @return {Boolean}                   - success
    */
-  initializeThisComponent = function (component, componentType, script) {
+  initializeThisComponent = function (component, componentType, image) {
     var
       componentClass,
       componentClasses,
@@ -210,9 +210,9 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
       }
     }
 
-    // get those nasty self-initializing script tags out of there
-    if (script) {
-      script.parentElement.removeChild(script);
+    // get those nasty self-initializing image tags out of there
+    if (image) {
+      image.parentElement.removeChild(image);
     }
 
     return true;
@@ -361,24 +361,25 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
      * @return {Boolean}      - success
      */
     initializeComponent: function (args) {
-      console.log(args);
 
       // without a component type there is no way to look up the component
       if (!args.componentType) {
         return;
       }
 
-      // no component and no script tag means we want to initialize all
+      // no component and no image tag means we want to initialize all
       // components of this type
-      if (!args.component && !args.scriptId) {
+      if (!args.component && !args.imageId) {
         initializeAllOfType(args.componentType);
         return;
       }
 
       if (!args.component) {
-        args.script = document.getElementById("drop-down-" + args.scriptId);
-        args.component = args.script.previousSibling;
+        args.image = document.getElementById(args.imageId);
+        args.component = args.image.previousSibling;
       }
+
+      initializeThisComponent(args.component, args.componentType, args.image);
 
       return true;
     },
