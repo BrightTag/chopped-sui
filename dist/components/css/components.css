@@ -21,6 +21,7 @@
 }
 .drop-down--enhanced {
   /* styles when component is completely enhanced */
+  height: 46px;
 }
 .drop-down__select--hidden {
   display: none;
@@ -58,7 +59,6 @@
   content: '';
   position: absolute;
   right: 33px;
-  transition: all .1s;
 }
 .drop-down__trigger:hover, .drop-down__trigger:focus {
   color: #00ADEF;
