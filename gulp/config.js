@@ -17,6 +17,15 @@ var config = {
     dest: 'dist/components/js'
   },
 
+  components: {
+    src: 'src/components/',
+    dest: 'src/components/',
+    php: {
+      src: 'gulp/resources/php-helper.mustache',
+      dest: 'helpers/php/'
+    }
+  },
+
   templates: {
     src: 'src/components/**/*.mustache',
     dest: 'src/components/',

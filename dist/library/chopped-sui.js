@@ -149,7 +149,7 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
 
   var
     Component,
-    SignalUI,
+    ChoppedSUI,
     initializeAllOfType,
     initializeThisComponent;
 
@@ -168,9 +168,9 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
       componentBuilt;
 
     // the component must be registered
-    if (SignalUI.registeredComponents[componentType]) {
+    if (ChoppedSUI.registeredComponents[componentType]) {
       componentClasses = component.className;
-      componentClass = SignalUI.registeredComponents[componentType]
+      componentClass = ChoppedSUI.registeredComponents[componentType]
         .componentClass;
       componentUnenhanced = new RegExp(
         '(^| )' + componentClass + '--unenhanced( |$)',
@@ -188,16 +188,16 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
         // only build unbuilt components
         if (!componentBuilt.test(componentClasses)) {
 
-          SignalUI.registeredComponents[componentType].willBuild(component);
-          SignalUI.registeredComponents[componentType].build(component, componentType);
-          SignalUI.registeredComponents[componentType].didBuild(component);
+          ChoppedSUI.registeredComponents[componentType].willBuild(component);
+          ChoppedSUI.registeredComponents[componentType].build(component, componentType);
+          ChoppedSUI.registeredComponents[componentType].didBuild(component);
 
           componentClasses += ' ' + componentClass + '--built';
         }
         component.className = componentClasses;
 
-        SignalUI.registeredComponents[componentType].willEnhance(component);
-        SignalUI.registeredComponents[componentType].enhance(component);
+        ChoppedSUI.registeredComponents[componentType].willEnhance(component);
+        ChoppedSUI.registeredComponents[componentType].enhance(component);
 
         // timeout required for css animation support
         setTimeout(function () {
@@ -205,7 +205,7 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
           className = className.replace(componentBuilt, ' ');
           className += ' ' + componentClass + '--enhanced';
           component.className = className;
-          SignalUI.registeredComponents[componentType].didEnhance(component);
+          ChoppedSUI.registeredComponents[componentType].didEnhance(component);
         }, 100);
       }
     }
@@ -227,12 +227,12 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
     var components, i, len;
 
     // the component must be registered
-    if (SignalUI.registeredComponents[componentType]) {
+    if (ChoppedSUI.registeredComponents[componentType]) {
 
       // find each component of this type that needs to be enhanced
       components = document.querySelectorAll(
         '.' +
-          window.SignalUI.registeredComponents[componentType].componentClass +
+          window.ChoppedSUI.registeredComponents[componentType].componentClass +
           '--unenhanced'
       );
 
@@ -346,8 +346,8 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
     return true;
   };
 
-  // SignalUI namespace
-  SignalUI = {
+  // ChoppedSUI namespace
+  ChoppedSUI = {
 
     /**
      * dictionary of known widget types
@@ -394,24 +394,24 @@ this.Element && Element.prototype.attachEvent && !Element.prototype.addEventList
         return;
       }
 
-      SignalUI.registeredComponents[args.componentType] = new Component(args);
+      ChoppedSUI.registeredComponents[args.componentType] = new Component(args);
 
       if (args.build) {
-        SignalUI.registeredComponents[args.componentType].build = args.build;
+        ChoppedSUI.registeredComponents[args.componentType].build = args.build;
       }
 
       if (args.enhance) {
-        SignalUI.registeredComponents[args.componentType].enhance =
+        ChoppedSUI.registeredComponents[args.componentType].enhance =
           args.enhance;
       }
 
-      SignalUI.initializeComponent({
+      ChoppedSUI.initializeComponent({
         componentType: args.componentType
       });
     }
   };
 
-  window.SignalUI = SignalUI;
+  window.ChoppedSUI = ChoppedSUI;
 }(window));
 
 /*!

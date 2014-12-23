@@ -30,6 +30,11 @@ class ComponentLibrary {
   }
 
   public function getChoppedSUIDropDown($data) {
-    return $this->mustache->render('dropdown', $data);
+    return $this->mustache->render('drop-down/drop-down', $data);
   }
+
+  public function getChoppedSUITabs($data) {
+    return $this->mustache->render('tabs/tabs', $data);
+  }
+
 }

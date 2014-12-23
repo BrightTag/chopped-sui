@@ -29,7 +29,10 @@ class ComponentLibrary {
     return $this->mustache->render($template, $data);
   }
 
-  public function getChoppedSUIDropDown($data) {
-    return $this->mustache->render('dropdown', $data);
+{{#components}}
+  public function getChoppedSUI{{name}}($data) {
+    return $this->mustache->render('{{dir}}/{{file}}', $data);
   }
+
+{{/components}}
 }

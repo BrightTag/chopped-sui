@@ -9,6 +9,7 @@ gulp.task('default', function(callback) {
 
   runSequence(
     'clean',
+    'helpers',
     'lint',
     'library',
     'components',

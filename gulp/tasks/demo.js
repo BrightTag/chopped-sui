@@ -15,7 +15,7 @@ gulp.task('demo', [
 
 gulp.task('demo:js:library', function() {
 
-  return gulp.src('dist/library/signal-ui.js')
+  return gulp.src('dist/library/chopped-sui.js')
     .pipe(gulp.dest('demo/js'))
 
 });

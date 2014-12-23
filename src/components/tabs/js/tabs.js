@@ -1,4 +1,4 @@
-(function (SignalUI) {
+(function (ChoppedSUI) {
 
   'use strict';
 
@@ -29,7 +29,7 @@
 
     component.addEventListener('click', function(e) {
       // e = e || window.event;
-      var 
+      var
         tab = e.target.parentElement,
         parentNode = tab.parentElement;
 
@@ -40,7 +40,7 @@
     });
   }
 
-  SignalUI.registerComponent({
+  ChoppedSUI.registerComponent({
 
     componentType: 'tabs',
 
@@ -52,4 +52,4 @@
 
   });
 
-}(window.SignalUI));
+}(window.ChoppedSUI));

@@ -1,4 +1,4 @@
-(function (SignalUI) {
+(function (ChoppedSUI) {
 
   'use strict';
 
@@ -60,9 +60,9 @@
     triggerData.text = selectedOption;
 
     // generate HTML
-    template += SignalUI.templates['drop-down-sizer'].render(menuData);
-    template += SignalUI.templates['drop-down-trigger'].render(triggerData);
-    template += SignalUI.templates['drop-down-menu'].render(menuData);
+    template += ChoppedSUI.templates['drop-down-sizer'].render(menuData);
+    template += ChoppedSUI.templates['drop-down-trigger'].render(triggerData);
+    template += ChoppedSUI.templates['drop-down-menu'].render(menuData);
 
     // append new HTML
     nodeBuilder = document.createElement('div');
@@ -125,12 +125,12 @@
       }
 
       // generate HTML
-      template += SignalUI.templates['drop-down-trigger'].render(triggerData);
+      template += ChoppedSUI.templates['drop-down-trigger'].render(triggerData);
     }
 
     if (menuFlushBoth.test(menu.className)) {
 
-      template += SignalUI.templates['drop-down-sizer'].render(menuData);
+      template += ChoppedSUI.templates['drop-down-sizer'].render(menuData);
 
     }
 
@@ -518,11 +518,11 @@
     return true;
   }
 
-  SignalUI.registerComponent({
+  ChoppedSUI.registerComponent({
     componentType : 'dropDown',
     componentClass: 'drop-down',
     build         : buildDropDown,
     enhance       : enhanceDropDown
   });
 
-}(window.SignalUI));
+}(window.ChoppedSUI));

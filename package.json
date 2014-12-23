@@ -1,5 +1,5 @@
 {
-  "name": "signal-ui",
+  "name": "chopped-sui",
   "description": "UI Component Library",
   "version": "0.1.0",
   "author": "Signal",
@@ -14,6 +14,7 @@
     "gulp-csso": "^0.2.9",
     "gulp-declare": "^0.3.0",
     "gulp-handlebars": "^3.0.1",
+    "gulp-hogan": "^1.1.0",
     "gulp-hogan-compile": "^0.4.1",
     "gulp-jade": "^0.10.0",
     "gulp-jshint": "^1.9.0",
