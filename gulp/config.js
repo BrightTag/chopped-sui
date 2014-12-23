@@ -22,7 +22,7 @@ var config = {
     dest: 'src/components/',
     php: {
       src: 'gulp/resources/php-helper.mustache',
-      dest: 'helpers/php/'
+      dest: 'dist/helpers/php/'
     }
   },
 
