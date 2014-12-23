@@ -59,6 +59,7 @@
   content: '';
   position: absolute;
   right: 33px;
+  transition: all .1s;
 }
 .drop-down__trigger:hover, .drop-down__trigger:focus {
   color: #00ADEF;
