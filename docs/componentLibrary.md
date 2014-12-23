@@ -4,15 +4,6 @@
 
 Drop down menus require data in the following format:
 
-### `uniqueIdentifier`
-
-> *required*
-
-> *string*
-
-Unique id attribute for the self-initialization script. This is to ensure that
-components added via AJAX do not initiate the wrong component.
-
 ### `id`
 
 > *optional*

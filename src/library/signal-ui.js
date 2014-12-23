@@ -223,13 +223,12 @@
 
       // no component and no image tag means we want to initialize all
       // components of this type
-      if (!args.component && !args.imageId) {
+      if (!args.component && !args.image) {
         initializeAllOfType(args.componentType);
         return;
       }
 
       if (!args.component) {
-        args.image = document.getElementById(args.imageId);
         args.component = args.image.previousSibling;
       }
 
