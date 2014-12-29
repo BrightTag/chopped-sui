@@ -13,19 +13,14 @@ gulp.task('library', [
 
 gulp.task('library:js', function () {
 
-  return gulp.src([
-      // @todo use bower for managing client dependencies
-      'gulp/resources/EventListener.js', //https://github.com/jonathantneal/EventListener/blob/master/EventListener.js
-      'src/library/*.js',
-      'node_modules/gulp-hogan-compile/node_modules/hogan.js/dist/hogan-3.0.2.mustache.js'
-    ])
+  return gulp.src(config.library.src)
     .pipe(concat('chopped-sui.js'))
-    .pipe(gulp.dest('dist/library'))
+    .pipe(gulp.dest(config.library.dest))
     .pipe(rename({
       suffix: '.min'
     }))
     .pipe(uglify())
     .on('error', handleErrors)
-    .pipe(gulp.dest('dist/library'));
+    .pipe(gulp.dest(config.library.dest));
 
 });

@@ -7,7 +7,7 @@ var config = {
   css: {
 
     src: 'src/components/**/*.scss',
-    dest: 'dist/components/css'
+    dest: 'dist/css'
 
   },
 
@@ -18,7 +18,20 @@ var config = {
       'src/components/**/js/*.js'
     ],
 
-    dest: 'dist/components/js'
+    dest: 'dist/js'
+
+  },
+
+  library: {
+
+    src: [
+      // @todo use bower for managing client dependencies
+      'gulp/resources/EventListener.js', //https://github.com/jonathantneal/EventListener/blob/master/EventListener.js
+      'src/library/*.js',
+      'node_modules/gulp-hogan-compile/node_modules/hogan.js/dist/hogan-3.0.2.mustache.js'
+    ],
+
+    dest: 'dist/js'
 
   },
 
