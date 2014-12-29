@@ -5,31 +5,46 @@ var config = {
   root: 'src',
 
   css: {
+
     src: 'src/components/**/*.scss',
     dest: 'dist/components/css'
+
   },
 
   js: {
+
     src: [
       'src/components/templates.js',
       'src/components/**/js/*.js'
     ],
+
     dest: 'dist/components/js'
+
   },
 
   components: {
+
     src: 'src/components/',
     dest: 'src/components/',
+
     php: {
       src: 'gulp/resources/php-helper.mustache',
       dest: 'dist/helpers/php/'
+    },
+
+    templates: {
+      src: 'src/components/**/*.mustache',
+      dest: 'dist/helpers/templates/'
     }
+
   },
 
   templates: {
+
     src: 'src/components/**/*.mustache',
     dest: 'src/components/',
     pattern: /'TEMPLATE:([^']+)'/g
+
   },
 
   autoPrefixer: [
