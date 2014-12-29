@@ -9,35 +9,27 @@ var config       = require('../config'),
 gulp.task('demo', [
   'demo:html',
   'demo:css',
-  'demo:js:library',
-  'demo:js:components'
+  'demo:js'
 ]);
 
-gulp.task('demo:js:library', function() {
+gulp.task('demo:js', function() {
 
-  return gulp.src('dist/library/chopped-sui.js')
-    .pipe(gulp.dest('demo/js'))
-
-});
-
-gulp.task('demo:js:components', function() {
-
-  return gulp.src('dist/components/js/components.js')
-    .pipe(gulp.dest('demo/js'))
+  return gulp.src(config.demo.js.src)
+    .pipe(gulp.dest(config.demo.js.dest))
 
 });
 
 gulp.task('demo:css', function() {
 
-  return gulp.src('dist/components/css/components.css')
-    .pipe(gulp.dest('demo/css'))
+  return gulp.src(config.demo.css.src)
+    .pipe(gulp.dest(config.demo.css.dest))
 
 });
 
 gulp.task('demo:html', function() {
 
-  return gulp.src('gulp/resources/demo.html')
+  return gulp.src(config.demo.html.src)
     .pipe(rename('index.html'))
-    .pipe(gulp.dest('demo'))
+    .pipe(gulp.dest(config.demo.html.dest))
 
 })

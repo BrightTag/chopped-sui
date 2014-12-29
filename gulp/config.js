@@ -91,13 +91,18 @@ var config = {
     serverport: '3002',
     root: 'demo',
 
+    html: {
+      src : 'gulp/resources/demo.html',
+      dest: 'demo'
+    },
+
     js: {
-      src: '',
+      src : 'dist/js/*.js',
       dest: 'demo/js'
     },
 
     css: {
-      src: '',
+      src : 'dist/css/*.css',
       dest: 'demo/css'
     }
 
