@@ -2,31 +2,17 @@
 class ComponentLibrary {
   private $mustache;
 
-  public function __construct() {
+  public function __construct($data = array()) {
     require 'mustache_php/src/Mustache/Autoloader.php';
     Mustache_Autoloader::register();
-    $this->mustache = new Mustache_Engine(array(
-      "loader" => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/templates')
-    ));
-  }
-
-  public function getComponent($component, $params, $built=FALSE) {
-    switch($component) {
-      case "dropdown":
-        return $this->getDropDown($params["id"], $params["buttonText"], $params["options"], $built);
-        break;
-    }
-  }
-
-  private function getDropDown($id, $buttonText, $options, $built) {
-    $data = array(
-      "id" => $id,
-      "buttonText" => $buttonText,
-      "options" => $options,
+    $config = array(
+      "loader" => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/../templates')
     );
-    $template = "dropdown/";
-    $template .= $built ? "built" : "unbuilt";
-    return $this->mustache->render($template, $data);
+
+    if (isset($data['partials_loader'])) {
+      $config['partials_loader'] = new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/../templates/' . $data['partials_loader']);
+    }
+    $this->mustache = new Mustache_Engine($config);
   }
 
   public function getChoppedSUIDropDown($data) {
@@ -36,5 +22,4 @@ class ComponentLibrary {
   public function getChoppedSUITabs($data) {
     return $this->mustache->render('tabs/tabs', $data);
   }
-
 }
