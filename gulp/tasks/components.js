@@ -5,5 +5,7 @@ var config = require('../config'),
 
 gulp.task('components', [
   'components:css',
+  'components:templates',
+  'components:build',
   'components:js'
 ]);

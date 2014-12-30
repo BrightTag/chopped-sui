@@ -7,10 +7,10 @@ var config       = require('../config'),
     replace      = require('gulp-replace'),
     hogan        = require('gulp-hogan-compile');
 
-gulp.task('components:templates', function () {
+gulp.task('components:templates', ['components:build'], function () {
 
   return gulp.src(config.templates.src)
-    .pipe(hogan('templates.js', {
+    .pipe(hogan('templates-build.js', {
       wrapper: false
     }))
     .pipe(replace(/var templates = \{\};/g, 'ChoppedSUI.templates = {};'))

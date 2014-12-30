@@ -7,7 +7,7 @@ var config       = require('../config'),
     hogan        = require('gulp-hogan'),
     replace      = require('gulp-replace'),
     rename       = require('gulp-rename'),
-    files        = fs.readdirSync(config.components.src),
+    files        = fs.readdirSync(config.components.dest),
     hoganData    = { components: [] };
 
 files.forEach(function(file){

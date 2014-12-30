@@ -4,19 +4,17 @@ var config       = require('../config'),
     handleErrors = require('../util/errors'),
     fs           = require('fs'),
     gulp         = require('gulp'),
+    browserify   = require('gulp-browserify'),
     replace      = require('gulp-replace'),
     concat       = require('gulp-concat'),
     rename       = require('gulp-rename'),
-    uglify       = require('gulp-uglify');
+    uglify       = require('gulp-uglify'),
+    transform    = require('vinyl-transform');
 
-gulp.task('components:js', ['components:templates'], function () {
+gulp.task('components:js', ['components:build', 'components:templates'], function () {
 
-  return gulp.src(config.js.src)
+  return gulp.src(config.components.src)
     .pipe(concat('components.js'))
-    // .pipe(replace(config.templates.pattern, function(s, filename) {
-    //   return fs.readFileSync('src/componentss/' + filename + '.min.js', 'utf8');
-    // }))
-    // .on('error', handleErrors)
     .pipe(gulp.dest(config.js.dest))
     .pipe(uglify())
     .on('error', handleErrors)

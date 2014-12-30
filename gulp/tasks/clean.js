@@ -7,7 +7,7 @@ var config = require('../config'),
 gulp.task('clean', [
   'clean:demo',
   'clean:dist',
-  'clean:src'
+  'clean:build'
 ]);
 
 gulp.task('clean:demo', function(callback) {
@@ -27,11 +27,11 @@ gulp.task('clean:dist', function(callback) {
 
 });
 
-gulp.task('clean:src', function(callback) {
+gulp.task('clean:build', function(callback) {
 
   del([
-    'src/components/**/templates/*.js',
-    'src/components/templates.js'
+    'dist/js/*build.js',
+    'demo/js/*build.js'
   ], callback);
 
 });

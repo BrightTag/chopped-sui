@@ -24,10 +24,17 @@ var config = {
 
   library: {
 
+    build: {
+
+      src: 'src/library/main.js',
+      dest: 'dist/js'
+
+    },
+
     src: [
       // @todo use bower for managing client dependencies
       'gulp/resources/EventListener.js', //https://github.com/jonathantneal/EventListener/blob/master/EventListener.js
-      'src/library/*.js',
+      'dist/js/library-build.js',
       'node_modules/gulp-hogan-compile/node_modules/hogan.js/dist/hogan-3.0.2.mustache.js'
     ],
 
@@ -37,8 +44,19 @@ var config = {
 
   components: {
 
-    src: 'src/components/',
-    dest: 'src/components/',
+    src: [
+      'dist/js/templates-build.js',
+      'dist/js/components-build.js'
+    ],
+    dest: 'dist/js',
+
+    lint: {
+      src: 'src/components/**/*.js'
+    },
+
+    build: {
+      src: 'src/components/*/js/main.js'
+    },
 
     php: {
       src: 'gulp/resources/php-helper.mustache',
@@ -55,7 +73,7 @@ var config = {
   templates: {
 
     src: 'src/components/**/*.mustache',
-    dest: 'src/components/',
+    dest: 'dist/js',
     pattern: /'TEMPLATE:([^']+)'/g
 
   },

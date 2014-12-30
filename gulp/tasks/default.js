@@ -13,8 +13,8 @@ gulp.task('default', function(callback) {
     'lint',
     'library',
     'components',
+    'clean:build',
     'demo',
-    'clean:src',
     callback
   );
 

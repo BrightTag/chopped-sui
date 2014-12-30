@@ -1,273 +1,345 @@
-(function (window) {
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/**
+ * adds HTML for JS enhancement
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function () {
   'use strict';
 
-  var
-    Component,
-    ChoppedSUI,
-    initializeAllOfType,
-    initializeThisComponent;
+  return true;
+};
 
-  /**
-   * Initialize a component if its type is registered
-   * @param  {DOM Element} component     - outermose element of a component
-   * @param  {String}      componentType - type of component
-   * @param  {DOM Element} image         - trailing image element
-   * @return {Boolean}                   - success
-   */
-  initializeThisComponent = function (component, componentType, image) {
-    var
-      componentClass,
-      componentClasses,
-      componentUnenhanced,
-      componentBuilt;
+},{}],2:[function(require,module,exports){
+/**
+ * emits a [component]DidBuild event
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function (component) {
+  'use strict';
 
-    // the component must be registered
-    if (ChoppedSUI.registeredComponents[componentType]) {
-      componentClasses = component.className;
-      componentClass = ChoppedSUI.registeredComponents[componentType]
-        .componentClass;
-      componentUnenhanced = new RegExp(
-        '(^| )' + componentClass + '--unenhanced( |$)',
-        'g'
-      );
-      componentBuilt = new RegExp(
-        '(^| )' + componentClass + '--built( |$)',
-        'g'
-      );
-
-      // only enhance unenhanced components
-      if (componentUnenhanced.test(componentClasses)) {
-        componentClasses = componentClasses.replace(componentUnenhanced, ' ');
-
-        // only build unbuilt components
-        if (!componentBuilt.test(componentClasses)) {
-
-          ChoppedSUI.registeredComponents[componentType].willBuild(component);
-          ChoppedSUI.registeredComponents[componentType].build(component, componentType);
-          ChoppedSUI.registeredComponents[componentType].didBuild(component);
-
-          componentClasses += ' ' + componentClass + '--built';
-        }
-        component.className = componentClasses;
-
-        ChoppedSUI.registeredComponents[componentType].willEnhance(component);
-        ChoppedSUI.registeredComponents[componentType].enhance(component);
-
-        // timeout required for css animation support
-        setTimeout(function () {
-          var className = component.className;
-          className = className.replace(componentBuilt, ' ');
-          className += ' ' + componentClass + '--enhanced';
-          component.className = className;
-          ChoppedSUI.registeredComponents[componentType].didEnhance(component);
-        }, 100);
+  var didBuildEvent = new window.CustomEvent(
+    this.componentType + 'DidBuild',
+    {
+      'detail': {
+        'component': component
       }
     }
+  );
+  component.dispatchEvent(didBuildEvent);
+  return true;
+};
 
-    // get those nasty self-initializing image tags out of there
-    if (image) {
-      image.parentElement.removeChild(image);
-    }
+},{}],3:[function(require,module,exports){
+/**
+ * emit a [component]DidEnhance event
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function (component) {
+  'use strict';
 
-    return true;
-  };
-
-  /**
-   * Initialize all components of a type if it's registered
-   * @param  {String}  componentType - type of component
-   * @return {Boolean}               - success
-   */
-  initializeAllOfType = function (componentType) {
-    var components, i, len;
-
-    // the component must be registered
-    if (ChoppedSUI.registeredComponents[componentType]) {
-
-      // find each component of this type that needs to be enhanced
-      components = document.querySelectorAll(
-        '.' +
-          window.ChoppedSUI.registeredComponents[componentType].componentClass +
-          '--unenhanced'
-      );
-
-      //
-      for (i = 0, len = components.length; i < len; i += 1) {
-
-        initializeThisComponent(components[i], componentType);
-
+  var didEnhanceEvent = new window.CustomEvent(
+    this.componentType + 'DidEnhance',
+    {
+      'detail': {
+        'component': component
       }
     }
-  };
+  );
+  component.dispatchEvent(didEnhanceEvent);
+  return true;
+};
 
-  /**
-   * Class representing a registered component
-   * @param {Object} args           - args
-   *        {String} componentType  - type of component
-   *        {String} componentClass - CSS class of component
-   */
-  Component = function (args) {
+},{}],4:[function(require,module,exports){
+/**
+ * adds enhanced behaviors
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function () {
+  'use strict';
+
+  return true;
+};
+
+},{}],5:[function(require,module,exports){
+/**
+ * emits a [component]WillBuild event
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function (component) {
+  'use strict';
+
+  var willBuildEvent = new window.CustomEvent(
+    this.componentType + 'WillBuild',
+    {
+      'detail': {
+        'component': component
+      }
+    }
+  );
+  component.dispatchEvent(willBuildEvent);
+  return true;
+};
+
+},{}],6:[function(require,module,exports){
+/**
+ * emit a [component]WillEnhance event
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function (component) {
+  'use strict';
+
+  var willEnhanceEvent = new window.CustomEvent(
+    this.componentType + 'WillEnhance',
+    {
+      'detail': {
+        'component': component
+      }
+    }
+  );
+  component.dispatchEvent(willEnhanceEvent);
+  return true;
+};
+
+},{}],7:[function(require,module,exports){
+var
+  build       = require('./component-build'),
+  didBuild    = require('./component-did-build'),
+  willBuild   = require('./component-will-build'),
+  enhance     = require('./component-enhance'),
+  didEnhance  = require('./component-did-enhance'),
+  willEnhance = require('./component-will-enhance'),
+  Component   = function (args) {
     this.componentType  = args.componentType  || '';
     this.componentClass = args.componentClass || '';
   };
 
-  /**
-   * emits a [component]WillBuild event
-   * @param  {DOM Element} component - outermose element of a component
-   * @return {[Boolean]}             - success
-   */
-  Component.prototype.willBuild = function (component) {
-    var willBuildEvent = new window.CustomEvent(
-      this.componentType + 'WillBuild',
-      {
-        'detail': {
-          'component': component
-        }
-      }
-    );
-    component.dispatchEvent(willBuildEvent);
-    return true;
-  };
+Component.prototype.build = build;
+Component.prototype.didBuild = didBuild;
+Component.prototype.willBuild = willBuild;
+Component.prototype.enhance = enhance;
+Component.prototype.didEnhance = didEnhance;
+Component.prototype.willEnhance = willEnhance;
 
-  /**
-   * emits a [component]DidBuild event
-   * @param  {DOM Element} component - outermose element of a component
-   * @return {[Boolean]}             - success
-   */
-  Component.prototype.didBuild = function (component) {
-    var didBuildEvent = new window.CustomEvent(
-      this.componentType + 'DidBuild',
-      {
-        'detail': {
-          'component': component
-        }
-      }
-    );
-    component.dispatchEvent(didBuildEvent);
-    return true;
-  };
+/**
+ * Class representing a registered component
+ * @param {Object} args           - args
+ *        {String} componentType  - type of component
+ *        {String} componentClass - CSS class of component
+*/
+module.exports = Component;
 
-  /**
-   * emit a [component]WillEnhance event
-   * @param  {DOM Element} component - outermose element of a component
-   * @return {[Boolean]}             - success
-   */
-  Component.prototype.willEnhance = function (component) {
-    var willEnhanceEvent = new window.CustomEvent(
-      this.componentType + 'WillEnhance',
-      {
-        'detail': {
-          'component': component
-        }
-      }
-    );
-    component.dispatchEvent(willEnhanceEvent);
-    return true;
-  };
+},{"./component-build":1,"./component-did-build":2,"./component-did-enhance":3,"./component-enhance":4,"./component-will-build":5,"./component-will-enhance":6}],8:[function(require,module,exports){
+(function (window) {
 
-  /**
-   * emit a [component]DidEnhance event
-   * @param  {DOM Element} component - outermose element of a component
-   * @return {[Boolean]}             - success
-   */
-  Component.prototype.didEnhance = function (component) {
-    var didEnhanceEvent = new window.CustomEvent(
-      this.componentType + 'DidEnhance',
-      {
-        'detail': {
-          'component': component
-        }
-      }
-    );
-    component.dispatchEvent(didEnhanceEvent);
-    return true;
-  };
+  'use strict';
 
-  /**
-   * adds HTML for JS enhancement
-   * @param  {DOM Element} component - outermose element of a component
-   * @return {[Boolean]}             - success
-   */
-  Component.prototype.build = function () {
-    return true;
-  };
-
-  /**
-   * adds enhanced behaviors
-   * @param  {DOM Element} component - outermose element of a component
-   * @return {[Boolean]}             - success
-   */
-  Component.prototype.enhance = function () {
-    return true;
-  };
+  var
+    registerComponent    = require('./register-component'),
+    registeredComponents = require('./registered-components'),
+    initializeComponent  = require('./initialize-component'),
+    ChoppedSUI;
 
   // ChoppedSUI namespace
   ChoppedSUI = {
 
-    /**
-     * dictionary of known widget types
-     * @type {Object}
-     */
-    registeredComponents: {},
-
-    /**
-     * [initializeComponent description]
-     * @param  {Object}  args - args
-     * @return {Boolean}      - success
-     */
-    initializeComponent: function (args) {
-
-      // without a component type there is no way to look up the component
-      if (!args.componentType) {
-        return;
-      }
-
-      // no component and no image tag means we want to initialize all
-      // components of this type
-      if (!args.component && !args.image) {
-        initializeAllOfType(args.componentType);
-        return;
-      }
-
-      if (!args.component) {
-        args.component = args.image.previousSibling;
-      }
-
-      initializeThisComponent(args.component, args.componentType, args.image);
-
-      return true;
-    },
-
-    /**
-     * [registerComponent description]
-     * @param  {Object} args  - args
-     * @return {Boolean}      - success
-     */
-    registerComponent: function (args) {
-
-      if (!args.componentClass || !args.componentType) {
-        return;
-      }
-
-      ChoppedSUI.registeredComponents[args.componentType] = new Component(args);
-
-      if (args.build) {
-        ChoppedSUI.registeredComponents[args.componentType].build = args.build;
-      }
-
-      if (args.enhance) {
-        ChoppedSUI.registeredComponents[args.componentType].enhance =
-          args.enhance;
-      }
-
-      ChoppedSUI.initializeComponent({
-        componentType: args.componentType
-      });
-    }
+    registeredComponents: registeredComponents,
+    initializeComponent : initializeComponent,
+    registerComponent   : registerComponent
   };
 
   window.ChoppedSUI = ChoppedSUI;
+
 }(window));
 
+},{"./initialize-component":10,"./register-component":12,"./registered-components":13}],9:[function(require,module,exports){
+var
+  initializeThisComponent = require('./initialize-this-component'),
+  registeredComponents    = require('./registered-components');
+
+/**
+ * Initialize all components of a type if it's registered
+ * @param  {String}  componentType - type of component
+ * @return {Boolean}               - success
+ */
+module.exports = function (componentType) {
+  'use strict';
+
+  var components, i, len;
+
+  // the component must be registered
+  if (registeredComponents[componentType]) {
+
+    // find each component of this type that needs to be enhanced
+    components = document.querySelectorAll(
+      '.' + registeredComponents[componentType].componentClass + '--unenhanced'
+    );
+
+    //
+    for (i = 0, len = components.length; i < len; i += 1) {
+
+      initializeThisComponent(components[i], componentType);
+
+    }
+  }
+};
+
+},{"./initialize-this-component":11,"./registered-components":13}],10:[function(require,module,exports){
+var
+  initializeAllOfType     = require('./initialize-all-of-type'),
+  initializeThisComponent = require('./initialize-this-component');
+
+/**
+ * initializes an instance or all instances of a component
+ * @param  {Object}  args - args
+ * @return {Boolean}      - success
+ */
+module.exports = function (args) {
+  'use strict';
+
+  // without a component type there is no way to look up the component
+  if (!args.componentType) {
+    return;
+  }
+
+  // no component and no image tag means we want to initialize all
+  // components of this type
+  if (!args.component && !args.image) {
+    initializeAllOfType(args.componentType);
+    return;
+  }
+
+  if (!args.component) {
+    args.component = args.image.previousSibling;
+  }
+
+  initializeThisComponent(args.component, args.componentType, args.image);
+
+  return true;
+};
+
+},{"./initialize-all-of-type":9,"./initialize-this-component":11}],11:[function(require,module,exports){
+var registeredComponents = require('./registered-components');
+
+/**
+ * Initialize a component if its type is registered
+ * @param  {DOM Element} component     - outermose element of a component
+ * @param  {String}      componentType - type of component
+ * @param  {DOM Element} image         - trailing image element
+ * @return {Boolean}                   - success
+ */
+module.exports = function (component, componentType, image) {
+  'use strict';
+
+  var
+    componentClass,
+    componentClasses,
+    componentUnenhanced,
+    componentBuilt;
+
+  // the component must be registered
+  if (registeredComponents[componentType]) {
+    componentClasses = component.className;
+    componentClass = registeredComponents[componentType]
+      .componentClass;
+    componentUnenhanced = new RegExp(
+      '(^| )' + componentClass + '--unenhanced( |$)',
+      'g'
+    );
+    componentBuilt = new RegExp(
+      '(^| )' + componentClass + '--built( |$)',
+      'g'
+    );
+
+    // only enhance unenhanced components
+    if (componentUnenhanced.test(componentClasses)) {
+      componentClasses = componentClasses.replace(componentUnenhanced, ' ');
+
+      // only build unbuilt components
+      if (!componentBuilt.test(componentClasses)) {
+
+        registeredComponents[componentType].willBuild(component);
+        registeredComponents[componentType].build(component, componentType);
+        registeredComponents[componentType].didBuild(component);
+
+        componentClasses += ' ' + componentClass + '--built';
+      }
+      component.className = componentClasses;
+
+      registeredComponents[componentType].willEnhance(component);
+      registeredComponents[componentType].enhance(component);
+
+      // timeout required for css animation support
+      setTimeout(function () {
+        var className = component.className;
+        className = className.replace(componentBuilt, ' ');
+        className += ' ' + componentClass + '--enhanced';
+        component.className = className;
+        registeredComponents[componentType].didEnhance(component);
+      }, 100);
+    }
+  }
+
+  // get those nasty self-initializing image tags out of there
+  if (image) {
+    image.parentElement.removeChild(image);
+  }
+
+  return true;
+};
+
+},{"./registered-components":13}],12:[function(require,module,exports){
+var
+  Component            = require('./component'),
+  initializeComponent  = require('./initialize-component'),
+  registeredComponents = require('./registered-components');
+
+/**
+ * [registerComponent description]
+ * @param  {Object} args  - args
+ * @return {Boolean}      - success
+ */
+module.exports = function (args) {
+
+  if (!args.componentClass || !args.componentType) {
+    return;
+  }
+
+  registeredComponents[args.componentType] = new Component(args);
+
+  if (args.build) {
+    registeredComponents[args.componentType].build = args.build;
+  }
+
+  if (args.enhance) {
+    registeredComponents[args.componentType].enhance =
+      args.enhance;
+  }
+
+  initializeComponent({
+    componentType: args.componentType
+  });
+};
+
+},{"./component":7,"./initialize-component":10,"./registered-components":13}],13:[function(require,module,exports){
+var registeredComponents = {};
+
+/**
+ * dictionary of known widget types
+ * @type {Object}
+ */
+module.exports = function () {
+  'use strict';
+
+  return registeredComponents;
+};
+
+},{}]},{},[8])
 /*!
  *  Copyright 2011 Twitter, Inc.
  *  Licensed under the Apache License, Version 2.0 (the "License");

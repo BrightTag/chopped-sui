@@ -17,7 +17,7 @@ gulp.task('lint', [
 gulp.task('lint:js', function () {
 
   return gulp.src(config.js.src)
-    .pipe(jshint())
+    .pipe(jshint({ 'browserify': true }))
     .pipe(jshint.reporter(jshintStylish))
     .pipe(jshint.reporter('fail'))
     .on('error', handleErrors);
