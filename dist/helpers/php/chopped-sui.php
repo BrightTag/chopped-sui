@@ -15,19 +15,11 @@ class ComponentLibrary {
     $this->mustache = new Mustache_Engine($config);
   }
 
-  public function getChoppedSUIChoppedSui.js($data) {
-    return $this->mustache->render('chopped-sui.js/chopped-sui.js', $data);
+  public function getChoppedSUIDropDown($data) {
+    return $this->mustache->render('drop-down/drop-down', $data);
   }
 
-  public function getChoppedSUIChoppedSui.min.js($data) {
-    return $this->mustache->render('chopped-sui.min.js/chopped-sui.min.js', $data);
-  }
-
-  public function getChoppedSUIComponents.js($data) {
-    return $this->mustache->render('components.js/components.js', $data);
-  }
-
-  public function getChoppedSUIComponents.min.js($data) {
-    return $this->mustache->render('components.min.js/components.min.js', $data);
+  public function getChoppedSUITabs($data) {
+    return $this->mustache->render('tabs/tabs', $data);
   }
 }

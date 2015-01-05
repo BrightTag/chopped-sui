@@ -42,6 +42,12 @@ var config = {
 
   },
 
+  helpers: {
+
+    components: 'src/components'
+
+  },
+
   components: {
 
     src: [
