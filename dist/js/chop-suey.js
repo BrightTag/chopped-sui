@@ -1,119 +1,34 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-/**
- * adds HTML for JS enhancement
- * @param  {DOM Element} component - outermose element of a component
- * @return {[Boolean]}             - success
- */
-module.exports = function () {
+(function (window) {
+
   'use strict';
 
-  return true;
-};
+  var
+    registerComponent    = require('./methods/register-component'),
+    registeredComponents = require('./methods/registered-components'),
+    initializeComponent  = require('./methods/initialize-component'),
+    ChopSuey;
 
-},{}],2:[function(require,module,exports){
-/**
- * emits a [component]DidBuild event
- * @param  {DOM Element} component - outermose element of a component
- * @return {[Boolean]}             - success
- */
-module.exports = function (component) {
-  'use strict';
+  // ChopSuey namespace
+  ChopSuey = {
 
-  var didBuildEvent = new window.CustomEvent(
-    this.componentType + 'DidBuild',
-    {
-      'detail': {
-        'component': component
-      }
-    }
-  );
-  component.dispatchEvent(didBuildEvent);
-  return true;
-};
+    registeredComponents: registeredComponents,
+    initializeComponent : initializeComponent,
+    registerComponent   : registerComponent
+  };
 
-},{}],3:[function(require,module,exports){
-/**
- * emit a [component]DidEnhance event
- * @param  {DOM Element} component - outermose element of a component
- * @return {[Boolean]}             - success
- */
-module.exports = function (component) {
-  'use strict';
+  window.ChopSuey = ChopSuey;
 
-  var didEnhanceEvent = new window.CustomEvent(
-    this.componentType + 'DidEnhance',
-    {
-      'detail': {
-        'component': component
-      }
-    }
-  );
-  component.dispatchEvent(didEnhanceEvent);
-  return true;
-};
+}(window));
 
-},{}],4:[function(require,module,exports){
-/**
- * adds enhanced behaviors
- * @param  {DOM Element} component - outermose element of a component
- * @return {[Boolean]}             - success
- */
-module.exports = function () {
-  'use strict';
-
-  return true;
-};
-
-},{}],5:[function(require,module,exports){
-/**
- * emits a [component]WillBuild event
- * @param  {DOM Element} component - outermose element of a component
- * @return {[Boolean]}             - success
- */
-module.exports = function (component) {
-  'use strict';
-
-  var willBuildEvent = new window.CustomEvent(
-    this.componentType + 'WillBuild',
-    {
-      'detail': {
-        'component': component
-      }
-    }
-  );
-  component.dispatchEvent(willBuildEvent);
-  return true;
-};
-
-},{}],6:[function(require,module,exports){
-/**
- * emit a [component]WillEnhance event
- * @param  {DOM Element} component - outermose element of a component
- * @return {[Boolean]}             - success
- */
-module.exports = function (component) {
-  'use strict';
-
-  var willEnhanceEvent = new window.CustomEvent(
-    this.componentType + 'WillEnhance',
-    {
-      'detail': {
-        'component': component
-      }
-    }
-  );
-  component.dispatchEvent(willEnhanceEvent);
-  return true;
-};
-
-},{}],7:[function(require,module,exports){
+},{"./methods/initialize-component":10,"./methods/register-component":12,"./methods/registered-components":13}],2:[function(require,module,exports){
 var
-  build       = require('./component-build'),
-  didBuild    = require('./component-did-build'),
-  willBuild   = require('./component-will-build'),
-  enhance     = require('./component-enhance'),
-  didEnhance  = require('./component-did-enhance'),
-  willEnhance = require('./component-will-enhance'),
+  build       = require('./component/component-build'),
+  didBuild    = require('./component/component-did-build'),
+  willBuild   = require('./component/component-will-build'),
+  enhance     = require('./component/component-enhance'),
+  didEnhance  = require('./component/component-did-enhance'),
+  willEnhance = require('./component/component-will-enhance'),
   Component   = function (args) {
     this.componentType  = args.componentType  || '';
     this.componentClass = args.componentClass || '';
@@ -134,30 +49,115 @@ Component.prototype.willEnhance = willEnhance;
 */
 module.exports = Component;
 
-},{"./component-build":1,"./component-did-build":2,"./component-did-enhance":3,"./component-enhance":4,"./component-will-build":5,"./component-will-enhance":6}],8:[function(require,module,exports){
-(function (window) {
-
+},{"./component/component-build":3,"./component/component-did-build":4,"./component/component-did-enhance":5,"./component/component-enhance":6,"./component/component-will-build":7,"./component/component-will-enhance":8}],3:[function(require,module,exports){
+/**
+ * adds HTML for JS enhancement
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function () {
   'use strict';
 
-  var
-    registerComponent    = require('./register-component'),
-    registeredComponents = require('./registered-components'),
-    initializeComponent  = require('./initialize-component'),
-    ChopSuey;
+  return true;
+};
 
-  // ChopSuey namespace
-  ChopSuey = {
+},{}],4:[function(require,module,exports){
+/**
+ * emits a [component]DidBuild event
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function (component) {
+  'use strict';
 
-    registeredComponents: registeredComponents,
-    initializeComponent : initializeComponent,
-    registerComponent   : registerComponent
-  };
+  var didBuildEvent = new window.CustomEvent(
+    this.componentType + 'DidBuild',
+    {
+      'detail': {
+        'component': component
+      }
+    }
+  );
+  component.dispatchEvent(didBuildEvent);
+  return true;
+};
 
-  window.ChopSuey = ChopSuey;
+},{}],5:[function(require,module,exports){
+/**
+ * emit a [component]DidEnhance event
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function (component) {
+  'use strict';
 
-}(window));
+  var didEnhanceEvent = new window.CustomEvent(
+    this.componentType + 'DidEnhance',
+    {
+      'detail': {
+        'component': component
+      }
+    }
+  );
+  component.dispatchEvent(didEnhanceEvent);
+  return true;
+};
 
-},{"./initialize-component":10,"./register-component":12,"./registered-components":13}],9:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+/**
+ * adds enhanced behaviors
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function () {
+  'use strict';
+
+  return true;
+};
+
+},{}],7:[function(require,module,exports){
+/**
+ * emits a [component]WillBuild event
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function (component) {
+  'use strict';
+
+  var willBuildEvent = new window.CustomEvent(
+    this.componentType + 'WillBuild',
+    {
+      'detail': {
+        'component': component
+      }
+    }
+  );
+  component.dispatchEvent(willBuildEvent);
+  return true;
+};
+
+},{}],8:[function(require,module,exports){
+/**
+ * emit a [component]WillEnhance event
+ * @param  {DOM Element} component - outermose element of a component
+ * @return {[Boolean]}             - success
+ */
+module.exports = function (component) {
+  'use strict';
+
+  var willEnhanceEvent = new window.CustomEvent(
+    this.componentType + 'WillEnhance',
+    {
+      'detail': {
+        'component': component
+      }
+    }
+  );
+  component.dispatchEvent(willEnhanceEvent);
+  return true;
+};
+
+},{}],9:[function(require,module,exports){
 var
   initializeThisComponent = require('./initialize-this-component'),
   registeredComponents    = require('./registered-components');
@@ -326,7 +326,7 @@ module.exports = function (args) {
   });
 };
 
-},{"./component":7,"./initialize-component":10,"./registered-components":13}],13:[function(require,module,exports){
+},{"./component":2,"./initialize-component":10,"./registered-components":13}],13:[function(require,module,exports){
 var registeredComponents = {};
 
 /**
@@ -339,7 +339,7 @@ module.exports = function () {
   return registeredComponents;
 };
 
-},{}]},{},[8])
+},{}]},{},[1])
 /*!
  *  Copyright 2011 Twitter, Inc.
  *  Licensed under the Apache License, Version 2.0 (the "License");

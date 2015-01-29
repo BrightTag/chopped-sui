@@ -1,4 +1,4 @@
-var currentOptionHidden = require('./current-option-hidden');
+var currentOptionHidden = require('./constants/current-option-hidden');
 
 // Add menu and trigger for existing select
 module.exports = function (component, select) {

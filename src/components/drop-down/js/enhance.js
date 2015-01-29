@@ -1,10 +1,10 @@
 var
-  enhanceTriggerClick     = require('./enhance-trigger-click'),
-  enhanceComponentKeyup   = require('./enhance-component-keyup'),
-  enhanceMenuClick        = require('./enhance-menu-click'),
-  listenForDropDownShow   = require('./listen-for-drop-down-show'),
-  listenForDropDownHide   = require('./listen-for-drop-down-hide'),
-  listenForDropDownSelect = require('./listen-for-drop-down-select');
+  enhanceTriggerClick     = require('./enhance/enhance-trigger-click'),
+  enhanceComponentKeyup   = require('./enhance/enhance-component-keyup'),
+  enhanceMenuClick        = require('./enhance/enhance-menu-click'),
+  listenForDropDownShow   = require('./enhance/listen-for-drop-down-show'),
+  listenForDropDownHide   = require('./enhance/listen-for-drop-down-hide'),
+  listenForDropDownSelect = require('./enhance/listen-for-drop-down-select');
 
 // open/close menu and change selected option on arrows
 module.exports = function enhanceDropDown(component) {

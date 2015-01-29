@@ -3,9 +3,9 @@
   'use strict';
 
   var
-    registerComponent    = require('./register-component'),
-    registeredComponents = require('./registered-components'),
-    initializeComponent  = require('./initialize-component'),
+    registerComponent    = require('./methods/register-component'),
+    registeredComponents = require('./methods/registered-components'),
+    initializeComponent  = require('./methods/initialize-component'),
     ChopSuey;
 
   // ChopSuey namespace

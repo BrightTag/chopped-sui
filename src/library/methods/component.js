@@ -1,10 +1,10 @@
 var
-  build       = require('./component-build'),
-  didBuild    = require('./component-did-build'),
-  willBuild   = require('./component-will-build'),
-  enhance     = require('./component-enhance'),
-  didEnhance  = require('./component-did-enhance'),
-  willEnhance = require('./component-will-enhance'),
+  build       = require('./component/component-build'),
+  didBuild    = require('./component/component-did-build'),
+  willBuild   = require('./component/component-will-build'),
+  enhance     = require('./component/component-enhance'),
+  didEnhance  = require('./component/component-did-enhance'),
+  willEnhance = require('./component/component-will-enhance'),
   Component   = function (args) {
     this.componentType  = args.componentType  || '';
     this.componentClass = args.componentClass || '';

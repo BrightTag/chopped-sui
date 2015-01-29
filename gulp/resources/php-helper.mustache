@@ -1,5 +1,5 @@
 <?php
-class ComponentLibrary {
+class ChopSuey {
   private $mustache;
 
   public function __construct($data = array()) {
@@ -16,7 +16,7 @@ class ComponentLibrary {
   }
 {{#components}}
 
-  public function getChopSuey{{name}}($data) {
+  public function {{name}}($data) {
     return $this->mustache->render('{{dir}}/{{file}}', $data);
   }
 {{/components}}

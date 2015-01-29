@@ -1,6 +1,6 @@
 var
-  menuFlush     = require('./menu-flush'),
-  menuFlushBoth = require('./menu-flush-both');
+  menuFlush     = require('./constants/menu-flush'),
+  menuFlushBoth = require('./constants/menu-flush-both');
 
 // add trigger for existing menu
 module.exports = function (component, menu, trigger) {

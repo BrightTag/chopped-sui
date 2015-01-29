@@ -4,12 +4,9 @@ var config       = require('../config'),
     handleErrors = require('../util/errors'),
     fs           = require('fs'),
     gulp         = require('gulp'),
-    browserify   = require('gulp-browserify'),
-    replace      = require('gulp-replace'),
     concat       = require('gulp-concat'),
     rename       = require('gulp-rename'),
-    uglify       = require('gulp-uglify'),
-    transform    = require('vinyl-transform');
+    uglify       = require('gulp-uglify');
 
 gulp.task('components:js', ['components:build', 'components:templates'], function () {
 

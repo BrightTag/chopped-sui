@@ -1,6 +1,6 @@
 var
-  menuHidden   = require('./menu-hidden'),
-  optionHidden = require('./option-hidden');
+  menuHidden   = require('./constants/menu-hidden'),
+  optionHidden = require('./constants/option-hidden');
 
 // open/close menu and change selected option on arrows
 module.exports = function (component, trigger, menu) {

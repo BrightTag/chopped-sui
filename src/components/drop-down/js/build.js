@@ -1,6 +1,6 @@
 var
-  buildFromMenu   = require('./build-from-menu'),
-  buildFromSelect = require('./build-from-select');
+  buildFromMenu   = require('./build/build-from-menu'),
+  buildFromSelect = require('./build/build-from-select');
 
 // add HTML for existing markup
 module.exports = function (component) {

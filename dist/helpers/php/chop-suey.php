@@ -1,5 +1,5 @@
 <?php
-class ComponentLibrary {
+class ChopSuey {
   private $mustache;
 
   public function __construct($data = array()) {
@@ -15,11 +15,11 @@ class ComponentLibrary {
     $this->mustache = new Mustache_Engine($config);
   }
 
-  public function getChopSueyDropDown($data) {
+  public function dropDown($data) {
     return $this->mustache->render('drop-down/drop-down', $data);
   }
 
-  public function getChopSueyTabs($data) {
+  public function tabs($data) {
     return $this->mustache->render('tabs/tabs', $data);
   }
 }

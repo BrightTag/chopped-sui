@@ -1,7 +1,7 @@
 var
-  triggerFixed       = require('./trigger-fixed'),
-  optionCurrentClass = require('./option-current-class'),
-  optionHiddenClass  = require('./option-hidden-class');
+  triggerFixed       = require('./constants/trigger-fixed'),
+  optionCurrentClass = require('./constants/option-current-class'),
+  optionHiddenClass  = require('./constants/option-hidden-class');
 
 module.exports = function (component, trigger, menu) {
   'use strict';

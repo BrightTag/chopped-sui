@@ -18,8 +18,6 @@
 
 `cd` to the local repo and run `gulp start:demo` and follow the instructions
 
-**TODO**: demo HTML shoud be built after helpers/templates are in place
-
 ## Components
 
 Each component resides in a folder under `src/components`.
@@ -30,34 +28,43 @@ Each component directory contains a folder for `css`, `js`, and `templates`.
 
 ### CSS
 
-`css` should contain a single SASS file named `component-name.scss` containing all the styles necessary to render all versions of the component. For `drop-down` this is `drop-down.scss`.
+`css` should contain a single SASS file named `main.scss` containing all the styles necessary to render all versions of the component.
 
-**TODO**: we may want to expand this to allow for multiple SASS files
-
-SASS files for all components will be converted to CSS and concatenated into `dist/components/css/components.css`.
-
-**TODO**: there may come a time where ordering these CSS files becomes a requirement
+SASS files for all components will be converted to CSS and concatenated into `dist/components/css/components.css` and `dist/components/css/components.min.css`.
 
 ### JS
 
-`js` should contain a single JS file named `component-name.js` containing the ChopSuey.registerComponent() call for this component. For `drop-down` this is `drop-down.scss`.
+`js` should contain a single JS file named `main.js` containing the ChopSuey.registerComponent() call for this component along with potential `build.js` and/or `enhance.js` with supporting browserify managed modules. 
+
+JavaScript files for all components will be converted and concatenated into `dist/components/js/components.js` and `dist/components/js/components.min.js`.
 
 ### Templates
 
 `templates` should contain one or more templates  named `component-name.mustache` for rendering the entire component, or `component-name-part.mustache` containing sub templates for any HTML that needs to be added on enhancement, no matter how insignificant.
 
+For example, the `drop-down` contains a main template called `drop-down.mustache` and three sub-templates called `drop-down-menu.mustache`, `drop-down-sizer.mustache`, and `drop-down-trigger.mustache`.
+
 ### Helpers
 
-**TODO**: language-specific helpers are necessary to generate the initial markup using the Jade Templates listed above. They should probably be generated dynamically
+Helper functions are also generated to provide native wrappers for generating ChopSuey component markup in various backend languages.
+
+Currently, helper templates are located in `gulp/resources` such as `php-helper.mustache`. These templates use the directory structure of the templates to generate method names for use in a particular language.
+
+Helpers get generated in `dist/helpers` in language specific folders.
+
+ChopSuey currently supports:
+* `php`
 
 ### Tests
 
-**TODO**: I'd like to do both unit and integration/behavior testing
+**TODO**
 
 ## Library
 
-The library is a single JavaScript file building helpers for initializing components in the ChopSuey namespace.
+`js` should contain a single JS file named `main.js` along with supporting browserify managed modules. 
 
-**TODO**: We should really be using browserify or requirejs to break this apart into smaller, testable parts.
+JavaScript files for the library will be converted and concatenated into `dist/components/js/chop-suey.js` and `dist/components/js/chop-suey.min.js`.
 
-**TODO**: Unit testing
+### Tests
+
+**TODO**

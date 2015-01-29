@@ -5,8 +5,8 @@
     ChopSuey.templates['drop-down'] = new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||"");t.b("<");if(t.s(t.f("select",c,p,1),c,p,0,12,15,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("div");});c.pop();}if(!t.s(t.f("select",c,p,1),c,p,1,0,0,"")){t.b("nav");};if(t.s(t.f("id",c,p,1),c,p,0,58,70,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" id=\"");t.b(t.v(t.f("id",c,p,0)));t.b("\"");});c.pop();}t.b(" class=\"drop-down drop-down--unenhanced");if(t.s(t.f("build",c,p,1),c,p,0,126,143,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down--built");});c.pop();}if(t.s(t.f("class",c,p,1),c,p,0,163,173,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" ");t.b(t.v(t.f("class",c,p,0)));});c.pop();}t.b("\">");t.b("\n" + i);if(t.s(t.f("select",c,p,1),c,p,0,199,705,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("    <select class=\"drop-down__select");if(t.s(t.f("hideCurrent",c,p,1),c,p,0,252,284,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__select--hide-current");});c.pop();}if(t.s(t.f("build",c,p,1),c,p,0,310,336,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" drop-down__select--hidden");});c.pop();}t.b("\" id=\"");t.b(t.v(t.f("selectId",c,p,0)));t.b("\" name=\"");t.b(t.v(t.f("selectName",c,p,0)));t.b("\">");t.b("\n" + i);if(t.s(t.f("menuItems",c,p,1),c,p,0,409,503,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("      <option value=\"");t.b(t.v(t.f("value",c,p,0)));t.b("\"");if(t.s(t.f("isCurrent",c,p,1),c,p,0,455,464,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(" selected");});c.pop();}t.b(">");t.b(t.v(t.f("text",c,p,0)));t.b("</option>");t.b("\n" + i);});c.pop();}t.b("    </select>");t.b("\n" + i);if(t.s(t.f("build",c,p,1),c,p,0,546,692,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(t.rp("<drop-down-sizer0",c,p,"      "));if(t.s(t.f("menuItems",c,p,1),c,p,0,595,646,"{{ }}")){t.rs(c,p,function(c,p,t){if(t.s(t.f("isCurrent",c,p,1),c,p,0,609,632,"{{ }}")){t.rs(c,p,function(c,p,t){t.b(t.rp("<drop-down-trigger1",c,p,""));});c.pop();}});c.pop();}t.b(t.rp("<drop-down-menu2",c,p,"      "));});c.pop();}});c.pop();}if(t.s(t.f("menu",c,p,1),c,p,0,728,898,"{{ }}")){t.rs(c,p,function(c,p,t){if(t.s(t.f("build",c,p,1),c,p,0,743,860,"{{ }}")){t.rs(c,p,function(c,p,t){if(!t.s(t.f("flushDirection",c,p,1),c,p,1,0,0,"")){t.b(t.rp("<drop-down-sizer3",c,p,"        "));};t.b(t.rp("<drop-down-trigger4",c,p,"      "));});c.pop();}t.b(t.rp("<drop-down-menu5",c,p,"    "));});c.pop();}t.b("</");if(t.s(t.f("select",c,p,1),c,p,0,921,924,"{{ }}")){t.rs(c,p,function(c,p,t){t.b("div");});c.pop();}if(!t.s(t.f("select",c,p,1),c,p,1,0,0,"")){t.b("nav");};t.b("><img src=\"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\" onload=\"ChopSuey.initializeComponent({image:this,componentType:'dropDown'});\" />");t.b("\n");return t.fl(); },partials: {"<drop-down-sizer0":{name:"drop-down-sizer", partials: {}, subs: {  }},"<drop-down-trigger1":{name:"drop-down-trigger", partials: {}, subs: {  }},"<drop-down-menu2":{name:"drop-down-menu", partials: {}, subs: {  }},"<drop-down-sizer3":{name:"drop-down-sizer", partials: {}, subs: {  }},"<drop-down-trigger4":{name:"drop-down-trigger", partials: {}, subs: {  }},"<drop-down-menu5":{name:"drop-down-menu", partials: {}, subs: {  }}}, subs: {  }});
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var
-  buildFromMenu   = require('./build-from-menu'),
-  buildFromSelect = require('./build-from-select');
+  buildFromMenu   = require('./build/build-from-menu'),
+  buildFromSelect = require('./build/build-from-select');
 
 // add HTML for existing markup
 module.exports = function (component) {
@@ -27,10 +27,10 @@ module.exports = function (component) {
   return true;
 };
 
-},{"./build-from-menu":2,"./build-from-select":3}],2:[function(require,module,exports){
+},{"./build/build-from-menu":2,"./build/build-from-select":3}],2:[function(require,module,exports){
 var
-  menuFlush     = require('./menu-flush'),
-  menuFlushBoth = require('./menu-flush-both');
+  menuFlush     = require('./constants/menu-flush'),
+  menuFlushBoth = require('./constants/menu-flush-both');
 
 // add trigger for existing menu
 module.exports = function (component, menu, trigger) {
@@ -108,8 +108,8 @@ module.exports = function (component, menu, trigger) {
   }
 };
 
-},{"./menu-flush":14,"./menu-flush-both":13}],3:[function(require,module,exports){
-var currentOptionHidden = require('./current-option-hidden');
+},{"./constants/menu-flush":6,"./constants/menu-flush-both":5}],3:[function(require,module,exports){
+var currentOptionHidden = require('./constants/current-option-hidden');
 
 // Add menu and trigger for existing select
 module.exports = function (component, select) {
@@ -169,15 +169,101 @@ module.exports = function (component, select) {
   }
 };
 
-},{"./current-option-hidden":4}],4:[function(require,module,exports){
+},{"./constants/current-option-hidden":4}],4:[function(require,module,exports){
 var currentOptionHidden = /(^| )drop-down__select--hide-current( |$)/;
 
 module.exports = currentOptionHidden;
 
 },{}],5:[function(require,module,exports){
+var menuFlushBoth = /(^| )drop-down__menu--flush-both( |$)/;
+
+module.exports = menuFlushBoth;
+
+},{}],6:[function(require,module,exports){
+var menuFlush = /(^| )drop-down__menu--flush-(\S+)( |$)/;
+
+module.exports = menuFlush;
+
+},{}],7:[function(require,module,exports){
 var
-  menuHidden   = require('./menu-hidden'),
-  optionHidden = require('./option-hidden');
+  enhanceTriggerClick     = require('./enhance/enhance-trigger-click'),
+  enhanceComponentKeyup   = require('./enhance/enhance-component-keyup'),
+  enhanceMenuClick        = require('./enhance/enhance-menu-click'),
+  listenForDropDownShow   = require('./enhance/listen-for-drop-down-show'),
+  listenForDropDownHide   = require('./enhance/listen-for-drop-down-hide'),
+  listenForDropDownSelect = require('./enhance/listen-for-drop-down-select');
+
+// open/close menu and change selected option on arrows
+module.exports = function enhanceDropDown(component) {
+  'use strict';
+
+  var
+    trigger = component.querySelectorAll('.drop-down__trigger')[0],
+    menu    = component.querySelectorAll('.drop-down__menu')[0],
+
+    hideOnOtherDropDownShow = function(e) {
+      var dropDownHideEvent;
+
+      e.stopPropagation();
+
+      if (e.detail.component !== component) {
+        dropDownHideEvent = new window.CustomEvent(
+          'dropDownHide'
+        );
+        component.dispatchEvent(dropDownHideEvent);
+      }
+    };
+
+  enhanceTriggerClick(component, trigger, menu);
+  enhanceComponentKeyup(component, trigger, menu);
+  enhanceMenuClick(component, menu);
+
+  listenForDropDownShow(component, trigger, menu, hideOnOtherDropDownShow);
+  listenForDropDownHide(component, trigger, menu, hideOnOtherDropDownShow);
+  listenForDropDownSelect(component, trigger, menu);
+
+  return true;
+};
+
+},{"./enhance/enhance-component-keyup":15,"./enhance/enhance-menu-click":16,"./enhance/enhance-trigger-click":17,"./enhance/listen-for-drop-down-hide":18,"./enhance/listen-for-drop-down-select":19,"./enhance/listen-for-drop-down-show":20}],8:[function(require,module,exports){
+var menuHiddenClass = /(^| )drop-down__menu--hidden( |$)/g;
+
+module.exports = menuHiddenClass;
+
+},{}],9:[function(require,module,exports){
+var menuHidden = /(^| )drop-down__menu--hidden( |$)/;
+
+module.exports = menuHidden;
+
+},{}],10:[function(require,module,exports){
+var optionCurrentClass = /(^| )drop-down__menu-option--current( |$)/g;
+
+module.exports = optionCurrentClass;
+
+},{}],11:[function(require,module,exports){
+var optionHiddenClass = /(^| )drop-down__menu-option--hidden( |$)/g;
+
+module.exports = optionHiddenClass;
+
+},{}],12:[function(require,module,exports){
+var optionHidden = /(^| )drop-down__menu-option--hidden( |$)/;
+
+module.exports = optionHidden;
+
+},{}],13:[function(require,module,exports){
+var triggerActiveClass = /(^| )drop-down__trigger--active( |$)/g;
+
+module.exports = triggerActiveClass;
+
+},{}],14:[function(require,module,exports){
+var triggerFixed = /(^| )drop-down__trigger--fixed( |$)/;
+
+module.exports = triggerFixed;
+
+},{}],15:[function(require,module,exports){
+var
+  menuHidden   = require('./constants/menu-hidden'),
+  optionHidden = require('./constants/option-hidden');
 
 // open/close menu and change selected option on arrows
 module.exports = function (component, trigger, menu) {
@@ -266,48 +352,7 @@ module.exports = function (component, trigger, menu) {
   component.addEventListener('keyup', handleComponentKeyup, false);
 };
 
-},{"./menu-hidden":16,"./option-hidden":19}],6:[function(require,module,exports){
-var
-  enhanceTriggerClick     = require('./enhance-trigger-click'),
-  enhanceComponentKeyup   = require('./enhance-component-keyup'),
-  enhanceMenuClick        = require('./enhance-menu-click'),
-  listenForDropDownShow   = require('./listen-for-drop-down-show'),
-  listenForDropDownHide   = require('./listen-for-drop-down-hide'),
-  listenForDropDownSelect = require('./listen-for-drop-down-select');
-
-// open/close menu and change selected option on arrows
-module.exports = function enhanceDropDown(component) {
-  'use strict';
-
-  var
-    trigger = component.querySelectorAll('.drop-down__trigger')[0],
-    menu    = component.querySelectorAll('.drop-down__menu')[0],
-
-    hideOnOtherDropDownShow = function(e) {
-      var dropDownHideEvent;
-
-      e.stopPropagation();
-
-      if (e.detail.component !== component) {
-        dropDownHideEvent = new window.CustomEvent(
-          'dropDownHide'
-        );
-        component.dispatchEvent(dropDownHideEvent);
-      }
-    };
-
-  enhanceTriggerClick(component, trigger, menu);
-  enhanceComponentKeyup(component, trigger, menu);
-  enhanceMenuClick(component, menu);
-
-  listenForDropDownShow(component, trigger, menu, hideOnOtherDropDownShow);
-  listenForDropDownHide(component, trigger, menu, hideOnOtherDropDownShow);
-  listenForDropDownSelect(component, trigger, menu);
-
-  return true;
-};
-
-},{"./enhance-component-keyup":5,"./enhance-menu-click":7,"./enhance-trigger-click":8,"./listen-for-drop-down-hide":10,"./listen-for-drop-down-select":11,"./listen-for-drop-down-show":12}],7:[function(require,module,exports){
+},{"./constants/menu-hidden":9,"./constants/option-hidden":12}],16:[function(require,module,exports){
 // select current option when clicked
 module.exports = function (component, menu) {
   'use strict';
@@ -334,8 +379,8 @@ module.exports = function (component, menu) {
   menu.addEventListener('click', handleMenuClick, false);
 };
 
-},{}],8:[function(require,module,exports){
-var menuHidden = require('./menu-hidden');
+},{}],17:[function(require,module,exports){
+var menuHidden = require('./constants/menu-hidden');
 
 // toggle menu visibility on trigger click
 module.exports = function (component, trigger, menu) {
@@ -367,27 +412,10 @@ module.exports = function (component, trigger, menu) {
   trigger.addEventListener('click', handleTriggerClick, false);
 };
 
-},{"./menu-hidden":16}],9:[function(require,module,exports){
-(function (ChopSuey) {
-  'use strict';
-
-  var
-    buildDropDown   = require('./build-drop-down'),
-    enhanceDropDown = require('./enhance-drop-down');
-
-  ChopSuey.registerComponent({
-    componentType : 'dropDown',
-    componentClass: 'drop-down',
-    build         : buildDropDown,
-    enhance       : enhanceDropDown
-  });
-
-}(window.ChopSuey));
-
-},{"./build-drop-down":1,"./enhance-drop-down":6}],10:[function(require,module,exports){
+},{"./constants/menu-hidden":9}],18:[function(require,module,exports){
 var
-  menuHiddenClass    = require('./menu-hidden-class'),
-  triggerActiveClass = require('./trigger-active-class');
+  menuHiddenClass    = require('./constants/menu-hidden-class'),
+  triggerActiveClass = require('./constants/trigger-active-class');
 
 module.exports = function (component, trigger, menu, hideOnOtherDropDownShow) {
   'use strict';
@@ -442,11 +470,11 @@ module.exports = function (component, trigger, menu, hideOnOtherDropDownShow) {
   component.addEventListener('dropDownHide', handleDropDownHide, false);
 };
 
-},{"./menu-hidden-class":15,"./trigger-active-class":20}],11:[function(require,module,exports){
+},{"./constants/menu-hidden-class":8,"./constants/trigger-active-class":13}],19:[function(require,module,exports){
 var
-  triggerFixed       = require('./trigger-fixed'),
-  optionCurrentClass = require('./option-current-class'),
-  optionHiddenClass  = require('./option-hidden-class');
+  triggerFixed       = require('./constants/trigger-fixed'),
+  optionCurrentClass = require('./constants/option-current-class'),
+  optionHiddenClass  = require('./constants/option-hidden-class');
 
 module.exports = function (component, trigger, menu) {
   'use strict';
@@ -530,10 +558,10 @@ module.exports = function (component, trigger, menu) {
   component.addEventListener('dropDownSelect', handleDropDownSelect, false);
 };
 
-},{"./option-current-class":17,"./option-hidden-class":18,"./trigger-fixed":21}],12:[function(require,module,exports){
+},{"./constants/option-current-class":10,"./constants/option-hidden-class":11,"./constants/trigger-fixed":14}],20:[function(require,module,exports){
 var
-  menuHiddenClass    = require('./menu-hidden-class'),
-  triggerActiveClass = require('./trigger-active-class');
+  menuHiddenClass    = require('./constants/menu-hidden-class'),
+  triggerActiveClass = require('./constants/trigger-active-class');
 
 module.exports = function (component, trigger, menu, hideOnOtherDropDownShow) {
   'use strict';
@@ -594,49 +622,79 @@ module.exports = function (component, trigger, menu, hideOnOtherDropDownShow) {
   component.addEventListener('dropDownShow', handleDropDownShow, false);
 };
 
-},{"./menu-hidden-class":15,"./trigger-active-class":20}],13:[function(require,module,exports){
-var menuFlushBoth = /(^| )drop-down__menu--flush-both( |$)/;
+},{"./constants/menu-hidden-class":8,"./constants/trigger-active-class":13}],21:[function(require,module,exports){
+(function (ChopSuey) {
+  'use strict';
 
-module.exports = menuFlushBoth;
+  var
+    build   = require('./build'),
+    enhance = require('./enhance');
 
-},{}],14:[function(require,module,exports){
-var menuFlush = /(^| )drop-down__menu--flush-(\S+)( |$)/;
+  ChopSuey.registerComponent({
+    componentType : 'dropDown',
+    componentClass: 'drop-down',
+    build         : build,
+    enhance       : enhance
+  });
 
-module.exports = menuFlush;
+}(window.ChopSuey));
 
-},{}],15:[function(require,module,exports){
-var menuHiddenClass = /(^| )drop-down__menu--hidden( |$)/g;
+},{"./build":1,"./enhance":7}]},{},[21])
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (ChopSuey) {
 
-module.exports = menuHiddenClass;
+  'use strict';
 
-},{}],16:[function(require,module,exports){
-var menuHidden = /(^| )drop-down__menu--hidden( |$)/;
+  function hasClass(e,cls) {
+    return e.className.match(('(\\s^|)'+cls+'(\\s|)'));
+  }
 
-module.exports = menuHidden;
+  function addClass(e,cls) {
+    if(!hasClass(e,cls)) {
+      e.className += ' ' + cls;
+    }
+  }
 
-},{}],17:[function(require,module,exports){
-var optionCurrentClass = /(^| )drop-down__menu-option--current( |$)/g;
+  function removeAllSiblingActiveClasses(e,cls) {
+    var children = e.children;
+    for (var i = 0; i < children.length; i +=1) {
 
-module.exports = optionCurrentClass;
+      var child = children[i];
+      if (hasClass(child, cls)) {
+        var reg = new RegExp('(\\s^|\\s)'+cls+'(\\s|)', 'g');
+        child.className=child.className.replace(reg,'');
+      }
+    }
+  }
 
-},{}],18:[function(require,module,exports){
-var optionHiddenClass = /(^| )drop-down__menu-option--hidden( |$)/g;
+  function toggleActiveClass (component) {
+  	var activeClassName = 'active';
 
-module.exports = optionHiddenClass;
+    component.addEventListener('click', function(e) {
+      // e = e || window.event;
+      var
+        tab = e.target.parentElement,
+        parentNode = tab.parentElement;
 
-},{}],19:[function(require,module,exports){
-var optionHidden = /(^| )drop-down__menu-option--hidden( |$)/;
+      if(hasClass(tab, 'nav-tab') && !hasClass(tab, 'nav-tab '+activeClassName)){
+        removeAllSiblingActiveClasses(parentNode, activeClassName);
+        addClass(tab, activeClassName);
+      }
+    });
+  }
 
-module.exports = optionHidden;
+  ChopSuey.registerComponent({
 
-},{}],20:[function(require,module,exports){
-var triggerActiveClass = /(^| )drop-down__trigger--active( |$)/g;
+    componentType: 'tabs',
 
-module.exports = triggerActiveClass;
+    componentClass: 'tabs',
 
-},{}],21:[function(require,module,exports){
-var triggerFixed = /(^| )drop-down__trigger--fixed( |$)/;
+    build: function () {},
 
-module.exports = triggerFixed;
+    enhance: toggleActiveClass
 
-},{}]},{},[9])
+  });
+
+}(window.ChopSuey));
+
+},{}]},{},[1])

@@ -1,6 +1,6 @@
 var
-  menuHiddenClass    = require('./menu-hidden-class'),
-  triggerActiveClass = require('./trigger-active-class');
+  menuHiddenClass    = require('./constants/menu-hidden-class'),
+  triggerActiveClass = require('./constants/trigger-active-class');
 
 module.exports = function (component, trigger, menu, hideOnOtherDropDownShow) {
   'use strict';

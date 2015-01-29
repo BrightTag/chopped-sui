@@ -15,7 +15,7 @@ files.forEach(function(file){
     hoganData.components.push({
       'file': file,
       'dir': file,
-      'name': file.replace(/(^|-)([a-z])/g, function (full, ignore, uppercase) {
+      'name': file.replace(/-([a-z])/g, function (full, uppercase) {
         return uppercase.toUpperCase();
       })
     });

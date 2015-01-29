@@ -2,14 +2,14 @@
   'use strict';
 
   var
-    buildDropDown   = require('./build-drop-down'),
-    enhanceDropDown = require('./enhance-drop-down');
+    build   = require('./build'),
+    enhance = require('./enhance');
 
   ChopSuey.registerComponent({
     componentType : 'dropDown',
     componentClass: 'drop-down',
-    build         : buildDropDown,
-    enhance       : enhanceDropDown
+    build         : build,
+    enhance       : enhance
   });
 
 }(window.ChopSuey));

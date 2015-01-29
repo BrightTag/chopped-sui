@@ -1,4 +1,4 @@
-var menuHidden = require('./menu-hidden');
+var menuHidden = require('./constants/menu-hidden');
 
 // toggle menu visibility on trigger click
 module.exports = function (component, trigger, menu) {
