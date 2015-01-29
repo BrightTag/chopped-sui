@@ -1,5 +1,0 @@
-<ul class="drop-down__menu drop-down__menu--hidden{{#flushDirection}} drop-down__menu--flush-{{flushDirection}}{{/flushDirection}}">
-	{{#menuItems}}
-		<li class="drop-down__menu-option{{#isCurrent}} drop-down__menu-option--current{{#hideCurrent}} drop-down__menu-option--hidden{{/hideCurrent}}{{/isCurrent}}"><a {{#menuItemId}}id="{{menuItemId}}" {{/menuItemId}}tabindex="-1" href="{{link}}{{^link}}javascript:;{{/link}}" class="drop-down__menu-option-trigger">{{text}}</a></li>
-	{{/menuItems}}
-</ul>

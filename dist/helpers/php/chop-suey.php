@@ -12,11 +12,14 @@ class ComponentLibrary {
     if (isset($data['partials_loader'])) {
       $config['partials_loader'] = new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/../templates/' . $data['partials_loader']);
     }
-
     $this->mustache = new Mustache_Engine($config);
   }
 
-  public function getSignalUIDropDown($data) {
+  public function getChopSueyDropDown($data) {
     return $this->mustache->render('drop-down/drop-down', $data);
+  }
+
+  public function getChopSueyTabs($data) {
+    return $this->mustache->render('tabs/tabs', $data);
   }
 }

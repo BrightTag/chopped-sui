@@ -45,9 +45,9 @@ module.exports = function (component, select) {
   triggerData.text = selectedOption;
 
   // generate HTML
-  template += window.ChoppedSUI.templates['drop-down-sizer'].render(menuData);
-  template += window.ChoppedSUI.templates['drop-down-trigger'].render(triggerData);
-  template += window.ChoppedSUI.templates['drop-down-menu'].render(menuData);
+  template += window.ChopSuey.templates['drop-down-sizer'].render(menuData);
+  template += window.ChopSuey.templates['drop-down-trigger'].render(triggerData);
+  template += window.ChopSuey.templates['drop-down-menu'].render(menuData);
 
   // append new HTML
   nodeBuilder = document.createElement('div');

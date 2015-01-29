@@ -1,4 +1,4 @@
-(function (ChoppedSUI) {
+(function (ChopSuey) {
 
   'use strict';
 
@@ -40,7 +40,7 @@
     });
   }
 
-  ChoppedSUI.registerComponent({
+  ChopSuey.registerComponent({
 
     componentType: 'tabs',
 
@@ -52,4 +52,4 @@
 
   });
 
-}(window.ChoppedSUI));
+}(window.ChopSuey));

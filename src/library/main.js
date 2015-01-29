@@ -6,16 +6,16 @@
     registerComponent    = require('./register-component'),
     registeredComponents = require('./registered-components'),
     initializeComponent  = require('./initialize-component'),
-    ChoppedSUI;
+    ChopSuey;
 
-  // ChoppedSUI namespace
-  ChoppedSUI = {
+  // ChopSuey namespace
+  ChopSuey = {
 
     registeredComponents: registeredComponents,
     initializeComponent : initializeComponent,
     registerComponent   : registerComponent
   };
 
-  window.ChoppedSUI = ChoppedSUI;
+  window.ChopSuey = ChopSuey;
 
 }(window));

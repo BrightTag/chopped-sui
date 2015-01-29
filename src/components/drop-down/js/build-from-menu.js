@@ -56,12 +56,12 @@ module.exports = function (component, menu, trigger) {
     }
 
     // generate HTML
-    template += window.ChoppedSUI.templates['drop-down-trigger'].render(triggerData);
+    template += window.ChopSuey.templates['drop-down-trigger'].render(triggerData);
   }
 
   if (menuFlushBoth.test(menu.className)) {
 
-    template += window.ChoppedSUI.templates['drop-down-sizer'].render(menuData);
+    template += window.ChopSuey.templates['drop-down-sizer'].render(menuData);
 
   }
 

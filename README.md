@@ -1,4 +1,4 @@
-# ChoppedSUI - SignalUI Component Library
+# ChopSuey - SignalUI Component Library
 
 ## Installation
 
@@ -40,7 +40,7 @@ SASS files for all components will be converted to CSS and concatenated into `di
 
 ### JS
 
-`js` should contain a single JS file named `component-name.js` containing the ChoppedSUI.registerComponent() call for this component. For `drop-down` this is `drop-down.scss`.
+`js` should contain a single JS file named `component-name.js` containing the ChopSuey.registerComponent() call for this component. For `drop-down` this is `drop-down.scss`.
 
 ### Templates
 
@@ -56,7 +56,7 @@ SASS files for all components will be converted to CSS and concatenated into `di
 
 ## Library
 
-The library is a single JavaScript file building helpers for initializing components in the ChoppedSUI namespace.
+The library is a single JavaScript file building helpers for initializing components in the ChopSuey namespace.
 
 **TODO**: We should really be using browserify or requirejs to break this apart into smaller, testable parts.
 

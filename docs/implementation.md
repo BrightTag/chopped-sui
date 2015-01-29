@@ -11,7 +11,7 @@ The component library will allow for easy calls to create components on a page
 ## Implementation
 
 1. Clone into signal-ui-component-library. Right now it is on Github, soon (probably) it will be moving to Gitlab.
-2. Inline chopped-sui.js in the head of the page in question.
+2. Inline chop-suey.js in the head of the page in question.
 3. Link components.css in the head of the page.
 4. At the end of the body tag link to components.js
 5. For each component or instance of a component, use the provided helper script to generate markup. These scripts have plenty of conifguration options to suit *your* needs! (Applause)

@@ -1,15 +1,15 @@
-(function (ChoppedSUI) {
+(function (ChopSuey) {
   'use strict';
 
   var
     buildDropDown   = require('./build-drop-down'),
     enhanceDropDown = require('./enhance-drop-down');
 
-  ChoppedSUI.registerComponent({
+  ChopSuey.registerComponent({
     componentType : 'dropDown',
     componentClass: 'drop-down',
     build         : buildDropDown,
     enhance       : enhanceDropDown
   });
 
-}(window.ChoppedSUI));
+}(window.ChopSuey));

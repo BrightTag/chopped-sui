@@ -3,10 +3,10 @@
 
 'use strict';
 
-var choppedSUI = require('../chopped-sui.js');
+var chopSuey = require('../chop-suey.js');
 
-describe('#window.ChoppedSUI', function () {
+describe('#window.ChopSuey', function () {
   it('is an object', function () {
-    expect(window.ChoppedSUI).toEqual(jasmine.any(Object));
+    expect(window.ChopSuey).toEqual(jasmine.any(Object));
   });
 });

@@ -26,7 +26,7 @@ gulp.task('helpers:php', function () {
 
   return gulp.src(config.components.php.src)
     .pipe(hogan(hoganData))
-    .pipe(rename('chopped-sui.php'))
+    .pipe(rename('chop-suey.php'))
     .pipe(gulp.dest(config.components.php.dest));
 
 });

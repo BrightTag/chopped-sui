@@ -10,7 +10,7 @@ var config       = require('../config'),
 gulp.task('library:js', ['library:build'], function () {
 
   return gulp.src(config.library.src)
-    .pipe(concat('chopped-sui.js'))
+    .pipe(concat('chop-suey.js'))
     .pipe(gulp.dest(config.library.dest))
     .pipe(rename({
       suffix: '.min'

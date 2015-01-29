@@ -13,8 +13,8 @@ gulp.task('components:templates', ['components:build'], function () {
     .pipe(hogan('templates-build.js', {
       wrapper: false
     }))
-    .pipe(replace(/var templates = \{\};/g, 'ChoppedSUI.templates = {};'))
-    .pipe(replace(/templates\['[^\/]+\/templates\//g, 'ChoppedSUI.templates[\''))
+    .pipe(replace(/var templates = \{\};/g, 'ChopSuey.templates = {};'))
+    .pipe(replace(/templates\['[^\/]+\/templates\//g, 'ChopSuey.templates[\''))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.templates.dest));
 

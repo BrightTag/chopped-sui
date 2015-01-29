@@ -2,5 +2,5 @@ dist/components/css/components.css      -diff
 dist/components/css/components.min.css  -diff
 dist/components/js/components.js        -diff
 dist/components/js/components.min.js    -diff
-dist/library/chopped-sui.js             -diff
-dist/library/chopped-sui.min.js         -diff
+dist/library/chop-suey.js             -diff
+dist/library/chop-suey.min.js         -diff
