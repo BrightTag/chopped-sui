@@ -304,6 +304,9 @@ module.exports = function (component) {
 };
 
 },{}],9:[function(require,module,exports){
+var registeredComponents = {};
+
+module.exports = registeredComponents;
 
 },{}],10:[function(require,module,exports){
 var

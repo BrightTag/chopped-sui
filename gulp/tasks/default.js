@@ -12,9 +12,9 @@ gulp.task('default', function(callback) {
     'helpers',
     'lint',
     'library',
-    'library:test',
     'components',
-    // 'clean:build',
+    'test',
+    'clean:build',
     'demo',
     callback
   );

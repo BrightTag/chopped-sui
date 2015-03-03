@@ -6,10 +6,12 @@ var config         = require('../config'),
     concat       = require('gulp-concat'),
     mochaPhantomJS = require('gulp-mocha-phantomjs');
 
-gulp.task('test', function () {
-  return gulp
-  .src('test/runner.html')
-  .pipe(mochaPhantomJS());
+gulp.task('components:test-build', function () {
+
+  return gulp.src(config.components.test.src)
+    .pipe(concat('components-test.js'))
+    .pipe(gulp.dest(config.components.test.dest));
+
 });
 
 gulp.task('library:test-build', function () {
@@ -20,7 +22,7 @@ gulp.task('library:test-build', function () {
 
 });
 
-gulp.task('library:test', ['library:test-build'], function () {
+gulp.task('test', ['library:test-build', 'components:test-build'], function () {
   return gulp
     .src('test/index.html')
     .pipe(mochaPhantomJS());

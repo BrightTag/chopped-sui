@@ -79,6 +79,11 @@ var config = {
     templates: {
       src: 'src/components/**/*.mustache',
       dest: 'dist/helpers/templates/'
+    },
+
+    test: {
+      src: 'src/components/**/*.test.js',
+      dest: 'test/js'
     }
 
   },
