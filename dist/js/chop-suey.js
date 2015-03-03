@@ -1,34 +1,172 @@
+// EventListener | CC0 | github.com/jonathantneal/EventListener
+
+!this.addEventListener && this.attachEvent && (function (window, document) {
+  var registry = [];
+
+  // add
+  function addEventListener(type, listener) {
+    var target = this;
+
+    registry.unshift({
+      __listener: function (event) {
+        event.currentTarget = target;
+        event.pageX = event.clientX + document.documentElement.scrollLeft;
+        event.pageY = event.clientY + document.documentElement.scrollTop;
+        event.preventDefault = function () { event.returnValue = false };
+        event.relatedTarget = event.fromElement || null;
+        event.stopPropagation = function () { event.cancelBubble = true };
+        event.relatedTarget = event.fromElement || null;
+        event.target = event.srcElement || target;
+        event.timeStamp = +new Date;
+
+        listener.call(target, event);
+      },
+      listener: listener,
+      target: target,
+      type: type
+    });
+
+    target.attachEvent("on" + type, registry[0].__listener);
+  }
+
+  // remove
+  function removeEventListener(type, listener) {
+    for (var index = 0, length = registry.length; index < length; ++index) {
+      if (registry[index].target == this && registry[index].type == type && registry[index].listener == listener) {
+        return this.detachEvent("on" + type, registry.splice(index, 1)[0].__listener);
+      }
+    }
+  }
+
+  // dispatch
+  function dispatchEvent(eventObject) {
+    try {
+      return this.fireEvent("on" + eventObject.type, eventObject);
+    } catch (error) {
+      for (var index = 0, length = registry.length; index < length; ++index) {
+        if (registry[index].target == this && registry[index].type == eventObject.type) {
+          registry[index].__listener.call(this, eventObject);
+        }
+      }
+    }
+  }
+
+  // custom
+  function CustomEvent(type, canBubble, cancelable, detail) {
+    var event = document.createEventObject(), key;
+
+    event.type = type;
+    event.returnValue = !cancelable;
+    event.cancelBubble = !canBubble;
+
+    for (key in detail) {
+      event[key] = detail[key];
+    }
+
+    return event;
+  }
+
+  function _patchNode(node) {
+    if (node.dispatchEvent) {
+      return;
+    }
+
+    node.addEventListener = addEventListener;
+    node.removeEventListener = removeEventListener;
+    node.dispatchEvent = dispatchEvent;
+
+    var appendChild = node.appendChild, createElement = node.createElement, insertBefore = node.insertBefore;
+
+    if (appendChild) {
+      node.appendChild = function (node) {
+        var returnValue = appendChild(node);
+
+        _patchNodeList(node.all);
+
+        return returnValue;
+      };
+    }
+
+    if (createElement) {
+      node.createElement = function (nodeName) {
+        var returnValue = createElement(nodeName);
+
+        _patchNodeList(node.all);
+
+        return returnValue;
+      };
+    }
+
+    if (insertBefore) {
+      node.insertBefore = function (node, referenceElement) {
+        var returnValue = insertBefore(node, referenceElement);
+
+        _patchNodeList(node.all);
+
+        return returnValue;
+      };
+    }
+
+    if ("innerHTML" in node) {
+      node.attachEvent("onpropertychange", function (event) {
+        if (event.propertyName != "innerHTML") return;
+
+        _patchNodeList(node.all);
+      });
+    }
+  }
+
+  function _patchNodeList(nodeList) {
+    for (var i = 0, node; node = nodeList[i]; ++i) {
+      _patchNode(node);
+    }
+  }
+
+  document.attachEvent("onreadystatechange", function (event) {
+    if (document.readyState == "complete") {
+      _patchNodeList(document.all);
+
+      // ready
+      document.dispatchEvent(new CustomEvent("DOMContentLoaded", false, false));
+    }
+  });
+
+  _patchNode(window);
+  _patchNode(document);
+
+  _patchNodeList(document.all);
+
+  window.CustomEvent = CustomEvent;
+})(this, document);
+
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (window) {
-
   'use strict';
 
   var
-    registerComponent    = require('./methods/register-component'),
-    registeredComponents = require('./methods/registered-components'),
-    initializeComponent  = require('./methods/initialize-component'),
+    registerComponent    = require('./methods/register-component.src.js'),
+    registeredComponents = require('./methods/registered-components.src.js'),
+    initializeComponent  = require('./methods/initialize-component.src.js'),
     ChopSuey;
 
   // ChopSuey namespace
   ChopSuey = {
-
     registeredComponents: registeredComponents,
     initializeComponent : initializeComponent,
     registerComponent   : registerComponent
   };
 
   window.ChopSuey = ChopSuey;
-
 }(window));
 
-},{"./methods/initialize-component":10,"./methods/register-component":12,"./methods/registered-components":13}],2:[function(require,module,exports){
+},{"./methods/initialize-component.src.js":11,"./methods/register-component.src.js":13,"./methods/registered-components.src.js":14}],2:[function(require,module,exports){
 var
-  build       = require('./component/component-build'),
-  didBuild    = require('./component/component-did-build'),
-  willBuild   = require('./component/component-will-build'),
-  enhance     = require('./component/component-enhance'),
-  didEnhance  = require('./component/component-did-enhance'),
-  willEnhance = require('./component/component-will-enhance'),
+  build       = require('./component/component-build.src.js'),
+  didBuild    = require('./component/component-did-build.src.js'),
+  willBuild   = require('./component/component-will-build.src.js'),
+  enhance     = require('./component/component-enhance.src.js'),
+  didEnhance  = require('./component/component-did-enhance.src.js'),
+  willEnhance = require('./component/component-will-enhance.src.js'),
   Component   = function (args) {
     this.componentType  = args.componentType  || '';
     this.componentClass = args.componentClass || '';
@@ -49,7 +187,7 @@ Component.prototype.willEnhance = willEnhance;
 */
 module.exports = Component;
 
-},{"./component/component-build":3,"./component/component-did-build":4,"./component/component-did-enhance":5,"./component/component-enhance":6,"./component/component-will-build":7,"./component/component-will-enhance":8}],3:[function(require,module,exports){
+},{"./component/component-build.src.js":3,"./component/component-did-build.src.js":4,"./component/component-did-enhance.src.js":5,"./component/component-enhance.src.js":6,"./component/component-will-build.src.js":7,"./component/component-will-enhance.src.js":8}],3:[function(require,module,exports){
 /**
  * adds HTML for JS enhancement
  * @param  {DOM Element} component - outermose element of a component
@@ -75,10 +213,12 @@ module.exports = function (component) {
     {
       'detail': {
         'component': component
-      }
+      },
+      'bubbles': true
     }
   );
   component.dispatchEvent(didBuildEvent);
+
   return true;
 };
 
@@ -96,10 +236,12 @@ module.exports = function (component) {
     {
       'detail': {
         'component': component
-      }
+      },
+      'bubbles': true
     }
   );
   component.dispatchEvent(didEnhanceEvent);
+
   return true;
 };
 
@@ -129,10 +271,12 @@ module.exports = function (component) {
     {
       'detail': {
         'component': component
-      }
+      },
+      'bubbles': true
     }
   );
   component.dispatchEvent(willBuildEvent);
+
   return true;
 };
 
@@ -150,17 +294,21 @@ module.exports = function (component) {
     {
       'detail': {
         'component': component
-      }
+      },
+      'bubbles': true
     }
   );
   component.dispatchEvent(willEnhanceEvent);
+
   return true;
 };
 
 },{}],9:[function(require,module,exports){
+
+},{}],10:[function(require,module,exports){
 var
-  initializeThisComponent = require('./initialize-this-component'),
-  registeredComponents    = require('./registered-components');
+  initializeThisComponent = require('./initialize-this-component.src.js'),
+  registeredComponents    = require('./constants/registered-components.src.js');
 
 /**
  * Initialize all components of a type if it's registered
@@ -173,7 +321,9 @@ module.exports = function (componentType) {
   var components, i, len;
 
   // the component must be registered
-  if (registeredComponents[componentType]) {
+  if (!registeredComponents[componentType]) {
+    return false;
+  } else {
 
     // find each component of this type that needs to be enhanced
     components = document.querySelectorAll(
@@ -182,17 +332,17 @@ module.exports = function (componentType) {
 
     //
     for (i = 0, len = components.length; i < len; i += 1) {
-
       initializeThisComponent(components[i], componentType);
-
     }
   }
+
+  return true;
 };
 
-},{"./initialize-this-component":11,"./registered-components":13}],10:[function(require,module,exports){
+},{"./constants/registered-components.src.js":9,"./initialize-this-component.src.js":12}],11:[function(require,module,exports){
 var
-  initializeAllOfType     = require('./initialize-all-of-type'),
-  initializeThisComponent = require('./initialize-this-component');
+  initializeAllOfType     = require('./initialize-all-of-type.src.js'),
+  initializeThisComponent = require('./initialize-this-component.src.js');
 
 /**
  * initializes an instance or all instances of a component
@@ -202,29 +352,41 @@ var
 module.exports = function (args) {
   'use strict';
 
-  // without a component type there is no way to look up the component
-  if (!args.componentType) {
-    return;
-  }
+  // without args or a componentType, there is nothing to initialize
+  if (!args || !args.componentType) {
+    return false;
 
   // no component and no image tag means we want to initialize all
   // components of this type
-  if (!args.component && !args.image) {
-    initializeAllOfType(args.componentType);
-    return;
-  }
+  } else if (!args.component && !args.image) {
+    return initializeAllOfType(args.componentType);
 
-  if (!args.component) {
+  // find the component from the image element and initialize it
+  } else if (!args.component) {
     args.component = args.image.previousSibling;
+
+    if (!args.component) {
+      return false;
+    } else {
+      return initializeThisComponent(
+        args.component,
+        args.componentType,
+        args.image
+      );
+    }
+
+  // initialize the component
+  } else {
+    return initializeThisComponent(
+      args.component,
+      args.componentType,
+      args.image
+    );
   }
-
-  initializeThisComponent(args.component, args.componentType, args.image);
-
-  return true;
 };
 
-},{"./initialize-all-of-type":9,"./initialize-this-component":11}],11:[function(require,module,exports){
-var registeredComponents = require('./registered-components');
+},{"./initialize-all-of-type.src.js":10,"./initialize-this-component.src.js":12}],12:[function(require,module,exports){
+var registeredComponents = require('./constants/registered-components.src.js');
 
 /**
  * Initialize a component if its type is registered
@@ -239,50 +401,57 @@ module.exports = function (component, componentType, image) {
   var
     componentClass,
     componentClasses,
+    componentTest,
     componentUnenhanced,
     componentBuilt;
 
   // the component must be registered
-  if (registeredComponents[componentType]) {
-    componentClasses = component.className;
-    componentClass = registeredComponents[componentType]
-      .componentClass;
-    componentUnenhanced = new RegExp(
-      '(^| )' + componentClass + '--unenhanced( |$)',
-      'g'
-    );
-    componentBuilt = new RegExp(
-      '(^| )' + componentClass + '--built( |$)',
-      'g'
-    );
+  if (!registeredComponents[componentType]) {
+    return false;
+  }
 
-    // only enhance unenhanced components
-    if (componentUnenhanced.test(componentClasses)) {
-      componentClasses = componentClasses.replace(componentUnenhanced, ' ');
+  componentClasses = component.className;
+  componentClass = registeredComponents[componentType]
+    .componentClass;
+  componentTest = new RegExp(
+    '(^| )' + componentClass + '( |$)'
+  );
+  componentUnenhanced = new RegExp(
+    '(^| )' + componentClass + '--unenhanced( |$)'
+  );
+  componentBuilt = new RegExp(
+    '(^| )' + componentClass + '--built( |$)'
+  );
 
-      // only build unbuilt components
-      if (!componentBuilt.test(componentClasses)) {
+  if (!componentTest.test(componentClasses)) {
+    return false;
 
-        registeredComponents[componentType].willBuild(component);
-        registeredComponents[componentType].build(component, componentType);
-        registeredComponents[componentType].didBuild(component);
+  // only enhance unenhanced components
+  } else if (componentUnenhanced.test(componentClasses)) {
+    componentClasses = componentClasses.replace(componentUnenhanced, ' ');
 
-        componentClasses += ' ' + componentClass + '--built';
-      }
-      component.className = componentClasses;
+    // only build unbuilt components
+    if (!componentBuilt.test(componentClasses)) {
 
-      registeredComponents[componentType].willEnhance(component);
-      registeredComponents[componentType].enhance(component);
+      registeredComponents[componentType].willBuild(component);
+      registeredComponents[componentType].build(component, componentType);
+      registeredComponents[componentType].didBuild(component);
 
-      // timeout required for css animation support
-      setTimeout(function () {
-        var className = component.className;
-        className = className.replace(componentBuilt, ' ');
-        className += ' ' + componentClass + '--enhanced';
-        component.className = className;
-        registeredComponents[componentType].didEnhance(component);
-      }, 100);
+      componentClasses += ' ' + componentClass + '--built';
     }
+    component.className = componentClasses;
+
+    registeredComponents[componentType].willEnhance(component);
+    registeredComponents[componentType].enhance(component);
+
+    // timeout required for css animation support
+    setTimeout(function () {
+      var className = component.className;
+      className = className.replace(componentBuilt, ' ');
+      className += ' ' + componentClass + '--enhanced';
+      component.className = className;
+      registeredComponents[componentType].didEnhance(component);
+    }, 100);
   }
 
   // get those nasty self-initializing image tags out of there
@@ -293,11 +462,11 @@ module.exports = function (component, componentType, image) {
   return true;
 };
 
-},{"./registered-components":13}],12:[function(require,module,exports){
+},{"./constants/registered-components.src.js":9}],13:[function(require,module,exports){
 var
-  Component            = require('./component'),
-  initializeComponent  = require('./initialize-component'),
-  registeredComponents = require('./registered-components');
+  Component            = require('./component.src.js'),
+  initializeComponent  = require('./initialize-component.src.js'),
+  registeredComponents = require('./constants/registered-components.src.js');
 
 /**
  * [registerComponent description]
@@ -307,7 +476,7 @@ var
 module.exports = function (args) {
 
   if (!args.componentClass || !args.componentType) {
-    return;
+    return false;
   }
 
   registeredComponents[args.componentType] = new Component(args);
@@ -326,8 +495,8 @@ module.exports = function (args) {
   });
 };
 
-},{"./component":2,"./initialize-component":10,"./registered-components":13}],13:[function(require,module,exports){
-var registeredComponents = {};
+},{"./component.src.js":2,"./constants/registered-components.src.js":9,"./initialize-component.src.js":11}],14:[function(require,module,exports){
+var registeredComponents = require('./constants/registered-components.src.js');
 
 /**
  * dictionary of known widget types
@@ -339,7 +508,7 @@ module.exports = function () {
   return registeredComponents;
 };
 
-},{}]},{},[1])
+},{"./constants/registered-components.src.js":9}]},{},[1])
 /*!
  *  Copyright 2011 Twitter, Inc.
  *  Licensed under the Apache License, Version 2.0 (the "License");

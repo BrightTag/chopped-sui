@@ -1,12 +1,27 @@
 'use strict';
 
-var config       = require('../config'),
-    gulp         = require('gulp'),
-    jasmine      = require('gulp-jasmine');
+var config         = require('../config'),
+    handleErrors   = require('../util/errors'),
+    gulp           = require('gulp'),
+    concat       = require('gulp-concat'),
+    mochaPhantomJS = require('gulp-mocha-phantomjs');
 
-gulp.task('library:test', function () {
+gulp.task('test', function () {
+  return gulp
+  .src('test/runner.html')
+  .pipe(mochaPhantomJS());
+});
 
-  return gulp.src('src/library/spec/*.js')
-    .pipe(jasmine());
+gulp.task('library:test-build', function () {
 
+  return gulp.src(config.library.test.src)
+    .pipe(concat('library-test.js'))
+    .pipe(gulp.dest(config.library.test.dest));
+
+});
+
+gulp.task('library:test', ['library:test-build'], function () {
+  return gulp
+    .src('test/index.html')
+    .pipe(mochaPhantomJS());
 });

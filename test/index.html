@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Tests</title>
+    <link href="../node_modules/mocha/mocha.css" media="screen" rel="stylesheet" type="text/css" />
+    <script>
+      (function () {
+        function CustomEvent ( event, params ) {
+          params = params || { bubbles: false, cancelable: false, detail: undefined };
+          var evt = document.createEvent( 'CustomEvent' );
+          evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+          return evt;
+         };
+
+        CustomEvent.prototype = window.Event.prototype;
+
+        window.CustomEvent = CustomEvent;
+      })();
+    </script>
+    <script src="../dist/js/chop-suey.js"></script>
+  </head>
+  <body>
+    <!-- Required for browser reporter -->
+    <div id="mocha"></div>
+
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      mocha.setup('bdd');
+      var should = chai.should();
+      window.expect = chai.expect;
+      window.assert = chai.assert;
+    </script>
+
+    <script src="js/library-test.js"></script>
+
+    <script>
+      if ( window.mochaPhantomJS ) {
+        mochaPhantomJS.run();
+      } else {
+        mocha.run();
+      }
+    </script>
+  </body>
+</html>

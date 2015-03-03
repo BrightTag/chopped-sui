@@ -15,11 +15,15 @@ class ChopSuey {
     $this->mustache = new Mustache_Engine($config);
   }
 
+  public function accordion($data) {
+    return $this->mustache->render('accordion/accordion', $data);
+  }
+
   public function dropDown($data) {
     return $this->mustache->render('drop-down/drop-down', $data);
   }
 
-  public function tabs($data) {
-    return $this->mustache->render('tabs/tabs', $data);
+  public function main.js($data) {
+    return $this->mustache->render('main.js/main.js', $data);
   }
 }

@@ -1,3 +1,4 @@
+
 .drop-down {
   /* default styles */
   display: inline-block;
@@ -172,83 +173,4 @@
 }
 .drop-down__sizer--flush-right .drop-down__menu-option-trigger, .drop-down__sizer--flush-left .drop-down__menu-option-trigger, .drop-down__sizer--flush-both .drop-down__menu-option-trigger {
   padding-right: 30px;
-}
-
-.tabs #entity-bar {
-  background-color: #00adef;
-  border-radius: 5px;
-  min-height: 50px;
-  width: 750px;
-  clear: both;
-}
-.tabs #entity-bar .picker-wrapper {
-  padding-top: 27px;
-  position: relative;
-}
-.tabs #entity-bar .site-picker {
-  background: #00526f;
-  border: 1px solid #003f56;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 400;
-  border-radius: 8px;
-  padding: 3px 25px 3px 10px;
-  position: relative;
-  text-shadow: none;
-  width: auto;
-}
-.tabs #entity-bar .site-picker:after {
-  border-style: solid;
-  border-width: 4px 5px 0 5px;
-  border-color: #FFF transparent transparent transparent;
-  content: '';
-  display: block;
-  position: absolute;
-  right: 8px;
-  top: 12px;
-  height: 0px;
-  width: 0px;
-}
-.tabs #entity-bar .site-picker span.current-site {
-  text-align: left;
-  width: 150px;
-}
-.tabs .primary-navigation {
-  min-height: 66px;
-}
-.tabs .primary-navigation ul {
-  list-style: none;
-  margin: 0 auto;
-  width: 1020px;
-}
-.tabs .primary-navigation li {
-  float: left;
-  text-decoration: none;
-  padding-top: 27px;
-}
-.tabs .primary-navigation li:first-child {
-  padding-left: 0;
-}
-.tabs .primary-navigation li.active a {
-  color: white;
-  text-shadow: 0px 1px 0px #818181;
-}
-.tabs .primary-navigation li.active:after {
-  border-style: solid;
-  border-width: 0 10px 10px 10px;
-  border-color: transparent transparent #F3F3F3 transparent;
-  content: '';
-  display: block;
-  margin: 6px auto 0 auto;
-  width: 0;
-  height: 0;
-}
-.tabs .primary-navigation li a {
-  color: #00526f;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 15px 25px 0 25px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #4DB7FF;
 }

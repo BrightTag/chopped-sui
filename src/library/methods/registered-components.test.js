@@ -1,0 +1,3 @@
+describe('ChopSuey.registeredComponents', function () {
+
+});

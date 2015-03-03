@@ -1,0 +1,3 @@
+describe('ChopSuey Accordion', function () {
+
+});

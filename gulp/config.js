@@ -14,8 +14,8 @@ var config = {
   js: {
 
     src: [
-      'src/components/templates.js',
-      'src/components/**/js/*.js'
+      'src/components/**/js/*.src.js',
+      'src/library/**/js/*.src.js'
     ],
 
     dest: 'dist/js'
@@ -26,14 +26,21 @@ var config = {
 
     build: {
 
-      src: 'src/library/main.js',
+      src: 'src/library/main.src.js',
       dest: 'dist/js'
+
+    },
+
+    test: {
+
+      src: 'src/library/**/*.test.js',
+      dest: 'test/js'
 
     },
 
     src: [
       // @todo use bower for managing client dependencies
-      'gulp/resources/EventListener.js', //https://github.com/jonathantneal/EventListener/blob/master/EventListener.js
+      'gulp/resources/EventListener.oldie.js', //https://github.com/jonathantneal/EventListener/blob/master/EventListener.oldie.js
       'dist/js/library-build.js',
       'node_modules/gulp-hogan-compile/node_modules/hogan.js/dist/hogan-3.0.2.mustache.js'
     ],
@@ -57,11 +64,11 @@ var config = {
     dest: 'dist/js',
 
     lint: {
-      src: 'src/components/**/*.js'
+      src: 'src/components/**/*.src.js'
     },
 
     build: {
-      src: 'src/components/*/js/main.js'
+      src: 'src/components/main.js'
     },
 
     php: {
@@ -112,7 +119,7 @@ var config = {
 
   demo: {
 
-    serverport: '3002',
+    serverport: '3003',
     root: 'demo',
 
     html: {
