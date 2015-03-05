@@ -12,12 +12,9 @@ indent_style = space
 indent_size = 2
 
 # Array syntax isn't widely supported.
-# List file extentions seperately.
+# List file extensions separately.
 [*.md]
 trim_trailing_whitespace = false
-
-# [*.jade]
-# trim_trailing_whitespace = false
 
 # The following are not widely supported
 # among editor plugins.
