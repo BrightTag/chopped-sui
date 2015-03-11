@@ -6,16 +6,23 @@
 module.exports = function (component) {
   'use strict';
 
-  var willEnhanceEvent = new window.CustomEvent(
-    this.componentType + 'WillEnhance',
-    {
-      'detail': {
-        'component': component
-      },
-      'bubbles': true
-    }
-  );
-  component.dispatchEvent(willEnhanceEvent);
+  var willEnhanceEvent;
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    willEnhanceEvent = new window.CustomEvent(
+      this.componentType + 'WillEnhance',
+      {
+        'detail': {
+          'component': component
+        },
+        'bubbles': true
+      }
+    );
+    component.dispatchEvent(willEnhanceEvent);
+
+    return true;
+  }
+
 };

@@ -10,7 +10,7 @@ var
  */
 module.exports = function (args) {
 
-  if (!args.componentClass || !args.componentType) {
+  if (!args || !args.componentClass || !args.componentType) {
     return false;
   }
 
@@ -28,4 +28,6 @@ module.exports = function (args) {
   initializeComponent({
     componentType: args.componentType
   });
+
+  return true;
 };

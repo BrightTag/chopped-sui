@@ -4,8 +4,13 @@ var registeredComponents = require('./constants/registered-components.src.js');
  * dictionary of known widget types
  * @type {Object}
  */
-module.exports = function () {
+module.exports = function (componentName) {
   'use strict';
 
-  return registeredComponents;
+  if (componentName) {
+    return registeredComponents[componentName];
+  } else {
+    return registeredComponents;
+  }
+
 };

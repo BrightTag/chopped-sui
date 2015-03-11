@@ -23,7 +23,6 @@ gulp.task('library:test-build', function () {
 });
 
 gulp.task('test', ['library:test-build', 'components:test-build'], function () {
-  return gulp
-    .src('test/index.html')
+  return gulp.src('test/index.html')
     .pipe(mochaPhantomJS());
 });

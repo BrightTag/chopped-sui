@@ -6,16 +6,23 @@
 module.exports = function (component) {
   'use strict';
 
-  var willBuildEvent = new window.CustomEvent(
-    this.componentType + 'WillBuild',
-    {
-      'detail': {
-        'component': component
-      },
-      'bubbles': true
-    }
-  );
-  component.dispatchEvent(willBuildEvent);
+  var willBuildEvent;
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    willBuildEvent = new window.CustomEvent(
+      this.componentType + 'WillBuild',
+      {
+        'detail': {
+          'component': component
+        },
+        'bubbles': true
+      }
+    );
+    component.dispatchEvent(willBuildEvent);
+
+    return true;
+  }
+
 };

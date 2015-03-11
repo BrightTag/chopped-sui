@@ -1,117 +1,240 @@
-describe('ChopSuey.initializeComponent by component', function () {
+describe('[private] initialize-this-component', function () {
 
-  it('should return false without a componentType', function () {
-    var component = document.createElement('div');
+  var
+    classBase = 'initializeThisComponent',
+    classIndex = 1,
+    newComponentName = function () {
+      return classBase + classIndex++;
+    };
 
-    component.className = 'knownInitializeByComponent1 knownInitializeByComponent1--unenehanced';
+  describe('validate args', function () {
 
-    expect(ChopSuey.initializeComponent({
-      component: component
-    })).to.equal(false);
-  });
+    it('should return false without a componentType', function () {
+      var
+        component = document.createElement('div'),
+        componentName = newComponentName();
 
-  it('should return false without an unknown componentType', function () {
-    var component = document.createElement('div');
+      component.className = componentName + ' ' + componentName + '--unenehanced';
 
-    component.className = 'knownInitializeByComponent1 knownInitializeByComponent1--unenehanced';
-
-    expect(ChopSuey.initializeComponent({
-      componentType: 'knownInitializeByComponent2',
-      component    : component
-    })).to.equal(false);
-  });
-
-  it('should return false without a matching componentType', function () {
-    var component = document.createElement('div');
-
-    ChopSuey.registerComponent({
-      componentType : 'knownInitializeByComponent1',
-      componentClass: 'knownInitializeByComponent1'
+      expect(ChopSuey._private.initializeThisComponent(
+        undefined,
+        component,
+        undefined
+      )).to.equal(false);
     });
 
-    component.className = 'knownInitializeByComponent2 knownInitializeByComponent2--uninitialized';
+    it('should return false without an unknown componentType', function () {
+      var
+        component = document.createElement('div'),
+        componentName1 = newComponentName(),
+        componentName2 = newComponentName();
 
-    document.body.appendChild(component);
+      component.className = componentName1 + ' ' + componentName1 + '--unenehanced';
 
-    expect(ChopSuey.initializeComponent({
-      componentType: 'knownInitializeByComponent1',
-      component    : component
-    })).to.equal(false);
-
-    document.body.removeChild(component);
-  });
-
-  it('should return true with a known, matching componentType', function () {
-    var component = document.createElement('div');
-
-    ChopSuey.registerComponent({
-      componentType : 'knownInitializeByComponent2',
-      componentClass: 'knownInitializeByComponent2'
+      expect(ChopSuey._private.initializeThisComponent(
+        componentName2,
+        component,
+        undefined
+      )).to.equal(false);
     });
 
-    component.className = 'knownInitializeByComponent2 knownInitializeByComponent2--uninitialized';
+    it('should return false without a matching componentType', function () {
+      var
+        component = document.createElement('div'),
+        componentName1 = newComponentName(),
+        componentName2 = newComponentName();
 
-    document.body.appendChild(component);
+      ChopSuey.registerComponent({
+        componentType : componentName1,
+        componentClass: componentName1
+      });
 
-    expect(ChopSuey.initializeComponent({
-      componentType: 'knownInitializeByComponent2',
-      component    : component
-    })).to.equal(true);
+      component.className = componentName2 + ' ' + componentName2 + '--uninitialized';
 
-    document.body.removeChild(component);
-  });
+      document.body.appendChild(component);
 
-  it('should initialize an uninitialized component', function (done) {
-    var
-      component = document.createElement('div');
-
-    ChopSuey.registerComponent({
-      componentType : 'knownInitializeByType3',
-      componentClass: 'knownInitializeByType3'
-    });
-
-    component.className = 'knownInitializeByType3 knownInitializeByType3--unenhanced';
-
-    document.body.appendChild(component);
-
-    expect(component.className).to.match(/--unenhanced( |$)/);
-
-    expect(ChopSuey.initializeComponent({
-      componentType: 'knownInitializeByType3'
-    })).to.equal(true);
-
-    expect(component.className).to.match(/--built( |$)/);
-
-    setTimeout(function () {
-      expect(component.className).to.match(/--enhanced( |$)/);
+      expect(ChopSuey._private.initializeThisComponent(
+        componentName1,
+        component,
+        undefined
+      )).to.equal(false);
 
       document.body.removeChild(component);
+    });
 
-      done();
-    }, 100);
+    it('should return true with a known, matching componentType', function () {
+      var
+        component = document.createElement('div'),
+        componentName = newComponentName();
+
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
+
+      component.className = componentName + ' ' + componentName + '--uninitialized';
+
+      document.body.appendChild(component);
+
+      expect(ChopSuey._private.initializeThisComponent(
+        componentName,
+        component,
+        undefined
+      )).to.equal(true);
+
+      document.body.removeChild(component);
+    });
 
   });
 
-  it('should not initialize an initialized component', function () {
-    var
-      component = document.createElement('div');
+  describe('by component', function () {
 
-    ChopSuey.registerComponent({
-      componentType : 'knownInitializeByType4',
-      componentClass: 'knownInitializeByType4'
+    it('should initialize an uninitialized component', function (done) {
+      var
+        component = document.createElement('div'),
+        componentName = newComponentName();
+
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
+
+      component.className = componentName + ' ' + componentName + '--unenhanced';
+
+      document.body.appendChild(component);
+
+      expect(component.className).to.match(/--unenhanced( |$)/);
+
+      ChopSuey._private.initializeThisComponent(
+        componentName,
+        component,
+        undefined
+      );
+
+      expect(component.className).to.match(/--built( |$)/);
+
+      setTimeout(function () {
+        expect(component.className).to.match(/--enhanced( |$)/);
+
+        document.body.removeChild(component);
+
+        done();
+      }, 100);
+
     });
 
-    component.className = 'knownInitializeByType4 knownInitializeByType4--enhanced';
+    it('should not initialize an initialized component', function (done) {
+      var
+        component = document.createElement('div'),
+        componentName = newComponentName();
 
-    document.body.appendChild(component);
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
 
-    expect(component.className).to.match(/--enhanced( |$)/);
+      component.className = componentName + ' ' + componentName + '--enhanced';
 
-    expect(ChopSuey.initializeComponent({
-      componentType: 'knownInitializeByType4'
-    })).to.equal(true);
+      document.body.appendChild(component);
 
-    expect(component.className).to.match(/--enhanced( |$)/);
+      expect(component.className).to.match(/--enhanced( |$)/);
+
+      ChopSuey._private.initializeThisComponent(
+        componentName,
+        component,
+        undefined
+      );
+
+      expect(component.className).to.match(/--enhanced( |$)/);
+
+      setTimeout(function () {
+        expect(component.className).to.match(/--enhanced( |$)/);
+
+        document.body.removeChild(component);
+
+        done();
+      }, 100);
+
+    });
+
+  });
+
+  describe('by component with image', function () {
+
+    it('should initialize an uninitialized component', function (done) {
+      var
+        component = document.createElement('div'),
+        image = document.createElement('img'),
+        componentName = newComponentName();
+
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
+
+      component.className = componentName + ' ' + componentName + '--unenhanced';
+
+      document.body.appendChild(component);
+      document.body.appendChild(image);
+
+      expect(component.className).to.match(/--unenhanced( |$)/);
+
+      ChopSuey._private.initializeThisComponent(
+        componentName,
+        component,
+        image
+      );
+
+      expect(component.className).to.match(/--built( |$)/);
+
+      setTimeout(function () {
+        expect(component.className).to.match(/--enhanced( |$)/);
+        expect(isInDOMTree(image)).to.equal(false);
+
+        document.body.removeChild(component);
+
+        done();
+      }, 100);
+
+    });
+
+    it('should not initialize an initialized component', function (done) {
+      var
+        component = document.createElement('div'),
+        image = document.createElement('img'),
+        componentName = newComponentName();
+
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
+
+      component.className = componentName + ' ' + componentName + '--enhanced';
+
+      document.body.appendChild(component);
+      document.body.appendChild(image);
+
+      expect(component.className).to.match(/--enhanced( |$)/);
+
+      ChopSuey._private.initializeThisComponent(
+        componentName,
+        component,
+        image
+      );
+
+      expect(component.className).to.match(/--enhanced( |$)/);
+
+      setTimeout(function () {
+        expect(component.className).to.match(/--enhanced( |$)/);
+
+        document.body.removeChild(component);
+        expect(isInDOMTree(image)).to.equal(false);
+
+        done();
+      }, 100);
+
+    });
+
   });
 
 });

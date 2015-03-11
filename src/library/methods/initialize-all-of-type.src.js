@@ -24,7 +24,7 @@ module.exports = function (componentType) {
 
     //
     for (i = 0, len = components.length; i < len; i += 1) {
-      initializeThisComponent(components[i], componentType);
+      initializeThisComponent(componentType, components[i]);
     }
   }
 

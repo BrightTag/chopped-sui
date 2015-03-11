@@ -6,16 +6,23 @@
 module.exports = function (component) {
   'use strict';
 
-  var didBuildEvent = new window.CustomEvent(
-    this.componentType + 'DidBuild',
-    {
-      'detail': {
-        'component': component
-      },
-      'bubbles': true
-    }
-  );
-  component.dispatchEvent(didBuildEvent);
+  var didBuildEvent;
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    didBuildEvent = new window.CustomEvent(
+      this.componentType + 'DidBuild',
+      {
+        'detail': {
+          'component': component
+        },
+        'bubbles': true
+      }
+    );
+    component.dispatchEvent(didBuildEvent);
+
+    return true;
+  }
+
 };

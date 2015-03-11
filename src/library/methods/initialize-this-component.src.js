@@ -7,7 +7,7 @@ var registeredComponents = require('./constants/registered-components.src.js');
  * @param  {DOM Element} image         - trailing image element
  * @return {Boolean}                   - success
  */
-module.exports = function (component, componentType, image) {
+module.exports = function (componentType, component, image) {
   'use strict';
 
   var

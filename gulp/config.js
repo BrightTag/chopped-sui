@@ -142,6 +142,10 @@ var config = {
       dest: 'demo/css'
     }
 
+  },
+
+  test: {
+    js: 'test/js/*.js'
   }
 
 }

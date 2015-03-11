@@ -27,8 +27,8 @@ module.exports = function (args) {
       return false;
     } else {
       return initializeThisComponent(
-        args.component,
         args.componentType,
+        args.component,
         args.image
       );
     }
@@ -36,8 +36,8 @@ module.exports = function (args) {
   // initialize the component
   } else {
     return initializeThisComponent(
-      args.component,
       args.componentType,
+      args.component,
       args.image
     );
   }

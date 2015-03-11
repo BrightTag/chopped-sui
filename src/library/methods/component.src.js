@@ -6,8 +6,10 @@ var
   didEnhance  = require('./component/component-did-enhance.src.js'),
   willEnhance = require('./component/component-will-enhance.src.js'),
   Component   = function (args) {
-    this.componentType  = args.componentType  || '';
-    this.componentClass = args.componentClass || '';
+    var args = args && typeof(args) === 'object' ? args : {};
+
+    this.componentType  = args.componentType  || 'component';
+    this.componentClass = args.componentClass || 'component';
   };
 
 Component.prototype.build = build;

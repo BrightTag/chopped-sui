@@ -159,7 +159,7 @@
   window.ChopSuey = ChopSuey;
 }(window));
 
-},{"./methods/initialize-component.src.js":11,"./methods/register-component.src.js":13,"./methods/registered-components.src.js":14}],2:[function(require,module,exports){
+},{"./methods/component.src.js":2,"./methods/initialize-all-of-type.src.js":10,"./methods/initialize-component.src.js":11,"./methods/initialize-this-component.src.js":12,"./methods/register-component.src.js":13,"./methods/registered-components.src.js":14}],2:[function(require,module,exports){
 var
   build       = require('./component/component-build.src.js'),
   didBuild    = require('./component/component-did-build.src.js'),
@@ -168,8 +168,10 @@ var
   didEnhance  = require('./component/component-did-enhance.src.js'),
   willEnhance = require('./component/component-will-enhance.src.js'),
   Component   = function (args) {
-    this.componentType  = args.componentType  || '';
-    this.componentClass = args.componentClass || '';
+    var args = args && typeof(args) === 'object' ? args : {};
+
+    this.componentType  = args.componentType  || 'component';
+    this.componentClass = args.componentClass || 'component';
   };
 
 Component.prototype.build = build;
@@ -193,10 +195,15 @@ module.exports = Component;
  * @param  {DOM Element} component - outermose element of a component
  * @return {[Boolean]}             - success
  */
-module.exports = function () {
+module.exports = function (component) {
   'use strict';
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    return true;
+  }
+
 };
 
 },{}],4:[function(require,module,exports){
@@ -208,18 +215,25 @@ module.exports = function () {
 module.exports = function (component) {
   'use strict';
 
-  var didBuildEvent = new window.CustomEvent(
-    this.componentType + 'DidBuild',
-    {
-      'detail': {
-        'component': component
-      },
-      'bubbles': true
-    }
-  );
-  component.dispatchEvent(didBuildEvent);
+  var didBuildEvent;
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    didBuildEvent = new window.CustomEvent(
+      this.componentType + 'DidBuild',
+      {
+        'detail': {
+          'component': component
+        },
+        'bubbles': true
+      }
+    );
+    component.dispatchEvent(didBuildEvent);
+
+    return true;
+  }
+
 };
 
 },{}],5:[function(require,module,exports){
@@ -231,18 +245,25 @@ module.exports = function (component) {
 module.exports = function (component) {
   'use strict';
 
-  var didEnhanceEvent = new window.CustomEvent(
-    this.componentType + 'DidEnhance',
-    {
-      'detail': {
-        'component': component
-      },
-      'bubbles': true
-    }
-  );
-  component.dispatchEvent(didEnhanceEvent);
+  var didEnhanceEvent;
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    didEnhanceEvent = new window.CustomEvent(
+      this.componentType + 'DidEnhance',
+      {
+        'detail': {
+          'component': component
+        },
+        'bubbles': true
+      }
+    );
+    component.dispatchEvent(didEnhanceEvent);
+
+    return true;
+  }
+
 };
 
 },{}],6:[function(require,module,exports){
@@ -251,10 +272,15 @@ module.exports = function (component) {
  * @param  {DOM Element} component - outermose element of a component
  * @return {[Boolean]}             - success
  */
-module.exports = function () {
+module.exports = function (component) {
   'use strict';
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    return true;
+  }
+
 };
 
 },{}],7:[function(require,module,exports){
@@ -266,18 +292,25 @@ module.exports = function () {
 module.exports = function (component) {
   'use strict';
 
-  var willBuildEvent = new window.CustomEvent(
-    this.componentType + 'WillBuild',
-    {
-      'detail': {
-        'component': component
-      },
-      'bubbles': true
-    }
-  );
-  component.dispatchEvent(willBuildEvent);
+  var willBuildEvent;
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    willBuildEvent = new window.CustomEvent(
+      this.componentType + 'WillBuild',
+      {
+        'detail': {
+          'component': component
+        },
+        'bubbles': true
+      }
+    );
+    component.dispatchEvent(willBuildEvent);
+
+    return true;
+  }
+
 };
 
 },{}],8:[function(require,module,exports){
@@ -289,18 +322,25 @@ module.exports = function (component) {
 module.exports = function (component) {
   'use strict';
 
-  var willEnhanceEvent = new window.CustomEvent(
-    this.componentType + 'WillEnhance',
-    {
-      'detail': {
-        'component': component
-      },
-      'bubbles': true
-    }
-  );
-  component.dispatchEvent(willEnhanceEvent);
+  var willEnhanceEvent;
 
-  return true;
+  if (!component) {
+    return false;
+  } else {
+    willEnhanceEvent = new window.CustomEvent(
+      this.componentType + 'WillEnhance',
+      {
+        'detail': {
+          'component': component
+        },
+        'bubbles': true
+      }
+    );
+    component.dispatchEvent(willEnhanceEvent);
+
+    return true;
+  }
+
 };
 
 },{}],9:[function(require,module,exports){
@@ -335,7 +375,7 @@ module.exports = function (componentType) {
 
     //
     for (i = 0, len = components.length; i < len; i += 1) {
-      initializeThisComponent(components[i], componentType);
+      initializeThisComponent(componentType, components[i]);
     }
   }
 
@@ -372,8 +412,8 @@ module.exports = function (args) {
       return false;
     } else {
       return initializeThisComponent(
-        args.component,
         args.componentType,
+        args.component,
         args.image
       );
     }
@@ -381,8 +421,8 @@ module.exports = function (args) {
   // initialize the component
   } else {
     return initializeThisComponent(
-      args.component,
       args.componentType,
+      args.component,
       args.image
     );
   }
@@ -398,7 +438,7 @@ var registeredComponents = require('./constants/registered-components.src.js');
  * @param  {DOM Element} image         - trailing image element
  * @return {Boolean}                   - success
  */
-module.exports = function (component, componentType, image) {
+module.exports = function (componentType, component, image) {
   'use strict';
 
   var
@@ -478,7 +518,7 @@ var
  */
 module.exports = function (args) {
 
-  if (!args.componentClass || !args.componentType) {
+  if (!args || !args.componentClass || !args.componentType) {
     return false;
   }
 
@@ -496,6 +536,8 @@ module.exports = function (args) {
   initializeComponent({
     componentType: args.componentType
   });
+
+  return true;
 };
 
 },{"./component.src.js":2,"./constants/registered-components.src.js":9,"./initialize-component.src.js":11}],14:[function(require,module,exports){
@@ -505,10 +547,15 @@ var registeredComponents = require('./constants/registered-components.src.js');
  * dictionary of known widget types
  * @type {Object}
  */
-module.exports = function () {
+module.exports = function (componentName) {
   'use strict';
 
-  return registeredComponents;
+  if (componentName) {
+    return registeredComponents[componentName];
+  } else {
+    return registeredComponents;
+  }
+
 };
 
 },{"./constants/registered-components.src.js":9}]},{},[1])

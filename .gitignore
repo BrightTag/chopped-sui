@@ -22,3 +22,4 @@ src/components/**/templates/*.js
 src/components/templates.js
 demo
 demo/*
+test/js/*
