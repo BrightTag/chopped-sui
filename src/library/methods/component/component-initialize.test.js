@@ -1,33 +1,55 @@
-describe('ChopSuey.initializeComponent', function () {
+describe('Component.initialize', function () {
 
   var
-    classBase = 'initializeComponent',
-    classIndex = 1,
+    classBase        = 'initializeComponent',
+    classIndex       = 1,
     newComponentName = function () {
       return classBase + classIndex++;
     };
 
   describe('validate args', function () {
 
-    it('should return false with no args', function () {
-      expect(ChopSuey.initializeComponent()).to.equal(false);
+    it('should return false with bad args', function () {
+      var componentName = newComponentName();
+
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
+
+      expect(ChopSuey.registeredComponents()[componentName].initialize({})).to.equal(false);
+      expect(ChopSuey.registeredComponents()[componentName].initialize(1)).to.equal(false);
+      expect(ChopSuey.registeredComponents()[componentName].initialize('a')).to.equal(false);
+      expect(ChopSuey.registeredComponents()[componentName].initialize(function(){})).to.equal(false);
     });
 
-    it('should return false with bad args', function () {
-      expect(ChopSuey.initializeComponent({})).to.equal(false);
-      expect(ChopSuey.initializeComponent(1)).to.equal(false);
-      expect(ChopSuey.initializeComponent('a')).to.equal(false);
-      expect(ChopSuey.initializeComponent(function(){})).to.equal(false);
+    it('should return true with good args', function () {
+      var
+        component     = document.createElement('div'),
+        componentName = newComponentName();
+
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
+
+      component.className = componentName + ' ' + componentName + '--unenhanced';
+
+      document.body.appendChild(component);
+
+      expect(ChopSuey.registeredComponents()[componentName].initialize(component)).to.equal(true);
+
+      document.body.removeChild(component);
     });
 
   });
 
-  describe('by componentType', function () {
+  describe('by type', function () {
 
     it('should initialize all of a componentType with no component or image', function (done) {
       var
-        component1 = document.createElement('div'),
-        component2 = document.createElement('div'),
+        component1    = document.createElement('div'),
+        component2    = document.createElement('div'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -44,9 +66,7 @@ describe('ChopSuey.initializeComponent', function () {
       expect(component1.className).to.match(/--unenhanced( |$)/);
       expect(component1.className).to.match(/--unenhanced( |$)/);
 
-      ChopSuey.initializeComponent({
-        componentType: componentName
-      });
+      ChopSuey.registeredComponents()[componentName].initialize();
 
       expect(component1.className).to.match(/--built( |$)/);
       expect(component2.className).to.match(/--built( |$)/);
@@ -65,12 +85,12 @@ describe('ChopSuey.initializeComponent', function () {
 
   });
 
-  describe('by component', function () {
+  describe('by element (component)', function () {
 
     it('should initialize a single component given that component', function (done) {
       var
-        component1 = document.createElement('div'),
-        component2 = document.createElement('div'),
+        component1    = document.createElement('div'),
+        component2    = document.createElement('div'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -87,10 +107,7 @@ describe('ChopSuey.initializeComponent', function () {
       expect(component1.className).to.match(/--unenhanced( |$)/);
       expect(component2.className).to.match(/--unenhanced( |$)/);
 
-      ChopSuey.initializeComponent({
-        componentType: componentName,
-        component: component1
-      });
+      ChopSuey.registeredComponents()[componentName].initialize(component1);
 
       expect(component1.className).to.match(/--built( |$)/);
       expect(component2.className).to.match(/--unenhanced( |$)/);
@@ -109,14 +126,14 @@ describe('ChopSuey.initializeComponent', function () {
 
   });
 
-  describe('by image', function () {
+  describe('by element (image)', function () {
 
     it('should initialize a single component given that component\'s image initializer', function (done) {
       var
-        component1 = document.createElement('div'),
-        image1 = document.createElement('img'),
-        component2 = document.createElement('div'),
-        image2 = document.createElement('img'),
+        component1    = document.createElement('div'),
+        image1        = document.createElement('img'),
+        component2    = document.createElement('div'),
+        image2        = document.createElement('img'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -135,10 +152,7 @@ describe('ChopSuey.initializeComponent', function () {
       expect(component1.className).to.match(/--unenhanced( |$)/);
       expect(component2.className).to.match(/--unenhanced( |$)/);
 
-      ChopSuey.initializeComponent({
-        componentType: componentName,
-        image: image1
-      });
+      ChopSuey.registeredComponents()[componentName].initialize(image1);
 
       expect(component1.className).to.match(/--built( |$)/);
       expect(component2.className).to.match(/--unenhanced( |$)/);

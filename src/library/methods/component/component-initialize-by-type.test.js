@@ -1,8 +1,8 @@
-describe('[private] initialize-all-of-type', function () {
+describe('Component.initialize (by type)', function () {
 
   var
-    classBase = 'initializeAllOfType',
-    classIndex = 1,
+    classBase        = 'initializeAllOfType',
+    classIndex       = 1,
     newComponentName = function () {
       return classBase + classIndex++;
     };
@@ -12,7 +12,12 @@ describe('[private] initialize-all-of-type', function () {
     it('should return false with an bad args', function () {
       var componentName = newComponentName();
 
-      expect(ChopSuey._private.initializeAllOfType()).to.equal(false);
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
+
+      expect(ChopSuey.registeredComponents()[componentName]._initializeByType()).to.equal(false);
 
     });
 
@@ -24,20 +29,18 @@ describe('[private] initialize-all-of-type', function () {
         componentClass: componentName
       });
 
-      expect(ChopSuey._private.initializeAllOfType(
-        componentName
-      )).to.equal(true);
+      expect(ChopSuey.registeredComponents()[componentName]._initializeByType( componentName)).to.equal(true);
 
     });
 
   });
 
-  describe('by componentType', function () {
+  describe('by type', function () {
 
     it('should build and enhance all unenhanced components of a componentType', function (done) {
       var
-        unenhanced1 = document.createElement('div'),
-        unenhanced2 = document.createElement('div'),
+        unenhanced1   = document.createElement('div'),
+        unenhanced2   = document.createElement('div'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -54,9 +57,7 @@ describe('[private] initialize-all-of-type', function () {
       expect(unenhanced1.className).to.match(/--unenhanced( |$)/);
       expect(unenhanced2.className).to.match(/--unenhanced( |$)/);
 
-      ChopSuey._private.initializeAllOfType(
-        componentName
-      );
+      ChopSuey.registeredComponents()[componentName]._initializeByType(componentName);
 
       expect(unenhanced1.className).to.match(/--built( |$)/);
       expect(unenhanced2.className).to.match(/--built( |$)/);
@@ -75,8 +76,8 @@ describe('[private] initialize-all-of-type', function () {
 
     it('should enhance all built unenhanced components of a componentType', function (done) {
       var
-        built1 = document.createElement('div'),
-        built2 = document.createElement('div'),
+        built1        = document.createElement('div'),
+        built2        = document.createElement('div'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -95,9 +96,7 @@ describe('[private] initialize-all-of-type', function () {
       expect(built2.className).to.match(/--unenhanced( |$)/);
       expect(built2.className).to.match(/--built( |$)/);
 
-      expect(ChopSuey._private.initializeAllOfType(
-        componentName
-      )).to.equal(true);
+      expect(ChopSuey.registeredComponents()[componentName]._initializeByType(componentName)).to.equal(true);
 
       expect(built1.className).to.match(/--built( |$)/);
       expect(built2.className).to.match(/--built( |$)/);
@@ -116,7 +115,7 @@ describe('[private] initialize-all-of-type', function () {
 
     it('should not build or enhance already enhanced components of a componentType', function (done) {
       var
-        enhanced = document.createElement('div'),
+        enhanced      = document.createElement('div'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -130,9 +129,7 @@ describe('[private] initialize-all-of-type', function () {
 
       expect(enhanced.className).to.match(/--enhanced( |$)/);
 
-      expect(ChopSuey._private.initializeAllOfType(
-        componentName
-      )).to.equal(true);
+      expect(ChopSuey.registeredComponents()[componentName]._initializeByType(componentName)).to.equal(true);
 
       expect(enhanced.className).to.match(/--enhanced( |$)/);
 

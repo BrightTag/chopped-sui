@@ -82,8 +82,16 @@ var config = {
     },
 
     test: {
-      src: 'src/components/**/*.test.js',
-      dest: 'test/js'
+
+      css: {
+        src: 'dist/css/components.css',
+        dest: 'test/css'
+      },
+
+      js: {
+        src: 'src/components/**/*.test.js',
+        dest: 'test/js'
+      }
     }
 
   },

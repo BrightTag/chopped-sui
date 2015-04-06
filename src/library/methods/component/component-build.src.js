@@ -1,6 +1,6 @@
 /**
  * adds HTML for JS enhancement
- * @param  {DOM Element} component - outermose element of a component
+ * @param  {DOM Element} component - outermost element of a component
  * @return {[Boolean]}             - success
  */
 module.exports = function (component) {
@@ -8,8 +8,7 @@ module.exports = function (component) {
 
   if (!component) {
     return false;
-  } else {
-    return true;
   }
 
+  return true;
 };

@@ -1,8 +1,8 @@
-var registeredComponents = require('./constants/registered-components.src.js');
+var registeredComponents = require('../constants/registered-components.src.js');
 
 /**
  * Initialize a component if its type is registered
- * @param  {DOM Element} component     - outermose element of a component
+ * @param  {DOM Element} component     - outermost element of a component
  * @param  {String}      componentType - type of component
  * @param  {DOM Element} image         - trailing image element
  * @return {Boolean}                   - success
@@ -17,11 +17,12 @@ module.exports = function (componentType, component, image) {
     componentUnenhanced,
     componentBuilt;
 
-  // the component must be registered
+  // can't initialize an unregistered component
   if (!registeredComponents[componentType]) {
     return false;
   }
 
+  // state tests based on classes
   componentClasses = component.className;
   componentClass = registeredComponents[componentType]
     .componentClass;
@@ -35,38 +36,43 @@ module.exports = function (componentType, component, image) {
     '(^| )' + componentClass + '--built( |$)'
   );
 
+  // don't initialize a component that doesn't have its class
   if (!componentTest.test(componentClasses)) {
     return false;
+  }
 
   // only enhance unenhanced components
-  } else if (componentUnenhanced.test(componentClasses)) {
+  if (componentUnenhanced.test(componentClasses)) {
     componentClasses = componentClasses.replace(componentUnenhanced, ' ');
 
     // only build unbuilt components
     if (!componentBuilt.test(componentClasses)) {
 
+      // broadcast willBuild event, build, then broadcast didBuild event
       registeredComponents[componentType].willBuild(component);
       registeredComponents[componentType].build(component, componentType);
       registeredComponents[componentType].didBuild(component);
 
       componentClasses += ' ' + componentClass + '--built';
     }
+
+    // set the classes once as we incur a redraw
     component.className = componentClasses;
 
+    // broadcast willEnhance event, enhance, then broadcast didEnhance event
     registeredComponents[componentType].willEnhance(component);
     registeredComponents[componentType].enhance(component);
+    componentClasses = componentClasses.replace(componentBuilt, ' ');
+    componentClasses += ' ' + componentClass + '--enhanced';
 
-    // timeout required for css animation support
+    // timeout allows CSS animations to fire
     setTimeout(function () {
-      var className = component.className;
-      className = className.replace(componentBuilt, ' ');
-      className += ' ' + componentClass + '--enhanced';
-      component.className = className;
+      component.className = componentClasses;
       registeredComponents[componentType].didEnhance(component);
     }, 100);
   }
 
-  // get those nasty self-initializing image tags out of there
+  // remove initializer images from the markup after initialization
   if (image) {
     image.parentElement.removeChild(image);
   }

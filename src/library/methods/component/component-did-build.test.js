@@ -1,22 +1,22 @@
-describe('[private] Component.didBuild', function () {
+describe('Component.didBuild', function () {
 
   it('should return false without a component', function () {
-    var component = new ChopSuey._private.Component({});
+    var component = new ChopSuey._Component({});
 
     expect(component.didBuild()).to.equal(false);
   });
 
   it('should return true with a component', function () {
     var
-      component = new ChopSuey._private.Component({}),
-      div = document.createElement('div');
+      component = new ChopSuey._Component({}),
+      div       = document.createElement('div');
 
     expect(component.didBuild(div)).to.equal(true);
   });
 
   it('should fire a componentDidBuild event on the element', function (done) {
     var
-      component = new ChopSuey._private.Component({
+      component = new ChopSuey._Component({
         componentType : 'component',
         componentClass: 'component'
       }),

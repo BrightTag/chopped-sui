@@ -13,7 +13,7 @@ gulp.task('components:js', ['components:build', 'components:templates'], functio
 
   return gulp.src(config.components.src)
     .pipe(concat('components.js'))
-    .pipe(gulp.dest(config.components.test.dest))
+    .pipe(gulp.dest(config.components.test.js.dest))
     .pipe(stripCode({
       start_comment: "expose",
       end_comment: "end-expose"

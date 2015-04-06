@@ -1,8 +1,8 @@
 describe('ChopSuey.registerComponent', function () {
 
   var
-    classBase = 'registerComponent',
-    classIndex = 1,
+    classBase        = 'registerComponent',
+    classIndex       = 1,
     newComponentName = function () {
       return classBase + classIndex++;
     };
@@ -40,17 +40,27 @@ describe('ChopSuey.registerComponent', function () {
   });
 
   describe('registered', function () {
-    var componentName = newComponentName();
+    var
+      componentName = newComponentName(),
+      build         = function () { return 'build' },
+      destroy       = function () { return 'destroy' },
+      enhance       = function () { return 'enhance' };
 
     it('should register a component', function () {
       ChopSuey.registerComponent({
         componentType : componentName,
-        componentClass: componentName
+        componentClass: componentName,
+        build         : build,
+        destroy         : destroy,
+        enhance       : enhance
       });
 
-      expect(ChopSuey.registeredComponents(componentName)).to.be.an.instanceof(ChopSuey._private.Component);
+      expect(ChopSuey.registeredComponents(componentName)).to.be.an.instanceof(ChopSuey._Component);
       expect(ChopSuey.registeredComponents(componentName).componentType).to.equal(componentName);
       expect(ChopSuey.registeredComponents(componentName).componentClass).to.equal(componentName);
+      expect(ChopSuey.registeredComponents(componentName).build).to.equal(build);
+      expect(ChopSuey.registeredComponents(componentName).destroy).to.equal(destroy);
+      expect(ChopSuey.registeredComponents(componentName).enhance).to.equal(enhance);
     });
 
     it('should override a registered component based on type', function () {

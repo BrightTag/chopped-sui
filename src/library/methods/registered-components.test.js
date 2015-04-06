@@ -1,8 +1,8 @@
 describe('ChopSuey.registeredComponents', function () {
 
   var
-    classBase = 'registeredComponents',
-    classIndex = 1,
+    classBase        = 'registeredComponents',
+    classIndex       = 1,
     newComponentName = function () {
       return classBase + classIndex++;
     };
@@ -27,7 +27,7 @@ describe('ChopSuey.registeredComponents', function () {
         componentClass: componentName
       });
 
-      expect(ChopSuey.registeredComponents(componentName)).to.be.an.instanceof(ChopSuey._private.Component);
+      expect(ChopSuey.registeredComponents(componentName)).to.be.an.instanceof(ChopSuey._Component);
       expect(ChopSuey.registeredComponents(componentName).componentType).to.equal(componentName);
       expect(ChopSuey.registeredComponents(componentName).componentClass).to.equal(componentName);
     });

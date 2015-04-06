@@ -1,42 +1,60 @@
 var
-  enhanceTriggerClick     = require('./enhance/enhance-trigger-click.src.js'),
-  enhanceComponentKeyup   = require('./enhance/enhance-component-keyup.src.js'),
-  enhanceMenuClick        = require('./enhance/enhance-menu-click.src.js'),
-  listenForDropDownShow   = require('./enhance/listen-for-drop-down-show.src.js'),
-  listenForDropDownHide   = require('./enhance/listen-for-drop-down-hide.src.js'),
-  listenForDropDownSelect = require('./enhance/listen-for-drop-down-select.src.js');
+  handleTriggerClick     = require('./enhance/handle-trigger-click.src.js'),
+  handleComponentBlur    = require('./enhance/handle-component-blur.src.js'),
+  handleComponentKeydown = require('./enhance/handle-component-keydown.src.js'),
+  handleComponentKeyup   = require('./enhance/handle-component-keyup.src.js'),
+  handleMenuClick        = require('./enhance/handle-menu-click.src.js'),
+  handleDropDownShow     = require('./enhance/handle-drop-down-show.src.js'),
+  handleDropDownHide     = require('./enhance/handle-drop-down-hide.src.js'),
+  handleDropDownSelect   = require('./enhance/handle-drop-down-select.src.js'),
+  isDropDown             = require('./constants/is-drop-down.src.js'),
+  isEnhancedDropDown     = require('./constants/is-enhanced-drop-down.src.js');
 
 // open/close menu and change selected option on arrows
-module.exports = function enhanceDropDown(component) {
+module.exports = function (component, unenhance) {
   'use strict';
 
   var
-    trigger = component.querySelectorAll('.drop-down__trigger')[0],
-    menu    = component.querySelectorAll('.drop-down__menu')[0],
+    trigger,
+    menu,
+    componentClasses,
+    addOrRemove = unenhance ? 'removeEventListener' : 'addEventListener';
 
-    hideOnOtherDropDownShow = function(e) {
-      var dropDownHideEvent;
+  // fail fast with no DOM lookups
+  if (!component || !(componentClasses = component.className)) {
+    return false;
+  }
 
-      e.stopPropagation();
+  // fail fast if component is not a dropDown
+  if (!isDropDown.test(componentClasses)) {
+    return false;
+  }
 
-      if (e.detail.component !== component) {
-        dropDownHideEvent = new window.CustomEvent(
-          'dropDownHide',
-          {
-            'bubbles': true
-          }
-        );
-        component.dispatchEvent(dropDownHideEvent);
-      }
-    };
+  // return without work if dropDown is already enhanced
+  if (!unenhance && isEnhancedDropDown.test(componentClasses)) {
+    return true;
+  }
 
-  enhanceTriggerClick(component, trigger, menu);
-  enhanceComponentKeyup(component, trigger, menu);
-  enhanceMenuClick(component, menu);
+  // potentially existing elements
+  trigger = component.querySelectorAll('.drop-down__trigger')[0];
+  menu    = component.querySelectorAll('.drop-down__menu')[0];
 
-  listenForDropDownShow(component, trigger, menu, hideOnOtherDropDownShow);
-  listenForDropDownHide(component, trigger, menu, hideOnOtherDropDownShow);
-  listenForDropDownSelect(component, trigger, menu);
+  // bad base component or template data issue
+  if (!trigger || !menu) {
+    return false;
+  }
+
+  // convert user interactions into API events
+  component[addOrRemove]('keydown', handleComponentKeydown, false);
+  component[addOrRemove]('keyup', handleComponentKeyup, false);
+  menu[addOrRemove]('click', handleMenuClick, false);
+  trigger[addOrRemove]('click', handleTriggerClick, false);
+
+  // listen for API events and react accordingly
+  component[addOrRemove]('dropDownHide', handleDropDownHide, false);
+  component[addOrRemove]('dropDownSelect', handleDropDownSelect, false);
+  component[addOrRemove]('dropDownShow', handleDropDownShow, false);
+  component[addOrRemove]('blur', handleComponentBlur, true);
 
   return true;
 };

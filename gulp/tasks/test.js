@@ -6,15 +6,23 @@ var config         = require('../config'),
     concat       = require('gulp-concat'),
     mochaPhantomJS = require('gulp-mocha-phantomjs');
 
-gulp.task('components:test-build', function () {
+gulp.task('components:test-js', function () {
 
-  return gulp.src(config.components.test.src)
+  return gulp.src(config.components.test.js.src)
     .pipe(concat('components-test.js'))
-    .pipe(gulp.dest(config.components.test.dest));
+    .pipe(gulp.dest(config.components.test.js.dest));
 
 });
 
-gulp.task('library:test-build', function () {
+gulp.task('components:test-css', function () {
+
+  return gulp.src(config.components.test.css.src)
+    .pipe(concat('components-test.css'))
+    .pipe(gulp.dest(config.components.test.css.dest));
+
+});
+
+gulp.task('library:test-js', function () {
 
   return gulp.src(config.library.test.src)
     .pipe(concat('library-test.js'))
@@ -22,7 +30,9 @@ gulp.task('library:test-build', function () {
 
 });
 
-gulp.task('test', ['library:test-build', 'components:test-build'], function () {
+gulp.task('test', ['library:test-js', 'components:test-js', 'components:test-css'], function () {
   return gulp.src('test/index.html')
-    .pipe(mochaPhantomJS());
+    .pipe(mochaPhantomJS({
+      useColors: true
+    }));
 });

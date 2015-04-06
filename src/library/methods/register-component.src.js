@@ -1,6 +1,5 @@
 var
   Component            = require('./component.src.js'),
-  initializeComponent  = require('./initialize-component.src.js'),
   registeredComponents = require('./constants/registered-components.src.js');
 
 /**
@@ -20,14 +19,15 @@ module.exports = function (args) {
     registeredComponents[args.componentType].build = args.build;
   }
 
-  if (args.enhance) {
-    registeredComponents[args.componentType].enhance =
-      args.enhance;
+  if (args.destroy) {
+    registeredComponents[args.componentType].destroy = args.destroy;
   }
 
-  initializeComponent({
-    componentType: args.componentType
-  });
+  if (args.enhance) {
+    registeredComponents[args.componentType].enhance = args.enhance;
+  }
+
+  registeredComponents[args.componentType].initialize();
 
   return true;
 };

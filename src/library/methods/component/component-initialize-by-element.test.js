@@ -1,8 +1,8 @@
-describe('[private] initialize-this-component', function () {
+describe('Component.initialize (by element)', function () {
 
   var
-    classBase = 'initializeThisComponent',
-    classIndex = 1,
+    classBase        = 'initializeThisComponent',
+    classIndex       = 1,
     newComponentName = function () {
       return classBase + classIndex++;
     };
@@ -11,27 +11,37 @@ describe('[private] initialize-this-component', function () {
 
     it('should return false without a componentType', function () {
       var
-        component = document.createElement('div'),
+        component     = document.createElement('div'),
         componentName = newComponentName();
 
       component.className = componentName + ' ' + componentName + '--unenehanced';
 
-      expect(ChopSuey._private.initializeThisComponent(
+      ChopSuey.registerComponent({
+        componentType : componentName,
+        componentClass: componentName
+      });
+
+      expect(ChopSuey.registeredComponents()[componentName]._initializeByElement(
         undefined,
         component,
         undefined
       )).to.equal(false);
     });
 
-    it('should return false without an unknown componentType', function () {
+    it('should return false without an known componentType', function () {
       var
-        component = document.createElement('div'),
+        component      = document.createElement('div'),
         componentName1 = newComponentName(),
         componentName2 = newComponentName();
 
       component.className = componentName1 + ' ' + componentName1 + '--unenehanced';
 
-      expect(ChopSuey._private.initializeThisComponent(
+      ChopSuey.registerComponent({
+        componentType : componentName1,
+        componentClass: componentName1
+      });
+
+      expect(ChopSuey.registeredComponents()[componentName1]._initializeByElement(
         componentName2,
         component,
         undefined
@@ -40,7 +50,7 @@ describe('[private] initialize-this-component', function () {
 
     it('should return false without a matching componentType', function () {
       var
-        component = document.createElement('div'),
+        component      = document.createElement('div'),
         componentName1 = newComponentName(),
         componentName2 = newComponentName();
 
@@ -53,7 +63,7 @@ describe('[private] initialize-this-component', function () {
 
       document.body.appendChild(component);
 
-      expect(ChopSuey._private.initializeThisComponent(
+      expect(ChopSuey.registeredComponents()[componentName1]._initializeByElement(
         componentName1,
         component,
         undefined
@@ -64,7 +74,7 @@ describe('[private] initialize-this-component', function () {
 
     it('should return true with a known, matching componentType', function () {
       var
-        component = document.createElement('div'),
+        component     = document.createElement('div'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -76,7 +86,7 @@ describe('[private] initialize-this-component', function () {
 
       document.body.appendChild(component);
 
-      expect(ChopSuey._private.initializeThisComponent(
+      expect(ChopSuey.registeredComponents()[componentName]._initializeByElement(
         componentName,
         component,
         undefined
@@ -91,7 +101,7 @@ describe('[private] initialize-this-component', function () {
 
     it('should initialize an uninitialized component', function (done) {
       var
-        component = document.createElement('div'),
+        component     = document.createElement('div'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -105,7 +115,7 @@ describe('[private] initialize-this-component', function () {
 
       expect(component.className).to.match(/--unenhanced( |$)/);
 
-      ChopSuey._private.initializeThisComponent(
+      ChopSuey.registeredComponents()[componentName]._initializeByElement(
         componentName,
         component,
         undefined
@@ -125,7 +135,7 @@ describe('[private] initialize-this-component', function () {
 
     it('should not initialize an initialized component', function (done) {
       var
-        component = document.createElement('div'),
+        component     = document.createElement('div'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -139,7 +149,7 @@ describe('[private] initialize-this-component', function () {
 
       expect(component.className).to.match(/--enhanced( |$)/);
 
-      ChopSuey._private.initializeThisComponent(
+      ChopSuey.registeredComponents()[componentName]._initializeByElement(
         componentName,
         component,
         undefined
@@ -163,8 +173,8 @@ describe('[private] initialize-this-component', function () {
 
     it('should initialize an uninitialized component', function (done) {
       var
-        component = document.createElement('div'),
-        image = document.createElement('img'),
+        component     = document.createElement('div'),
+        image         = document.createElement('img'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -179,7 +189,7 @@ describe('[private] initialize-this-component', function () {
 
       expect(component.className).to.match(/--unenhanced( |$)/);
 
-      ChopSuey._private.initializeThisComponent(
+      ChopSuey.registeredComponents()[componentName]._initializeByElement(
         componentName,
         component,
         image
@@ -200,8 +210,8 @@ describe('[private] initialize-this-component', function () {
 
     it('should not initialize an initialized component', function (done) {
       var
-        component = document.createElement('div'),
-        image = document.createElement('img'),
+        component     = document.createElement('div'),
+        image         = document.createElement('img'),
         componentName = newComponentName();
 
       ChopSuey.registerComponent({
@@ -216,7 +226,7 @@ describe('[private] initialize-this-component', function () {
 
       expect(component.className).to.match(/--enhanced( |$)/);
 
-      ChopSuey._private.initializeThisComponent(
+      ChopSuey.registeredComponents()[componentName]._initializeByElement(
         componentName,
         component,
         image

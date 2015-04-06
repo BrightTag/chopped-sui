@@ -1,6 +1,6 @@
 /**
  * emits a [component]DidBuild event
- * @param  {DOM Element} component - outermose element of a component
+ * @param  {DOM Element} component - outermost element of a component
  * @return {[Boolean]}             - success
  */
 module.exports = function (component) {
@@ -10,19 +10,18 @@ module.exports = function (component) {
 
   if (!component) {
     return false;
-  } else {
-    didBuildEvent = new window.CustomEvent(
-      this.componentType + 'DidBuild',
-      {
-        'detail': {
-          'component': component
-        },
-        'bubbles': true
-      }
-    );
-    component.dispatchEvent(didBuildEvent);
-
-    return true;
   }
 
+  didBuildEvent = new window.CustomEvent(
+    this.componentType + 'DidBuild',
+    {
+      'detail': {
+        'component': component
+      },
+      'bubbles': true
+    }
+  );
+  component.dispatchEvent(didBuildEvent);
+
+  return true;
 };
