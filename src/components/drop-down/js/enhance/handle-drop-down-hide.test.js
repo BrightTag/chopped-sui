@@ -28,7 +28,7 @@ describe('DropDown.enhance (dropDownHide:dropDown)', function () {
 
   describe('validation', function () {
 
-    describe('showing the menu', function () {
+    describe('hiding the menu', function () {
 
       describe('an open menu', function () {
 
@@ -51,7 +51,8 @@ describe('DropDown.enhance (dropDownHide:dropDown)', function () {
 
           trigger.addEventListener('click', function () {
             expect(window.getComputedStyle(menu, null)['visibility']).to.equal('visible');
-            document.body.removeChild(dropDown);
+            trigger.removeEventListener('click');
+            DropDown.destroy(dropDown);
             done();
           }, false);
 
@@ -82,7 +83,9 @@ describe('DropDown.enhance (dropDownHide:dropDown)', function () {
 
             dropDown.addEventListener('dropDownWillHide', function () {
               expect(window.getComputedStyle(menu, null)['visibility']).to.equal('visible');
-              document.body.removeChild(dropDown);
+              trigger.removeEventListener('click');
+              dropDown.removeEventListener('dropDownWillHide');
+              DropDown.destroy(dropDown);
               done();
             }, false);
 
@@ -122,7 +125,9 @@ describe('DropDown.enhance (dropDownHide:dropDown)', function () {
 
             dropDown.addEventListener('dropDownDidHide', function () {
               expect(window.getComputedStyle(menu, null)['visibility']).to.equal('hidden');
-              document.body.removeChild(dropDown);
+              trigger.removeEventListener('click');
+              dropDown.removeEventListener('dropDownDidHide');
+              DropDown.destroy(dropDown);
               done();
             }, false);
 
@@ -159,7 +164,7 @@ describe('DropDown.enhance (dropDownHide:dropDown)', function () {
 
           expect(window.getComputedStyle(menu, null)['visibility']).to.equal('hidden');
 
-          document.body.removeChild(dropDown);
+          DropDown.destroy(dropDown);
         });
 
         it('should be hidden on dropDownWillHide', function (done) {
@@ -181,7 +186,8 @@ describe('DropDown.enhance (dropDownHide:dropDown)', function () {
 
           dropDown.addEventListener('dropDownWillHide', function () {
             expect(window.getComputedStyle(menu, null)['visibility']).to.equal('hidden');
-            document.body.removeChild(dropDown);
+            dropDown.removeEventListener('dropDownWillHide');
+            DropDown.destroy(dropDown);
             done();
           }, false);
 
@@ -213,7 +219,8 @@ describe('DropDown.enhance (dropDownHide:dropDown)', function () {
 
           dropDown.addEventListener('dropDownDidHide', function () {
             expect(window.getComputedStyle(menu, null)['visibility']).to.equal('hidden');
-            document.body.removeChild(dropDown);
+            dropDown.removeEventListener('dropDownDidHide');
+            DropDown.destroy(dropDown);
             done();
           }, false);
 
@@ -239,37 +246,32 @@ describe('DropDown.enhance (dropDownHide:dropDown)', function () {
         div = document.createElement('div'),
         dropDown,
         menuLink,
-        clickTriggerEvent,
+        hideEvent,
         hideCount = 0;
 
       div.innerHTML = validDropDownHTML;
 
       dropDown = div.querySelectorAll('.drop-down')[0];
-      trigger = dropDown.querySelectorAll('.drop-down__trigger')[0];
 
       document.body.appendChild(dropDown);
       DropDown.enhance(dropDown);
 
-      dropDown.addEventListener('dropDownHide', function () {
+      dropDown.addEventListener('dropDownDidHide', function () {
         hideCount++;
       }, false);
 
-      clickTriggerEvent = new Event('click', {bubbles: true});
-      trigger.dispatchEvent(clickTriggerEvent);
-
-      clickTriggerEvent = new Event('click', {bubbles: true});
-      trigger.dispatchEvent(clickTriggerEvent);
+      hideEvent = new CustomEvent('dropDownHide', {bubbles: true});
+      dropDown.dispatchEvent(hideEvent);
 
       DropDown.enhance(dropDown, 'unenhance');
 
-      clickTriggerEvent = new Event('click', {bubbles: true});
-      trigger.dispatchEvent(clickTriggerEvent);
-
-      clickTriggerEvent = new Event('click', {bubbles: true});
-      trigger.dispatchEvent(clickTriggerEvent);
+      hideEvent = new CustomEvent('dropDownHide', {bubbles: true});
+      dropDown.dispatchEvent(hideEvent);
 
       expect(hideCount).to.equal(1);
-      document.body.removeChild(dropDown);
+
+      dropDown.removeEventListener('dropDownDidHide');
+      DropDown.destroy(dropDown);
     });
 
   });

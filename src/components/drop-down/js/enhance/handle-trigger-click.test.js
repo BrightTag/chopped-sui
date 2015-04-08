@@ -43,12 +43,14 @@ describe('DropDown.enhance (click:trigger)', function () {
       document.body.appendChild(dropDown);
       DropDown.enhance(dropDown);
 
-      dropDown.addEventListener('dropDownShow', function () {
+      dropDown.addEventListener('dropDownDidShow', function () {
 
-        dropDown.addEventListener('dropDownHide', function () {
+        dropDown.addEventListener('dropDownDidHide', function () {
 
           expect(1).to.equal(1); // made it here
-          document.body.removeChild(dropDown);
+          dropDown.removeEventListener('dropDownDidShow');
+          dropDown.removeEventListener('dropDownDidHide');
+          DropDown.destroy(dropDown);
           done();
         }, false);
 
@@ -82,11 +84,11 @@ describe('DropDown.enhance (click:trigger)', function () {
       document.body.appendChild(dropDown);
       DropDown.enhance(dropDown);
 
-      dropDown.addEventListener('dropDownHide', function () {
+      dropDown.addEventListener('dropDownDidHide', function () {
         hideCount++;
       }, false);
 
-      dropDown.addEventListener('dropDownShow', function () {
+      dropDown.addEventListener('dropDownDidShow', function () {
         showCount++;
       }, false);
 
@@ -106,7 +108,10 @@ describe('DropDown.enhance (click:trigger)', function () {
 
       expect(hideCount).to.equal(1);
       expect(showCount).to.equal(1);
-      document.body.removeChild(dropDown);
+
+      dropDown.removeEventListener('dropDownDidShow');
+      dropDown.removeEventListener('dropDownDidHide');
+      DropDown.destroy(dropDown);
     });
 
   });

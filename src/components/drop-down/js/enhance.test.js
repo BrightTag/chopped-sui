@@ -54,7 +54,7 @@ describe('DropDown.enhance', function () {
 
       document.body.appendChild(dropDown);
       expect(DropDown.enhance(dropDown)).to.equal(false);
-      document.body.removeChild(dropDown);
+      DropDown.destroy(dropDown);
     });
 
     it('should return false if it can\'t locate the trigger', function () {
@@ -71,7 +71,7 @@ describe('DropDown.enhance', function () {
 
       document.body.appendChild(dropDown);
       expect(DropDown.enhance(dropDown)).to.equal(false);
-      document.body.removeChild(dropDown);
+      DropDown.destroy(dropDown);
     });
 
     it('should return true if the dropDown is already enhanced', function (done) {
@@ -90,7 +90,7 @@ describe('DropDown.enhance', function () {
       window.setTimeout(function () {
         expect(DropDown.enhance(dropDown)).to.equal(true);
         expect(DropDown.enhance(dropDown, 'unenhance')).to.equal(true);
-        document.body.removeChild(dropDown);
+        DropDown.destroy(dropDown);
         done();
       }, 150);
     });
@@ -111,7 +111,7 @@ describe('DropDown.enhance', function () {
       window.setTimeout(function () {
         expect(DropDown.enhance(dropDown)).to.equal(true);
         expect(DropDown.enhance(dropDown, 'unenhance')).to.equal(true);
-        document.body.removeChild(dropDown);
+        DropDown.destroy(dropDown);
         done();
       }, 150);
     });
@@ -127,7 +127,7 @@ describe('DropDown.enhance', function () {
 
       document.body.appendChild(dropDown);
       expect(DropDown.enhance(dropDown)).to.equal(true);
-      document.body.removeChild(dropDown);
+      DropDown.destroy(dropDown);
     });
 
   });
@@ -160,7 +160,7 @@ describe('DropDown.enhance', function () {
 
       document.body.appendChild(dropDown);
       expect(DropDown.enhance(dropDown, 'unenhance')).to.equal(false);
-      document.body.removeChild(dropDown);
+      DropDown.destroy(dropDown);
     });
 
     it('should return false if it can\'t locate the trigger', function () {
@@ -177,7 +177,7 @@ describe('DropDown.enhance', function () {
 
       document.body.appendChild(dropDown);
       expect(DropDown.enhance(dropDown, 'unenhance')).to.equal(false);
-      document.body.removeChild(dropDown);
+      DropDown.destroy(dropDown);
     });
 
     it('should return true if it has a good component element and markup', function () {
@@ -191,7 +191,7 @@ describe('DropDown.enhance', function () {
 
       document.body.appendChild(dropDown);
       expect(DropDown.enhance(dropDown, 'unenhance')).to.equal(true);
-      document.body.removeChild(dropDown);
+      DropDown.destroy(dropDown);
     });
 
   });

@@ -43,9 +43,10 @@ describe('DropDown.enhance (click:menu)', function () {
       document.body.appendChild(dropDown);
       DropDown.enhance(dropDown);
 
-      dropDown.addEventListener('dropDownSelect', function () {
+      dropDown.addEventListener('dropDownDidSelect', function () {
         expect(1).to.equal(1); // made it here
-        document.body.removeChild(dropDown);
+        dropDown.removeEventListener('dropDownSelect');
+        DropDown.destroy(dropDown);
         done();
       }, false);
 
@@ -73,7 +74,7 @@ describe('DropDown.enhance (click:menu)', function () {
       document.body.appendChild(dropDown);
       DropDown.enhance(dropDown);
 
-      dropDown.addEventListener('dropDownSelect', function () {
+      dropDown.addEventListener('dropDownDidSelect', function () {
         selectCount++;
       }, false);
 
@@ -86,7 +87,9 @@ describe('DropDown.enhance (click:menu)', function () {
       menuLink.dispatchEvent(clickMenuEvent);
 
       expect(selectCount).to.equal(1);
-      document.body.removeChild(dropDown);
+
+      dropDown.removeEventListener('dropDownSelect');
+      DropDown.destroy(dropDown);
     });
 
   });

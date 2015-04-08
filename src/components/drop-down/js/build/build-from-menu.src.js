@@ -32,8 +32,11 @@ module.exports = function (component, menu, trigger) {
     });
   }
 
-  menuFlushDirection = menu.className.match(menuFlush).length ?
+  menuFlushDirection = '';
+  if (menu && menu.className) {
+    menuFlushDirection = menuFlush.test(menu.className) ?
       menu.className.match(menuFlush)[2] : '';
+  }
 
   if (menuFlushDirection) {
     menuData.flushDirection = menuFlushDirection;

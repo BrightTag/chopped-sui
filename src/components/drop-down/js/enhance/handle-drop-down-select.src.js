@@ -9,6 +9,7 @@ module.exports = function (e) {
     trigger,
     menu,
     selected,
+    dropDownWillSelectEvent,
     dropDownDidSelectEvent,
     dropDownHideEvent,
     menuOptions,
@@ -28,6 +29,17 @@ module.exports = function (e) {
   menu            = component.querySelectorAll('.drop-down__menu')[0];
   currentIsHidden = component.querySelectorAll('.drop-down__menu-option--hidden').length;
   selected        = e.detail.select;
+
+  dropDownWillSelectEvent = new window.CustomEvent(
+    'dropDownWillSelect',
+    {
+      'bubbles': true,
+      'detail': {
+        'selected' : e.detail.select
+      }
+    }
+  );
+  component.dispatchEvent(dropDownWillSelectEvent);
 
   if (!triggerFixed.test(trigger.className)) {
     trigger.innerHTML = selected.innerHTML;
@@ -66,9 +78,6 @@ module.exports = function (e) {
   dropDownHideEvent = new window.CustomEvent(
     'dropDownHide',
     {
-      'detail': {
-        'component': component
-      },
       'bubbles': true
     }
   );
@@ -78,11 +87,10 @@ module.exports = function (e) {
   dropDownDidSelectEvent = new window.CustomEvent(
     'dropDownDidSelect',
     {
+      'bubbles': true,
       'detail': {
-        'component': e.detail.component,
         'selected' : e.detail.select
-      },
-      'bubbles': true
+      }
     }
   );
   component.dispatchEvent(dropDownDidSelectEvent);

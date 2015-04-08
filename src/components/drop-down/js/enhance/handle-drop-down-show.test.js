@@ -51,7 +51,8 @@ describe('DropDown.enhance (dropDownShow:dropDown)', function () {
 
           trigger.addEventListener('click', function () {
             expect(window.getComputedStyle(menu, null)['visibility']).to.equal('visible');
-            document.body.removeChild(dropDown);
+            trigger.removeEventListener('click');
+            DropDown.destroy(dropDown);
             done();
           }, false);
 
@@ -82,7 +83,9 @@ describe('DropDown.enhance (dropDownShow:dropDown)', function () {
 
             dropDown.addEventListener('dropDownWillShow', function () {
               expect(window.getComputedStyle(menu, null)['visibility']).to.equal('visible');
-              document.body.removeChild(dropDown);
+              trigger.removeEventListener('click');
+              dropDown.removeEventListener('dropDownWillShow');
+              DropDown.destroy(dropDown);
               done();
             }, false);
 
@@ -122,7 +125,9 @@ describe('DropDown.enhance (dropDownShow:dropDown)', function () {
 
             dropDown.addEventListener('dropDownDidShow', function () {
               expect(window.getComputedStyle(menu, null)['visibility']).to.equal('visible');
-              document.body.removeChild(dropDown);
+              trigger.removeEventListener('click');
+              dropDown.removeEventListener('dropDownDidShow');
+              DropDown.destroy(dropDown);
               done();
             }, false);
 
@@ -159,7 +164,7 @@ describe('DropDown.enhance (dropDownShow:dropDown)', function () {
 
           expect(window.getComputedStyle(menu, null)['visibility']).to.equal('hidden');
 
-          document.body.removeChild(dropDown);
+          DropDown.destroy(dropDown);
         });
 
         it('should be hidden on dropDownWillShow', function (done) {
@@ -181,7 +186,8 @@ describe('DropDown.enhance (dropDownShow:dropDown)', function () {
 
           dropDown.addEventListener('dropDownWillShow', function () {
             expect(window.getComputedStyle(menu, null)['visibility']).to.equal('hidden');
-            document.body.removeChild(dropDown);
+            dropDown.removeEventListener('dropDownWillShow');
+            DropDown.destroy(dropDown);
             done();
           }, false);
 
@@ -213,7 +219,8 @@ describe('DropDown.enhance (dropDownShow:dropDown)', function () {
 
           dropDown.addEventListener('dropDownDidShow', function () {
             expect(window.getComputedStyle(menu, null)['visibility']).to.equal('visible');
-            document.body.removeChild(dropDown);
+            dropDown.removeEventListener('dropDownDidShow');
+            DropDown.destroy(dropDown);
             done();
           }, false);
 
@@ -239,37 +246,32 @@ describe('DropDown.enhance (dropDownShow:dropDown)', function () {
         div = document.createElement('div'),
         dropDown,
         menuLink,
-        clickTriggerEvent,
+        showEvent,
         showCount = 0;
 
       div.innerHTML = validDropDownHTML;
 
       dropDown = div.querySelectorAll('.drop-down')[0];
-      trigger = dropDown.querySelectorAll('.drop-down__trigger')[0];
 
       document.body.appendChild(dropDown);
       DropDown.enhance(dropDown);
 
-      dropDown.addEventListener('dropDownShow', function () {
+      dropDown.addEventListener('dropDownDidShow', function () {
         showCount++;
       }, false);
 
-      clickTriggerEvent = new Event('click', {bubbles: true});
-      trigger.dispatchEvent(clickTriggerEvent);
-
-      clickTriggerEvent = new Event('click', {bubbles: true});
-      trigger.dispatchEvent(clickTriggerEvent);
+      showEvent = new CustomEvent('dropDownShow', {bubbles: true});
+      dropDown.dispatchEvent(showEvent);
 
       DropDown.enhance(dropDown, 'unenhance');
 
-      clickTriggerEvent = new Event('click', {bubbles: true});
-      trigger.dispatchEvent(clickTriggerEvent);
-
-      clickTriggerEvent = new Event('click', {bubbles: true});
-      trigger.dispatchEvent(clickTriggerEvent);
+      showEvent = new CustomEvent('dropDownShow', {bubbles: true});
+      dropDown.dispatchEvent(showEvent);
 
       expect(showCount).to.equal(1);
-      document.body.removeChild(dropDown);
+
+      dropDown.removeEventListener('dropDownDidShow');
+      DropDown.destroy(dropDown);
     });
 
   });
