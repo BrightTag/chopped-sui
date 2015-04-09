@@ -124,7 +124,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           document.body.appendChild(dropDown);
           DropDown.enhance(dropDown);
 
-          expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('MENU');
+          expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('menu');
           DropDown.destroy(dropDown);
         });
 
@@ -146,7 +146,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           DropDown.enhance(dropDown);
 
           dropDown.addEventListener('dropDownWillSelect', function () {
-            expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('MENU');
+            expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('menu');
             dropDown.removeEventListener('dropDownWillSelect');
             DropDown.destroy(dropDown);
             done();
@@ -184,7 +184,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           dropDown.addEventListener('dropDownDidSelect', function () {
 
             dropDown.addEventListener('dropDownDidShow', function () {
-              expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal(menuLink.innerText.replace(/^\s*/,'').replace(/\s*$/,''));
+              expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal(menuLink.innerHTML.replace(/^\s*/,'').replace(/\s*$/,''));
               dropDown.removeEventListener('dropDownDidSelect');
               dropDown.removeEventListener('dropDownDidShow');
               DropDown.destroy(dropDown);
@@ -224,7 +224,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           document.body.appendChild(dropDown);
           DropDown.enhance(dropDown);
 
-          expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('MENU');
+          expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('menu');
           DropDown.destroy(dropDown);
         });
 
@@ -246,7 +246,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           DropDown.enhance(dropDown);
 
           dropDown.addEventListener('dropDownWillSelect', function () {
-            expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('MENU');
+            expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('menu');
             dropDown.removeEventListener('dropDownWillSelect');
             DropDown.destroy(dropDown);
             done();
@@ -284,7 +284,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           dropDown.addEventListener('dropDownDidSelect', function () {
 
             dropDown.addEventListener('dropDownDidShow', function () {
-              expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('MENU');
+              expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('menu');
               dropDown.removeEventListener('dropDownDidSelect');
               dropDown.removeEventListener('dropDownDidShow');
               DropDown.destroy(dropDown);
@@ -325,7 +325,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
 
           trigger = dropDown.querySelectorAll('.drop-down__trigger')[0];
 
-          expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
+          expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
           DropDown.destroy(dropDown);
         });
 
@@ -342,7 +342,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           document.body.appendChild(dropDown);
           DropDown.enhance(dropDown);
 
-          hiddenMenuItem = dropDown.querySelectorAll('.drop-down__menu .drop-down__menu-option--hidden')[0];
+          hiddenMenuItem = dropDown.querySelectorAll('.drop-down__menu .drop-down__menu-option--hidden a')[0];
 
           expect(hiddenMenuItem).to.equal(undefined);
           DropDown.destroy(dropDown);
@@ -367,7 +367,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           trigger = dropDown.querySelectorAll('.drop-down__trigger')[0];
 
           dropDown.addEventListener('dropDownWillSelect', function () {
-            expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
+            expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
             dropDown.removeEventListener('dropDownWillSelect');
             DropDown.destroy(dropDown);
             done();
@@ -406,7 +406,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           dropDown.addEventListener('dropDownDidSelect', function () {
 
             dropDown.addEventListener('dropDownDidShow', function () {
-              expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal(menuLink.innerText.replace(/^\s*/,'').replace(/\s*$/,''));
+              expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal(menuLink.innerHTML.replace(/^\s*/,'').replace(/\s*$/,''));
               dropDown.removeEventListener('dropDownDidSelect');
               dropDown.removeEventListener('dropDownDidShow');
               DropDown.destroy(dropDown);
@@ -451,7 +451,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           dropDown.addEventListener('dropDownDidSelect', function () {
 
             dropDown.addEventListener('dropDownDidShow', function () {
-              hiddenMenuItem = dropDown.querySelectorAll('.drop-down__menu .drop-down__menu-option--hidden')[0];
+              hiddenMenuItem = dropDown.querySelectorAll('.drop-down__menu .drop-down__menu-option--hidden a')[0];
               expect(hiddenMenuItem).to.equal(undefined);
               dropDown.removeEventListener('dropDownDidSelect');
               dropDown.removeEventListener('dropDownDidShow');
@@ -493,7 +493,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
 
           trigger = dropDown.querySelectorAll('.drop-down__trigger')[0];
 
-          expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
+          expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
           DropDown.destroy(dropDown);
         });
 
@@ -510,9 +510,9 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           document.body.appendChild(dropDown);
           DropDown.enhance(dropDown);
 
-          hiddenMenuItem = dropDown.querySelectorAll('.drop-down__menu .drop-down__menu-option--hidden')[0];
+          hiddenMenuItem = dropDown.querySelectorAll('.drop-down__menu .drop-down__menu-option--hidden a')[0];
 
-          expect(hiddenMenuItem.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
+          expect(hiddenMenuItem.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
           DropDown.destroy(dropDown);
         });
 
@@ -535,7 +535,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           trigger = dropDown.querySelectorAll('.drop-down__trigger')[0];
 
           dropDown.addEventListener('dropDownWillSelect', function () {
-            expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
+            expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('3');
             dropDown.removeEventListener('dropDownWillSelect');
             DropDown.destroy(dropDown);
             done();
@@ -574,7 +574,7 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           dropDown.addEventListener('dropDownDidSelect', function () {
 
             dropDown.addEventListener('dropDownDidShow', function () {
-              expect(trigger.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal(menuLink.innerText.replace(/^\s*/,'').replace(/\s*$/,''));
+              expect(trigger.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal(menuLink.innerHTML.replace(/^\s*/,'').replace(/\s*$/,''));
               dropDown.removeEventListener('dropDownDidSelect');
               dropDown.removeEventListener('dropDownDidShow');
               DropDown.destroy(dropDown);
@@ -619,8 +619,8 @@ describe('DropDown.enhance (dropDownSelect:dropDown)', function () {
           dropDown.addEventListener('dropDownDidSelect', function () {
 
             dropDown.addEventListener('dropDownDidShow', function () {
-              hiddenMenuItem = dropDown.querySelectorAll('.drop-down__menu .drop-down__menu-option--hidden')[0];
-              expect(hiddenMenuItem.innerText.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('1');
+              hiddenMenuItem = dropDown.querySelectorAll('.drop-down__menu .drop-down__menu-option--hidden a')[0];
+              expect(hiddenMenuItem.innerHTML.replace(/^\s*/,'').replace(/\s*$/,'')).to.equal('1');
               dropDown.removeEventListener('dropDownDidSelect');
               dropDown.removeEventListener('dropDownDidShow');
               DropDown.destroy(dropDown);
