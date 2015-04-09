@@ -1,5 +1,7 @@
 # ChopSuey - SignalUI Component Library
 
+ChopSuey is a small JavaScript library that enables common UI Components (HTML, CSS, and interactions) to be shared across multiple projects. Components are designed with minimal styling so that they can be tailored to match the applications they are used in. Markup for ChopSuey components can be generated client or server side depending on the architectural requirements of your application.
+
 ## Installation
 
 1. Clone this repo
