@@ -10,9 +10,11 @@ ChopSuey is a small JavaScript library that enables common UI Components (HTML, 
 
 ## Usage
 
-`js` should contain a single JS file named `main.js` along with supporting browserify managed modules. 
-
-JavaScript files for the library will be converted and concatenated into `dist/components/js/chop-suey.js` and `dist/components/js/chop-suey.min.js`.
+1. Clone this repository and run `./install.sh`.
+2. **Inline** [chop-suey.min.js](dist/js/chop-suey.min.js) in the `<head>` of your webpage.
+3. Add [components.min.css](dist/css/components.min.css) to your webpage.
+4. Add [components.min.js](dist/js/components.min.js) as an external script at the end of the `<body>` section of your webpage.
+5. For each component or instance of a component, use the provided helper script to generate markup. These scripts have plenty of conifguration options to suit *your* needs!
 
 
 ## Component Event API
