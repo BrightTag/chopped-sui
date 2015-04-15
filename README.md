@@ -2,11 +2,36 @@
 
 ChopSuey is a small JavaScript library that enables common UI Components (HTML, CSS, and interactions) to be shared across projects built with disparate technologies. Components are designed with minimal styling so that they can be tailored to match the applications they are used in. Markup for ChopSuey components can be generated client or server side depending on the architectural requirements of your application.
 
-## Library
+## Available Components
+
+- [Drop Down Menu](docs/componentLibrary.md)
+- Accordian
+
+
+## Usage
 
 `js` should contain a single JS file named `main.js` along with supporting browserify managed modules. 
 
 JavaScript files for the library will be converted and concatenated into `dist/components/js/chop-suey.js` and `dist/components/js/chop-suey.min.js`.
+
+
+## Component Event API
+
+Components will broadcast various state changes through events. We can listen to, and respond to, these events just as we would a click event. All components will broadcast:
+
+`componentNameWillBuild`: Fired before HTML is added
+`componentNameDidBuild`: Fired after HTML is added
+`componentNameWillEnhance`: Fired before behavior is added
+`componentNameDidEnhance`: Fired after behavior is added
+`componentNameWillDestroy`: Fired before HTML and behavior are removed
+`componentNameDidEnhance`: Fired after HTML and behavior are removed
+
+Additionally, some components will broadcast additional events when state changes occur.  For example:
+
+`dropDownWillShow`: Fired before a drop-down menu shows
+`accordionDidHide`: Fired after a section of an accordion is hidden
+
+In all cases, the context of the current component is passed in as `this` and as `event.target`. For some components, additional information will be attached to the event such as which accordion section was actually hidden. See the [component docs](docs/componentLibrary.md) for more information in these cases.
 
 
 ## Development
