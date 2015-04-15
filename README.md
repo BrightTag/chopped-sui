@@ -1,24 +1,6 @@
-# ChopSuey - SignalUI Component Library
+# ChopSuey - Signal Component Library
 
-ChopSuey is a small JavaScript library that enables common UI Components (HTML, CSS, and interactions) to be shared across multiple projects. Components are designed with minimal styling so that they can be tailored to match the applications they are used in. Markup for ChopSuey components can be generated client or server side depending on the architectural requirements of your application.
-
-## Installation
-
-1. Clone this repo
-2. `cd` to your local repo and run `./install.sh`
-
-## Updating
-
-1. On master branch `git pull origin master`
-2. run `./update.sh`
-
-## Building
-
-`cd` to the local repo and run `gulp`
-
-## Demo
-
-`cd` to the local repo and run `gulp start:demo` and follow the instructions
+ChopSuey is a small JavaScript library that enables common UI Components (HTML, CSS, and interactions) to be shared across projects built with disparate technologies. Components are designed with minimal styling so that they can be tailored to match the applications they are used in. Markup for ChopSuey components can be generated client or server side depending on the architectural requirements of your application.
 
 ## Components
 
@@ -57,16 +39,28 @@ Helpers get generated in `dist/helpers` in language specific folders.
 ChopSuey currently supports:
 * `php`
 
-### Tests
-
-**TODO**
-
 ## Library
 
 `js` should contain a single JS file named `main.js` along with supporting browserify managed modules. 
 
 JavaScript files for the library will be converted and concatenated into `dist/components/js/chop-suey.js` and `dist/components/js/chop-suey.min.js`.
 
-### Tests
+## Development
 
-**TODO**
+### Installation
+
+1. Clone this repo
+2. `cd` to your local repo and run `./install.sh`
+
+### Updating
+
+1. On master branch `git pull origin master`
+2. run `./update.sh`
+
+### Building
+
+`cd` to the local repo and run `gulp`
+
+### Demo
+
+`cd` to the local repo and run `gulp start:demo` and follow the instructions
