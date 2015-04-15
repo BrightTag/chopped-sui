@@ -77,7 +77,12 @@ The `templates` directory should contain one or more templates  named `component
 
 For example, the `drop-down` contains a main template called `drop-down.mustache` and three sub-templates called `drop-down-menu.mustache`, `drop-down-sizer.mustache`, and `drop-down-trigger.mustache`.
 
-### Component Helpers
+### Tests
+
+Testing files live along side the source files. Testing is written using Mocha/Chai. We test everything from expected returns of small functions given good and bad arguments, to whether or not HTML is being added to the page, events are being thrown, and events are being listened for. 
+
+
+## Component Helpers
 
 Helper functions provide native wrappers for generating ChopSuey component markup in various backend languages.
 
