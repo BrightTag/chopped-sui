@@ -5,9 +5,18 @@ var config       = require('../config'),
     fs           = require('fs'),
     gulp         = require('gulp'),
     replace      = require('gulp-replace'),
+    rename       = require('gulp-rename'),
     hogan        = require('gulp-hogan-compile');
 
-gulp.task('components:templates', ['components:build'], function () {
+gulp.task('components:templates:dist', function () {
+  return gulp.src(config.templates.src)
+    .pipe(rename(function (path) {
+      path.dirname = path.dirname.replace(/\/templates/, '');
+    }))
+    .pipe(gulp.dest('dist/templates'));
+});
+
+gulp.task('components:templates', ['components:build', 'components:templates:dist'], function () {
 
   return gulp.src(config.templates.src)
     .pipe(hogan('templates-build.js', {

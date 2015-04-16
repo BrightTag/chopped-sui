@@ -1,6 +1,6 @@
 # Drop-Down
 
-## Configuration
+## Template Configuration
 
 Drop down menus require data in the following format:
 
@@ -191,85 +191,61 @@ To listen for a broadcast event, use the following pattern:
 
 ```js
 component.addEventListener('eventName', function (e) {
-  // access e.details here
+  // access e.target and e.details here
 });
 ```
 
 `eventName` corresponds to a valid broadcast event.
 
-`e.details` is an object that contains `component` (the outermost element of the component that fired the event) and potentially other data relevant to the state change.
-
 ### `dropDownWillBuild`
-
-#### `event.detail`
-
-`component` - the outermost element of the component that will be built
 
 emitted when the component is about to be built
 
 ### `dropDownDidBuild`
 
-#### `event.detail`
-
-`component` - the outermost element of the component that was built
-
 emitted when the component is built
 
+### `dropDownWillDestroy`
+
+emitted when the component is about to be destroyed
+
+### `dropDownDidDestroy`
+
+emitted when the component is destroyed
+
 ### `dropDownWillEnhance`
-
-#### `event.detail`
-
-`component` - the outermost element of the component that will be enhanced
 
 emitted when the component is about to be enhanced
 
 ### `dropDownDidEnhance`
 
-#### `event.detail`
-
-`component` - the outermost element of the component that was enhanced
-
 emitted when the component is enhanced
 
 ### `dropDownWillShow`
-
-#### `event.detail`
-
-`component` - the outermost element of the component whose menu will be shown
 
 emitted when the component's menu is about to be shown
 
 ### `dropDownDidShow`
 
-#### `event.detail`
-
-`component` - the outermost element of the component whose menu was shown
-
 emitted when the component's menu is shown
 
 ### `dropDownWillHide`
-
-#### `event.detail`
-
-`component` - the outermost element of the component whose menu will be hidden
 
 emitted when the component's menu is about to be hidden
 
 ### `dropDownDidHide`
 
-#### `event.detail`
-
-`component` - the outermost element of the component whose menu was hidden
-
 emitted when the component's menu is hidden
+
+### `dropDownWillSelect`
+
+`event.detail.selected` - the component's menu item element that was selected
+
+emitted when one of the component's menu items is about to be selected
 
 ### `dropDownDidSelect`
 
-#### `event.detail`
-
-`component` - the outermost element of the component whose menu was hidden
-
-`selected` - the component's menu item element that was selected
+`event.detail.selected` - the component's menu item element that was selected
 
 emitted when one of the component's menu items is selected
 

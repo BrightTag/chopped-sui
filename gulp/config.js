@@ -49,12 +49,6 @@ var config = {
 
   },
 
-  helpers: {
-
-    components: 'src/components'
-
-  },
-
   components: {
 
     src: [
@@ -71,14 +65,9 @@ var config = {
       src: 'src/components/main.js'
     },
 
-    php: {
-      src: 'gulp/resources/php-helper.mustache',
-      dest: 'dist/helpers/php/'
-    },
-
     templates: {
       src: 'src/components/**/*.mustache',
-      dest: 'dist/helpers/templates/'
+      dest: 'dist/templates/'
     },
 
     test: {
