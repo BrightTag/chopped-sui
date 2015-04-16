@@ -83,15 +83,3 @@ For example, the `drop-down` contains a main template called `drop-down.mustache
 ### Tests
 
 Testing files live along side the source files. Testing is written using Mocha/Chai. We test everything from expected returns of small functions given good and bad arguments, to whether or not HTML is being added to the page, events are being thrown, and events are being listened for. 
-
-
-## Component Helpers
-
-Helper functions provide native wrappers for generating ChopSuey component markup in various backend languages.
-
-Currently, helper templates are located in [gulp/resources](gulp/resources) such as `php-helper.mustache`. These templates use the directory structure of the templates to generate method names for use in a particular language.
-
-Helpers get generated in [dist/helpers](dist/helpers) in language specific folders.
-
-ChopSuey currently supports:
-* `php`
