@@ -1,0 +1,88 @@
+@import '../../order';
+
+$button: (
+  background-color: #EEE,
+  background-color--hover: #F8F8F8,
+  border-color: #EEE,
+  border-radius: 2px,
+  border-style: solid,
+  border-width: 2px,
+  color: #333,
+  color--hover: #F30,
+  font-family: (Arial, sans-serif),
+  font-size: 14px,
+  font-style: normal,
+  font-weight: 400,
+  line-height: 24px,
+  padding: 10px 15px,
+  text-transform: uppercase
+) !default;
+
+@if (variable-exists(chop-suey-config)) {
+  @if (map-has-key($chop-suey-config, button)) {
+    $button: map-merge(
+      $button,
+      map-get($chop-suey-config, button)
+    );
+  }
+}
+
+@function get-styles($map, $type) {
+  @if variable-exists(chop-suey-config) {
+    @if map-has-key($chop-suey-config, $type) {
+      $map: map-merge(
+        $map,
+        map-get($chop-suey-config, $type)
+      );
+    }
+  }
+  @return $map;
+}
+
+@function get-variants($map) {
+  $component: $map;
+  $component: map-remove($component, variants);
+  $components: ();
+  $components: append($components, $component);
+  @if map-has-key($map, variants) {
+    $variants: map-get($map, variants);
+    @each $class, $styles in $variants {
+      $class: (
+        class: variant-#{$class}
+      );
+      $new: map-merge($styles, $class);
+      $components: append($components, $new);
+    }
+  }
+  @return $components;
+}
+
+@function map-set($map, $key, $value) {
+  $new: ($key: $value);
+  @return map-merge($map, $new);
+}
+
+@function enforce-four-args($map, $key) {
+  @if map-has-key($map, $key) {
+    $list: map-get($map, $key);
+    @if length($list) == 1 and nth($list, 1) == null {
+      $map: map-remove($map, $key);
+    }
+    @else {
+      @if length($list) == 0 {
+        $list: 0;
+      }
+      @if length($list) == 1 {
+        $list: append($list, nth($list, 1));
+      }
+      @if length($list) == 2 {
+        $list: append($list, nth($list, 1));
+      }
+      @if length($list) == 3 {
+        $list: append($list, nth($list, 2));
+      }
+      $map: map-set($map, $key, nth($list, 1) nth($list, 2) nth($list, 3) nth($list, 4));
+    }
+  }
+  @return $map;
+}

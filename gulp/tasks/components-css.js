@@ -19,8 +19,7 @@ gulp.task('components:css:compile', function () {
     .pipe(sass({
       bundleExec: true,
       style: 'expanded',
-      'sourcemap=none': true,
-      quiet: true
+      'sourcemap=none': true
     }))
     .on('error', handleErrors)
     .pipe(concat('components.css'))

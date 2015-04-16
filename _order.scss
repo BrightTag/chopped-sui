@@ -1,0 +1,100 @@
+$chop-suey-config: (
+
+  drop-down: (
+
+    variants: (
+
+      lo-mein: (
+
+        trigger: (
+          background-color: transparent,
+          background-color--hover: transparent,
+          border-color: transparent transparent #ccc transparent,
+          border-radius: 0,
+          border-style: solid,
+          border-width: 0 0 2px 0,
+          color: #333,
+          color--hover: #00ADEF,
+          font-family: ("proxima-nova", Helvetica, Verdana, Arial, sans-serif),
+          font-size: 16px,
+          font-style: normal,
+          font-weight: 400,
+          line-height: 24px,
+          padding: 10px 30px
+        ),
+
+        menu: (
+          font-family: ("proxima-nova", Helvetica, Verdana, Arial, sans-serif),
+          font-size: 16px,
+          font-style: normal,
+          font-weight: 400,
+          text-transform: uppercase,
+          box-shadow: none
+        ),
+
+        menu-item: (
+          background-color: #FFF,
+          background-color--active: #E8E8E8,
+          background-color--hover: #FFF,
+          color: #333,
+          color--active: #00ADEF,
+          color--hover: #00ADEF,
+          border-color: #CCC,
+          border-color--active: #CCC #CCC #CCC #00ADEF,
+          border-color--hover: #CCC #CCC #CCC #333,
+          border-style: solid,
+          border-width: 0 2px
+        )
+
+      ),
+
+      data-hub: (
+
+        trigger: (
+          background-color: #00ADEF,
+          background-color--hover: #00B7F9,
+          border-color: transparent transparent #0091C6 transparent,
+          border-radius: 0,
+          border-style: solid,
+          border-width: 0 0 1px 0,
+          color: #FFF,
+          color--hover: #FFF,
+          font-family: ("Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif),
+          font-size: 16px,
+          font-style: normal,
+          font-weight: 400,
+          line-height: 22px,
+          padding: 6px 12px,
+          text-transform: none
+        ),
+
+        menu: (
+          font-family: ("Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif),
+          font-size: 16px,
+          font-style: normal,
+          font-weight: 400,
+          text-transform: none,
+          box-shadow: (0 0 5px rgba(0, 0, 0, .5))
+        ),
+
+        menu-item: (
+          background-color: #FFF,
+          background-color--active: #00ADEF,
+          background-color--hover: #00B7F9,
+          color: #00ADEF,
+          color--active: #FFF,
+          color--hover: #FFF,
+          border-color: #FFF,
+          border-color--active: #FFF,
+          border-color--hover: #0091C6,
+          border-style: solid,
+          border-width: 1px
+        )
+
+      )
+
+    )
+
+  )
+
+);

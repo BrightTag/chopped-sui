@@ -16,196 +16,28 @@
         color: #333;
         font-family: "porxima-nova", Arial, sans-serif;
         font-weight: 400; font-style: normal;
+        text-align: center;
       }
       .drop-down {
-        margin: 10px 100px;
+        margin: 20px 50px;
       }
       h2 {
-        margin-top: 50px;
+        font-size: 50px;
+        margin: 50px 0;
+        padding: 0;
       }
       h3 {
-        margin-left: 50px;
+        font-size: 30px;
+        margin: 30px 0;
+        padding: 0;
       }
-    </style>
-    <style>
-    .collect .drop-down {
-      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-      text-transform: none;
-      height: 32px;
-    }
-
-      .collect .drop-down__trigger {
-        background: -webkit-linear-gradient(top, #00adef 0%, #00adef 100%);
-        border-bottom: 2px solid #0091c6;
-        border-radius: 3px;
-        color: #fff;
-        font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-        padding: 3px 41px 3px 15px;
-        text-transform: none;
-      }
-
-        .collect .drop-down__trigger:before {
-          border-color: #fff transparent transparent transparent;
-          bottom: 5px;
-          right: 17px;
-        }
-
-      .collect .drop-down__trigger:hover,
-      .collect .drop-down__trigger:focus {
-        color: #fff;
-      }
-
-        .collect .drop-down__trigger:hover:before,
-        .collect .drop-down__trigger:focus:before {
-          border-color: #fff transparent transparent transparent;
-          bottom: 5px;
-        }
-
-      .collect .drop-down__menu {
-        border-bottom: 2px solid #0091c6;
-        border-top: 2px solid #0091c6;
-        box-shadow: 0 1px 5px rgba(0,0,0,.15);
-        top: 30px;
-        z-index: 12;
-      }
-
-      .collect .drop-down__menu-option {
-        border: none;
-        margin-top: -1px;
-      }
-
-        .collect .drop-down__menu-option:first-of-type {
-         margin-top: 0;
-        }
-
-        .collect .drop-down__menu-option:last-of-type {
-          border-bottom-color: #dedede;
-        }
-
-          .collect .drop-down__menu-option-trigger {
-            border: 1px solid #dedede;
-            color: #569dcd;
-            padding: 10px 40px 10px 14px;
-          }
-
-            .collect .drop-down__menu--flush-right .drop-down__menu-option-trigger,
-            .collect .drop-down__menu--flush-left .drop-down__menu-option-trigger,
-            .collect .drop-down__menu--flush-both .drop-down__menu-option-trigger {
-              padding-right: 14px;
-            }
-
-          .collect .drop-down__menu-option-trigger:hover,
-          .collect .drop-down__menu-option-trigger:focus {
-            background-color: #81caf7;
-            border-color: #81caf7;
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
-          }
-
-          .collect .drop-down__menu-option--current .drop-down__menu-option-trigger,
-          .collect .drop-down__menu-option--current .drop-down__menu-option-trigger:hover,
-          .collect .drop-down__menu-option--current .drop-down__menu-option-trigger:focus {
-            background-color: #0091c6;
-            border-color: #0091c6;
-            color: #fff;
-            text-shadow: none;
-          }
-
-          .cadence .drop-down {
-            font-family: "Helvetica Neue", Calibri, sans-serif;
-            text-transform: none;
-            height: 44px;
-          }
-
-            .cadence .drop-down__trigger {
-              background-color: #505050;
-              color: #fff;
-              border-bottom: none;
-              font-family: "Helvetica Neue", Calibri, sans-serif;
-              text-transform: none;
-              padding: 10px 40px 10px 15px;
-            }
-
-            .cadence .drop-down__trigger:hover,
-            .cadence .drop-down__trigger:focus {
-              background-color: #272727;
-            }
-
-              .cadence .drop-down__trigger:before {
-                border-color: rgba(255,255,255,0.4) transparent transparent transparent;
-                right: 15px;
-              }
-
-            .cadence .drop-down__trigger:hover,
-            .cadence .drop-down__trigger:focus {
-              background-color: #272727;
-              color: #fff;
-            }
-
-              .cadence .drop-down__trigger:hover:before,
-              .cadence .drop-down__trigger:focus:before {
-                border-color: rgba(255,255,255,0.4) transparent transparent transparent;
-              }
-
-            .cadence .drop-down__trigger--active {
-              background-color: #272727;
-              color: #fff;
-            }
-
-              .cadence .drop-down__trigger--active:before {
-                border-color: rgba(255,255,255,0.4) transparent transparent transparent;
-              }
-
-            .cadence .drop-down__menu {
-              border: none;
-              max-height: 176px;
-            }
-
-              .cadence .drop-down__menu-option {
-                margin: 0;
-              }
-
-              .cadence .drop-down__menu-option:first-of-type {
-                margin-top: 0;
-              }
-
-              .cadence .drop-down__menu-option:last-of-type {
-                margin-bottom: 0;
-              }
-
-                .cadence .drop-down__menu-option-trigger {
-                  color: #e5e5e5;
-                  background-color: #333;
-                  border: none;
-                  padding: 10px 40px 10px 15px;
-                }
-
-                .cadence .drop-down__menu--flush-right .drop-down__menu-option-trigger,
-                .cadence .drop-down__menu--flush-left .drop-down__menu-option-trigger,
-                .cadence .drop-down__menu--flush-both .drop-down__menu-option-trigger {
-                  padding-right: 15px;;
-                }
-
-                .cadence .drop-down__menu-option-trigger:hover,
-                .cadence .drop-down__menu-option-trigger:focus {
-                  color: #fff;
-                  background-color: #272727;
-                }
-
-                .cadence .drop-down__menu-option--current .drop-down__menu-option-trigger,
-                .cadence .drop-down__menu-option--current .drop-down__menu-option-trigger:hover,
-                .cadence .drop-down__menu-option--current .drop-down__menu-option-trigger:focus {
-                  background-color: #171717;
-                }
-
-
     </style>
   </head>
   <body>
 
-    <h2>Drop-Down Menu From Select</h2>
+    <h2>Built From Select</h2>
 
-    <h3>Client-Side</h3>
+    <h3>Built Client-Side</h3>
 
     <div class="drop-down drop-down--unenhanced">
       <select class="drop-down__select">
@@ -213,9 +45,25 @@
         <option value="2">Menu Option 2</option>
         <option value="3">Menu Option 3</option>
       </select>
-    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
-    <h3>Server-Side</h3>
+    <div class="drop-down drop-down--unenhanced drop-down--variant-lo-mein">
+      <select class="drop-down__select">
+        <option value="1">Menu Option 1</option>
+        <option value="2">Menu Option 2</option>
+        <option value="3">Menu Option 3</option>
+      </select>
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <div class="drop-down drop-down--unenhanced drop-down--variant-data-hub">
+      <select class="drop-down__select">
+        <option value="1">Menu Option 1</option>
+        <option value="2">Menu Option 2</option>
+        <option value="3">Menu Option 3</option>
+      </select>
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <h3>Built Server-Side</h3>
 
     <div class="drop-down drop-down--unenhanced drop-down--built">
       <select class="drop-down__select drop-down__select--hidden">
@@ -234,12 +82,50 @@
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 2</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 3</a></li>
       </ul>
-    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <div class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-lo-mein">
+      <select class="drop-down__select drop-down__select--hidden">
+        <option value="1">Menu Option 1</option>
+        <option value="2">Menu Option 2</option>
+        <option value="3">Menu Option 3</option>
+      </select>
+      <ul class="drop-down__sizer">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 3</span></li>
+      </ul>
+      <button class="drop-down__trigger">Menu Option 1</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option drop-down__menu-option--current"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 3</a></li>
+      </ul>
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <div class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-data-hub">
+      <select class="drop-down__select drop-down__select--hidden">
+        <option value="1">Menu Option 1</option>
+        <option value="2">Menu Option 2</option>
+        <option value="3">Menu Option 3</option>
+      </select>
+      <ul class="drop-down__sizer">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 3</span></li>
+      </ul>
+      <button class="drop-down__trigger">Menu Option 1</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option drop-down__menu-option--current"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 3</a></li>
+      </ul>
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
-    <h2>Drop-Down Menu From Select - Hide Selected</h2>
+    <h2>Built From Select - Selected Option Is Hidden</h2>
 
-    <h3>Client-Side</h3>
+    <h3>Built Client-Side</h3>
 
     <div class="drop-down drop-down--unenhanced">
       <select class="drop-down__select drop-down__select--hide-current">
@@ -247,10 +133,26 @@
         <option value="2">Menu Option 2</option>
         <option value="3">Menu Option 3</option>
       </select>
-    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <div class="drop-down drop-down--unenhanced drop-down--variant-lo-mein">
+      <select class="drop-down__select drop-down__select--hide-current">
+        <option value="1">Menu Option 1</option>
+        <option value="2">Menu Option 2</option>
+        <option value="3">Menu Option 3</option>
+      </select>
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <div class="drop-down drop-down--unenhanced drop-down--variant-data-hub">
+      <select class="drop-down__select drop-down__select--hide-current">
+        <option value="1">Menu Option 1</option>
+        <option value="2">Menu Option 2</option>
+        <option value="3">Menu Option 3</option>
+      </select>
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
-    <h3>Server-Side</h3>
+    <h3>Built Server-Side</h3>
 
     <div class="drop-down drop-down--unenhanced drop-down--built">
       <select class="drop-down__select drop-down__select--hidden drop-down__select--hide-current">
@@ -269,12 +171,50 @@
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 2</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 3</a></li>
       </ul>
-    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <div class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-lo-mein">
+      <select class="drop-down__select drop-down__select--hidden drop-down__select--hide-current">
+        <option value="1">Menu Option 1</option>
+        <option value="2">Menu Option 2</option>
+        <option value="3">Menu Option 3</option>
+      </select>
+      <ul class="drop-down__sizer">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 3</span></li>
+      </ul>
+      <button class="drop-down__trigger">Menu Option 1</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option drop-down__menu-option--current drop-down__menu-option--hidden"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 3</a></li>
+      </ul>
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <div class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-data-hub">
+      <select class="drop-down__select drop-down__select--hidden drop-down__select--hide-current">
+        <option value="1">Menu Option 1</option>
+        <option value="2">Menu Option 2</option>
+        <option value="3">Menu Option 3</option>
+      </select>
+      <ul class="drop-down__sizer">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 3</span></li>
+      </ul>
+      <button class="drop-down__trigger">Menu Option 1</button>
+      <ul class="drop-down__menu drop-down__menu--hidden">
+        <li class="drop-down__menu-option drop-down__menu-option--current drop-down__menu-option--hidden"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="javascript:;">Menu Option 3</a></li>
+      </ul>
+    </div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
-    <h2>Drop-Down Menu From Link List</h2>
+    <h2>Built From List Of Links</h2>
 
-    <h3>Client-Side</h3>
+    <h3>Built Client-Side</h3>
 
     <nav class="drop-down drop-down--unenhanced">
       <ul class="drop-down__menu drop-down__menu--flush-both" drop-down-trigger-text="Menu">
@@ -285,10 +225,32 @@
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#5">Menu Option 5</a></li>
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#6">Menu Option 6</a></li>
       </ul>
-    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--variant-lo-mein">
+      <ul class="drop-down__menu drop-down__menu--flush-both" drop-down-trigger-text="Menu">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#4">Menu Option 4</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#5">Menu Option 5</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#6">Menu Option 6</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--variant-data-hub">
+      <ul class="drop-down__menu drop-down__menu--flush-both" drop-down-trigger-text="Menu">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#4">Menu Option 4</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#5">Menu Option 5</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#6">Menu Option 6</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
-    <h3>Server-Side</h3>
+    <h3>Built Server-Side</h3>
 
     <nav class="drop-down drop-down--unenhanced drop-down--built">
       <button class="drop-down__trigger drop-down__trigger--fixed">Menu</button>
@@ -308,12 +270,52 @@
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#5">Menu Option 5</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#6">Menu Option 6</a></li>
       </ul>
-    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-lo-mein">
+      <button class="drop-down__trigger drop-down__trigger--fixed">Menu</button>
+      <ul class="drop-down__sizer drop-down__menu--flush-both">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 3</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 4</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 5</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 6</span></li>
+      </ul>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-both">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#4">Menu Option 4</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#5">Menu Option 5</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#6">Menu Option 6</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-data-hub">
+      <button class="drop-down__trigger drop-down__trigger--fixed">Menu</button>
+      <ul class="drop-down__sizer drop-down__menu--flush-both">
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 1</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 2</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 3</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 4</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 5</span></li>
+        <li class="drop-down__menu-option"><span class="drop-down__menu-option-trigger">Menu Option 6</span></li>
+      </ul>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-both">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#4">Menu Option 4</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#5">Menu Option 5</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#6">Menu Option 6</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
-    <h2>Drop-Down Menu From Link List - Flush Right</h2>
+    <h2>Built From List Of Links - Menu Flush Right</h2>
 
-    <h3>Client-Side</h3>
+    <h3>Built Client-Side</h3>
 
     <nav class="drop-down drop-down--unenhanced">
       <ul class="drop-down__menu drop-down__menu--flush-right" drop-down-trigger-text="Menu">
@@ -321,10 +323,26 @@
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
       </ul>
-    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--variant-lo-mein">
+      <ul class="drop-down__menu drop-down__menu--flush-right" drop-down-trigger-text="Menu">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--variant-data-hub">
+      <ul class="drop-down__menu drop-down__menu--flush-right" drop-down-trigger-text="Menu">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
-    <h3>Server-Side</h3>
+    <h3>Built Server-Side</h3>
 
     <nav class="drop-down drop-down--unenhanced drop-down--built">
       <button class="drop-down__trigger drop-down__trigger--fixed drop-down__trigger--right">Menu</button>
@@ -333,12 +351,30 @@
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
       </ul>
-    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-lo-mein">
+      <button class="drop-down__trigger drop-down__trigger--fixed drop-down__trigger--right">Menu</button>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-right">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-data-hub">
+      <button class="drop-down__trigger drop-down__trigger--fixed drop-down__trigger--right">Menu</button>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-right">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
-    <h2>Drop-Down Menu From Link List - Flush Left</h2>
+    <h2>Built From List Of Links - Menu Flush Left</h2>
 
-    <h3>Client-Side</h3>
+    <h3>Built Client-Side</h3>
 
     <nav class="drop-down drop-down--unenhanced">
       <ul class="drop-down__menu drop-down__menu--flush-left" drop-down-trigger-text="Menu">
@@ -346,10 +382,26 @@
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
         <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
       </ul>
-    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--variant-lo-mein">
+      <ul class="drop-down__menu drop-down__menu--flush-left" drop-down-trigger-text="Menu">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--variant-data-hub">
+      <ul class="drop-down__menu drop-down__menu--flush-left" drop-down-trigger-text="Menu">
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
-    <h3>Server-Side</h3>
+    <h3>Built Server-Side</h3>
 
     <nav class="drop-down drop-down--unenhanced drop-down--built">
       <button class="drop-down__trigger drop-down__trigger--fixed drop-down__trigger--left">Menu</button>
@@ -358,42 +410,27 @@
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
         <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
       </ul>
-    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(this)}}());" />
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
-
-
-
-
-
-
-
-    <!-- <br>
-    <hr>
-    <h3>Navigation Tabs</h3>
-
-     <div class="tabs tabs--unenhanced">
-      <div id="entity-bar">
-      <nav class="primary-navigation">
-      <ul>
-        <li class="picker-wrapper">
-          <a class="site-picker" href="#">
-            <span class="current-site" title="carerunner.com" id="currentSite">carerunner.com</span>
-          </a>
-        </li>
-        <li class='nav-tab active'><a href="#1">Site</a></li>
-        <li class='nav-tab'><a href="#2">Tags</a></li>
-        <li class='nav-tab'><a href="#3">Pages</a></li>
-        <li class='nav-tab'><a href="#4">Data & Events</a></li>
+    <nav class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-lo-mein">
+      <button class="drop-down__trigger drop-down__trigger--fixed drop-down__trigger--left">Menu</button>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-left">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
       </ul>
-      </nav>
-      </div>
-      <div> Tab Content 1</div>
-      <div> Tab Content 2</div>
-      <div> Tab Content 3</div>
-    </div><img id="tabs-1" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="ChopSuey.initializeComponent({image:this,componentType:'tabs'});" />
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
+
+    <nav class="drop-down drop-down--unenhanced drop-down--built drop-down--variant-data-hub">
+      <button class="drop-down__trigger drop-down__trigger--fixed drop-down__trigger--left">Menu</button>
+      <ul class="drop-down__menu drop-down__menu--hidden drop-down__menu--flush-left">
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#1">Menu Option 1</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#2">Menu Option 2</a></li>
+        <li class="drop-down__menu-option"><a tabindex="-1" class="drop-down__menu-option-trigger" href="#3">Menu Option 3</a></li>
+      </ul>
+    </nav><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="(function(i){var c;if(c=ChopSuey.registeredComponents()['dropDown']){c.initialize(i)}}(this));" />
 
 
- -->
     <script src="js/components.js"></script>
 
   </body>
