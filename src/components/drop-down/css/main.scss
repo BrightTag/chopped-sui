@@ -1,235 +1,484 @@
-.drop-down {
+@import '../../globals';
 
-  /* default styles */
-  display: inline-block;
-  font-family: "proxima-nova", Helvetica, Verdana, Arial, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  margin: 0;
-  position: relative;
-  text-align: left;
-  text-transform: uppercase;
-  vertical-align: bottom;
+$drop-down: (
+  font-family: map-get($button, font-family),
+  font-size: map-get($button, font-size),
+  font-style: map-get($button, font-style),
+  font-weight: map-get($button, font-weight),
+  text-transform: map-get($button, text-transform),
 
-  .js & {
+  trigger: (
+    background-color: map-get($button, background-color),
+    background-color--hover: map-get($button, background-color--hover),
+    border-color: map-get($button, border-color),
+    border-radius: map-get($button, border-radius),
+    border-style: map-get($button, border-style),
+    border-width: map-get($button, border-width),
+    color: map-get($button, color),
+    color--hover: map-get($button, color--hover),
+    font-family: map-get($button, font-family),
+    font-size: map-get($button, font-size),
+    font-style: map-get($button, font-style),
+    font-weight: map-get($button, font-weight),
+    line-height: map-get($button, line-height),
+    padding: map-get($button, padding),
+    text-transform: map-get($button, text-transform)
+  ),
 
-    /* styles while page is loading */
-    height: 46px;
+  menu: (
+    box-shadow: none,
+    font-family: map-get($button, font-family),
+    font-size: map-get($button, font-size),
+    font-style: map-get($button, font-style),
+    font-weight: map-get($button, font-weight),
+    text-transform: map-get($button, text-transform),
+  ),
 
+  menu-item: (
+    background-color: #FFF,
+    background-color--active: map-get($button, background-color),
+    background-color--hover: map-get($button, background-color--hover),
+    color: map-get($button, color),
+    color--active: map-get($button, color--hover),
+    color--hover: map-get($button, color--hover),
+    border-color: map-get($button, background-color),
+    border-color--active: map-get($button, background-color),
+    border-color--hover: map-get($button, color),
+    border-style: map-get($button, border-style),
+    border-width: map-get($button, border-width)
+  )
+
+) !default;
+
+$drop-down: get-styles($drop-down, drop-down);
+
+$variants: get-variants($drop-down);
+
+$default__trigger--height: 0;
+$default__menu--offset: 0;
+$default__menu-item--height: 0;
+
+@each $variant in $variants {
+
+  $variant-menu-item: map-get($variant, menu-item);
+  @if $variant-menu-item == null {
+    $variant-menu-item: ();
   }
 
-  &--built {
+  $variant-menu-item: enforce-four-args($variant-menu-item, border-color);
 
-    /* styles when component is built but unenhanced */
-    height: 46px;
+  $variant-menu-item: enforce-four-args($variant-menu-item, border-color--active);
 
+  $variant-menu-item: enforce-four-args($variant-menu-item, border-color--hover);
+
+  $variant-menu-item: enforce-four-args($variant-menu-item, border-style);
+
+  $variant-menu-item: enforce-four-args($variant-menu-item, border-width);
+
+  $variant: map-set($variant, menu-item, $variant-menu-item);
+
+  $variant-trigger: map-get($variant, trigger);
+  @if $variant-trigger == null {
+    $variant-trigger: ();
   }
 
-  &--enhanced {
+  $variant-trigger: enforce-four-args($variant-trigger, border-color);
 
-    /* styles when component is completely enhanced */
-    height: 46px;
+  $variant-trigger: enforce-four-args($variant-trigger, border-style);
 
+  $variant-trigger: enforce-four-args($variant-trigger, border-width);
+
+  $variant-trigger: enforce-four-args($variant-trigger, padding);
+
+  @if map-has-key($variant-trigger, padding) {
+    $variant-trigger: map-set(
+      $variant-trigger,
+      padding,
+      nth(map-get($variant-trigger, padding), 1) (nth(map-get($variant-trigger, padding), 2) + 20px) nth(map-get($variant-trigger, padding), 3) nth(map-get($variant-trigger, padding), 4)
+    );
   }
 
-  &__select {
+  $variant__trigger--height: $default__trigger--height;
 
-    &--hidden {
-
-      display: none;
-
+  @if map-has-key($variant-trigger, line-height)
+    or map-has-key($variant-trigger, padding)
+    or map-has-key($variant-trigger, border-width) {
+    $trigger-line-height: map-get(map-get($drop-down, trigger), line-height);
+    $trigger-padding: map-get(map-get($drop-down, trigger), padding);
+    $trigger-border-width: map-get(map-get($drop-down, trigger), border-width);
+    @if map-has-key($variant-trigger, line-height) {
+      $trigger-line-height: map-get($variant-trigger, line-height);
     }
-
+    @if map-has-key($variant-trigger, padding) {
+      $trigger-padding: map-get($variant-trigger, padding);
+    }
+    @if map-has-key($variant-trigger, border-width) {
+      $trigger-border-width: map-get($variant-trigger, border-width);
+    }
+    $variant__trigger--height: $trigger-line-height + nth($trigger-padding, 1) + nth($trigger-padding, 3) + nth($trigger-border-width, 1) + nth($trigger-border-width, 3);
   }
 
-  &__trigger {
+  $variant__menu--offset: $default__menu--offset;
 
-    background-color: transparent;
-    border-color: #CCC;
-    border-style: solid;
-    border-width: 0 0 2px 0;
-    color: #333;
-    cursor: hand;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "proxima-nova", Helvetica, Verdana, Arial, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    left: 0;
-    line-height: 24px;
-    margin: 0;
-    padding: 10px 50px 10px 30px;
-    position: absolute;
-    text-align: left;
-    text-transform: uppercase;
-    top: 0;
-    transition: all .1s;
-    white-space: nowrap;
-    width: 100%;
-
-    &:before {
-
-      border-color: #333 transparent transparent transparent;
-      border-style: solid;
-      border-width: 6px 5px;
-      bottom: 13px;
-      content: '';
-      position: absolute;
-      right: 28px;
-      transition: all .1s;
-
+  @if map-has-key($variant-trigger, border-width)
+    or $variant__trigger--height != $default__trigger--height {
+    $trigger-border-width: map-get(map-get($drop-down, trigger), border-width);
+    @if map-has-key($variant-trigger, border-width) {
+      $trigger-border-width: map-get($variant-trigger, border-width);
     }
-
-    &:hover,
-    &:focus {
-
-      color: #00ADEF;
-
-      &:before {
-
-        border-color: #00ADEF transparent transparent transparent;
-
-      }
-
-    }
-
-    &--active {
-
-      z-index: 111;
-
-    }
-
-    &--left,
-    &--right {
-
-      position: relative;
-
-    }
-
+    $variant__menu--offset: $variant__trigger--height - nth($trigger-border-width, 3);
   }
 
-  &__menu,
-  &__sizer {
+  $variant__menu-item--height: $default__menu-item--height;
 
-    border-bottom: 2px solid #CCC;
-    border-top: 2px solid #CCC;
-    display: inline-block;
-    left: 0;
-    list-style: none;
-    margin: 0;
-    max-height: 176px;
-    min-width: 100%;
-    opacity: 1;
-    overflow: scroll;
-    padding: 0;
-    position: absolute;
-    top: 44px;
-    z-index: 11;
-
-    .drop-down--unenhanced & {
-
-      max-height: none;
-      position: relative;
-      top: 0;
-
+  @if map-has-key($variant-trigger, line-height)
+    or map-has-key($variant-trigger, padding)
+    or map-has-key($variant-menu-item, border-width) {
+    $trigger-line-height: map-get(map-get($drop-down, trigger), line-height);
+    $trigger-padding: map-get(map-get($drop-down, trigger), padding);
+    $menu-item-border-width: map-get(map-get($drop-down, menu-item), border-width);
+    @if map-has-key($variant-trigger, line-height) {
+      $trigger-line-height: map-get($variant-trigger, line-height);
     }
-
-    .drop-down--built & {
-
-      max-height: 200px;
-      position: absolute;
-      top: 44px;
-
+    @if map-has-key($variant-trigger, padding) {
+      $trigger-padding: map-get($variant-trigger, padding);
     }
-
-    &--flush-right {
-
-      left: auto;
-      right: 0;
-
+    @if map-has-key(map-get($variant, menu-item), border-width) {
+      $menu-item-border-width: map-get(map-get($variant, menu-item), border-width);
     }
+    $variant__menu-item--height: $trigger-line-height + nth($trigger-padding, 1) + nth($trigger-padding, 3) + nth($menu-item-border-width, 3);
+  }
 
+  @if map-has-key($variant, class) {}
+  @else {
+    $default__trigger--height: $variant__trigger--height;
+    $default__menu--offset: $variant__menu--offset;
+    $default__menu-item--height: $variant__menu-item--height;
+  }
 
-    &--flush-right,
-    &--flush-left,
-    &--flush-both {
+  $variant: map-set($variant, trigger, $variant-trigger);
 
-      & .drop-down__menu-option-trigger {
+  $variant-class: '';
+  @if map-has-key($variant, class) {
+    $variant-class: map-get($variant, class);
+  }
 
-        padding-right: 30px;
+  $variant-trigger: map-get($variant, trigger);
+  @if $variant-trigger == null {
+    $variant-trigger: ();
+  }
+  $variant-menu: map-get($variant, menu);
+  @if $variant-menu == null {
+    $variant-menu: ();
+  }
+  $variant-menu-item: map-get($variant, menu-item);
+  @if $variant-menu-item == null {
+    $variant-menu-item: ();
+  }
 
-      }
+  @if $variant-class != '' {
 
-    }
+    @if $variant__trigger--height != $default__trigger--height {
 
-    &--hidden {
+      .drop-down--#{$variant-class}.drop-down {
 
-      opacity: 0;
-      top: 0;
-      visibility: hidden;
+        .js & {
 
-    }
+          /* styles while page is loading */
+          height: $variant__trigger--height;
 
-    .drop-down--enhanced & {
+        }
 
-      transition: all .1s;
+        &--built {
 
-    }
+          /* styles when component is built but unenhanced */
+          height: $variant__trigger--height;
 
-    &-option {
+        }
 
-      position: relative;
-      transition: all .1s;
-      width: auto;
+        &--enhanced {
 
-      &--current {
-
-        border-color: #00ADEF;
-        z-index: 11;
-
-        .drop-down__menu-option-trigger {
-
-          background-color: #E8E8E8;
-          border-left-color: #00ADEF;
-          color: #00ADEF;
-          z-index: 111;
+          /* styles when component is completely enhanced */
+          height: $variant__trigger--height;
 
         }
 
       }
 
-      &--hidden {
+    }
 
-        display: none;
+    .drop-down--#{$variant-class}.drop-down .drop-down{
 
-      }
+      &__trigger {
 
-      &-trigger {
+        @if map-has-key($variant-trigger, background-color) {
+          background-color: map-get($variant-trigger, background-color);
+        }
+        @if map-has-key($variant-trigger, border-color) {
+          border-color: map-get($variant-trigger, border-color);
+        }
+        @if map-has-key($variant-trigger, border-radius) {
+          border-radius: map-get($variant-trigger, border-radius);
+        }
+        @if map-has-key($variant-trigger, border-style) {
+          border-style: map-get($variant-trigger, border-style);
+        }
+        @if map-has-key($variant-trigger, border-width) {
+          border-width: map-get($variant-trigger, border-width);
+        }
+        @if map-has-key($variant-trigger, color) {
+          color: map-get($variant-trigger, color);
+        }
+        @if map-has-key($variant-trigger, font-family) {
+          font-family: map-get($variant-trigger, font-family);
+        }
+        @if map-has-key($variant-trigger, font-size) {
+          font-size: map-get($variant-trigger, font-size);
+        }
+        @if map-has-key($variant-trigger, font-style) {
+          font-style: map-get($variant-trigger, font-style);
+        }
+        @if map-has-key($variant-trigger, font-weight) {
+          font-weight: map-get($variant-trigger, font-weight);
+        }
+        @if map-has-key($variant-trigger, line-height) {
+          line-height: map-get($variant-trigger, line-height);
+        }
+        @if map-has-key($variant-trigger, padding) {
+          padding: map-get($variant-trigger, padding);
+        }
+        @if map-has-key($variant-trigger, text-transform) {
+          text-transform: map-get($variant-trigger, text-transform);
+        }
 
-        background-color: #FFF;
-        border-left: 2px solid #CCC;
-        border-right: 2px solid #CCC;
-        color: #333;
-        cursor: hand;
-        cursor: pointer;
-        display: block;
-        font-size: 16px;
-        line-height: 24px;
-        padding: 10px 48px 10px 28px;
-        position: relative;
-        text-decoration: none;
-        transition: all .1s;
-        white-space: nowrap;
-        width: auto;
+        &:before {
+
+          @if map-has-key($variant-trigger, color) {
+            border-top-color: map-get($variant-trigger, color);
+          }
+          @if map-has-key($variant-trigger, padding)
+            or map-has-key($variant-trigger, line-height) {
+            $trigger-padding: map-get(map-get($drop-down, trigger), padding);
+            $trigger-line-height: map-get(map-get($drop-down, trigger), line-height);
+            @if map-has-key($variant-trigger, padding) {
+              $trigger-padding: map-get($variant-trigger, padding);
+            }
+            @if map-has-key($variant-trigger, line-height) {
+              $trigger-line-height: map-get($variant-trigger, line-height);
+            }
+            bottom: nth($trigger-padding, 3) + ($trigger-line-height / 2) - 10px;
+          }
+          @if map-has-key($variant-trigger, padding) {
+            right: nth(map-get($variant-trigger, padding), 2) - 20px;
+          }
+
+        }
 
         &:hover,
         &:focus {
 
-          border-left-color: #333;
-          color: #00ADEF;
-          z-index: 11;
+          @if map-has-key($variant-trigger, background-color--hover) {
+            background-color: map-get($variant-trigger, background-color--hover);
+          }
+          @if map-has-key($variant-trigger, color--hover) {
+            color: map-get($variant-trigger, color--hover);
+          }
+
+          &:before {
+
+            @if map-has-key($variant-trigger, color--hover) {
+              border-top-color: map-get($variant-trigger, color--hover);
+            }
+
+          }
+
+        }
+
+      }
+
+      &__menu,
+      &__sizer {
+
+        @if map-has-key($variant-trigger, border-color) {
+          border-color: nth(map-get($variant-trigger, border-color), 3);
+        }
+        @if map-has-key($variant-trigger, border-style) {
+          border-style: nth(map-get($variant-trigger, border-style), 3);
+        }
+        @if map-has-key($variant-menu-item, border-width) {
+          @if nth(map-get($variant-menu-item, border-width), 1) != 0 {
+          }
+          @else {
+            border-width: nth(map-get($variant-trigger, border-width), 3) 0;
+          }
+        }
+        @if map-has-key($variant-menu, box-shadow) {
+          box-shadow: map-get($variant-menu, box-shadow);
+        }
+        @if map-has-key($variant-menu, font-family) {
+          font-family: map-get($variant-menu, font-family);
+        }
+        @if map-has-key($variant-menu, font-size) {
+          font-size: map-get($variant-menu, font-size);
+        }
+        @if map-has-key($variant-menu, font-style) {
+          font-style: map-get($variant-menu, font-style);
+        }
+        @if map-has-key($variant-menu, font-weight) {
+          font-weight: map-get($variant-menu, font-weight);
+        }
+        @if map-has-key($variant-menu-item, border-width)
+          or $variant__menu-item--height != $default__menu-item--height {
+          $menu-item-border-width: map-get(map-get($drop-down, menu-item), border-width);
+          @if map-has-key($variant-menu-item, border-width) {
+            $menu-item-border-width: map-get($variant-menu-item,border-width);
+          }
+          max-height: (4 * $variant__menu-item--height) + nth($menu-item-border-width, 3);
+        }
+        @if $variant__menu--offset != $default__menu--offset {
+          top: $variant__menu--offset;
+        }
+        @if map-has-key($variant-menu, text-transform) {
+          text-transform: map-get($variant-menu, text-transform);
+        }
+
+        .drop-down--built & {
+
+          @if map-has-key($variant-menu-item, border-width)
+            or $variant__menu-item--height != $default__menu-item--height {
+            $menu-item-border-width: map-get(map-get($drop-down, menu-item), border-width);
+            @if map-has-key($variant-menu-item, border-width) {
+              $menu-item-border-width: map-get($variant-menu-item, border-width);
+            }
+            max-height: (4 * $variant__menu-item--height) + nth($menu-item-border-width, 3);
+          }
+          @if $variant__menu--offset != $default__menu--offset {
+            top: $variant__menu--offset;
+          }
+
+        }
+
+
+        &--flush-right,
+        &--flush-left,
+        &--flush-both {
+
+          & .drop-down__menu-option-trigger {
+
+            @if map-has-key($variant-trigger, padding) {
+              padding-right: nth(map-get($variant-trigger, padding), 2) - 20px;
+            }
+
+          }
+
+        }
+
+        &-option {
+
+          & + .drop-down__menu-option {
+            @if map-has-key($variant-menu-item, border-width) {
+              @if nth(map-get($variant-menu-item, border-width), 1) {
+                @if nth(map-get($variant-menu-item, border-width), 1) == nth(map-get($variant-menu-item, border-width), 3) {
+                  .drop-down__menu-option-trigger {
+                    margin-top: (-1 * nth(map-get($variant-menu-item, border-width), 1));
+                  }
+                }
+              }
+            }
+          }
+
+          &--current {
+
+            .drop-down__menu-option-trigger {
+
+              @if map-has-key($variant-menu-item, background-color--active) {
+                background-color: map-get($variant-menu-item, background-color--active);
+              }
+              @if map-has-key($variant-menu-item, border-color--active) {
+                border-color: map-get($variant-menu-item, border-color--active);
+              }
+              @if map-has-key($variant-menu-item, color--active) {
+                color: map-get($variant-menu-item, color--active);
+              }
+
+            }
+
+          }
+
+          &-trigger {
+
+            @if map-has-key($variant-menu-item, background-color) {
+              background-color: map-get($variant-menu-item, background-color);
+            }
+            @if map-has-key($variant-menu-item, border-color) {
+              border-color: map-get($variant-menu-item, border-color);
+            }
+            @if map-has-key($variant-menu-item, border-style) {
+              border-style: map-get($variant-menu-item, border-style);
+            }
+            @if map-has-key($variant-menu-item, border-width) {
+              border-width: map-get($variant-menu-item, border-width);
+            }
+            @if map-has-key($variant-menu-item, color) {
+              color: map-get($variant-menu-item, color);
+            }
+            @if map-has-key($variant-menu, font-size) {
+              font-size: map-get($variant-menu, font-size);
+            }
+            @if map-has-key($variant-trigger, line-height) {
+              line-height: map-get($variant-trigger, line-height);
+            }
+            @if map-has-key($variant-trigger, padding)
+              or map-has-key($variant-trigger, border-width) {
+              $trigger-padding: map-get(map-get($drop-down, trigger), padding);
+              $trigger-border-width: map-get(map-get($drop-down, trigger), border-width);
+              @if map-has-key($variant-trigger, padding) {
+                $trigger-padding: map-get($variant-trigger, padding);
+              }
+              @if map-has-key($variant-trigger, border-width) {
+                $trigger-border-width: map-get($variant-trigger, border-width);
+              }
+              padding: nth($trigger-padding, 1) (nth($trigger-padding, 2) - nth(map-get($variant-trigger, border-width), 3)) nth($trigger-padding, 3) (nth($trigger-padding, 4) - nth($trigger-border-width, 3));
+            }
+
+            &:hover,
+            &:focus {
+
+              @if map-has-key($variant-menu-item, background-color--hover) {
+                background-color: map-get($variant-menu-item, background-color--hover);
+              }
+              @if map-has-key($variant-menu-item, border-color--hover) {
+                border-color: map-get($variant-menu-item, border-color--hover);
+              }
+              @if map-has-key($variant-menu-item, color--hover) {
+                color: map-get($variant-menu-item, color--hover);
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+      &__sizer {
+
+        @if $variant__menu--offset != $default__menu--offset {
+          height: $variant__menu--offset;
+        }
+
+        &--flush-right,
+        &--flush-left,
+        &--flush-both {
+
+          & .drop-down__menu-option-trigger {
+
+            @if map-has-key($variant-trigger, padding) {
+              padding-right: nth(map-get($variant-trigger, padding), 2) - 20px;
+            }
+
+          }
 
         }
 
@@ -238,38 +487,311 @@
     }
 
   }
+  @else {
 
-  &__sizer {
+    $drop-down: $variant;
 
-    border: none;
-    display: inline-block;
-    height: 44px;
-    position: relative;
-    top: 0;
-    visibility: hidden;
+    .drop-down {
 
-    .drop-down--unenhanced &,
-    .drop-down--built & {
-
-      max-height: none;
+      /* default styles */
+      display: inline-block;
+      margin: 0;
       position: relative;
-      top: 0;
+      text-align: left;
+      vertical-align: bottom;
 
-    }
+      * {
 
-    .drop-down--enhanced & {
+        box-sizing: border-box;
 
-      transition: none;
+      }
 
-    }
+      .js & {
 
-    &--flush-right,
-    &--flush-left,
-    &--flush-both {
+        /* styles while page is loading */
+        height: $variant__trigger--height;
 
-      & .drop-down__menu-option-trigger {
+      }
 
-        padding-right: 30px;
+      &--built {
+
+        /* styles when component is built but unenhanced */
+        height: $variant__trigger--height;
+
+      }
+
+      &--enhanced {
+
+        /* styles when component is completely enhanced */
+        height: $variant__trigger--height;
+
+      }
+
+      &__select {
+
+        &--hidden {
+
+          display: none;
+
+        }
+
+      }
+
+      &__trigger {
+
+        background-color: map-get($variant-trigger, background-color);
+        border-color: map-get($variant-trigger, border-color);
+        border-radius: map-get($variant-trigger, border-radius);
+        border-style: map-get($variant-trigger, border-style);
+        border-width: map-get($variant-trigger, border-width);
+        color: map-get($variant-trigger, color);
+        cursor: hand;
+        cursor: pointer;
+        display: inline-block;
+        font-family: map-get($variant-trigger, font-family);
+        font-size: map-get($variant-trigger, font-size);
+        font-style: map-get($variant-trigger, font-style);
+        font-weight: map-get($variant-trigger, font-weight);
+        left: 0;
+        line-height: map-get($variant-trigger, line-height);
+        margin: 0;
+        padding: map-get($variant-trigger, padding);
+        position: absolute;
+        text-align: left;
+        text-transform: map-get($variant-trigger, text-transform);
+        top: 0;
+        transition: all .1s;
+        white-space: nowrap;
+        width: 100%;
+
+        &:before {
+
+          border-color: transparent;
+          border-style: solid;
+          border-top-color: map-get($variant-trigger, color);
+          border-width: 6px 5px;
+          bottom: nth(map-get($variant-trigger, padding), 3) + (map-get($variant-trigger, line-height) / 2) - 10px;
+          content: '';
+          position: absolute;
+          right: nth(map-get($variant-trigger, padding), 2) - 20px;
+          transition: all .1s;
+
+        }
+
+        &:hover,
+        &:focus {
+
+          background-color: map-get($variant-trigger, background-color--hover);
+          color: map-get($variant-trigger, color--hover);
+
+          &:before {
+
+            border-top-color: map-get($variant-trigger, color--hover);
+
+          }
+
+        }
+
+        &--active {
+
+          z-index: 111;
+
+        }
+
+        &--left,
+        &--right {
+
+          position: relative;
+
+        }
+
+      }
+
+      &__menu,
+      &__sizer {
+
+        border-color: nth(map-get($variant-trigger, border-color), 3);
+        border-style: nth(map-get($variant-trigger, border-style), 3);
+        @if nth(map-get($variant-menu-item, border-width), 1) != 0 {
+          border-width: 0;
+        }
+        @else {
+          border-width: nth(map-get($variant-trigger, border-width), 3) 0;
+        }
+        box-shadow: map-get($variant-menu, box-shadow);
+        display: inline-block;
+        font-family: map-get($variant-menu, font-family);
+        font-size: map-get($variant-menu, font-size);
+        font-style: map-get($variant-menu, font-style);
+        font-weight: map-get($variant-menu, font-weight);
+        left: 0;
+        list-style: none;
+        margin: 0;
+        max-height: (4 * $variant__menu-item--height) + nth(map-get($variant-menu-item, border-width), 3);
+        min-width: 100%;
+        opacity: 1;
+        overflow: scroll;
+        padding: 0;
+        position: absolute;
+        top: $variant__menu--offset;
+        text-transform: map-get($variant-menu, text-transform);
+        z-index: 1111;
+
+        .drop-down--unenhanced & {
+
+          max-height: none;
+          position: relative;
+          top: 0;
+
+        }
+
+        .drop-down--built & {
+
+          max-height: (4 * $variant__menu-item--height) + nth(map-get($variant-menu-item, border-width), 3);
+          position: absolute;
+          top: $variant__menu--offset;
+
+        }
+
+        &--flush-right {
+
+          left: auto;
+          right: 0;
+
+        }
+
+
+        &--flush-right,
+        &--flush-left,
+        &--flush-both {
+
+          & .drop-down__menu-option-trigger {
+
+            padding-right: nth(map-get($variant-trigger, padding), 2) - 20px;
+
+          }
+
+        }
+
+        &--hidden {
+
+          opacity: 0;
+          top: 0;
+          visibility: hidden;
+
+        }
+
+        .drop-down--enhanced & {
+
+          transition: all .1s;
+
+        }
+
+        &-option {
+
+          position: relative;
+          transition: all .1s;
+          width: auto;
+
+          & + & {
+            @if nth(map-get($variant-menu-item, border-width), 1) {
+              @if nth(map-get($variant-menu-item, border-width), 1) == nth(map-get($variant-menu-item, border-width), 3) {;
+                .drop-down__menu-option-trigger {
+                  margin-top: (-1 * nth(map-get($variant-menu-item, border-width), 1));
+                }
+              }
+            }
+          }
+
+          &--current {
+
+            .drop-down__menu-option-trigger {
+
+              background-color: map-get($variant-menu-item, background-color--active);
+              border-color: map-get($variant-menu-item, border-color--active);
+              color: map-get($variant-menu-item, color--active);
+              z-index: 11;
+
+            }
+
+          }
+
+          &--hidden {
+
+            display: none;
+
+          }
+
+          &-trigger {
+
+            background-color: map-get($variant-menu-item, background-color);
+            border-color: map-get($variant-menu-item, border-color);
+            border-style: map-get($variant-menu-item, border-style);
+            border-width: map-get($variant-menu-item, border-width);
+            color: map-get($variant-menu-item, color);
+            cursor: hand;
+            cursor: pointer;
+            display: block;
+            font-size: map-get($variant-menu, font-size);
+            line-height: map-get($variant-trigger, line-height);
+            outline: none;
+            padding: nth(map-get($variant-trigger, padding), 1) (nth(map-get($variant-trigger, padding), 2) - nth(map-get($variant-trigger, border-width), 3)) nth(map-get($variant-trigger, padding), 3) (nth(map-get($variant-trigger, padding), 4) - nth(map-get($variant-trigger, border-width), 3));
+            position: relative;
+            text-decoration: none;
+            transition: all .1s;
+            white-space: nowrap;
+            width: auto;
+
+            &:hover,
+            &:focus {
+
+              background-color: map-get($variant-menu-item, background-color--hover);
+              border-color: map-get($variant-menu-item, border-color--hover);
+              color: map-get($variant-menu-item, color--hover);
+              z-index: 111;
+
+            }
+
+          }
+
+        }
+
+      }
+
+      &__sizer {
+
+        display: inline-block;
+        height: $variant__menu--offset;
+        position: relative;
+        top: 0;
+        visibility: hidden;
+
+        .drop-down--unenhanced &,
+        .drop-down--built & {
+
+          max-height: none;
+          position: relative;
+          top: 0;
+
+        }
+
+        .drop-down--enhanced & {
+
+          transition: none;
+
+        }
+
+        &--flush-right,
+        &--flush-left,
+        &--flush-both {
+
+          & .drop-down__menu-option-trigger {
+
+            padding-right: nth(map-get($variant-trigger, padding), 2) - 20px;
+
+          }
+
+        }
 
       }
 

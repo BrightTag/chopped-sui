@@ -1,4 +1,4 @@
-<{{#select}}div{{/select}}{{^select}}nav{{/select}}{{#id}} id="{{id}}"{{/id}} class="drop-down drop-down--unenhanced{{#build}} drop-down--built{{/build}}{{#class}} {{class}}{{/class}}">
+<{{#select}}div{{/select}}{{^select}}nav{{/select}}{{#id}} id="{{id}}"{{/id}} class="drop-down drop-down--unenhanced{{#build}} drop-down--built{{/build}}{{#variant}} drop-down--variant-{{variant}}{{/variant}}{{#class}} {{class}}{{/class}}">
   {{#select}}
     <select class="drop-down__select{{#hideCurrent}} drop-down__select--hide-current{{/hideCurrent}}{{#build}} drop-down__select--hidden{{/build}}" id="{{selectId}}" name="{{selectName}}">
       {{#menuItems}}
