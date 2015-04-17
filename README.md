@@ -15,7 +15,7 @@ ChopSuey is a small JavaScript library that enables common UI Components (HTML, 
 2. **Inline** [chop-suey.min.js](dist/js/chop-suey.min.js) in the `<head>` of your webpage.
 3. Add [components.min.css](dist/css/components.min.css) to your webpage.
 4. Add [components.min.js](dist/js/components.min.js) as an external script at the end of the `<body>` section of your webpage.
-5. For each component or instance of a component, use the provided helper script to generate markup. These scripts have plenty of conifguration options to suit *your* needs!
+5. For each component or instance of a component, use the [mustache template](dist/templates) to generate and place markup where needed. The template can be rendered server-side or client-side and Chop-Suey will self-initialize JavaScript events when it detects the component markup on the page.  Each template takes the configuration arguments documented in the [component docs](#available-components) so that it can be customized to your particular application.
 
 
 ## Component Event API
