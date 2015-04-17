@@ -34,7 +34,7 @@ Additionally, some components will broadcast additional events when state change
 - `dropDownWillShow`: Fired before a drop-down menu shows
 - `accordionDidHide`: Fired after a section of an accordion is hidden
 
-In all cases, the context of the current component is passed in as `this` and as `event.target`. For some components, additional information will be attached to the event such as which accordion section was actually hidden. See the [component docs](docs/componentLibrary.md) for more information in these cases.
+In all cases, the context of the current component is passed in as `this` and as `event.target`. For some components, additional information will be attached to the event such as which accordion section was actually hidden. See the [component's docs](#available-components) for more information.
 
 
 ## Development
