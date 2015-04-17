@@ -4,8 +4,8 @@ ChopSuey is a small JavaScript library that enables common UI Components (HTML, 
 
 ## Available Components
 
-- [Drop Down Menu](docs/componentLibrary.md)
-- Accordian (in development)
+- [Drop Down Menu](src/components/drop-down)
+- [Accordian](src/components/accordion) (in development)
 - Tabs (in development)
 
 
