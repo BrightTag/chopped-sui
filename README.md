@@ -36,6 +36,21 @@ Additionally, some components will broadcast additional events when state change
 
 In all cases, the context of the current component is passed in as `this` and as `event.target`. For some components, additional information will be attached to the event such as which accordion section was actually hidden. See the [component's docs](#available-components) for more information.
 
+### Triggering Events
+
+Chop-Suey components use standard DOM events to trigger state changes.  For instance, to make the drop-down component show it's menu:
+
+```javascript
+var component = document.getElementById('theComponent');
+var show      = new window.CustomEvent('dropDownShow');
+
+component.dispatchEvent(show);
+```
+
+The drop-down component is always listening for a dropDownShow event fired on itself, and when it hears one, it will modify all the CSS and JavaScript necessary to make the drop-down menu visible. It will also fire dropDownWillShow and dropDownDidShow events.
+
+In this way, we only need to interact with components as black boxes that will tell us their state via events and respond to our requests to change their state without worrying about what the HTML markup, CSS classes, or bound JavaScript events are.
+
 
 ## Development
 
