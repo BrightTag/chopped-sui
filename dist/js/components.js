@@ -368,7 +368,7 @@ var triggerFixed = /(^| )drop-down__trigger--fixed( |$)/;
 module.exports = triggerFixed;
 
 },{}],21:[function(require,module,exports){
-// prevent document scroll on arrow navigation
+// hide open drop-down on tab/blur
 module.exports = function (e) {
   var component = this;
 
